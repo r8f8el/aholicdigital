@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laura Frares Arquitetura &bull; Rio Verde — GO</title>
+    <meta name="description" content="Escritório de arquitetura contemporânea, projetos residenciais de alto padrão e sedes rurais em Rio Verde, Goiás. Arquiteta Laura Frares (CAU/GO).">
+    
+    <!-- Google Fonts: Space Grotesk / Inter / JetBrains Mono (Studio Minimalist) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        studio: {
+                            50: '#F7F7F5',
+                            100: '#EFEFEA',
+                            200: '#E0DFD8',
+                            300: '#C8C7BD',
+                            400: '#99988D',
+                            500: '#6B6A60',
+                            600: '#4D4C44',
+                            700: '#33322D',
+                            800: '#21201D',
+                            900: '#141412',
+                            950: '#0A0A09',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background: #141412; color: #F7F7F5; }
+        .hairline-b { border-bottom: 1px solid #E0DFD8; }
+        .hairline-t { border-top: 1px solid #E0DFD8; }
+        .hairline-r { border-right: 1px solid #E0DFD8; }
+    </style>
+</head>
+<body class="bg-[#F7F7F5] text-studio-900 font-sans antialiased">
+
+    <!-- Minimal Header: Studio Identity -->
+    <header class="sticky top-0 z-50 bg-[#F7F7F5]/90 backdrop-blur-md hairline-b">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10 h-20 flex items-center justify-between">
+            <!-- Studio Wordmark -->
+            <a href="#" class="flex flex-col">
+                <span class="font-display font-bold text-lg sm:text-xl tracking-tight text-studio-950">LAURA FRARES</span>
+                <span class="font-mono text-[9px] tracking-[0.25em] text-studio-500 uppercase -mt-0.5">ARQUITETURA &bull; RIO VERDE / GO</span>
+            </a>
+
+            <!-- Nav Links (Index Style) -->
+            <nav class="hidden md:flex items-center gap-10 font-mono text-xs text-studio-600">
+                <a href="#obras" class="hover:text-studio-950 transition-colors">01. OBRAS SELECIONADAS</a>
+                <a href="#filosofia" class="hover:text-studio-950 transition-colors">02. ESCRITÓRIO</a>
+                <a href="#processo" class="hover:text-studio-950 transition-colors">03. DIRETRIZES TÉCNICAS</a>
+                <a href="#contato" class="hover:text-studio-950 transition-colors">04. CONTATO</a>
+            </nav>
+
+            <!-- Direct Line Action -->
+            <a href="https://wa.me/5564999999999?text=Ol%C3%A1%20Laura!%20Gostaria%20de%20apresentar%20meu%20terreno%20para%20desenvolvimento%20de%20projeto." 
+               target="_blank"
+               class="font-mono text-xs text-studio-950 hover:text-white bg-transparent hover:bg-studio-950 px-4 py-2 border border-studio-900 transition-all">
+                NOVO PROJETO &rarr;
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero: Editorial Statement & Large Immersive Feature -->
+    <section class="pt-12 pb-20 sm:pt-20 sm:pb-28 hairline-b">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+            
+            <!-- Headline Statement -->
+            <div class="max-w-5xl mb-14 sm:mb-20">
+                <span class="font-mono text-xs text-studio-500 uppercase tracking-widest block mb-4">
+                    [ PRÁTICA ARQUITETÔNICA CONTEMPORÂNEA &bull; RIO VERDE - GO ]
+                </span>
+                <h1 class="font-display text-3xl sm:text-5xl lg:text-[62px] font-bold text-studio-950 leading-[1.08] tracking-tight">
+                    Projetamos casas e sedes de fazendas que dialogam com a escala e a luz do cerrado goiano.
+                </h1>
+            </div>
+
+            <!-- Main Feature Showcase (Full Bleed Image with Architectural Meta) -->
+            <div class="space-y-4">
+                <div class="aspect-[16/9] sm:aspect-[21/10] bg-studio-200 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=90" 
+                         alt="Casa do Cerrado &mdash; Laura Frares Arquitetura" 
+                         class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700">
+                </div>
+                
+                <!-- Architectural Metadata Strip -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pt-2 font-mono text-xs text-studio-600 hairline-t">
+                    <div class="flex flex-wrap items-center gap-x-6 gap-y-1">
+                        <span class="text-studio-950 font-medium">OBRA EM DESTAQUE: CASA DO CERRADO</span>
+                        <span>LOCAL: CONDOMÍNIO PORTAL DO SOL &bull; RIO VERDE</span>
+                        <span>ÁREA: 540 M²</span>
+                    </div>
+                    <span class="text-studio-400">PROJETO ARQUITETÔNICO &bull; INTERIORES</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Selected Works (Editorial Catalog) -->
+    <section id="obras" class="py-24 hairline-b bg-white">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+            
+            <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-16 pb-6 hairline-b">
+                <div>
+                    <span class="font-mono text-xs text-studio-400 block mb-1">01 / CATÁLOGO</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-studio-950">
+                        Obras Selecionadas
+                    </h2>
+                </div>
+                <div class="font-mono text-xs text-studio-500">
+                    RESIDENCIAL &bull; RURAL &bull; INTERIORES &bull; COMERCIAL
+                </div>
+            </div>
+
+            <!-- Project 01: Sede Rural Contemporânea -->
+            <div class="py-16 hairline-b grid lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                <div class="lg:col-span-8">
+                    <div class="aspect-[16/10] bg-studio-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85" 
+                             alt="Sede Fazenda Alvorada" 
+                             class="w-full h-full object-cover hover:scale-102 transition-transform duration-700">
+                    </div>
+                </div>
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="font-mono text-xs text-studio-400 space-y-1">
+                        <span class="block text-studio-950 font-bold">PROJETO 01 &mdash; RURAL</span>
+                        <p>ÁREA: 720 M² &bull; RIO VERDE - GO</p>
+                        <p>MATERIALIDADE: CONCRETO APARENTE &bull; CUMARU &bull; VIDRO</p>
+                    </div>
+                    <h3 class="font-display text-2xl sm:text-3xl font-bold text-studio-950">
+                        Sede Fazenda Alvorada
+                    </h3>
+                    <p class="text-sm text-studio-600 leading-relaxed font-normal">
+                        Concebida para conectar a vida no campo ao conforto da arquitetura contemporânea. Volumes horizontais baixos para preservação da linha do horizonte, beirais generosos para proteção solar e living totalmente envidraçado integrado à paisagem da lavoura.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://wa.me/5564999999999?text=Ol%C3%A1%20Laura!%20Gostaria%20de%20saber%20mais%20sobre%20o%20projeto%20da%20Sede%20Fazenda%20Alvorada." 
+                           target="_blank"
+                           class="font-mono text-xs font-semibold text-studio-950 hover:text-studio-500 inline-flex items-center gap-2">
+                            <span>CONSULTAR ESTUDO DE CASO</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 02: Residência Urbana em Condomínio -->
+            <div class="py-16 hairline-b grid lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                <div class="lg:col-span-4 order-2 lg:order-1 space-y-6">
+                    <div class="font-mono text-xs text-studio-400 space-y-1">
+                        <span class="block text-studio-950 font-bold">PROJETO 02 &mdash; RESIDENCIAL</span>
+                        <p>ÁREA: 480 M² &bull; CONDOMÍNIO FECHADO</p>
+                        <p>MATERIALIDADE: PEDRA MOLEDO &bull; RIPADO &bull; AÇO</p>
+                    </div>
+                    <h3 class="font-display text-2xl sm:text-3xl font-bold text-studio-950">
+                        Casa da Jabuticabeira
+                    </h3>
+                    <p class="text-sm text-studio-600 leading-relaxed font-normal">
+                        Organizada ao redor de um pátio interno com vegetação nativa. O pé-direito duplo na área social proporciona ventilação cruzada contínua, reduzindo a demanda por climatização artificial durante o ano todo em Rio Verde.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://wa.me/5564999999999?text=Ol%C3%A1%20Laura!%20Gostaria%20de%20saber%20sobre%20projetos%20residenciais%20em%20condom%C3%ADnio." 
+                           target="_blank"
+                           class="font-mono text-xs font-semibold text-studio-950 hover:text-studio-500 inline-flex items-center gap-2">
+                            <span>CONSULTAR ESTUDO DE CASO</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 order-1 lg:order-2">
+                    <div class="aspect-[16/10] bg-studio-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=85" 
+                             alt="Casa da Jabuticabeira &mdash; Residencial em Condomínio" 
+                             class="w-full h-full object-cover hover:scale-102 transition-transform duration-700">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 03: Interiores & Marcenaria Nobre -->
+            <div class="py-16 grid lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                <div class="lg:col-span-8">
+                    <div class="aspect-[16/10] bg-studio-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=85" 
+                             alt="Interiores Apartamento Mirante" 
+                             class="w-full h-full object-cover hover:scale-102 transition-transform duration-700">
+                    </div>
+                </div>
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="font-mono text-xs text-studio-400 space-y-1">
+                        <span class="block text-studio-950 font-bold">PROJETO 03 &mdash; INTERIORES</span>
+                        <p>ÁREA: 310 M² &bull; RIO VERDE - GO</p>
+                        <p>ESPECIFICAÇÃO: TRAVERTINO NAVONA &bull; ILUMINAÇÃO CÊNICA</p>
+                    </div>
+                    <h3 class="font-display text-2xl sm:text-3xl font-bold text-studio-950">
+                        Apartamento Mirante
+                    </h3>
+                    <p class="text-sm text-studio-600 leading-relaxed font-normal">
+                        Design de interiores pautado na sobriedade de texturas naturais e marcenaria sob medida em lâmina de nogueira. Projeto luminotécnico invisível com automação integrada de cenas.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://wa.me/5564999999999?text=Ol%C3%A1%20Laura!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20projeto%20de%20interiores." 
+                           target="_blank"
+                           class="font-mono text-xs font-semibold text-studio-950 hover:text-studio-500 inline-flex items-center gap-2">
+                            <span>CONSULTAR ESTUDO DE CASO</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Philosophy & Technical Rigor (No Icons in Boxes!) -->
+    <section id="filosofia" class="py-24 hairline-b bg-[#F7F7F5]">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+                
+                <!-- Left: Big Architectural Quote -->
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="font-mono text-xs text-studio-400 block mb-2">02 / FILOSOFIA DE PROJETO</span>
+                    <blockquote class="font-display text-2xl sm:text-4xl font-bold text-studio-950 leading-tight tracking-tight">
+                        &ldquo;Projetar no sudoeste goiano exige precisão climática: ventilação cruzada, sombreamento inteligente e respeito à topografia. Não criamos formas gratuitas; criamos patrimônio duradouro.&rdquo;
+                    </blockquote>
+                    <div class="pt-4 font-mono text-xs text-studio-500">
+                        <span class="text-studio-950 font-bold block">ARQUITETA LAURA FRARES</span>
+                        <span>REGISTRO OFICIAL NO CAU/GO &bull; RIO VERDE</span>
+                    </div>
+                </div>
+
+                <!-- Right: Studio Vision -->
+                <div class="lg:col-span-6 space-y-6 text-sm sm:text-base text-studio-700 leading-relaxed">
+                    <p>
+                        O escritório <strong>Laura Frares Arquitetura</strong> atua na intersecção entre o rigor técnico da engenharia e a sensibilidade do design contemporâneo. Cada traço é orientado por critérios funcionais claros: como o sol incide nas fachadas às 16h, como o vento circula pelos quartos e como a circulação atende à dinâmica da família.
+                    </p>
+                    <p>
+                        Trabalhamos com um número limitado de projetos simultâneos para garantir imersão completa da titular em todas as fases &mdash; do primeiro croqui ao detalhamento do último parafuso de marcenaria.
+                    </p>
+                    
+                    <div class="pt-6 grid grid-cols-2 gap-6 hairline-t font-mono text-xs">
+                        <div>
+                            <span class="font-bold text-studio-950 block mb-1">LOCALIZAÇÃO</span>
+                            <span>Rio Verde &mdash; Goiás</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-studio-950 block mb-1">ATENDIMENTO</span>
+                            <span>Com hora marcada</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Method (Direct Guidelines, not SaaS Cards) -->
+    <section id="processo" class="py-24 hairline-b bg-white">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+            
+            <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-16 pb-6 hairline-b">
+                <div>
+                    <span class="font-mono text-xs text-studio-400 block mb-1">03 / MÉTODO CONSTRUTIVO</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-studio-950">
+                        Como Desenvolvemos Seu Projeto
+                    </h2>
+                </div>
+                <div class="font-mono text-xs text-studio-500">
+                    4 FASES &bull; ZERO DESPERDÍCIO EM OBRA
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-studio-200">
+                
+                <div class="py-8 md:py-0 md:pr-8 space-y-3">
+                    <span class="font-mono text-xs text-studio-400 block">FASE 01</span>
+                    <h4 class="font-display text-lg font-bold text-studio-950">Estudo Preliminar & Insolação</h4>
+                    <p class="text-xs text-studio-600 leading-relaxed font-normal">
+                        Visita ao lote, análise topográfica, estudo solar, regras do condomínio e mapeamento dos hábitos da família.
+                    </p>
+                </div>
+
+                <div class="py-8 md:py-0 md:px-8 space-y-3">
+                    <span class="font-mono text-xs text-studio-400 block">FASE 02</span>
+                    <h4 class="font-display text-lg font-bold text-studio-950">Modelagem 3D Fotorrealista</h4>
+                    <p class="text-xs text-studio-600 leading-relaxed font-normal">
+                        Simulação virtual precisa de cada ambiente, volumetria externa, materiais e iluminação antes de qualquer compra.
+                    </p>
+                </div>
+
+                <div class="py-8 md:py-0 md:px-8 space-y-3">
+                    <span class="font-mono text-xs text-studio-400 block">FASE 03</span>
+                    <h4 class="font-display text-lg font-bold text-studio-950">Projeto Executivo Detalhado</h4>
+                    <p class="text-xs text-studio-600 leading-relaxed font-normal">
+                        Caderno técnico completo de engenharia, hidráulica, elétrica, paginações de piso e marcenaria milimétrica.
+                    </p>
+                </div>
+
+                <div class="py-8 md:py-0 md:pl-8 space-y-3">
+                    <span class="font-mono text-xs text-studio-400 block">FASE 04</span>
+                    <h4 class="font-display text-lg font-bold text-studio-950">Acompanhamento de Obra</h4>
+                    <p class="text-xs text-studio-600 leading-relaxed font-normal">
+                        Supervisão técnica de fornecedores para assegurar que a execução seja 100% fiel às especificações aprovadas.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Real Client Testimonials (Editorial Quotations) -->
+    <section class="py-24 hairline-b bg-[#F7F7F5]">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+            
+            <div class="mb-14 pb-6 hairline-b flex justify-between items-end">
+                <span class="font-mono text-xs text-studio-400">04 / AVALIAÇÕES REAIS NO GOOGLE MAPS (5.0 ★)</span>
+                <span class="font-mono text-xs text-studio-600">RELATOS VERIFICADOS</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="space-y-4">
+                    <blockquote class="text-sm text-studio-800 leading-relaxed font-normal">
+                        &ldquo;A Laura projetou nossa casa em condomínio e o resultado foi impressionante. O render 3D ficou idêntico à obra pronta e o detalhamento técnico evitou qualquer desperdício de material. Recomendo com total segurança em Rio Verde.&rdquo;
+                    </blockquote>
+                    <div class="pt-2 font-mono text-xs text-studio-500 hairline-t">
+                        <span class="text-studio-950 font-bold block">Marcos & Juliana</span>
+                        <span>Residencial Portal do Sol &bull; Rio Verde</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <blockquote class="text-sm text-studio-800 leading-relaxed font-normal">
+                        &ldquo;Fizemos o projeto da sede da nossa fazenda com a Laura. Ela conseguiu integrar a vista dos campos com um conforto térmico e moderno incrível. Uma das melhores profissionais do estado.&rdquo;
+                    </blockquote>
+                    <div class="pt-2 font-mono text-xs text-studio-500 hairline-t">
+                        <span class="text-studio-950 font-bold block">Rodrigo A. Guimarães</span>
+                        <span>Produtor Rural &bull; Sudoeste Goiano</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <blockquote class="text-sm text-studio-800 leading-relaxed font-normal">
+                        &ldquo;O projeto de interiores e iluminação transformou totalmente nosso apartamento. Marcenaria nobre e iluminação de cinema, sem qualquer dor de cabeça na obra.&rdquo;
+                    </blockquote>
+                    <div class="pt-2 font-mono text-xs text-studio-500 hairline-t">
+                        <span class="text-studio-950 font-bold block">Camila Ferreira</span>
+                        <span>Cliente de Interiores &bull; Rio Verde</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Consultation Module (Clean Architectural CTA) -->
+    <section id="contato" class="py-24 bg-studio-950 text-white">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-8 space-y-4">
+                    <span class="font-mono text-xs text-studio-400 uppercase tracking-widest block">INÍCIO DE PROJETO</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+                        Tem um terreno em Rio Verde ou deseja planejar sua nova casa?
+                    </h2>
+                    <p class="text-studio-400 text-sm sm:text-base font-normal max-w-2xl leading-relaxed">
+                        Envie os detalhes do seu lote ou imóvel para agendarmos uma primeira reunião de alinhamento e estudo de viabilidade.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-4 lg:text-right">
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1%20Laura!%20Gostaria%20de%20apresentar%20meu%20terreno%20para%20desenvolver%20um%20projeto." 
+                       target="_blank"
+                       class="inline-block bg-white hover:bg-studio-100 text-studio-950 font-mono text-xs font-bold px-8 py-5 tracking-wider transition-colors">
+                        FALAR COM A ARQUITETA &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Footer -->
+    <footer class="bg-studio-900 text-studio-500 py-12 hairline-t text-xs font-mono">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+            <div>
+                <span class="text-white font-display font-bold text-sm block">LAURA FRARES ARQUITETURA</span>
+                <span class="text-studio-500 mt-0.5 block">CAU/GO &bull; Rio Verde &mdash; GO</span>
+            </div>
+            <div class="text-studio-600">
+                <p>&copy; 2026 Laura Frares Arquitetura. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

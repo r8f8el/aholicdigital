@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karla Barros &bull; Arquitetura de Alto Padrão | João Pessoa</title>
+    <meta name="description" content="Atelier de arquitetura autoral e interiores de alto padrão em João Pessoa, Paraíba. Projetos premiados e participação na CASACOR Paraíba.">
+    
+    <!-- Google Fonts: Italiana (Haute Couture) + Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            50: '#FAF8F5',
+                            100: '#F4EFEA',
+                            200: '#E8DFD5',
+                            300: '#D5C5B5',
+                            bronze: '#BFA175',
+                            gold: '#C5A880',
+                            goldlight: '#DFCCA6',
+                            charcoal: '#151413',
+                            espresso: '#1A1815',
+                            obsidian: '#0E0D0C',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Italiana"', 'serif'],
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background: #BFA175; color: #FAF8F5; }
+        .gold-border { border-color: rgba(191, 161, 117, 0.35); }
+        .gold-line { background: linear-gradient(90deg, rgba(191,161,117,0) 0%, rgba(191,161,117,0.6) 50%, rgba(191,161,117,0) 100%); }
+    </style>
+</head>
+<body class="bg-[#FAF8F5] text-luxury-charcoal font-sans antialiased selection:bg-luxury-bronze selection:text-white">
+
+    <!-- Top Announcement: CASACOR & 20 Anos -->
+    <div class="bg-luxury-obsidian text-luxury-gold text-[10px] sm:text-xs font-light tracking-[0.25em] uppercase py-2.5 px-4 text-center border-b border-luxury-bronze/20">
+        <span>CASACOR Paraíba &bull; 20 Anos de Arquitetura Autoral em João Pessoa</span>
+    </div>
+
+    <!-- Haute Couture Header -->
+    <header class="sticky top-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-luxury-200/60">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12 h-24 flex items-center justify-between">
+            
+            <!-- Atelier Brandmark -->
+            <a href="#" class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full overflow-hidden border border-luxury-bronze/40 p-0.5 transition-transform group-hover:scale-105">
+                    <img src="../assets/instagram-logo.jpg" alt="Karla Barros" class="w-full h-full object-cover rounded-full">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display text-2xl sm:text-[26px] tracking-wide text-luxury-obsidian leading-none">KARLA BARROS</span>
+                    <span class="text-[9px] tracking-[0.35em] text-luxury-bronze uppercase mt-1 font-medium">ARQUITETURA &bull; ATELIER DE INTERIORES</span>
+                </div>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="hidden lg:flex items-center gap-12 text-xs tracking-[0.18em] uppercase text-luxury-charcoal/70">
+                <a href="#obras" class="hover:text-luxury-bronze transition-colors">Portfólio</a>
+                <a href="#sobre" class="hover:text-luxury-bronze transition-colors">O Escritório</a>
+                <a href="#casacor" class="hover:text-luxury-bronze transition-colors">CASACOR</a>
+                <a href="#metodo" class="hover:text-luxury-bronze transition-colors">Metodologia</a>
+            </nav>
+
+            <!-- Direct Haute Contact -->
+            <a href="https://wa.me/558330216161?text=Ol%C3%A1%20Karla!%20Gostaria%20de%20agendar%20uma%20reuni%C3%A3o%20conceitual%20para%20meu%20projeto." 
+               target="_blank"
+               class="inline-flex items-center gap-3 px-6 py-3 border border-luxury-bronze text-luxury-obsidian hover:bg-luxury-obsidian hover:text-white transition-all duration-300 text-xs tracking-[0.2em] uppercase">
+                <span>Agendar Consulta</span>
+                <span class="text-luxury-bronze">&rarr;</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero: Cinematic Quiet Luxury -->
+    <section class="relative pt-16 pb-24 sm:pt-24 sm:pb-36 overflow-hidden">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Editorial Column -->
+                <div class="lg:col-span-6 space-y-8">
+                    <div class="inline-flex items-center gap-3">
+                        <span class="w-8 h-[1px] bg-luxury-bronze"></span>
+                        <span class="text-[11px] tracking-[0.3em] uppercase text-luxury-bronze font-medium">João Pessoa &bull; Litoral Paraibano</span>
+                    </div>
+
+                    <h1 class="font-display text-4xl sm:text-6xl lg:text-[68px] font-normal leading-[1.06] text-luxury-obsidian tracking-tight">
+                        O silêncio do luxo, moldado pela luz e pelo mar.
+                    </h1>
+
+                    <p class="font-serif text-lg sm:text-xl text-luxury-charcoal/80 leading-relaxed max-w-xl italic">
+                        Projetos residenciais contemporâneos concebidos com a sobriedade das pedras naturais, a nobreza da madeira e a integração absoluta com a brisa do Atlântico.
+                    </p>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                        <a href="https://wa.me/558330216161?text=Ol%C3%A1%20Karla!%20Gostaria%20de%20apresentar%20meu%20terreno%20ou%20im%C3%B3vel." 
+                           target="_blank"
+                           class="bg-luxury-obsidian text-white hover:bg-luxury-bronze px-8 py-4 text-xs tracking-[0.25em] uppercase text-center transition-colors duration-300 shadow-sm">
+                            Apresentar Terreno / Imóvel
+                        </a>
+                        <a href="#obras" 
+                           class="border border-luxury-200 hover:border-luxury-bronze px-8 py-4 text-xs tracking-[0.25em] uppercase text-center text-luxury-charcoal transition-colors duration-300">
+                            Explorar Portfólio
+                        </a>
+                    </div>
+
+                    <!-- Distinction Metrics -->
+                    <div class="pt-8 border-t border-luxury-200/80 grid grid-cols-3 gap-6">
+                        <div>
+                            <span class="font-display text-3xl sm:text-4xl text-luxury-obsidian block">20+</span>
+                            <span class="text-[10px] tracking-[0.2em] text-luxury-bronze uppercase">Anos de Atuação</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl sm:text-4xl text-luxury-obsidian block">CASACOR</span>
+                            <span class="text-[10px] tracking-[0.2em] text-luxury-bronze uppercase">Mostras Oficiais</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl sm:text-4xl text-luxury-obsidian block">4.9 ★</span>
+                            <span class="text-[10px] tracking-[0.2em] text-luxury-bronze uppercase">Google Reviews</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Feature Hero Work -->
+                <div class="lg:col-span-6">
+                    <div class="relative group">
+                        <!-- Subtle Gold Frame Offset -->
+                        <div class="absolute -inset-3 border border-luxury-bronze/30 translate-x-2 translate-y-2 pointer-events-none transition-transform group-hover:translate-x-3 group-hover:translate-y-3 duration-500"></div>
+                        
+                        <div class="relative aspect-[4/5] bg-luxury-100 overflow-hidden shadow-2xl">
+                            <img src="../assets/instagram-post-2.jpg" 
+                                 alt="Projeto de Arquitetura Autoral Karla Barros" 
+                                 class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-1000 ease-out">
+                            <div class="absolute inset-0 bg-gradient-to-t from-luxury-obsidian/60 via-transparent to-transparent"></div>
+                            
+                            <!-- Bottom Floating Caption -->
+                            <div class="absolute bottom-6 left-6 right-6 text-white p-6 backdrop-blur-md bg-luxury-obsidian/40 border border-white/10">
+                                <span class="text-[10px] tracking-[0.3em] uppercase text-luxury-gold block mb-1">PROJETO AUTORAL SELECIONADO</span>
+                                <h3 class="font-display text-2xl font-light">Residência Cabo Branco</h3>
+                                <p class="text-xs text-white/80 font-light mt-1">Integração living e jardim &bull; João Pessoa / PB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Gold Divider -->
+    <div class="h-[1px] gold-line"></div>
+
+    <!-- Selected Works (Haute Magazine Editorial) -->
+    <section id="obras" class="py-28 sm:py-36 bg-white">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-20 pb-8 border-b border-luxury-200/80">
+                <div class="space-y-2">
+                    <span class="text-[11px] tracking-[0.3em] uppercase text-luxury-bronze font-medium block">01 &mdash; Portfólio Exclusivo</span>
+                    <h2 class="font-display text-3xl sm:text-5xl text-luxury-obsidian">
+                        Obras Selecionadas
+                    </h2>
+                </div>
+                <p class="font-serif text-base text-luxury-charcoal/70 italic max-w-md">
+                    Harmonia milimétrica entre a estética cosmopolita e a leveza orgânica do litoral nordestino.
+                </p>
+            </div>
+
+            <!-- Showcase 01: Full Width Asymmetric Feature -->
+            <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-28">
+                <div class="lg:col-span-8 group overflow-hidden">
+                    <div class="aspect-[16/10] bg-luxury-100 overflow-hidden relative shadow-lg">
+                        <img src="../assets/instagram-post-1.jpg" 
+                             alt="Living Beira-Mar Jardim Oceania" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                    </div>
+                </div>
+                <div class="lg:col-span-4 space-y-6">
+                    <span class="text-[10px] tracking-[0.3em] text-luxury-bronze uppercase block">JARDIM OCEANIA &bull; JOÃO PESSOA</span>
+                    <h3 class="font-display text-3xl sm:text-4xl text-luxury-obsidian">
+                        Living Beira-Mar
+                    </h3>
+                    <div class="w-12 h-[1px] bg-luxury-bronze"></div>
+                    <p class="font-serif text-base text-luxury-charcoal/80 leading-relaxed italic">
+                        &ldquo;A prioridade foi abrir os vãos da varanda para que o horizonte do Atlântico se tornasse a verdadeira obra de arte do ambiente social.&rdquo;
+                    </p>
+                    <p class="text-xs text-luxury-charcoal/70 leading-relaxed">
+                        Mármore travertino navona, marcenaria sob medida em lâmina natural de carvalho e iluminação cênica automatizada.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://wa.me/558330216161?text=Ol%C3%A1%20Karla!%20Adorei%20o%20Living%20Beira-Mar%20e%20gostaria%20de%20conversar%20sobre%20meu%20projeto." 
+                           target="_blank" 
+                           class="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-luxury-obsidian hover:text-luxury-bronze transition-colors">
+                            <span>Consultar Detalhes do Projeto</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Showcase 02: Interiores Altiplano & Sunset -->
+            <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-28">
+                <div class="lg:col-span-4 order-2 lg:order-1 space-y-6">
+                    <span class="text-[10px] tracking-[0.3em] text-luxury-bronze uppercase block">ALTIPLANO CABO BRANCO &bull; RESIDENCIAL</span>
+                    <h3 class="font-display text-3xl sm:text-4xl text-luxury-obsidian">
+                        Residência Sunset
+                    </h3>
+                    <div class="w-12 h-[1px] bg-luxury-bronze"></div>
+                    <p class="font-serif text-base text-luxury-charcoal/80 leading-relaxed italic">
+                        &ldquo;Criamos uma atmosfera calorosa e intimista, onde cada textura convida ao toque e ao descanso após um dia intenso.&rdquo;
+                    </p>
+                    <p class="text-xs text-luxury-charcoal/70 leading-relaxed">
+                        Mobiliário assinado por designers brasileiros, painéis ripados e iluminação indireta que acompanha o pôr do sol paraibano.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://wa.me/558330216161?text=Ol%C3%A1%20Karla!%20Gostaria%20de%20desenvolver%20um%20projeto%20no%20Altiplano." 
+                           target="_blank" 
+                           class="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-luxury-obsidian hover:text-luxury-bronze transition-colors">
+                            <span>Consultar Detalhes do Projeto</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 order-1 lg:order-2 group overflow-hidden">
+                    <div class="aspect-[16/10] bg-luxury-100 overflow-hidden relative shadow-lg">
+                        <img src="../assets/instagram-post-4.jpg" 
+                             alt="Residência Sunset Altiplano" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Triptych Grid: Suíte Master, Gourmet e Área Íntima -->
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <div class="space-y-4 group">
+                    <div class="aspect-[3/4] bg-luxury-100 overflow-hidden relative shadow-md">
+                        <img src="../assets/instagram-post-5.jpg" alt="Suíte Presidencial Manaíra" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <span class="text-[9px] tracking-[0.3em] text-luxury-bronze uppercase block">MANAÍRA &bull; JOÃO PESSOA</span>
+                    <h4 class="font-display text-2xl text-luxury-obsidian">Suíte Presidencial</h4>
+                    <p class="text-xs text-luxury-charcoal/70 font-light">Cabeceira em linho natural e iluminação de leitura embutida com foco no repouso absoluto.</p>
+                </div>
+
+                <div class="space-y-4 group">
+                    <div class="aspect-[3/4] bg-luxury-100 overflow-hidden relative shadow-md">
+                        <img src="../assets/instagram-post-6.jpg" alt="Espaço Gourmet Intermares" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <span class="text-[9px] tracking-[0.3em] text-luxury-bronze uppercase block">INTERMARES &bull; CABEDELO/JP</span>
+                    <h4 class="font-display text-2xl text-luxury-obsidian">Varanda Gourmet</h4>
+                    <p class="text-xs text-luxury-charcoal/70 font-light">Integração com a área de lazer, bancada em granito escovado e materiais imunes à maresia.</p>
+                </div>
+
+                <div class="space-y-4 group">
+                    <div class="aspect-[3/4] bg-luxury-100 overflow-hidden relative shadow-md">
+                        <img src="../assets/instagram-post-3.jpg" alt="Atelier & Consultoria" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <span class="text-[9px] tracking-[0.3em] text-luxury-bronze uppercase block">CASACOR PARAÍBA</span>
+                    <h4 class="font-display text-2xl text-luxury-obsidian">Espaço Conceito</h4>
+                    <p class="text-xs text-luxury-charcoal/70 font-light">Composição autoral com curadoria de arte, valorizando a identidade regional e contemporânea.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CASACOR & Trajetória (Prestígio & Quiet Luxury) -->
+    <section id="casacor" class="py-28 sm:py-36 bg-luxury-obsidian text-white relative overflow-hidden">
+        
+        <!-- Subtle Glow -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-luxury-bronze/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-[10px] tracking-[0.35em] text-luxury-gold uppercase block">LEGADO & RECONHECIMENTO</span>
+                    <h2 class="font-display text-4xl sm:text-5xl lg:text-[52px] leading-tight text-white">
+                        Vinte anos moldando a paisagem do morar elegante.
+                    </h2>
+                    <div class="w-16 h-[1px] bg-luxury-bronze"></div>
+                    <p class="font-serif text-lg text-luxury-100/80 leading-relaxed italic">
+                        &ldquo;A boa arquitetura não grita. Ela acolhe, organiza e eleva a rotina de quem a habita.&rdquo;
+                    </p>
+                    <p class="text-xs text-luxury-200/60 leading-relaxed font-light">
+                        A arquiteta <strong>Karla Barros</strong> imprimiu sua assinatura em dezenas de residências, coberturas e ambientes corporativos em João Pessoa. Com participações marcantes na <strong>CASACOR Paraíba</strong>, o escritório se consolidou como uma das referências máximas em arquitetura de alto padrão do estado.
+                    </p>
+                    
+                    <div class="pt-4">
+                        <a href="https://instagram.com/karlabarrosarquitetura" target="_blank" class="inline-flex items-center gap-3 text-luxury-gold hover:text-white text-xs tracking-[0.2em] uppercase transition-colors">
+                            <span>Ver Galeria Completa no Instagram &bull; @karlabarrosarquitetura</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="aspect-[4/5] bg-luxury-espresso p-2 border border-luxury-bronze/30 shadow-2xl">
+                            <img src="../assets/fachada-principal.jpg" alt="Atelier Karla Barros" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        </div>
+                        <div class="aspect-[4/5] bg-luxury-espresso p-2 border border-luxury-bronze/30 shadow-2xl mt-8">
+                            <img src="../assets/instagram-post-3.jpg" alt="CASACOR Paraíba" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Metodologia Autoral (Diretrizes Claras e Chiques) -->
+    <section id="metodo" class="py-28 sm:py-36 bg-[#FAF8F5]">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <div class="text-center max-w-2xl mx-auto mb-20 space-y-3">
+                <span class="text-[11px] tracking-[0.3em] uppercase text-luxury-bronze font-medium block">03 &mdash; O Rito Criativo</span>
+                <h2 class="font-display text-3xl sm:text-5xl text-luxury-obsidian">
+                    Como Damos Vida ao Seu Refúgio
+                </h2>
+                <p class="font-serif text-base text-luxury-charcoal/70 italic">
+                    Um processo imersivo, fluido e rigorosamente conduzido pela titular.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                
+                <div class="p-8 bg-white border border-luxury-200/70 space-y-4 relative group hover:border-luxury-bronze transition-colors">
+                    <span class="font-display text-4xl text-luxury-bronze/40 block group-hover:text-luxury-bronze transition-colors">I</span>
+                    <h3 class="font-display text-xl text-luxury-obsidian">Briefing & Alma</h3>
+                    <p class="text-xs text-luxury-charcoal/70 leading-relaxed font-light">
+                        Mapeamento minucioso dos rituais diários, memórias afetivas e aspirações de conforto da família.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white border border-luxury-200/70 space-y-4 relative group hover:border-luxury-bronze transition-colors">
+                    <span class="font-display text-4xl text-luxury-bronze/40 block group-hover:text-luxury-bronze transition-colors">II</span>
+                    <h3 class="font-display text-xl text-luxury-obsidian">Imersão 3D</h3>
+                    <p class="text-xs text-luxury-charcoal/70 leading-relaxed font-light">
+                        Simulação fotorrealista milimétrica de insolação, texturas nobres, mobiliário e cenas de iluminação.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white border border-luxury-200/70 space-y-4 relative group hover:border-luxury-bronze transition-colors">
+                    <span class="font-display text-4xl text-luxury-bronze/40 block group-hover:text-luxury-bronze transition-colors">III</span>
+                    <h3 class="font-display text-xl text-luxury-obsidian">Caderno Executivo</h3>
+                    <p class="text-xs text-luxury-charcoal/70 leading-relaxed font-light">
+                        Detalhamento técnico completo para engenharia, marcenaria sob medida e paginações exclusivas.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white border border-luxury-200/70 space-y-4 relative group hover:border-luxury-bronze transition-colors">
+                    <span class="font-display text-4xl text-luxury-bronze/40 block group-hover:text-luxury-bronze transition-colors">IV</span>
+                    <h3 class="font-display text-xl text-luxury-obsidian">Curadoria & Obra</h3>
+                    <p class="text-xs text-luxury-charcoal/70 leading-relaxed font-light">
+                        Supervisão técnica contínua e assessoria na escolha de obras de arte, tecidos e iluminação final.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Consultation Module (High Elegance) -->
+    <section class="py-24 bg-luxury-charcoal text-white relative border-t border-luxury-bronze/30">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <span class="text-[11px] tracking-[0.35em] text-luxury-gold uppercase block">ATENDIMENTO COM HORA MARCADA</span>
+                <h2 class="font-display text-4xl sm:text-6xl text-white leading-tight">
+                    Inicie a conversa sobre seu novo espaço.
+                </h2>
+                <p class="font-serif text-lg text-luxury-200/80 leading-relaxed italic max-w-xl mx-auto">
+                    Nosso atelier recebe clientes para alinhamento conceitual e análise de viabilidade em Jardim Oceania, João Pessoa.
+                </p>
+                <div class="pt-4">
+                    <a href="https://wa.me/558330216161?text=Ol%C3%A1%20Karla!%20Gostaria%20de%20agendar%20uma%20conversa%20sobre%20meu%20projeto." 
+                       target="_blank"
+                       class="inline-block bg-luxury-bronze hover:bg-luxury-gold text-luxury-obsidian px-10 py-5 text-xs tracking-[0.25em] uppercase font-medium transition-colors duration-300 shadow-xl">
+                        Falar Diretamente com a Arquiteta &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Haute Footer -->
+    <footer class="bg-luxury-obsidian text-luxury-300/60 py-14 border-t border-white/10 text-xs">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div class="text-center sm:text-left">
+                <span class="font-display text-lg text-white block tracking-wide">KARLA BARROS ARQUITETURA</span>
+                <span class="text-[11px] text-luxury-bronze mt-1 block">Rua Ivanice Martins da Câmara, 135 &bull; Jardim Oceania &mdash; João Pessoa, PB</span>
+            </div>
+            <div class="text-center sm:text-right text-[11px] text-luxury-300/40">
+                <p>&copy; 2026 Karla Barros Arquitetura &bull; Todos os direitos reservados.</p>
+                <p class="mt-0.5">Telefone: (83) 3021-6161 &bull; CASACOR Paraíba</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

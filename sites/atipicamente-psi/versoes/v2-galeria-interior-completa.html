@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atipicamente Psi &bull; Núcleo Clínico e Educacional | Caldas Novas</title>
+    <meta name="description" content="Clínica multidisciplinar de psicologia, neuropsicologia, intervenção ABA e desenvolvimento neuroatípico em Caldas Novas - GO. Atendimento humanizado e baseado em evidências.">
+    
+    <!-- Google Fonts: League Spartan + Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FDFBF7',
+                            100: '#FAF6EE',
+                            200: '#F3EBDD',
+                            300: '#E8DCB8',
+                        },
+                        psi: {
+                            terracotta: '#C86849',
+                            terracotta_light: '#F8ECE7',
+                            navy: '#1E2C42',
+                            sage: '#6D8A78',
+                            sage_light: '#EDF3EE',
+                            charcoal: '#262626',
+                            sand: '#EFE7DA',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"League Spartan"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background: #C86849; color: #FFFFFF; }
+        
+        /* Scroll Reveal */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating Slow Bounce */
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(-4%); }
+            50% { transform: translateY(4%); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 4.5s ease-in-out infinite;
+        }
+
+        /* Smooth team card transitions */
+        .team-card {
+            background-color: #FFFFFF;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(30, 44, 66, 0.08);
+            border-color: #C86849;
+        }
+
+        /* Interior Gallery Zoom Card */
+        .gallery-card {
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+            background: #FAF6EE;
+        }
+        .gallery-card img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .insta-card {
+            overflow: hidden;
+            border-radius: 16px;
+            position: relative;
+        }
+        .insta-card img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .insta-card:hover img {
+            transform: scale(1.06);
+        }
+    </style>
+</head>
+<body class="bg-[#FAF6EE] text-psi-charcoal font-sans antialiased">
+
+    <!-- Top Notice Bar -->
+    <div class="bg-psi-navy text-[#FAF6EE] text-xs py-2 px-4 text-center font-display font-medium tracking-wider">
+        <span>ACOLHIMENTO &bull; NEURODIVERSIDADE &bull; PSICOLOGIA BASEADA EM EVIDÊNCIAS &bull; CALDAS NOVAS - GO</span>
+    </div>
+
+    <!-- Glassmorphism Header -->
+    <header class="sticky top-0 z-50 px-6 sm:px-12 h-20 flex items-center justify-between border-b border-psi-charcoal/10"
+            style="background: rgba(250, 246, 238, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+        
+        <!-- Brand / Logo -->
+        <a href="#" class="flex items-center gap-3.5 group">
+            <div class="w-10 h-10 rounded-full bg-white p-1 border border-psi-terracotta/30 shadow-sm flex items-center justify-center overflow-hidden">
+                <img src="../assets/logo-atipicamente.png" alt="Atipicamente Psi" class="w-full h-auto object-contain">
+            </div>
+            <div class="flex flex-col">
+                <span class="font-display text-xl sm:text-2xl font-[900] tracking-tighter uppercase text-psi-navy leading-none">
+                    ATIPICAMENTE PSI
+                </span>
+                <span class="text-[9px] tracking-[0.25em] text-psi-terracotta uppercase font-bold mt-0.5">
+                    NÚCLEO CLÍNICO & EDUCACIONAL
+                </span>
+            </div>
+        </a>
+
+        <!-- Nav Links -->
+        <nav class="hidden md:flex items-center gap-8 font-display text-xs font-bold uppercase tracking-[0.18em] text-psi-navy/80">
+            <a href="#equipe" class="hover:text-psi-terracotta transition-colors">Corpo Clínico</a>
+            <a href="#espaco" class="hover:text-psi-terracotta transition-colors">Estrutura & Salas</a>
+            <a href="#especialidades" class="hover:text-psi-terracotta transition-colors">Especialidades</a>
+            <a href="#feed" class="hover:text-psi-terracotta transition-colors">Instagram</a>
+            <a href="#contato" class="hover:text-psi-terracotta transition-colors">Contato</a>
+        </nav>
+
+        <!-- CTA Agendamento -->
+        <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20atendimento%20e%20avalia%C3%A7%C3%A3o%20na%20Atipicamente%20Psi." 
+           target="_blank"
+           class="bg-psi-terracotta hover:bg-[#b5593c] text-white text-xs font-display font-[800] uppercase tracking-wider px-6 py-3 rounded-full transition-all duration-300 shadow-sm">
+            Agendar Acolhimento
+        </a>
+    </header>
+
+    <!-- Hero Section (Cream & Terracotta) -->
+    <section class="relative min-h-[90vh] flex items-center justify-center px-6 sm:px-12 py-16 sm:py-24 border-b border-psi-charcoal/10 overflow-hidden">
+        
+        <div class="absolute inset-0 opacity-40 pointer-events-none bg-[radial-gradient(#E8DCB8_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+        <div class="max-w-[1440px] w-full mx-auto grid lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+            
+            <!-- Left 7 cols -->
+            <div class="lg:col-span-7 space-y-6 sm:space-y-8 reveal-up active">
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-psi-terracotta_light border border-psi-terracotta/20 text-psi-terracotta text-xs font-display font-bold uppercase tracking-widest">
+                    <span>🌱 Um espaço seguro para cada singularidade</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-[5.4vw] font-[900] leading-[0.92] tracking-tight uppercase text-psi-navy">
+                    Cuidar da mente é mais do que tratar sintomas. <span class="text-psi-terracotta italic font-serif lowercase block mt-1">É acolher o ser.</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-psi-charcoal/80 leading-relaxed font-normal max-w-xl">
+                    Núcleo especializado em neurodesenvolvimento, avaliação neuropsicológica, terapia cognitivo-comportamental e intervenção ABA para crianças, adolescentes e adultos em Caldas Novas.
+                </p>
+
+                <!-- Actions -->
+                <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20desejo%20agendar%20uma%20consulta." 
+                       target="_blank"
+                       class="bg-psi-navy hover:bg-psi-terracotta text-white font-display font-[800] text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-colors duration-300 text-center shadow-md">
+                        Falar com a Recepção no WhatsApp &rarr;
+                    </a>
+                    <a href="#espaco" 
+                       class="border border-psi-navy/30 hover:border-psi-terracotta hover:text-psi-terracotta text-psi-navy font-display font-[800] text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-colors text-center">
+                        Conhecer Nossas Salas &rarr;
+                    </a>
+                </div>
+
+                <!-- Verified Pillars -->
+                <div class="pt-8 border-t border-psi-charcoal/10 grid grid-cols-3 gap-6 text-left">
+                    <div>
+                        <span class="font-display text-3xl sm:text-4xl font-[900] text-psi-navy block">5+</span>
+                        <span class="text-[11px] font-display font-bold uppercase tracking-wider text-psi-terracotta">Especialistas CRP 09</span>
+                    </div>
+                    <div>
+                        <span class="font-display text-3xl sm:text-4xl font-[900] text-psi-navy block">TEA & TDAH</span>
+                        <span class="text-[11px] font-display font-bold uppercase tracking-wider text-psi-terracotta">Intervenção ABA</span>
+                    </div>
+                    <div>
+                        <span class="font-display text-3xl sm:text-4xl font-[900] text-psi-navy block">PBE</span>
+                        <span class="text-[11px] font-display font-bold uppercase tracking-wider text-psi-terracotta">Prática em Evidências</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right 5 cols -->
+            <div class="lg:col-span-5 relative reveal-up active">
+                <div class="rounded-[28px] overflow-hidden border-2 border-white shadow-2xl bg-white aspect-[4/5] relative">
+                    <img src="../assets/interior-maps-1.jpg" 
+                         alt="Interior Atipicamente Psi" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-psi-navy/70 via-transparent to-transparent"></div>
+                    
+                    <div class="absolute bottom-6 left-6 right-6 text-white p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+                        <span class="text-[10px] font-display font-bold uppercase tracking-widest text-psi-sand block mb-1">
+                            CALDAS NOVAS &bull; GOIÁS
+                        </span>
+                        <h4 class="font-display text-xl font-[800]">Ambiente Planejado para Acolher</h4>
+                        <p class="text-xs text-white/90 mt-1 font-light">Salas temáticas e estruturadas para avaliação e estimulação precoce.</p>
+                    </div>
+                </div>
+
+                <div class="absolute -bottom-8 -left-8 w-36 h-36 rounded-full bg-psi-terracotta text-white flex flex-col items-center justify-center shadow-xl border-4 border-[#FAF6EE] animate-bounce-slow">
+                    <span class="font-display text-3xl font-[900] leading-none">100%</span>
+                    <span class="text-[9px] font-display font-bold uppercase tracking-wider text-center mt-1 px-3">
+                        Acolhimento Humano
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 2️⃣ GALERIA DE FOTOS DO INTERIOR & ESTRUTURA (NOVA SEÇÃO EXCLUSIVA!) -->
+    <section id="espaco" class="py-24 sm:py-32 bg-[#FAF6EE] border-b border-psi-charcoal/10">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16 pb-8 border-b border-psi-charcoal/10 reveal-up">
+                <div class="space-y-2">
+                    <span class="text-xs font-display font-bold uppercase tracking-[0.3em] text-psi-terracotta block">
+                        TOUR PELO NÚCLEO &bull; ESTRUTURA CLÍNICA
+                    </span>
+                    <h2 class="font-display text-4xl sm:text-6xl font-[900] uppercase text-psi-navy">
+                        Nosso Espaço por Dentro
+                    </h2>
+                </div>
+                <p class="text-sm sm:text-base text-psi-charcoal/70 max-w-md font-medium">
+                    Ambientes projetados com iluminação suave, conforto acústico e recursos sensoriais para proporcionar segurança a crianças, jovens e famílias.
+                </p>
+            </div>
+
+            <!-- Grid de Fotos do Interior em Destaque -->
+            <div class="grid md:grid-cols-12 gap-6 items-stretch">
+                
+                <!-- Destaque 1: Recepção e Acolhimento (7 cols) -->
+                <div class="md:col-span-7 gallery-card aspect-[16/10] shadow-md reveal-up group">
+                    <img src="../assets/interior-maps-1.jpg" alt="Recepção e Sala de Espera Climatizada" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-psi-navy/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
+                        <span class="text-[10px] font-display font-bold uppercase tracking-widest text-psi-sand block mb-1">
+                            SALA DE ESPERA & RECEPÇÃO
+                        </span>
+                        <h3 class="font-display text-2xl sm:text-3xl font-[900]">Ambiente de Acolhimento Inicial</h3>
+                        <p class="text-xs sm:text-sm text-white/80 font-light mt-1 max-w-lg">
+                            Recepção climatizada com cores calmas para redução da ansiedade pré-atendimento.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Destaque 2: Sala de Avaliação Neuropsicológica (5 cols) -->
+                <div class="md:col-span-5 gallery-card aspect-[4/3] md:aspect-auto shadow-md reveal-up group">
+                    <img src="../assets/interior-maps-2.jpg" alt="Consultório de Avaliação e Atendimento Individual" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-psi-navy/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
+                        <span class="text-[10px] font-display font-bold uppercase tracking-widest text-psi-sand block mb-1">
+                            CONSULTÓRIO CLÍNICO
+                        </span>
+                        <h3 class="font-display text-2xl font-[900]">Avaliação & Psicoterapia</h3>
+                        <p class="text-xs sm:text-sm text-white/80 font-light mt-1">
+                            Espaço privativo com isolamento acústico para escuta individual e testes cognitivos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Destaque 3: Sala de Intervenção ABA & Estimulação Precoce (4 cols) -->
+                <div class="md:col-span-4 gallery-card aspect-[4/3] shadow-md reveal-up group">
+                    <img src="../assets/interior-maps-5.jpg" alt="Sala de Terapia Comportamental e ABA" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-psi-navy/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                        <span class="text-[10px] font-display font-bold uppercase tracking-widest text-psi-sand block mb-1">
+                            MÉTODO ABA & TEA
+                        </span>
+                        <h3 class="font-display text-xl font-[900]">Sala de Intervenção Comportamental</h3>
+                        <p class="text-xs text-white/80 font-light mt-1">Recursos pedagógicos e mesas adaptadas para o treino de habilidades.</p>
+                    </div>
+                </div>
+
+                <!-- Destaque 4: Espaço Lúdico e Psicoterapia Infantil (4 cols) -->
+                <div class="md:col-span-4 gallery-card aspect-[4/3] shadow-md reveal-up group">
+                    <img src="../assets/interior-post-1.jpg" alt="Brinquedoteca Terapêutica" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-psi-navy/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                        <span class="text-[10px] font-display font-bold uppercase tracking-widest text-psi-sand block mb-1">
+                            INFANTOJUVENIL
+                        </span>
+                        <h3 class="font-display text-xl font-[900]">Espaço Lúdico Terapêutico</h3>
+                        <p class="text-xs text-white/80 font-light mt-1">Brinquedos expressivos e materiais estruturados para crianças.</p>
+                    </div>
+                </div>
+
+                <!-- Destaque 5: Fachada & Localização (4 cols) -->
+                <div class="md:col-span-4 gallery-card aspect-[4/3] shadow-md reveal-up group">
+                    <img src="../assets/fachada-principal.jpg" alt="Fachada Atipicamente Psi Caldas Novas" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-psi-navy/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                        <span class="text-[10px] font-display font-bold uppercase tracking-widest text-psi-sand block mb-1">
+                            CALDAS NOVAS &bull; GO
+                        </span>
+                        <h3 class="font-display text-xl font-[900]">Localização Acessível</h3>
+                        <p class="text-xs text-white/80 font-light mt-1">Estacionamento facilitado e acessibilidade plena para todos.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3️⃣ EQUIPE MULTIDISCIPLINAR (Fotos Reais) -->
+    <section id="equipe" class="py-24 sm:py-32 bg-white border-b border-psi-charcoal/10">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <div class="max-w-3xl mb-16 space-y-3 reveal-up">
+                <span class="text-xs font-display font-bold uppercase tracking-[0.3em] text-psi-terracotta block">
+                    NOSSO CORPO CLÍNICO
+                </span>
+                <h2 class="font-display text-4xl sm:text-6xl font-[900] uppercase text-psi-navy leading-[0.95]">
+                    Profissionais com Especialização e Escuta Sensível
+                </h2>
+                <p class="text-base sm:text-lg text-psi-charcoal/70 leading-relaxed font-normal">
+                    Cada membro da equipe Atipicamente Psi traz formação de excelência, registro ativo no CRP e compromisso inegociável com intervenções éticas e comprovadas.
+                </p>
+            </div>
+
+            <!-- Team Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Profissional 1: Gabriela Fernandes -->
+                <div class="team-card p-8 rounded-2xl border border-psi-charcoal/10 flex flex-col justify-between space-y-6 reveal-up">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-psi-terracotta shadow-md flex-shrink-0 bg-cream-100">
+                                <img src="../assets/gabriela-fernandes.png" alt="Gabriela Fernandes" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl font-[900] text-psi-navy leading-tight">
+                                    Gabriela Fernandes
+                                </h3>
+                                <p class="text-xs font-display font-bold uppercase text-psi-terracotta tracking-wider mt-0.5">
+                                    Neuropsicóloga &bull; CRP 09/19262
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 pt-2 text-xs text-psi-charcoal/80 leading-relaxed">
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Pós-Graduações:</strong>
+                                • Análise do Comportamento Aplicada (ABA)<br>
+                                • Neuropsicologia Clínica<br>
+                                • Especialista em TEA e Neurodesenvolvimento
+                            </div>
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Certificações & Protocolos:</strong>
+                                • Protocolo VB-MAPP e Treino Parental<br>
+                                • Intervenções Assistidas por Animais<br>
+                                • Supervisão Clínica Especializada
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20atendimento%20com%20a%20Dra.%20Gabriela%20Fernandes." 
+                       target="_blank"
+                       class="w-full py-3 bg-[#FAF6EE] hover:bg-psi-terracotta hover:text-white text-psi-navy font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-colors text-center border border-psi-charcoal/10">
+                        Agendar com Gabriela &rarr;
+                    </a>
+                </div>
+
+                <!-- Profissional 2: Gracielly Albuquerque -->
+                <div class="team-card p-8 rounded-2xl border border-psi-charcoal/10 flex flex-col justify-between space-y-6 reveal-up">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-psi-terracotta shadow-md flex-shrink-0 bg-cream-100">
+                                <img src="../assets/gracielly-albuquerque.png" alt="Gracielly Albuquerque" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl font-[900] text-psi-navy leading-tight">
+                                    Gracielly Albuquerque
+                                </h3>
+                                <p class="text-xs font-display font-bold uppercase text-psi-terracotta tracking-wider mt-0.5">
+                                    Psicóloga &bull; CRP 09/22914
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 pt-2 text-xs text-psi-charcoal/80 leading-relaxed">
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Pós-Graduações:</strong>
+                                • Terapias Cognitivo-Comportamentais Contextuais<br>
+                                • Terapia Dialética Comportamental (DBT)
+                            </div>
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Certificações & Estudos:</strong>
+                                • Autismo e TDAH em Crianças e Jovens<br>
+                                • Saúde Mental e Desenvolvimento Infantojuvenil<br>
+                                • Práticas Inclusivas e Neurodiversidade
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20atendimento%20com%20a%20Gracielly%20Albuquerque." 
+                       target="_blank"
+                       class="w-full py-3 bg-[#FAF6EE] hover:bg-psi-terracotta hover:text-white text-psi-navy font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-colors text-center border border-psi-charcoal/10">
+                        Agendar com Gracielly &rarr;
+                    </a>
+                </div>
+
+                <!-- Profissional 3: Vinícius Guimarães -->
+                <div class="team-card p-8 rounded-2xl border border-psi-charcoal/10 flex flex-col justify-between space-y-6 reveal-up">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-psi-terracotta shadow-md flex-shrink-0 bg-cream-100">
+                                <img src="../assets/vinicius-guimaraes.png" alt="Vinícius Guimarães" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl font-[900] text-psi-navy leading-tight">
+                                    Vinícius Guimarães
+                                </h3>
+                                <p class="text-xs font-display font-bold uppercase text-psi-terracotta tracking-wider mt-0.5">
+                                    Psicólogo &bull; CRP 09/23069
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 pt-2 text-xs text-psi-charcoal/80 leading-relaxed">
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Pós-Graduações:</strong>
+                                • Terapias Cognitivo-Comportamentais Contextuais<br>
+                                • Atendimento de Adolescentes e Adultos<br>
+                                • TCC Baseada em Evidências
+                            </div>
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Foco Clínico:</strong>
+                                • Tratamento de Transtornos de Ansiedade<br>
+                                • Ansiedade Social e Fobias<br>
+                                • Depressão e Regulação Emocional
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20atendimento%20com%20o%20Dr.%20Vin%C3%ADcius%20Guimar%C3%A3es." 
+                       target="_blank"
+                       class="w-full py-3 bg-[#FAF6EE] hover:bg-psi-terracotta hover:text-white text-psi-navy font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-colors text-center border border-psi-charcoal/10">
+                        Agendar com Vinícius &rarr;
+                    </a>
+                </div>
+
+                <!-- Profissional 4: Felipe Rezende -->
+                <div class="team-card p-8 rounded-2xl border border-psi-charcoal/10 flex flex-col justify-between space-y-6 reveal-up">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-psi-terracotta shadow-md flex-shrink-0 bg-cream-100">
+                                <img src="../assets/felipe-rezende.png" alt="Felipe Rezende" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl font-[900] text-psi-navy leading-tight">
+                                    Felipe Rezende
+                                </h3>
+                                <p class="text-xs font-display font-bold uppercase text-psi-terracotta tracking-wider mt-0.5">
+                                    Psicólogo &bull; CRP 09/20924
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 pt-2 text-xs text-psi-charcoal/80 leading-relaxed">
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Pós-Graduações:</strong>
+                                • Psicologia de Grupos<br>
+                                • Psicologia Clínica Gestalt-Terapia<br>
+                                • Atuação em Saúde Pública
+                            </div>
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Especialidades:</strong>
+                                • Orientação Profissional e de Carreiras<br>
+                                • Saúde Mental e Atenção Psicossocial<br>
+                                • Acompanhamento de Adolescentes e Jovens
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20atendimento%20com%20o%20Felipe%20Rezende." 
+                       target="_blank"
+                       class="w-full py-3 bg-[#FAF6EE] hover:bg-psi-terracotta hover:text-white text-psi-navy font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-colors text-center border border-psi-charcoal/10">
+                        Agendar com Felipe &rarr;
+                    </a>
+                </div>
+
+                <!-- Profissional 5: Laura Rosa -->
+                <div class="team-card p-8 rounded-2xl border border-psi-charcoal/10 flex flex-col justify-between space-y-6 reveal-up">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-psi-terracotta shadow-md flex-shrink-0 bg-cream-100">
+                                <img src="../assets/laura-rosa.png" alt="Laura Rosa" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl font-[900] text-psi-navy leading-tight">
+                                    Laura Rosa
+                                </h3>
+                                <p class="text-xs font-display font-bold uppercase text-psi-terracotta tracking-wider mt-0.5">
+                                    Psicóloga &bull; CRP 09/23206
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 pt-2 text-xs text-psi-charcoal/80 leading-relaxed">
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Pós-Graduações:</strong>
+                                • Terapia Cognitivo-Comportamental (TCC)<br>
+                                • Análise do Comportamento Aplicada (ABA)<br>
+                                • Atendimento Infantil e Adulto
+                            </div>
+                            <div class="p-3 bg-cream-100 rounded-xl border border-cream-200">
+                                <strong class="text-psi-navy block mb-1 font-display">Certificações Clínicas:</strong>
+                                • Protocolos ABA e VB-MAPP<br>
+                                • Ferramenta Social Savvy para TEA<br>
+                                • Neurociência da Aprendizagem e Inclusão
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20atendimento%20com%20a%20Laura%20Rosa." 
+                       target="_blank"
+                       class="w-full py-3 bg-[#FAF6EE] hover:bg-psi-terracotta hover:text-white text-psi-navy font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-colors text-center border border-psi-charcoal/10">
+                        Agendar com Laura &rarr;
+                    </a>
+                </div>
+
+                <!-- Card 6: Abordagem Multidisciplinar -->
+                <div class="p-8 rounded-2xl border-2 border-dashed border-psi-terracotta/40 bg-psi-terracotta_light/50 flex flex-col justify-between space-y-6 reveal-up">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-psi-terracotta text-white flex items-center justify-center font-display text-2xl font-black">
+                            +
+                        </div>
+                        <h3 class="font-display text-2xl font-[900] text-psi-navy">
+                            Suporte Médico & Nutricional Integrado
+                        </h3>
+                        <p class="text-sm text-psi-charcoal/80 leading-relaxed">
+                            Além da equipe de psicologia e neuropsicologia, a clínica conta com suporte de <strong>Médicos</strong> e <strong>Nutricionistas</strong> parceiros para uma visão integral da saúde metabólica, neurológica e comportamental.
+                        </p>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20integrados%20da%20cl%C3%ADnica." 
+                       target="_blank"
+                       class="w-full py-3 bg-psi-terracotta text-white font-display text-xs font-bold uppercase tracking-wider rounded-xl transition-colors text-center shadow-sm">
+                        Consultar Outras Áreas &rarr;
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4️⃣ ÁREAS DE ATUAÇÃO & TERAPIAS -->
+    <section id="especialidades" class="py-24 sm:py-32 bg-[#FAF6EE] border-b border-psi-charcoal/10">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16 pb-8 border-b border-psi-charcoal/10 reveal-up">
+                <div>
+                    <span class="text-xs font-display font-bold uppercase tracking-[0.3em] text-psi-terracotta block mb-2">
+                        PILARES TERAPÊUTICOS
+                    </span>
+                    <h2 class="font-display text-4xl sm:text-6xl font-[900] uppercase text-psi-navy">
+                        Especialidades Clínicas
+                    </h2>
+                </div>
+                <p class="text-sm sm:text-base text-psi-charcoal/70 max-w-md font-medium">
+                    Atuação ética e empática voltada para o bem-estar duradouro de crianças, jovens e adultos.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                
+                <div class="p-8 bg-white rounded-2xl border border-psi-charcoal/10 space-y-3 hover:border-psi-terracotta transition-colors reveal-up">
+                    <span class="font-display text-xs font-bold text-psi-terracotta uppercase tracking-wider block">01 / AVALIAÇÃO</span>
+                    <h4 class="font-display text-2xl font-[900] text-psi-navy">Neuropsicologia</h4>
+                    <p class="text-xs text-psi-charcoal/70 leading-relaxed">
+                        Mapeamento detalhado de funções cognitivas: atenção, memória, raciocínio, funções executivas e diagnóstico de TEA e TDAH.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white rounded-2xl border border-psi-charcoal/10 space-y-3 hover:border-psi-terracotta transition-colors reveal-up">
+                    <span class="font-display text-xs font-bold text-psi-terracotta uppercase tracking-wider block">02 / INTERVENÇÃO</span>
+                    <h4 class="font-display text-2xl font-[900] text-psi-navy">Método ABA</h4>
+                    <p class="text-xs text-psi-charcoal/70 leading-relaxed">
+                        Aplicação da Análise do Comportamento Aplicada com protocolos validados (VB-MAPP) para desenvolvimento de autonomia e linguagem.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white rounded-2xl border border-psi-charcoal/10 space-y-3 hover:border-psi-terracotta transition-colors reveal-up">
+                    <span class="font-display text-xs font-bold text-psi-terracotta uppercase tracking-wider block">03 / PSICOTERAPIA</span>
+                    <h4 class="font-display text-2xl font-[900] text-psi-navy">TCC & DBT</h4>
+                    <p class="text-xs text-psi-charcoal/70 leading-relaxed">
+                        Terapias cognitivo-comportamentais e dialética para manejo de ansiedade, regulação emocional, depressão e habilidades sociais.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white rounded-2xl border border-psi-charcoal/10 space-y-3 hover:border-psi-terracotta transition-colors reveal-up">
+                    <span class="font-display text-xs font-bold text-psi-terracotta uppercase tracking-wider block">04 / FAMÍLIA</span>
+                    <h4 class="font-display text-2xl font-[900] text-psi-navy">Treino Parental</h4>
+                    <p class="text-xs text-psi-charcoal/70 leading-relaxed">
+                        Orientação estruturada para pais e cuidadores, construindo pontes sólidas entre a clínica, o lar e a escola.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5️⃣ FEED DO INSTAGRAM OFICIAL (@atipicamentepsi) -->
+    <section id="feed" class="py-24 sm:py-32 bg-white border-b border-psi-charcoal/10">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-16 pb-8 border-b border-psi-charcoal/10 reveal-up">
+                <div>
+                    <span class="text-xs font-display font-bold uppercase tracking-[0.3em] text-psi-terracotta block mb-2">
+                        CONTEÚDO &bull; EDUCAÇÃO &bull; ROTINA
+                    </span>
+                    <h2 class="font-display text-4xl sm:text-6xl font-[900] uppercase text-psi-navy">
+                        No Instagram @atipicamentepsi
+                    </h2>
+                </div>
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" 
+                   class="inline-flex items-center gap-2 font-display text-xs font-bold uppercase tracking-widest text-psi-navy hover:text-psi-terracotta border border-psi-charcoal/20 px-6 py-3 rounded-full transition-colors">
+                    <span>Acompanhar Perfil Oficial ↗</span>
+                </a>
+            </div>
+
+            <!-- Staggered / Grid Feed Showcase -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="insta-card aspect-square bg-[#FAF6EE] shadow-sm group">
+                    <img src="../assets/interior-post-1.jpg" alt="Post Atipicamente Psi" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-psi-navy/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-display font-bold uppercase tracking-widest">
+                        Ver no Instagram ↗
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="insta-card aspect-square bg-[#FAF6EE] shadow-sm group">
+                    <img src="../assets/interior-post-2.jpg" alt="Post Atipicamente Psi" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-psi-navy/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-display font-bold uppercase tracking-widest">
+                        Ver no Instagram ↗
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="insta-card aspect-square bg-[#FAF6EE] shadow-sm group">
+                    <img src="../assets/interior-post-3.jpg" alt="Post Atipicamente Psi" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-psi-navy/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-display font-bold uppercase tracking-widest">
+                        Ver no Instagram ↗
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="insta-card aspect-square bg-[#FAF6EE] shadow-sm group">
+                    <img src="../assets/interior-post-4.jpg" alt="Post Atipicamente Psi" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-psi-navy/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-display font-bold uppercase tracking-widest">
+                        Ver no Instagram ↗
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="insta-card aspect-square bg-[#FAF6EE] shadow-sm group">
+                    <img src="../assets/interior-post-5.jpg" alt="Post Atipicamente Psi" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-psi-navy/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-display font-bold uppercase tracking-widest">
+                        Ver no Instagram ↗
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="insta-card aspect-square bg-[#FAF6EE] shadow-sm group">
+                    <img src="../assets/interior-post-6.jpg" alt="Post Atipicamente Psi" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-psi-navy/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-display font-bold uppercase tracking-widest">
+                        Ver no Instagram ↗
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6️⃣ CALL TO ACTION & LOCALIZAÇÃO -->
+    <section id="contato" class="py-24 bg-psi-navy text-white relative overflow-hidden">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-8 space-y-6">
+                    <span class="text-xs font-display font-bold uppercase tracking-[0.3em] text-psi-terracotta block">
+                        AGENDAMENTO & INFORMAÇÕES
+                    </span>
+                    <h2 class="font-display text-4xl sm:text-6xl font-[900] uppercase text-white leading-tight">
+                        Dê o primeiro passo para o acolhimento do seu filho ou da sua família.
+                    </h2>
+                    <p class="text-white/80 text-base sm:text-lg max-w-2xl font-light leading-relaxed">
+                        Nossa equipe está à disposição para tirar dúvidas sobre protocolos, triagens e disponibilidades de horários em Caldas Novas.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-4 lg:text-right">
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20iniciar%20o%20acolhimento%20na%20Atipicamente%20Psi." 
+                       target="_blank"
+                       class="inline-block bg-psi-terracotta hover:bg-[#b5593c] text-white font-display text-xs font-[800] uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 shadow-2xl">
+                        Falar no WhatsApp &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#162132] text-white/60 py-14 text-xs font-display">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div class="text-center sm:text-left">
+                <span class="text-white font-[900] text-lg uppercase tracking-wider block">
+                    ATIPICAMENTE PSI &bull; NÚCLEO CLÍNICO E EDUCACIONAL
+                </span>
+                <span class="text-white/40 mt-1 block">
+                    Caldas Novas &mdash; Goiás &bull; Especialistas com registro no CRP 09
+                </span>
+            </div>
+            <div class="text-center sm:text-right text-white/40">
+                <p>&copy; 2026 Atipicamente Psi. Todos os direitos reservados.</p>
+                <p class="mt-0.5">Instagram: @atipicamentepsi</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reveal on Scroll Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+</html>

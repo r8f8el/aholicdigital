@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Anielly Vilela | Estética Avançada & Ultraformer III — Caldas Novas</title>
+    <meta name="description" content="Clínica especializada em Harmonização Facial, Ultraformer III, BB Laser e Estética Avançada em Caldas Novas, GO. Agendamento com Anielly Vilela.">
+    
+    <!-- Google Fonts: Newsreader + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nude: {
+                            50: '#FDFBF9',
+                            100: '#F9F5F1',
+                            200: '#EFE8E1',
+                            300: '#E2D6CA',
+                            400: '#CDBBB0',
+                            500: '#B29B8E',
+                            600: '#947D70',
+                            700: '#756054',
+                            800: '#57463D',
+                            900: '#382D27',
+                        },
+                        rosewood: {
+                            500: '#9D6E5F',
+                            600: '#845749',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        serif: ['"Newsreader"', 'Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background: #EFE8E1; color: #1F1D1B; }
+    </style>
+</head>
+<body class="bg-[#FDFBF9] text-[#1F1D1B] font-sans antialiased selection:bg-nude-200">
+
+    <!-- Top Utility Bar -->
+    <div class="border-b border-nude-200 bg-nude-100/70 text-xs text-nude-700 py-2 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                <span>Atendimento com Hora Marcada &bull; Tecnologias Ultraformer III & BB Laser</span>
+            </div>
+            <div class="flex items-center gap-4 text-nude-800">
+                <span>Itanhangá I, Caldas Novas &mdash; GO</span>
+                <span class="text-nude-300">|</span>
+                <a href="tel:5564993368698" class="font-medium hover:text-black transition-colors">(64) 99336-8698</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-[#FDFBF9]/90 backdrop-blur-md border-b border-nude-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <!-- Brand / Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-nude-200/80 border border-nude-300 flex items-center justify-center text-rosewood-600 font-serif font-semibold text-lg">
+                    AV
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl font-medium tracking-tight text-neutral-950">Anielly Vilela</span>
+                    <span class="text-[9px] tracking-[0.25em] uppercase text-nude-600 -mt-0.5 font-medium">Estética Avançada</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-medium text-neutral-600">
+                <a href="#procedimentos" class="hover:text-black transition-colors">Tratamentos</a>
+                <a href="#tecnologias" class="hover:text-black transition-colors">Ultraformer III</a>
+                <a href="#sobre" class="hover:text-black transition-colors">A Especialista</a>
+                <a href="#depoimentos" class="hover:text-black transition-colors">Avaliações</a>
+                <a href="#localizacao" class="hover:text-black transition-colors">Localização</a>
+            </nav>
+
+            <!-- Action CTA -->
+            <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20Cl%C3%ADnica%20Anielly%20Vilela." 
+               target="_blank"
+               class="inline-flex items-center gap-2 bg-[#1F1D1B] hover:bg-neutral-800 text-white text-xs font-medium px-5 py-2.5 rounded-sm tracking-wide transition-colors">
+                <span>Agendar Avaliação</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-nude-400"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-16 pb-20 md:pt-24 md:pb-28 border-b border-nude-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Content -->
+                <div class="lg:col-span-7 space-y-8">
+                    
+                    <div class="space-y-4">
+                        <p class="text-xs uppercase tracking-[0.2em] text-nude-600 font-semibold">
+                            Estética Facial & Corporal &bull; Caldas Novas
+                        </p>
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-[52px] leading-[1.12] text-neutral-950 font-normal tracking-tight">
+                            Tecnologia médica e sensibilidade estética para realçar a sua melhor versão.
+                        </h1>
+                    </div>
+
+                    <p class="text-base sm:text-lg text-neutral-600 font-normal leading-relaxed max-w-xl">
+                        Protocolos avançados de rejuvenescimento facial, estímulo de colágeno com <strong>Ultraformer III</strong> e tratamentos de alta performance conduzidos por <strong>Anielly Vilela</strong>.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                        <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." 
+                           target="_blank"
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#1F1D1B] hover:bg-neutral-800 text-white text-sm font-medium px-7 py-3.5 rounded-sm transition-colors">
+                            <i data-lucide="calendar" class="w-4 h-4 text-nude-400"></i>
+                            <span>Agendar Avaliação no WhatsApp</span>
+                        </a>
+
+                        <a href="#procedimentos" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-neutral-700 hover:text-black text-sm font-medium px-4 py-3.5 border-b border-nude-400 hover:border-black transition-colors">
+                            <span>Conhecer tratamentos</span>
+                            <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="pt-6 border-t border-nude-200 grid grid-cols-3 gap-6 text-left">
+                        <div>
+                            <span class="block font-serif text-2xl font-medium text-neutral-950">4.9 ★</span>
+                            <span class="block text-xs text-nude-600 mt-0.5">Avaliação Google Maps</span>
+                        </div>
+                        <div>
+                            <span class="block font-serif text-2xl font-medium text-neutral-950">Ultraformer III</span>
+                            <span class="block text-xs text-nude-600 mt-0.5">Tecnologia padrão ouro</span>
+                        </div>
+                        <div>
+                            <span class="block font-serif text-2xl font-medium text-neutral-950">Itanhangá I</span>
+                            <span class="block text-xs text-nude-600 mt-0.5">Espaço privativo</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Hero Image Showcase -->
+                <div class="lg:col-span-5">
+                    <div class="relative bg-nude-100 p-2 rounded-sm border border-nude-300">
+                        <div class="aspect-[4/5] overflow-hidden bg-neutral-200 relative">
+                            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1000&q=85" 
+                                 alt="Tratamento Facial Avançado na Clínica Anielly Vilela" 
+                                 class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700">
+                        </div>
+                        <div class="pt-3 pb-1 px-2 flex justify-between items-center text-xs text-nude-700">
+                            <span>Clínica Anielly Vilela</span>
+                            <span class="font-medium text-neutral-950">Rua B28 &bull; Caldas Novas</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Spotlight: Ultraformer III & BB Laser -->
+    <section id="tecnologias" class="py-24 border-b border-nude-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-nude-200">
+                <div class="space-y-2">
+                    <span class="text-xs uppercase tracking-[0.2em] text-nude-600 font-semibold">Tecnologias Médicas</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-neutral-950 font-normal">
+                        Resultados visíveis sem cirurgia
+                    </h2>
+                </div>
+                <p class="text-sm text-neutral-500 max-w-md">
+                    Trabalhamos com equipamentos consagrados mundialmente para estímulo de colágeno, lifting facial e uniformização da pele.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 pt-12">
+                
+                <!-- Ultraformer III -->
+                <div class="p-8 bg-nude-50 border border-nude-200 rounded-sm space-y-6 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="inline-block px-3 py-1 bg-nude-200 text-rosewood-600 text-xs font-semibold uppercase tracking-wider rounded-sm">
+                            Padrão Ouro de Lifting
+                        </div>
+                        <h3 class="font-serif text-2xl font-medium text-neutral-950">
+                            Ultraformer III
+                        </h3>
+                        <p class="text-sm text-neutral-600 leading-relaxed">
+                            Ultrassom micro e macrofocado que atua nas camadas mais profundas da pele (fáscia muscular), promovendo efeito lifting imediato e progressivo, redução de papada, definição do contorno da mandíbula e estímulo intenso de colágeno.
+                        </p>
+                        <div class="text-xs text-nude-700 space-y-1 pt-2">
+                            <p>&bull; Sem tempo de recuperação (retorno imediato à rotina)</p>
+                            <p>&bull; Tratamento para rosto, pescoço e áreas corporais</p>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Gostaria%20de%20saber%20valores%20e%20sess%C3%B5es%20de%20Ultraformer%20III." 
+                       target="_blank" 
+                       class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-neutral-950 hover:text-rosewood-500 pt-4 border-t border-nude-200 transition-colors">
+                        <span>Consultar sessões de Ultraformer</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- BB Laser Pisom & Melasma -->
+                <div class="p-8 bg-nude-50 border border-nude-200 rounded-sm space-y-6 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="inline-block px-3 py-1 bg-nude-200 text-rosewood-600 text-xs font-semibold uppercase tracking-wider rounded-sm">
+                            Uniformização & Textura
+                        </div>
+                        <h3 class="font-serif text-2xl font-medium text-neutral-950">
+                            BB Laser Pisom & Clareamento
+                        </h3>
+                        <p class="text-sm text-neutral-600 leading-relaxed">
+                            Laser fracionado não-ablativo desenvolvido para fechar poros, clarear manchas solares, tratar melasma resistente e devolver o viço natural à pele com efeito de porcelana duradouro.
+                        </p>
+                        <div class="text-xs text-nude-700 space-y-1 pt-2">
+                            <p>&bull; Melhora visível de textura e luminosidade</p>
+                            <p>&bull; Protocolos específicos e seguros para melasma</p>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20BB%20Laser." 
+                       target="_blank" 
+                       class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-neutral-950 hover:text-rosewood-500 pt-4 border-t border-nude-200 transition-colors">
+                        <span>Consultar tratamento a laser</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Procedures Index -->
+    <section id="procedimentos" class="py-24 border-b border-nude-200 bg-[#FDFBF9]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            
+            <div class="pb-12 border-b border-nude-200 space-y-2">
+                <span class="text-xs uppercase tracking-[0.2em] text-nude-600 font-semibold">Protocolos Clínicos</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-neutral-950 font-normal">
+                    Menu de tratamentos personalizados
+                </h2>
+            </div>
+
+            <div class="divide-y divide-nude-200">
+                
+                <!-- Harmonização Facial -->
+                <div class="py-8 grid md:grid-cols-12 gap-6 items-start">
+                    <div class="md:col-span-4">
+                        <span class="text-xs font-mono text-nude-500 block mb-1">01 &mdash; Facial</span>
+                        <h3 class="font-serif text-2xl font-medium text-neutral-950">Harmonização Facial</h3>
+                    </div>
+                    <div class="md:col-span-5 text-sm text-neutral-600 leading-relaxed">
+                        Toxina botulínica (botox) para linhas de expressão, preenchimento com ácido hialurônico para lábios, olheiras e maçãs do rosto, além de bioestimuladores para sustentação.
+                    </div>
+                    <div class="md:col-span-3 md:text-right">
+                        <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20Harmoniza%C3%A7%C3%A3o%20Facial." target="_blank" class="text-xs uppercase tracking-widest font-semibold text-neutral-950 hover:text-rosewood-500 transition-colors">
+                            Agendar consulta &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Limpeza de Pele & Peelings -->
+                <div class="py-8 grid md:grid-cols-12 gap-6 items-start">
+                    <div class="md:col-span-4">
+                        <span class="text-xs font-mono text-nude-500 block mb-1">02 &mdash; Saúde da Pele</span>
+                        <h3 class="font-serif text-2xl font-medium text-neutral-950">Limpeza Profunda & Peelings</h3>
+                    </div>
+                    <div class="md:col-span-5 text-sm text-neutral-600 leading-relaxed">
+                        Higienização técnica com extração indolor, hidratação profunda e renovação celular com peelings químicos formulados para o seu fototipo.
+                    </div>
+                    <div class="md:col-span-3 md:text-right">
+                        <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Quero%20agendar%20uma%20Limpeza%20de%20Pele." target="_blank" class="text-xs uppercase tracking-widest font-semibold text-neutral-950 hover:text-rosewood-500 transition-colors">
+                            Agendar consulta &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Microagulhamento & Melasma -->
+                <div class="py-8 grid md:grid-cols-12 gap-6 items-start">
+                    <div class="md:col-span-4">
+                        <span class="text-xs font-mono text-nude-500 block mb-1">03 &mdash; Rejuvenescimento</span>
+                        <h3 class="font-serif text-2xl font-medium text-neutral-950">Microagulhamento & Melasma</h3>
+                    </div>
+                    <div class="md:col-span-5 text-sm text-neutral-600 leading-relaxed">
+                        Indução percutânea de colágeno com drug delivery de ativos clareadores e regeneradores, tratando cicatrizes de acne, textura e manchas.
+                    </div>
+                    <div class="md:col-span-3 md:text-right">
+                        <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Microagulhamento." target="_blank" class="text-xs uppercase tracking-widest font-semibold text-neutral-950 hover:text-rosewood-500 transition-colors">
+                            Agendar consulta &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Terapias Capilares & Corporais -->
+                <div class="py-8 grid md:grid-cols-12 gap-6 items-start">
+                    <div class="md:col-span-4">
+                        <span class="text-xs font-mono text-nude-500 block mb-1">04 &mdash; Capilar & Corporal</span>
+                        <h3 class="font-serif text-2xl font-medium text-neutral-950">Tratamento Capilar & Laser</h3>
+                    </div>
+                    <div class="md:col-span-5 text-sm text-neutral-600 leading-relaxed">
+                        Estimulação de folículos capilares para controle de queda e afinamento, além de depilação a laser de alta precisão e conforto.
+                    </div>
+                    <div class="md:col-span-3 md:text-right">
+                        <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Quero%20saber%20sobre%20Tratamento%20Capilar." target="_blank" class="text-xs uppercase tracking-widest font-semibold text-neutral-950 hover:text-rosewood-500 transition-colors">
+                            Agendar consulta &rarr;
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- The Specialist Section -->
+    <section id="sobre" class="py-24 border-b border-nude-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5">
+                    <div class="space-y-4">
+                        <div class="aspect-[3/4] bg-neutral-200 overflow-hidden rounded-sm border border-nude-300">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Anielly Vilela - Estética Avançada" 
+                                 class="w-full h-full object-cover grayscale-[10%]">
+                        </div>
+                        <div class="text-xs text-nude-700">
+                            <p class="font-medium text-neutral-950">Anielly Vilela</p>
+                            <p>Especialista em Rejuvenescimento Facial e Tecnologias Estéticas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-xs uppercase tracking-[0.2em] text-nude-600 font-semibold">Sobre a Clínica</span>
+                    
+                    <h2 class="font-serif text-3xl sm:text-4xl text-neutral-950 font-normal leading-snug">
+                        &ldquo;Cuidar da pele é um ato de saúde, autoestima e respeito à sua história.&rdquo;
+                    </h2>
+
+                    <div class="space-y-4 text-sm text-neutral-600 leading-relaxed font-normal">
+                        <p>
+                            A <strong>Clínica Anielly Vilela</strong> é referência em estética avançada em Caldas Novas, combinando o que há de mais moderno na ciência estética com um olhar atento e individualizado para cada paciente.
+                        </p>
+                        <p>
+                            Nosso consultório no Itanhangá I foi planejado para oferecer uma experiência de privacidade, conforto e biossegurança rigorosa. Cada plano de tratamento é desenhado sob medida para entregar resultados harmônicos, seguros e sem artificialidades.
+                        </p>
+                    </div>
+
+                    <div class="pt-4 grid sm:grid-cols-2 gap-4 border-t border-nude-200 text-xs text-neutral-700">
+                        <div>
+                            <span class="font-semibold block text-neutral-950 mb-1">Localização</span>
+                            <span>Rua B28, Qd. 36, Lt. 17, Sala 1 &mdash; Itanhangá I, Caldas Novas</span>
+                        </div>
+                        <div>
+                            <span class="font-semibold block text-neutral-950 mb-1">Agendamentos</span>
+                            <span>Segunda a Sexta com horário reservado no WhatsApp</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Patient Testimonials -->
+    <section id="depoimentos" class="py-24 border-b border-nude-200 bg-[#FDFBF9]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            
+            <div class="pb-12 border-b border-nude-200 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+                <div class="space-y-2">
+                    <span class="text-xs uppercase tracking-[0.2em] text-nude-600 font-semibold">Depoimentos Públicos</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-neutral-950 font-normal">
+                        Avaliações no Google Maps
+                    </h2>
+                </div>
+                <div class="text-xs text-nude-600">
+                    Média <strong>4.9 de 5.0 estrelas</strong> baseada em 42 avaliações reais
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 pt-12">
+                
+                <div class="space-y-4">
+                    <div class="text-amber-600 text-xs">★★★★★</div>
+                    <blockquote class="font-serif text-base text-neutral-800 leading-relaxed italic">
+                        &ldquo;Fiz o Ultraformer III com a Anielly e o resultado foi inacreditável! Minha pele ficou muito mais firme e sem marcas de expressão. Atendimento impecável em Caldas Novas.&rdquo;
+                    </blockquote>
+                    <div class="pt-2 text-xs border-t border-nude-200 text-nude-600">
+                        <span class="font-medium text-neutral-950 block">Patrícia Fonseca</span>
+                        <span>Paciente verificada no Google Maps</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="text-amber-600 text-xs">★★★★★</div>
+                    <blockquote class="font-serif text-base text-neutral-800 leading-relaxed italic">
+                        &ldquo;A melhor limpeza de pele e tratamento de melasma que já fiz. A Anielly explica tudo com muita paciência e os produtos são maravilhosos. Recomendo de olhos fechados!&rdquo;
+                    </blockquote>
+                    <div class="pt-2 text-xs border-t border-nude-200 text-nude-600">
+                        <span class="font-medium text-neutral-950 block">Juliana Martins</span>
+                        <span>Paciente verificada no Google Maps</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="text-amber-600 text-xs">★★★★★</div>
+                    <blockquote class="font-serif text-base text-neutral-800 leading-relaxed italic">
+                        &ldquo;Espaço lindo, super limpo e acolhedor. Os tratamentos a laser e o botox ficaram super naturais. Não troco por nenhuma outra clínica!&rdquo;
+                    </blockquote>
+                    <div class="pt-2 text-xs border-t border-nude-200 text-nude-600">
+                        <span class="font-medium text-neutral-950 block">Renata Silveira</span>
+                        <span>Paciente verificada no Google Maps</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Map -->
+    <section id="localizacao" class="py-24 bg-nude-100/50 border-b border-nude-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            
+            <div class="grid lg:grid-cols-12 gap-12">
+                
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-2">
+                        <span class="text-xs uppercase tracking-[0.2em] text-nude-600 font-semibold">Endereço & Acesso</span>
+                        <h2 class="font-serif text-3xl text-neutral-950 font-normal">
+                            Venha nos visitar
+                        </h2>
+                    </div>
+
+                    <div class="space-y-6 text-sm text-neutral-700">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-nude-600 font-semibold block mb-1">Endereço</span>
+                            <p class="font-medium text-neutral-950">Rua B28, Quadra 36, Lote 17, Sala 1</p>
+                            <p class="text-nude-700">Itanhangá I (Próximo à Panificadora Super Pão)</p>
+                            <p class="text-nude-700">Caldas Novas &mdash; GO, CEP 75680-356</p>
+                        </div>
+
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-nude-600 font-semibold block mb-1">Horário de Atendimento</span>
+                            <p>Segunda a Sexta: <strong>08h às 18h</strong></p>
+                            <p>Atendimento privativo com agendamento prévio</p>
+                        </div>
+
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-nude-600 font-semibold block mb-1">WhatsApp & Agendamento</span>
+                            <p><a href="tel:5564993368698" class="hover:text-black transition-colors font-medium">(64) 99336-8698</a></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a href="https://maps.google.com/maps?q=Rua+B28+Quadra+36+Caldas+Novas+GO" 
+                           target="_blank"
+                           class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-neutral-950 hover:text-rosewood-500 border-b border-neutral-950 pb-1 transition-colors">
+                            <span>Abrir rota no Google Maps</span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Google Map Frame -->
+                <div class="lg:col-span-7 bg-white p-2 rounded-sm border border-nude-300">
+                    <div class="w-full h-80 lg:h-full min-h-[320px] bg-nude-200">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Rua+B28+Quadra+36+Caldas+Novas+GO&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation CTA -->
+    <section class="py-20 bg-[#1F1D1B] text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center space-y-6">
+            <h2 class="font-serif text-3xl sm:text-4xl font-normal text-nude-50 tracking-tight">
+                Agende sua avaliação estética em Caldas Novas.
+            </h2>
+            <p class="text-nude-400 text-sm max-w-lg mx-auto font-normal leading-relaxed">
+                Descubra qual protocolo é ideal para a sua pele com quem entende de rejuvenescimento e tecnologias avançadas.
+            </p>
+            <div class="pt-4">
+                <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o%20na%20Cl%C3%ADnica%20Anielly%20Vilela." 
+                   target="_blank"
+                   class="inline-flex items-center gap-2.5 bg-nude-100 hover:bg-white text-neutral-950 text-xs uppercase tracking-widest font-semibold px-8 py-4 rounded-sm transition-colors">
+                    <i data-lucide="message-circle" class="w-4 h-4 text-emerald-700"></i>
+                    <span>Conversar no WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Minimalist Footer -->
+    <footer class="bg-[#171514] text-nude-500 py-12 text-xs border-t border-neutral-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="font-serif text-base text-nude-200 block">Clínica Anielly Vilela</span>
+                <span class="text-nude-600 mt-0.5 block">Estética Avançada &bull; Rejuvenescimento Facial</span>
+            </div>
+            <div class="text-center sm:text-right text-nude-600">
+                <p>&copy; 2026 Clínica Anielly Vilela. Todos os direitos reservados.</p>
+                <p class="mt-1">Rua B28, Qd. 36, Lt. 17, Sala 1 &mdash; Itanhangá I, Caldas Novas - GO</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Discreet Floating WhatsApp Pill -->
+    <a href="https://wa.me/5564993368698?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2.5 bg-[#1F1D1B] text-white hover:bg-neutral-800 px-4 py-3 rounded-full shadow-lg border border-nude-700/40 text-xs font-medium transition-all group">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>WhatsApp</span>
+        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-nude-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+    </a>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+<!-- PROSPECTOR-EDITOR-START -->
+<style id="pe-style">
+#pe-bar{position:fixed;top:0;left:0;right:0;z-index:99999;background:#111;color:#fff;font:14px/1 -apple-system,Segoe UI,Roboto,sans-serif;display:flex;align-items:center;gap:16px;padding:10px 16px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+#pe-bar button{background:#22c55e;color:#fff;border:0;border-radius:8px;padding:8px 16px;font-weight:600;cursor:pointer}
+#pe-bar button:hover{background:#16a34a}
+body{margin-top:44px !important}
+.pe-hover{outline:2px dashed #22c55e !important;outline-offset:2px;cursor:pointer}
+[contenteditable="true"]:focus{outline:2px solid #3b82f6 !important;outline-offset:2px}
+</style>
+<div id="pe-bar">
+  <strong>Modo edição</strong>
+  <span>Clique em textos para editar · clique em imagens para trocar</span>
+  <button id="pe-export" type="button">Exportar página</button>
+</div>
+<input type="file" id="pe-file" accept="image/*" style="display:none">
+<script id="pe-script">
+(function(){
+  var TEXT='h1,h2,h3,h4,h5,h6,p,li,a,span,button,td,th,figcaption,blockquote,strong,em';
+  document.querySelectorAll(TEXT).forEach(function(el){
+    if(el.closest('#pe-bar'))return;
+    if(el.children.length===0||el.childElementCount<=1){
+      el.addEventListener('click',function(e){
+        if(el.tagName==='A'||el.tagName==='BUTTON')e.preventDefault();
+        el.setAttribute('contenteditable','true');el.focus();
+      });
+      el.addEventListener('mouseenter',function(){el.classList.add('pe-hover')});
+      el.addEventListener('mouseleave',function(){el.classList.remove('pe-hover')});
+      el.addEventListener('blur',function(){el.removeAttribute('contenteditable')});
+    }
+  });
+  var fileInput=document.getElementById('pe-file'),currentImg=null;
+  document.querySelectorAll('img').forEach(function(img){
+    img.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();currentImg=img;fileInput.click()});
+    img.addEventListener('mouseenter',function(){img.classList.add('pe-hover')});
+    img.addEventListener('mouseleave',function(){img.classList.remove('pe-hover')});
+  });
+  fileInput.addEventListener('change',function(){
+    var f=fileInput.files[0];if(!f||!currentImg)return;
+    var r=new FileReader();
+    r.onload=function(){currentImg.src=r.result;if(currentImg.srcset)currentImg.removeAttribute('srcset')};
+    r.readAsDataURL(f);fileInput.value='';
+  });
+  document.getElementById('pe-export').addEventListener('click',function(){
+    var doc=document.documentElement.cloneNode(true);
+    ['#pe-bar','#pe-style','#pe-script','#pe-file'].forEach(function(s){var n=doc.querySelector(s);if(n)n.remove()});
+    doc.querySelectorAll('[contenteditable]').forEach(function(n){n.removeAttribute('contenteditable')});
+    doc.querySelectorAll('.pe-hover').forEach(function(n){n.classList.remove('pe-hover')});
+    var html='<!DOCTYPE html>\n'+doc.outerHTML;
+    var blob=new Blob([html],{type:'text/html'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';a.click();
+  });
+})();
+</script>
+<!-- PROSPECTOR-EDITOR-END -->
+</body>
+</html>

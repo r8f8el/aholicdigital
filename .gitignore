@@ -1,0 +1,15 @@
+# Antigravity & IDE
+.gemini/
+.system_generated/
+*.log
+
+# Environment & Local Secrets
+.env.local
+.env*.local
+
+# Database local (se não quiser versionar o sqlite)
+prospector.db-journal
+
+# Node
+node_modules/
+.vercel

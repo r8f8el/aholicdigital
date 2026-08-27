@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Odontologia & Harmonização Facial | Caldas Novas</title>
+    <meta name="description" content="Centro integrado de Odontologia Digital, Reabilitação Oral e Harmonização Orofacial em Caldas Novas. Dra. Silvania Rossi (CRO/GO 4395).">
+    
+    <!-- Google Fonts: Plus Jakarta Sans (Swiss Precision) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tech: {
+                            50: '#F8FAFC',
+                            100: '#F1F5F9',
+                            200: '#E2E8F0',
+                            300: '#CBD5E1',
+                            400: '#94A3B8',
+                            500: '#64748B',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1E293B',
+                            900: '#0F172A',
+                            950: '#020617',
+                        },
+                        clinical: {
+                            500: '#0284C7',
+                            600: '#0369A1',
+                            700: '#075985',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-tech-900 font-sans antialiased selection:bg-clinical-500 selection:text-white">
+
+    <!-- Top Technical Bar -->
+    <div class="bg-tech-950 text-tech-300 text-xs py-2.5 px-4 border-b border-tech-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 font-mono text-[11px] bg-emerald-950 text-emerald-400 border border-emerald-800/80 px-2 py-0.5 rounded">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    PLANTÃO 24H ATIVO
+                </span>
+                <span class="text-tech-300">Setor Oeste, Caldas Novas &mdash; GO &bull; Em frente ao Condomínio Aquarius</span>
+            </div>
+            <div class="flex items-center gap-5 text-tech-200">
+                <a href="tel:5564992714048" class="font-mono hover:text-white transition-colors flex items-center gap-1.5">
+                    <i data-lucide="phone" class="w-3 h-3 text-clinical-500"></i>
+                    <span>(64) 99271-4048</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation: Swiss Minimalist & Structured -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-tech-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand with Local Logo Asset -->
+            <a href="#" class="flex items-center gap-3.5 group">
+                <img src="assets/logo.png" alt="Quality Odontologia e Face Logo" class="h-10 w-auto object-contain">
+                <div>
+                    <span class="text-lg font-bold tracking-tight text-tech-950 block leading-tight">QUALITY</span>
+                    <span class="text-[10px] font-mono tracking-widest text-tech-500 uppercase block">ODONTOLOGIA &bull; FACE</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold text-tech-600 uppercase tracking-wider">
+                <a href="#especialidades" class="hover:text-clinical-600 transition-colors">Especialidades</a>
+                <a href="#tecnologia" class="hover:text-clinical-600 transition-colors">Tecnologia</a>
+                <a href="#corpo-clinico" class="hover:text-clinical-600 transition-colors">Corpo Clínico</a>
+                <a href="#avaliacoes" class="hover:text-clinical-600 transition-colors">Avaliações 4.9★</a>
+                <a href="#unidade" class="hover:text-clinical-600 transition-colors">Unidade</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="flex items-center gap-3">
+                <a href="https://wa.me/5564992714048?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20Quality%20Odontologia." 
+                   target="_blank"
+                   class="inline-flex items-center gap-2 bg-clinical-600 hover:bg-clinical-700 text-white text-xs font-bold px-5 py-3 rounded-lg shadow-sm hover:shadow transition-all">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                    <span>Agendar Avaliação</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section: Swiss Modern Precision Grid -->
+    <section class="pt-16 pb-20 md:pt-24 md:pb-28 bg-tech-50 border-b border-tech-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Copy -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-white border border-tech-200 px-3 py-1.5 rounded-md text-xs font-mono text-tech-700 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-clinical-600"></span>
+                        <span>CENTRO DE ALTA PERFORMANCE CLÍNICA</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-tech-950 leading-[1.12]">
+                        Precisão digital para a estética do seu sorriso e harmonia facial.
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-tech-600 font-normal leading-relaxed max-w-xl">
+                        Da reabilitação protética avançada e implantes à harmonização orofacial completa. Atendimento técnico com a <strong>Dra. Silvania Rossi</strong> (CRO/GO 4395) e equipe multidisciplinar em Caldas Novas.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="pt-2 flex flex-col sm:flex-row items-center gap-3.5">
+                        <a href="https://wa.me/5564992714048?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20iniciar%20meu%20atendimento." 
+                           target="_blank"
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-tech-950 hover:bg-black text-white text-sm font-bold px-7 py-4 rounded-lg shadow-md transition-colors">
+                            <i data-lucide="message-square" class="w-4 h-4 text-clinical-500"></i>
+                            <span>Falar com Atendimento no WhatsApp</span>
+                        </a>
+
+                        <a href="#especialidades" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-tech-100 text-tech-800 text-sm font-semibold px-6 py-4 rounded-lg border border-tech-300 transition-colors">
+                            <span>Ver Procedimentos</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-tech-400"></i>
+                        </a>
+                    </div>
+
+                    <!-- Verified Stats Grid -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-tech-200 text-left font-mono">
+                        <div>
+                            <span class="block text-2xl font-bold text-tech-950">4.9 ★</span>
+                            <span class="block text-[11px] text-tech-500 mt-0.5">Google Maps (+57 aval.)</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-bold text-tech-950">24H</span>
+                            <span class="block text-[11px] text-tech-500 mt-0.5">Plantão de Urgência</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-bold text-tech-950">10+ ANOS</span>
+                            <span class="block text-[11px] text-tech-500 mt-0.5">Em Caldas Novas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image Block -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white rounded-2xl p-4 border border-tech-200 shadow-xl space-y-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden bg-tech-100 relative">
+                            <img src="assets/google-maps-foto-1.jpg" 
+                                 alt="Unidade Quality Odontologia e Face &mdash; Foto Real Google Maps" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 bg-tech-950/90 text-white font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded">
+                                FOTO OFICIAL GOOGLE MAPS &bull; SETOR OESTE
+                            </div>
+                        </div>
+                        <div class="p-2 space-y-2">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-tech-950">Dra. Silvania Rossi &bull; CRO/GO 4395</span>
+                                <span class="font-mono text-emerald-600 font-bold">ABERTO &bull; 24H</span>
+                            </div>
+                            <p class="text-xs text-tech-500">
+                                Rua Antônio Coelho de Godoy, Qd. 11, Lt. 04 (Em frente ao Condomínio Aquarius).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties: Swiss Precision Technical Index -->
+    <section id="especialidades" class="py-24 bg-white border-b border-tech-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-tech-200">
+                <div>
+                    <span class="text-xs font-mono font-bold text-clinical-600 uppercase tracking-widest block mb-1">CATÁLOGO CLÍNICO</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-tech-950">
+                        Especialidades Odontológicas & Faciais
+                    </h2>
+                </div>
+                <p class="text-sm text-tech-500 max-w-md">
+                    Diagnóstico com tecnologia digital e planejamento individualizado antes de qualquer intervenção.
+                </p>
+            </div>
+
+            <!-- Grid 3x2 -->
+            <div class="grid md:grid-cols-3 gap-6 pt-12">
+                
+                <!-- Card 1 -->
+                <div class="p-8 rounded-xl bg-tech-50 border border-tech-200 hover:border-clinical-600 transition-colors flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <span class="font-mono text-xs font-bold text-clinical-600">01 / ESTÉTICA FACIAL</span>
+                        <h3 class="text-xl font-bold text-tech-950">Harmonização Orofacial</h3>
+                        <p class="text-sm text-tech-600 leading-relaxed">
+                            Toxina botulínica, preenchimento com ácido hialurônico de alta pureza e bioestimuladores para definição de contorno e rejuvenescimento anatômico natural.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5564992714048?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20Harmoniza%C3%A7%C3%A3o%20Orofacial." 
+                       target="_blank" 
+                       class="inline-flex items-center gap-1.5 text-xs font-bold text-clinical-600 hover:text-clinical-700 uppercase tracking-wider">
+                        <span>Consultar Procedimento</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-8 rounded-xl bg-tech-50 border border-tech-200 hover:border-clinical-600 transition-colors flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <span class="font-mono text-xs font-bold text-clinical-600">02 / ESTÉTICA DENTAL</span>
+                        <h3 class="text-xl font-bold text-tech-950">Lentes de Contato & Facetas</h3>
+                        <p class="text-sm text-tech-600 leading-relaxed">
+                            Laminados ultrafinos de porcelana para ajuste de proporção, fechamento de diastemas e restauração de cor com alta resistência mecânica.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5564992714048?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20Lentes%20de%20Contato." 
+                       target="_blank" 
+                       class="inline-flex items-center gap-1.5 text-xs font-bold text-clinical-600 hover:text-clinical-700 uppercase tracking-wider">
+                        <span>Consultar Procedimento</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-8 rounded-xl bg-tech-50 border border-tech-200 hover:border-clinical-600 transition-colors flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <span class="font-mono text-xs font-bold text-clinical-600">03 / CIRURGIA & IMPLANTES</span>
+                        <h3 class="text-xl font-bold text-tech-950">Implantes & Próteses Fixas</h3>
+                        <p class="text-sm text-tech-600 leading-relaxed">
+                            Reabilitação completa da mastigação e estética com implantes osseointegrados de titânio e protocolos de carga imediata quando indicados.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5564992714048?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20Implantes." 
+                       target="_blank" 
+                       class="inline-flex items-center gap-1.5 text-xs font-bold text-clinical-600 hover:text-clinical-700 uppercase tracking-wider">
+                        <span>Consultar Procedimento</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="p-8 rounded-xl bg-tech-50 border border-tech-200 hover:border-clinical-600 transition-colors flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <span class="font-mono text-xs font-bold text-clinical-600">04 / ESTÉTICA</span>
+                        <h3 class="text-xl font-bold text-tech-950">Clareamento a Laser</h3>
+                        <p class="text-sm text-tech-600 leading-relaxed">
+                            Remoção de manchas e clareamento dental seguro em consultório com controle ativo de sensibilidade e proteção gengival.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5564992714048?text=Ol%C3%A1!%20Quero%20fazer%20Clareamento." 
+                       target="_blank" 
+                       class="inline-flex items-center gap-1.5 text-xs font-bold text-clinical-600 hover:text-clinical-700 uppercase tracking-wider">
+                        <span>Consultar Procedimento</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="p-8 rounded-xl bg-tech-50 border border-tech-200 hover:border-clinical-600 transition-colors flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <span class="font-mono text-xs font-bold text-clinical-600">05 / ORTODONTIA</span>
+                        <h3 class="text-xl font-bold text-tech-950">Alinhadores & Ortodontia</h3>
+                        <p class="text-sm text-tech-600 leading-relaxed">
+                            Correção do posicionamento dentário e oclusão com alinhadores transparentes e aparelhos fixos de alta precisão.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5564992714048?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20Ortodontia." 
+                       target="_blank" 
+                       class="inline-flex items-center gap-1.5 text-xs font-bold text-clinical-600 hover:text-clinical-700 uppercase tracking-wider">
+                        <span>Consultar Procedimento</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Card 6: Emergency Module -->
+                <div class="p-8 rounded-xl bg-tech-950 text-white border border-tech-800 flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <span class="font-mono text-xs font-bold text-emerald-400">06 / EMERGÊNCIA 24H</span>
+                        <h3 class="text-xl font-bold text-white">Plantão de Urgência</h3>
+                        <p class="text-sm text-tech-300 leading-relaxed">
+                            Atendimento imediato para dor de dente aguda, traumas, fraturas ou quedas de restaurações a qualquer hora do dia ou da noite.
+                        </p>
+                    </div>
+                    <a href="tel:5564992714048" 
+                       class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-3 px-4 rounded uppercase tracking-wider transition-colors">
+                        <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                        <span>Ligar para Plantão (64) 99271-4048</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Clinical Team -->
+    <section id="corpo-clinico" class="py-24 bg-tech-50 border-b border-tech-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5">
+                    <div class="bg-white p-3 rounded-2xl border border-tech-200 shadow-md">
+                        <div class="aspect-[4/5] rounded-xl overflow-hidden bg-tech-200">
+                            <img src="https://images.unsplash.com/photo-1594824813521-177114a48043?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Dra. Silvania Rossi" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-3 text-left space-y-1">
+                            <h4 class="font-bold text-tech-950">Dra. Silvania Cristina Rossi Ferreira</h4>
+                            <p class="font-mono text-xs text-clinical-600 font-semibold">CRO/GO 4395 &bull; Cirurgiã-Dentista</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-xs font-mono font-bold text-clinical-600 uppercase tracking-widest">RESPONSABILIDADE TÉCNICA</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-tech-950 leading-tight">
+                        Excelência clínica com fundamentação técnica e biossegurança.
+                    </h2>
+                    <p class="text-tech-600 text-base leading-relaxed">
+                        A <strong>Quality Odontologia e Face</strong> opera com corpo clínico qualificado sob coordenação da Dra. Silvania Rossi e do Dr. Eduardo Ferreira. Nossa clínica segue protocolos rígidos para garantir procedimentos confortáveis, anestesia indolor e alta durabilidade em cada intervenção.
+                    </p>
+                    <div class="pt-4 grid sm:grid-cols-2 gap-4 border-t border-tech-200 text-xs text-tech-700 font-mono">
+                        <div>
+                            <span class="text-tech-950 font-bold block">REGISTRO REGIONAL</span>
+                            <span>CRO/GO 4395</span>
+                        </div>
+                        <div>
+                            <span class="text-tech-950 font-bold block">LOCALIZAÇÃO</span>
+                            <span>Setor Oeste &mdash; Caldas Novas, GO</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews: Swiss Grid -->
+    <section id="avaliacoes" class="py-24 bg-white border-b border-tech-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pb-12 border-b border-tech-200 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+                <div>
+                    <span class="text-xs font-mono font-bold text-clinical-600 uppercase tracking-widest">AVALIAÇÕES PÚBLICAS</span>
+                    <h2 class="text-3xl font-bold tracking-tight text-tech-950 mt-1">
+                        Depoimentos no Google Maps (4.9 ★)
+                    </h2>
+                </div>
+                <span class="font-mono text-xs text-tech-500">+57 relatos verificados</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 pt-12">
+                
+                <div class="p-6 rounded-xl bg-tech-50 border border-tech-200 space-y-4">
+                    <div class="font-mono text-amber-500 text-xs">★★★★★</div>
+                    <p class="text-sm text-tech-700 leading-relaxed italic">
+                        "Atendimento maravilhoso. A Dra. Silvania é extremamente cuidadosa, me explicou todo o procedimento de harmonização e o resultado ficou muito natural."
+                    </p>
+                    <div class="pt-2 border-t border-tech-200 text-xs font-bold text-tech-950">
+                        Mariana Alencar &bull; <span class="font-normal text-tech-500">Google Maps</span>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-xl bg-tech-50 border border-tech-200 space-y-4">
+                    <div class="font-mono text-amber-500 text-xs">★★★★★</div>
+                    <p class="text-sm text-tech-700 leading-relaxed italic">
+                        "Precisei de atendimento de emergência de madrugada e foram extremamente rápidos e atenciosos. Resolveram minha dor na hora. Clínica de muita confiança."
+                    </p>
+                    <div class="pt-2 border-t border-tech-200 text-xs font-bold text-tech-950">
+                        Carlos E. Mendes &bull; <span class="font-normal text-tech-500">Google Maps</span>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-xl bg-tech-50 border border-tech-200 space-y-4">
+                    <div class="font-mono text-amber-500 text-xs">★★★★★</div>
+                    <p class="text-sm text-tech-700 leading-relaxed italic">
+                        "Fiz minhas facetas e clareamento na Quality e transformou totalmente minha autoestima. Ambiente impecável e equipe de altíssimo padrão."
+                    </p>
+                    <div class="pt-2 border-t border-tech-200 text-xs font-bold text-tech-950">
+                        Fernanda Ribeiro &bull; <span class="font-normal text-tech-500">Google Maps</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Google Maps Structure Gallery -->
+    <section class="py-20 bg-tech-50 border-b border-tech-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pb-10 flex justify-between items-end border-b border-tech-200">
+                <div>
+                    <span class="text-xs font-mono font-bold text-clinical-600 uppercase tracking-widest">FOTOS REAIS &bull; GOOGLE MAPS</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-tech-950 mt-1">
+                        Estrutura & Ambiente da Clínica
+                    </h2>
+                </div>
+                <span class="font-mono text-xs text-tech-500">Imagens oficiais do estabelecimento</span>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-6 pt-10">
+                <div class="rounded-xl overflow-hidden bg-white border border-tech-200 shadow-sm space-y-2 p-2">
+                    <div class="aspect-[4/3] rounded-lg overflow-hidden bg-tech-100">
+                        <img src="assets/google-maps-foto-2.jpg" alt="Consultório Odontológico Quality" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-2 font-mono text-xs text-tech-600">Consultório & Equipamentos</div>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-white border border-tech-200 shadow-sm space-y-2 p-2">
+                    <div class="aspect-[4/3] rounded-lg overflow-hidden bg-tech-100">
+                        <img src="assets/google-maps-foto-4.jpg" alt="Recepção e Sala de Espera" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-2 font-mono text-xs text-tech-600">Recepção Climatizada</div>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-white border border-tech-200 shadow-sm space-y-2 p-2">
+                    <div class="aspect-[4/3] rounded-lg overflow-hidden bg-tech-100">
+                        <img src="assets/google-maps-foto-5.jpg" alt="Fachada Setor Oeste" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-2 font-mono text-xs text-tech-600">Fachada & Localização</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Instagram Feed Showcase -->
+    <section class="py-20 bg-white border-b border-tech-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pb-10 flex flex-col sm:flex-row justify-between sm:items-end gap-4 border-b border-tech-200">
+                <div>
+                    <span class="text-xs font-mono font-bold text-pink-600 uppercase tracking-widest">FEED OFICIAL NO INSTAGRAM</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-tech-950 mt-1">
+                        Acompanhe @qualityodontologiaeface
+                    </h2>
+                </div>
+                <a href="https://instagram.com/qualityodontologiaeface" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-bold text-tech-950 hover:text-pink-600 border border-tech-300 hover:border-pink-600 px-4 py-2 rounded-lg transition-colors">
+                    <span>Ver Perfil no Instagram ↗</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10">
+                <a href="https://instagram.com/qualityodontologiaeface" target="_blank" class="group rounded-xl overflow-hidden bg-tech-100 aspect-square border border-tech-200 relative">
+                    <img src="assets/instagram-post-1.jpg" alt="Post Instagram Quality Odontologia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold font-mono">
+                        Abrir Post ↗
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/qualityodontologiaeface" target="_blank" class="group rounded-xl overflow-hidden bg-tech-100 aspect-square border border-tech-200 relative">
+                    <img src="assets/instagram-post-2.jpg" alt="Post Instagram Quality Odontologia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold font-mono">
+                        Abrir Post ↗
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/qualityodontologiaeface" target="_blank" class="group rounded-xl overflow-hidden bg-tech-100 aspect-square border border-tech-200 relative">
+                    <img src="assets/instagram-post-3.jpg" alt="Post Instagram Quality Odontologia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold font-mono">
+                        Abrir Post ↗
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/qualityodontologiaeface" target="_blank" class="group rounded-xl overflow-hidden bg-tech-100 aspect-square border border-tech-200 relative">
+                    <img src="assets/instagram-post-4.jpg" alt="Post Instagram Quality Odontologia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold font-mono">
+                        Abrir Post ↗
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact -->
+    <section id="unidade" class="py-24 bg-tech-50 border-b border-tech-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-xs font-mono font-bold text-clinical-600 uppercase tracking-widest">UNIDADE PRINCIPAL</span>
+                        <h2 class="text-3xl font-bold tracking-tight text-tech-950 mt-1">
+                            Como Chegar
+                        </h2>
+                    </div>
+
+                    <div class="space-y-4 text-sm text-tech-700">
+                        <div>
+                            <span class="font-mono text-xs font-bold text-tech-500 uppercase block">Endereço</span>
+                            <p class="font-semibold text-tech-950">Rua Antônio Coelho de Godoy, Qd. 11, Lt. 04</p>
+                            <p class="text-tech-600">Setor Oeste (Em frente ao Condomínio Aquarius), Caldas Novas &mdash; GO</p>
+                        </div>
+                        <div>
+                            <span class="font-mono text-xs font-bold text-tech-500 uppercase block">Horários</span>
+                            <p>Segunda a Sexta: <strong>08h às 19h</strong> &bull; Sábados: <strong>08h às 13h</strong></p>
+                            <p class="font-mono text-emerald-700 text-xs mt-0.5 font-bold">&bull; Urgências e Plantão: 24 HORAS</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a href="https://maps.google.com/maps?q=Rua+Ant%C3%B4nio+Coelho+de+Godoy+Caldas+Novas+GO" 
+                           target="_blank" 
+                           class="inline-flex items-center gap-2 bg-tech-950 text-white text-xs font-bold px-5 py-3 rounded-lg hover:bg-black transition-colors">
+                            <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                            <span>Abrir Navegação no Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-white p-2 rounded-xl border border-tech-200 shadow-lg">
+                    <div class="w-full h-80 rounded-lg overflow-hidden bg-tech-200">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Rua+Ant%C3%B4nio+Coelho+de+Godoy+Caldas+Novas+GO&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Minimalist Footer -->
+    <footer class="bg-tech-950 text-tech-400 py-12 text-xs border-t border-tech-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <span class="font-bold text-white tracking-wider block">QUALITY ODONTOLOGIA & FACE</span>
+                <span class="text-tech-500 font-mono">Dra. Silvania Cristina Rossi Ferreira &bull; CRO/GO 4395</span>
+            </div>
+            <div class="text-tech-500">
+                <p>&copy; 2026 Quality Odontologia. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Discreet WhatsApp -->
+    <a href="https://wa.me/5564992714048?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-lg shadow-xl font-bold text-xs transition-transform hover:scale-105">
+        <i data-lucide="message-circle" class="w-4 h-4"></i>
+        <span>WhatsApp</span>
+    </a>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

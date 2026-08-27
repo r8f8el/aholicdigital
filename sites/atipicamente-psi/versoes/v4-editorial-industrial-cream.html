@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atipicamente Psi &bull; Núcleo Clínico e Educacional | Caldas Novas</title>
+    <meta name="description" content="Design editorial de alto impacto para Atipicamente Psi. Psicologia, Neuropsicologia, Método ABA e Desenvolvimento Neuroatípico em Caldas Novas - GO.">
+    
+    <!-- Google Fonts: Anton (Display) + Inter (Utility) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#1E2C42',        /* Substitui Forest: Base escura profunda */
+                            terracotta: '#C86849',  /* Terracota acolhedor oficial */
+                            terracotta_light: '#F8ECE7',
+                            sand: '#EFE7DA',        /* Tom areia quente */
+                            cream: '#FAF6EE',       /* Tom creme base */
+                            cream_light: '#FDFBF7', /* Off-white puro */
+                            sage: '#6D8A78',        /* Eucalipto orgânico */
+                            charcoal: '#222831'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Anton"', 'sans-serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::selection { background: #C86849; color: #FAF6EE; }
+
+        /* 1. Transição Customizada de Alta Precisão (Cubic-Bezier 0.16, 1, 0.3, 1) */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 2. Floating Parallax Animations */
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(3.5deg); }
+        }
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(16px) rotate(-3deg); }
+        }
+        .animate-float-1 {
+            animation: float1 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+        .animate-float-2 {
+            animation: float2 6.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+
+        /* 3. Letras com Apresentação Escalonada no Hero */
+        .char-reveal {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: charSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes charSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 4. Blur-Reveal Button Overlay em Cards */
+        .blur-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 40px -15px rgba(30, 44, 66, 0.14);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .blur-card img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .blur-card:hover img {
+            transform: scale(1.08);
+        }
+        .blur-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(30, 44, 66, 0.45);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .blur-card:hover .blur-overlay {
+            opacity: 1;
+        }
+        .blur-btn {
+            transform: translateY(28px);
+            opacity: 0;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .blur-card:hover .blur-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* 5. Linha de Inputs do Rodapé */
+        .underline-input {
+            border: 0;
+            border-bottom: 2px solid rgba(250, 246, 238, 0.3);
+            background: transparent;
+            color: #FAF6EE;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .underline-input:focus {
+            border-bottom-color: #C86849;
+        }
+    </style>
+</head>
+<body class="bg-brand-sand text-brand-navy font-sans antialiased overflow-x-hidden relative selection:bg-brand-terracotta selection:text-white">
+
+    <!-- 🌀 PERSISTENT SVG FRACTAL NOISE OVERLAY (4% Opacidade Analógica) -->
+    <div class="fixed inset-0 pointer-events-none z-[9999] opacity-[0.04]" 
+         style="background-image: url('data:image/svg+xml;utf8,<svg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'noiseFilter\'><feTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/></filter><rect width=\'100%\' height=\'100%\' filter=\'url(%23noiseFilter)\'/></svg>');">
+    </div>
+
+    <!-- 1️⃣ FIXED TOP NAVIGATION (Pill-shaped com Blur) -->
+    <header class="fixed top-6 left-0 right-0 z-50 px-4 sm:px-8">
+        <div class="max-w-[1400px] mx-auto flex items-center justify-between">
+            
+            <!-- Left: Logo Bold com prefixo hífen -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-white p-1 shadow-md flex items-center justify-center flex-shrink-0">
+                    <img src="../assets/logo-atipicamente.png" alt="Atipicamente Psi" class="w-full h-auto object-contain">
+                </div>
+                <span class="font-display text-xl sm:text-2xl uppercase tracking-tighter text-brand-navy group-hover:text-brand-terracotta transition-colors">
+                    - ATIPICAMENTE PSI
+                </span>
+            </a>
+
+            <!-- Center: Pill Navigation Bar (Desktop) -->
+            <nav class="hidden md:flex items-center gap-7 px-8 py-3.5 rounded-full border border-white/40 shadow-sm"
+                 style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+                <a href="#estrutura" class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-navy hover:text-brand-terracotta transition-colors">Estrutura</a>
+                <a href="#especialistas" class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-navy hover:text-brand-terracotta transition-colors">Especialistas</a>
+                <a href="#metodos" class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-navy hover:text-brand-terracotta transition-colors">Métodos</a>
+                <a href="#instagram" class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-navy hover:text-brand-terracotta transition-colors">Instagram</a>
+                <a href="#contato" class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-navy hover:text-brand-terracotta transition-colors">Contato</a>
+            </nav>
+
+            <!-- Right: Action Button em Pill Branco com Badge Contador -->
+            <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Desejo%20agendar%20um%20acolhimento%20na%20Atipicamente%20Psi." 
+               target="_blank"
+               class="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white text-brand-navy hover:bg-brand-terracotta hover:text-white transition-all duration-300 shadow-md border border-brand-navy/10 group">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-[11px] font-bold uppercase tracking-[0.25em]">AGENDAR</span>
+                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-brand-sand text-brand-navy group-hover:bg-white/20 group-hover:text-white transition-colors">
+                    09
+                </span>
+            </a>
+
+        </div>
+    </header>
+
+    <!-- 2️⃣ HERO SECTION (Full Height & Anton 21vw Display) -->
+    <section class="min-h-screen pt-32 pb-20 px-6 sm:px-12 flex flex-col justify-between relative bg-brand-sand overflow-hidden">
+        
+        <!-- Top Metadata Label -->
+        <div class="max-w-[1400px] mx-auto w-full pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-navy/15 pb-6">
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-brand-terracotta"></span>
+                <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-navy/75">
+                    NÚCLEO CLÍNICO & EDUCACIONAL &bull; CALDAS NOVAS - GO
+                </span>
+            </div>
+            <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-terracotta">
+                PSICOLOGIA &bull; NEUROPSICOLOGIA &bull; MÉTODO ABA
+            </div>
+        </div>
+
+        <!-- Centerpiece: Massive 'Anton' Display Text (20vw) com Fotos Orgânicas Flutuantes -->
+        <div class="max-w-[1440px] mx-auto w-full my-auto py-12 relative flex items-center justify-center">
+            
+            <!-- Massive Anton Centerpiece -->
+            <div class="text-center select-none">
+                <h1 class="font-display text-[9.5vw] sm:text-[10.5vw] lg:text-[11.2vw] tracking-[-0.04em] whitespace-nowrap font-normal leading-[0.76] tracking-[-0.05em] uppercase text-brand-navy">
+                    <span class="char-reveal" style="animation-delay: 0.05s">A</span><span class="char-reveal" style="animation-delay: 0.10s">T</span><span class="char-reveal" style="animation-delay: 0.15s">I</span><span class="char-reveal" style="animation-delay: 0.20s">P</span><span class="char-reveal" style="animation-delay: 0.25s">I</span><span class="char-reveal" style="animation-delay: 0.30s">C</span><span class="char-reveal" style="animation-delay: 0.35s">A</span><span class="char-reveal" style="animation-delay: 0.40s">M</span><span class="char-reveal" style="animation-delay: 0.45s">E</span><span class="char-reveal" style="animation-delay: 0.50s">N</span><span class="char-reveal" style="animation-delay: 0.55s">T</span><span class="char-reveal" style="animation-delay: 0.60s">E</span>
+                </h1>
+                <p class="font-display text-4xl sm:text-6xl lg:text-7xl uppercase tracking-[-0.03em] text-brand-terracotta -mt-2 sm:-mt-6">
+                    ACOLHER O SER &bull; EXPANDIR POTENCIAIS
+                </p>
+            </div>
+
+            <!-- Floating Organic Card 1 (Left): Fachada Real (border-radius: 3rem) -->
+            <div class="hidden lg:block absolute left-2 top-8 w-56 h-72 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white animate-float-1 z-10 pointer-events-auto -left-10 lg:-left-16 top-6 w-48 h-64">
+                <img src="../assets/proprietario-1.jpg" alt="Entrada Oficial Atipicamente Psi" class="w-full h-full object-cover">
+                <div class="absolute bottom-4 left-4 right-4 bg-brand-navy/90 backdrop-blur-md p-3 rounded-2xl text-white">
+                    <span class="text-[9px] font-bold uppercase tracking-widest text-brand-terracotta block">SEDE PRÓPRIA</span>
+                    <span class="text-xs font-bold block">Entrada Caldas Novas</span>
+                </div>
+            </div>
+
+            <!-- Floating Organic Card 2 (Right): Recepção Real Oficial (border-radius: 3rem) -->
+            <div class="hidden lg:block absolute right-2 bottom-4 w-60 h-80 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white animate-float-2 z-10 pointer-events-auto -right-10 lg:-right-16 bottom-4 w-52 h-72">
+                <img src="../assets/proprietario-2.jpg" alt="Recepção e Consultório Oficial Google" class="w-full h-full object-cover">
+                <div class="absolute bottom-4 left-4 right-4 bg-brand-navy/90 backdrop-blur-md p-3.5 rounded-2xl text-white">
+                    <span class="text-[9px] font-bold uppercase tracking-widest text-brand-terracotta block">FOTO GOOGLE MAPS</span>
+                    <span class="text-xs font-bold block">Recepção Acolhedora</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Hero Bottom: Dual-Column Descriptive Text & Location -->
+        <div class="max-w-[1400px] mx-auto w-full grid md:grid-cols-12 gap-8 pt-8 border-t border-brand-navy/15 items-end">
+            <div class="md:col-span-8">
+                <p class="text-base sm:text-xl text-brand-navy/85 leading-snug font-medium max-w-2xl">
+                    Cuidar da mente é mais do que tratar sintomas. É um compromisso ético e científico com a neurodiversidade, oferecendo suporte contínuo para crianças, jovens e famílias.
+                </p>
+            </div>
+            <div class="md:col-span-4 md:text-right space-y-1">
+                <div class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-terracotta">
+                    ORIGEM &bull; CRP 09
+                </div>
+                <div class="text-xs font-bold uppercase tracking-[0.2em] text-brand-navy">
+                    Rua Interna &bull; Caldas Novas - GO
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 3️⃣ SEÇÃO ESTRUTURA / O NÚCLEO (Color Block #FAF6EE, border-radius: 5rem no topo) -->
+    <section id="estrutura" class="relative z-10 bg-brand-cream rounded-t-[5rem] -mt-16 pt-28 pb-32 px-6 sm:px-12 shadow-[0_-25px_50px_rgba(30,44,66,0.06)]">
+        <div class="max-w-[1400px] mx-auto space-y-16">
+            
+            <!-- Section Header: Massive Anton 14vw Display + Circular CTA -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-brand-navy/15 reveal-up">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-[0.4em] text-brand-terracotta block mb-2">
+                        01 / AMBIENTES REAIS &bull; GOOGLE MAPS
+                    </span>
+                    <h2 class="font-display text-6xl sm:text-8xl lg:text-[11vw] leading-[0.8] tracking-[-0.04em] uppercase text-brand-navy">
+                        ESTRUTURA
+                    </h2>
+                </div>
+                
+                <div class="flex items-center gap-6">
+                    <p class="text-xs sm:text-sm text-brand-navy/70 max-w-xs font-medium uppercase tracking-wider leading-relaxed">
+                        Salas planejadas com atenuação sensorial, materiais estruturados e conforto para avaliações e sessões.
+                    </p>
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20visitar%20a%20cl%C3%ADnica%20Atipicamente%20Psi." 
+                       target="_blank"
+                       class="w-20 h-20 rounded-full bg-brand-terracotta text-white flex items-center justify-center font-display text-2xl hover:scale-110 transition-transform shadow-xl flex-shrink-0">
+                        &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3-Column Grid de Cards com [4/5] Aspect Ratio & Blur-Reveal Button -->
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Fachada e Entrada Oficial -->
+                <div class="blur-card aspect-[4/5] reveal-up group">
+                    <img src="../assets/proprietario-1.jpg" alt="Fachada Oficial" class="w-full h-full object-cover">
+                    <div class="absolute top-6 left-6 z-10">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] px-3.5 py-1.5 rounded-full bg-white/90 text-brand-navy backdrop-blur-sm">
+                            FACHADA
+                        </span>
+                    </div>
+                    <div class="blur-overlay p-6 text-center">
+                        <div class="blur-btn space-y-3">
+                            <h4 class="font-display text-3xl uppercase text-white tracking-tight">Acesso Privativo</h4>
+                            <p class="text-xs text-white/80 max-w-xs mx-auto">Ambiente calmo e discreto em Caldas Novas.</p>
+                            <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Como%20fa%C3%A7o%20para%20chegar%20%C3%A0%20cl%C3%ADnica?" 
+                               target="_blank"
+                               class="inline-block px-6 py-3 rounded-full bg-white text-brand-navy font-bold text-[10px] uppercase tracking-[0.25em] hover:bg-brand-terracotta hover:text-white transition-colors shadow-lg">
+                                LOCALIZAÇÃO &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Consultório e Sala de Espera Real -->
+                <div class="blur-card aspect-[4/5] reveal-up group">
+                    <img src="../assets/proprietario-2.jpg" alt="Consultório Clínico" class="w-full h-full object-cover">
+                    <div class="absolute top-6 left-6 z-10">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] px-3.5 py-1.5 rounded-full bg-white/90 text-brand-navy backdrop-blur-sm">
+                            RECEPÇÃO & ILUMINAÇÃO
+                        </span>
+                    </div>
+                    <div class="blur-overlay p-6 text-center">
+                        <div class="blur-btn space-y-3">
+                            <h4 class="font-display text-3xl uppercase text-white tracking-tight">Sala de Espera</h4>
+                            <p class="text-xs text-white/80 max-w-xs mx-auto">Sofás confortáveis e luz indireta para reduzir ansiedade.</p>
+                            <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Quero%20conhecer%20o%20espa%C3%A7o." 
+                               target="_blank"
+                               class="inline-block px-6 py-3 rounded-full bg-white text-brand-navy font-bold text-[10px] uppercase tracking-[0.25em] hover:bg-brand-terracotta hover:text-white transition-colors shadow-lg">
+                                CONHECER SALA &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Espaço Terapêutico e Estimulação -->
+                <div class="blur-card aspect-[4/5] reveal-up group">
+                    <img src="../assets/proprietario-3.jpg" alt="Espaço Terapêutico Infantil" class="w-full h-full object-cover">
+                    <div class="absolute top-6 left-6 z-10">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] px-3.5 py-1.5 rounded-full bg-white/90 text-brand-navy backdrop-blur-sm">
+                            SALA LÚDICA & ABA
+                        </span>
+                    </div>
+                    <div class="blur-overlay p-6 text-center">
+                        <div class="blur-btn space-y-3">
+                            <h4 class="font-display text-3xl uppercase text-white tracking-tight">Estimulação Infantil</h4>
+                            <p class="text-xs text-white/80 max-w-xs mx-auto">Mesas adaptadas e jogos validados para desenvolvimento.</p>
+                            <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20as%20salas%20ABA." 
+                               target="_blank"
+                               class="inline-block px-6 py-3 rounded-full bg-white text-brand-navy font-bold text-[10px] uppercase tracking-[0.25em] hover:bg-brand-terracotta hover:text-white transition-colors shadow-lg">
+                                VER RECURSOS &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4️⃣ SEÇÃO CORPO CLÍNICO (Color Block #FDFBF7, border-radius: 5rem no topo) -->
+    <section id="especialistas" class="relative z-20 bg-brand-cream_light rounded-t-[5rem] -mt-16 pt-28 pb-32 px-6 sm:px-12 shadow-[0_-25px_50px_rgba(30,44,66,0.06)]">
+        <div class="max-w-[1400px] mx-auto space-y-16">
+            
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-brand-navy/15 reveal-up">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-[0.4em] text-brand-terracotta block mb-2">
+                        02 / CORPO CLÍNICO ESPECIALIZADO
+                    </span>
+                    <h2 class="font-display text-6xl sm:text-8xl lg:text-[11vw] leading-[0.8] tracking-[-0.04em] uppercase text-brand-navy">
+                        ESPECIALISTAS
+                    </h2>
+                </div>
+                <p class="text-xs sm:text-sm text-brand-navy/70 max-w-md font-medium uppercase tracking-wider leading-relaxed">
+                    Cinco psicólogos registrados no CRP 09 com formações avançadas em Neuropsicologia, TCC, DBT e ABA.
+                </p>
+            </div>
+
+            <!-- Grid de Psicólogos com Rounding 2.5rem & Cartões de Informação -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- 1: Gabriela Fernandes -->
+                <div class="bg-brand-cream rounded-[2.5rem] p-8 border border-brand-navy/10 flex flex-col justify-between space-y-6 shadow-md reveal-up hover:border-brand-terracotta transition-colors">
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-[2rem] overflow-hidden border-2 border-brand-terracotta bg-white flex-shrink-0 shadow-sm">
+                                <img src="../assets/gabriela-fernandes.png" alt="Gabriela Fernandes" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl uppercase tracking-tight text-brand-navy leading-none">
+                                    Gabriela Fernandes
+                                </h3>
+                                <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-terracotta block mt-1">
+                                    Neuropsicóloga &bull; CRP 09/19262
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs text-brand-navy/80 leading-relaxed pt-2">
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">PÓS-GRADUAÇÃO:</strong>
+                                Análise do Comportamento Aplicada (ABA) & Neuropsicologia Clínica.
+                            </div>
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">CERTIFICAÇÕES:</strong>
+                                Protocolo VB-MAPP, Orientação Parental e Intervenções Assistidas por Animais.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Desejo%20agendar%20com%20a%20Dra.%20Gabriela%20Fernandes." 
+                       target="_blank"
+                       class="w-full py-3.5 rounded-full bg-brand-navy text-white hover:bg-brand-terracotta font-bold text-[10px] uppercase tracking-[0.25em] text-center transition-colors shadow-sm block">
+                        AGENDAR CONSULTA &rarr;
+                    </a>
+                </div>
+
+                <!-- 2: Gracielly Albuquerque -->
+                <div class="bg-brand-cream rounded-[2.5rem] p-8 border border-brand-navy/10 flex flex-col justify-between space-y-6 shadow-md reveal-up hover:border-brand-terracotta transition-colors">
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-[2rem] overflow-hidden border-2 border-brand-terracotta bg-white flex-shrink-0 shadow-sm">
+                                <img src="../assets/gracielly-albuquerque.png" alt="Gracielly Albuquerque" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl uppercase tracking-tight text-brand-navy leading-none">
+                                    Gracielly Albuquerque
+                                </h3>
+                                <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-terracotta block mt-1">
+                                    Psicóloga &bull; CRP 09/22914
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs text-brand-navy/80 leading-relaxed pt-2">
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">PÓS-GRADUAÇÃO:</strong>
+                                Terapias Cognitivo-Comportamentais Contextuais & DBT Dialética.
+                            </div>
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">ÁREA DE FOCO:</strong>
+                                Autismo, TDAH, Neurodiversidade e Saúde Mental Infantojuvenil.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Desejo%20agendar%20com%20a%20Gracielly%20Albuquerque." 
+                       target="_blank"
+                       class="w-full py-3.5 rounded-full bg-brand-navy text-white hover:bg-brand-terracotta font-bold text-[10px] uppercase tracking-[0.25em] text-center transition-colors shadow-sm block">
+                        AGENDAR CONSULTA &rarr;
+                    </a>
+                </div>
+
+                <!-- 3: Vinícius Guimarães -->
+                <div class="bg-brand-cream rounded-[2.5rem] p-8 border border-brand-navy/10 flex flex-col justify-between space-y-6 shadow-md reveal-up hover:border-brand-terracotta transition-colors">
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-[2rem] overflow-hidden border-2 border-brand-terracotta bg-white flex-shrink-0 shadow-sm">
+                                <img src="../assets/vinicius-guimaraes.png" alt="Vinícius Guimarães" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl uppercase tracking-tight text-brand-navy leading-none">
+                                    Vinícius Guimarães
+                                </h3>
+                                <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-terracotta block mt-1">
+                                    Psicólogo &bull; CRP 09/23069
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs text-brand-navy/80 leading-relaxed pt-2">
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">PÓS-GRADUAÇÃO:</strong>
+                                Terapias Cognitivo-Comportamentais Contextuais (TCC).
+                            </div>
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">ESPECIALIDADE:</strong>
+                                Manejo de Ansiedade Geral e Social, Depressão e Jovens/Adultos.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Desejo%20agendar%20com%20o%20Dr.%20Vin%C3%ADcius%20Guimar%C3%A3es." 
+                       target="_blank"
+                       class="w-full py-3.5 rounded-full bg-brand-navy text-white hover:bg-brand-terracotta font-bold text-[10px] uppercase tracking-[0.25em] text-center transition-colors shadow-sm block">
+                        AGENDAR CONSULTA &rarr;
+                    </a>
+                </div>
+
+                <!-- 4: Felipe Rezende -->
+                <div class="bg-brand-cream rounded-[2.5rem] p-8 border border-brand-navy/10 flex flex-col justify-between space-y-6 shadow-md reveal-up hover:border-brand-terracotta transition-colors">
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-[2rem] overflow-hidden border-2 border-brand-terracotta bg-white flex-shrink-0 shadow-sm">
+                                <img src="../assets/felipe-rezende.png" alt="Felipe Rezende" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl uppercase tracking-tight text-brand-navy leading-none">
+                                    Felipe Rezende
+                                </h3>
+                                <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-terracotta block mt-1">
+                                    Psicólogo &bull; CRP 09/20924
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs text-brand-navy/80 leading-relaxed pt-2">
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">PÓS-GRADUAÇÃO:</strong>
+                                Psicologia de Grupos & Gestalt-Terapia Clínica.
+                            </div>
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">ATUAÇÃO:</strong>
+                                Orientação de Carreiras, Atenção Psicossocial e Jovens.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Desejo%20agendar%20com%20o%20Felipe%20Rezende." 
+                       target="_blank"
+                       class="w-full py-3.5 rounded-full bg-brand-navy text-white hover:bg-brand-terracotta font-bold text-[10px] uppercase tracking-[0.25em] text-center transition-colors shadow-sm block">
+                        AGENDAR CONSULTA &rarr;
+                    </a>
+                </div>
+
+                <!-- 5: Laura Rosa -->
+                <div class="bg-brand-cream rounded-[2.5rem] p-8 border border-brand-navy/10 flex flex-col justify-between space-y-6 shadow-md reveal-up hover:border-brand-terracotta transition-colors">
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-[2rem] overflow-hidden border-2 border-brand-terracotta bg-white flex-shrink-0 shadow-sm">
+                                <img src="../assets/laura-rosa.png" alt="Laura Rosa" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-display text-2xl uppercase tracking-tight text-brand-navy leading-none">
+                                    Laura Rosa
+                                </h3>
+                                <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-terracotta block mt-1">
+                                    Psicóloga &bull; CRP 09/23206
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs text-brand-navy/80 leading-relaxed pt-2">
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">PÓS-GRADUAÇÃO:</strong>
+                                Terapia Cognitivo-Comportamental (TCC) & Método ABA.
+                            </div>
+                            <div class="p-3 bg-white rounded-2xl border border-brand-navy/5">
+                                <strong class="text-brand-navy font-bold block mb-0.5 tracking-wide">PROTOCOLOS:</strong>
+                                VB-MAPP, Social Savvy para TEA e Neurociência da Aprendizagem.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Desejo%20agendar%20com%20a%20Laura%20Rosa." 
+                       target="_blank"
+                       class="w-full py-3.5 rounded-full bg-brand-navy text-white hover:bg-brand-terracotta font-bold text-[10px] uppercase tracking-[0.25em] text-center transition-colors shadow-sm block">
+                        AGENDAR CONSULTA &rarr;
+                    </a>
+                </div>
+
+                <!-- 6: Card Multidisciplinar (Médico & Nutricionista) -->
+                <div class="rounded-[2.5rem] p-8 border-2 border-dashed border-brand-terracotta/40 bg-brand-terracotta_light/40 flex flex-col justify-between space-y-6 reveal-up">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-terracotta text-white flex items-center justify-center font-display text-3xl">
+                            +
+                        </div>
+                        <h3 class="font-display text-2xl uppercase tracking-tight text-brand-navy">
+                            Suporte Médico & Nutricional
+                        </h3>
+                        <p class="text-xs text-brand-navy/80 leading-relaxed">
+                            Cuidado integral com apoio de médicos e nutricionistas parceiros para avaliação metabólica, medicamentosa e rotina alimentar.
+                        </p>
+                    </div>
+
+                    <a href="https://wa.me/5564999999999?text=Ol%C3%A1!%20Quero%20informa%C3%A7%C3%B5es%20sobre%20m%C3%A9dicos%20e%20nutri%C3%A7%C3%A3o." 
+                       target="_blank"
+                       class="w-full py-3.5 rounded-full bg-brand-terracotta text-white hover:bg-[#b5593c] font-bold text-[10px] uppercase tracking-[0.25em] text-center transition-colors shadow-sm block">
+                        CONSULTAR SUPORTE &rarr;
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5️⃣ SEÇÃO MÉTODOS / PILARES (Color Block #F8ECE7, border-radius: 5rem no topo) -->
+    <section id="metodos" class="relative z-30 bg-brand-terracotta_light rounded-t-[5rem] -mt-16 pt-28 pb-32 px-6 sm:px-12 shadow-[0_-25px_50px_rgba(30,44,66,0.06)]">
+        <div class="max-w-[1400px] mx-auto space-y-16">
+            
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-brand-navy/15 reveal-up">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-[0.4em] text-brand-terracotta block mb-2">
+                        03 / CIÊNCIA & PRÁTICA BASEADA EM EVIDÊNCIAS
+                    </span>
+                    <h2 class="font-display text-6xl sm:text-8xl lg:text-[11vw] leading-[0.8] tracking-[-0.04em] uppercase text-brand-navy">
+                        MÉTODOS
+                    </h2>
+                </div>
+                <p class="text-xs sm:text-sm text-brand-navy/70 max-w-xs font-medium uppercase tracking-wider leading-relaxed">
+                    Protocolos validados internacionalmente para intervenção comportamental e psicológica.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                
+                <div class="p-8 bg-white rounded-[2.5rem] space-y-3 shadow-md reveal-up border border-brand-navy/5">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-terracotta block">
+                        01 &bull; MAPEAMENTO
+                    </span>
+                    <h4 class="font-display text-3xl uppercase tracking-tight text-brand-navy">Neuropsicologia</h4>
+                    <p class="text-xs text-brand-navy/70 leading-relaxed font-medium">
+                        Avaliação minuciosa de memória, atenção, raciocínio, funções executivas e diagnóstico diferencial de TEA e TDAH.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white rounded-[2.5rem] space-y-3 shadow-md reveal-up border border-brand-navy/5">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-terracotta block">
+                        02 &bull; COMPORTAMENTO
+                    </span>
+                    <h4 class="font-display text-3xl uppercase tracking-tight text-brand-navy">Método ABA</h4>
+                    <p class="text-xs text-brand-navy/70 leading-relaxed font-medium">
+                        Análise do Comportamento Aplicada com VB-MAPP para desenvolvimento intensivo de linguagem, interação e autonomia.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white rounded-[2.5rem] space-y-3 shadow-md reveal-up border border-brand-navy/5">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-terracotta block">
+                        03 &bull; TERAPIAS
+                    </span>
+                    <h4 class="font-display text-3xl uppercase tracking-tight text-brand-navy">TCC & DBT</h4>
+                    <p class="text-xs text-brand-navy/70 leading-relaxed font-medium">
+                        Terapias cognitivo-comportamentais para regulação emocional, ansiedade, depressão e habilidades interpessoais.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white rounded-[2.5rem] space-y-3 shadow-md reveal-up border border-brand-navy/5">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-terracotta block">
+                        04 &bull; PARENTALIDADE
+                    </span>
+                    <h4 class="font-display text-3xl uppercase tracking-tight text-brand-navy">Treino Parental</h4>
+                    <p class="text-xs text-brand-navy/70 leading-relaxed font-medium">
+                        Capacitação contínua de pais e cuidadores para generalização dos comportamentos em casa e na rotina escolar.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6️⃣ SEÇÃO INSTAGRAM FEED (Color Block #FAF6EE, border-radius: 5rem no topo) -->
+    <section id="instagram" class="relative z-40 bg-brand-cream rounded-t-[5rem] -mt-16 pt-28 pb-32 px-6 sm:px-12 shadow-[0_-25px_50px_rgba(30,44,66,0.06)]">
+        <div class="max-w-[1400px] mx-auto space-y-16">
+            
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-brand-navy/15 reveal-up">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-[0.4em] text-brand-terracotta block mb-2">
+                        04 / CONTEÚDO OFICIAL &bull; @ATIPICAMENTEPSI
+                    </span>
+                    <h2 class="font-display text-6xl sm:text-8xl lg:text-[11vw] leading-[0.8] tracking-[-0.04em] uppercase text-brand-navy">
+                        INSTAGRAM
+                    </h2>
+                </div>
+                
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" 
+                   class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-navy text-white hover:bg-brand-terracotta font-bold text-[11px] uppercase tracking-[0.25em] transition-all shadow-md">
+                    <span>SEGUIR NO INSTAGRAM ↗</span>
+                </a>
+            </div>
+
+            <!-- Grid de Fotos em Alta Resolução -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="blur-card aspect-square reveal-up group">
+                    <img src="../assets/instagram-post-1.jpg" alt="Post Instagram" class="w-full h-full object-cover">
+                    <div class="blur-overlay p-4">
+                        <span class="blur-btn text-[10px] font-bold uppercase tracking-[0.25em] px-5 py-2.5 rounded-full bg-white text-brand-navy shadow-md">
+                            VER POST ↗
+                        </span>
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="blur-card aspect-square reveal-up group">
+                    <img src="../assets/instagram-post-2.jpg" alt="Post Instagram" class="w-full h-full object-cover">
+                    <div class="blur-overlay p-4">
+                        <span class="blur-btn text-[10px] font-bold uppercase tracking-[0.25em] px-5 py-2.5 rounded-full bg-white text-brand-navy shadow-md">
+                            VER POST ↗
+                        </span>
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/atipicamentepsi" target="_blank" class="blur-card aspect-square reveal-up group">
+                    <img src="../assets/instagram-post-3.jpg" alt="Post Instagram" class="w-full h-full object-cover">
+                    <div class="blur-overlay p-4">
+                        <span class="blur-btn text-[10px] font-bold uppercase tracking-[0.25em] px-5 py-2.5 rounded-full bg-white text-brand-navy shadow-md">
+                            VER POST ↗
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7️⃣ FOOTER (Background #1E2C42, Navy com Terracota & Creme, border-radius: 5rem no topo) -->
+    <footer id="contato" class="relative z-50 bg-brand-navy text-brand-cream rounded-t-[5rem] -mt-16 pt-28 pb-16 px-6 sm:px-12 shadow-[0_-30px_60px_rgba(0,0,0,0.2)]">
+        <div class="max-w-[1400px] mx-auto space-y-20">
+            
+            <!-- 12-Column Grid -->
+            <div class="grid lg:grid-cols-12 gap-16">
+                
+                <!-- Left 6 cols: Large Inscription with Underline-Only Input -->
+                <div class="lg:col-span-6 space-y-8">
+                    <div class="space-y-3">
+                        <span class="text-[11px] font-bold uppercase tracking-[0.4em] text-brand-terracotta block">
+                            AGENDAMENTO IMEDIATO
+                        </span>
+                        <h3 class="font-display text-4xl sm:text-6xl uppercase tracking-tight text-white leading-none">
+                            INICIE O ACOLHIMENTO DA SUA FAMÍLIA.
+                        </h3>
+                        <p class="text-sm text-brand-cream/70 font-light leading-relaxed max-w-md">
+                            Deixe seu nome e WhatsApp para que a equipe de recepção entre em contato com horários disponíveis.
+                        </p>
+                    </div>
+
+                    <!-- Underline Input Form -->
+                    <form onsubmit="event.preventDefault(); window.open('https://wa.me/5564999999999?text=Ol%C3%A1!%20Meu%20nome%20%C3%A9%20' + encodeURIComponent(document.getElementById('ft-nome').value) + '%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20atendimento.');" 
+                          class="space-y-6 max-w-lg">
+                        <div>
+                            <input id="ft-nome" type="text" placeholder="SEU NOME COMPLETO" required
+                                   class="w-full py-4 text-xs font-bold uppercase tracking-[0.3em] underline-input placeholder:text-brand-cream/35">
+                        </div>
+                        <div class="flex items-center gap-4 pt-2">
+                            <button type="submit" 
+                                    class="px-8 py-4 rounded-full bg-brand-terracotta hover:bg-[#b5593c] text-white font-bold text-[11px] uppercase tracking-[0.3em] transition-colors shadow-lg">
+                                SOLICITAR CONTATO NO WHATSAPP &rarr;
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right 6 cols: 2 columns of links in bold tracked-out uppercase Inter -->
+                <div class="lg:col-span-6 grid grid-cols-2 gap-8 lg:pl-12">
+                    
+                    <div class="space-y-5">
+                        <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-terracotta block">
+                            NAVEGAÇÃO
+                        </span>
+                        <ul class="space-y-3.5 text-xs font-bold uppercase tracking-[0.25em] text-brand-cream/80">
+                            <li><a href="#estrutura" class="hover:text-brand-terracotta transition-colors">Estrutura Real</a></li>
+                            <li><a href="#especialistas" class="hover:text-brand-terracotta transition-colors">Psicólogos</a></li>
+                            <li><a href="#metodos" class="hover:text-brand-terracotta transition-colors">Método ABA</a></li>
+                            <li><a href="#metodos" class="hover:text-brand-terracotta transition-colors">Neuropsicologia</a></li>
+                            <li><a href="#instagram" class="hover:text-brand-terracotta transition-colors">Feed Instagram</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-5">
+                        <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-terracotta block">
+                            LOCALIZAÇÃO & CONTATO
+                        </span>
+                        <div class="space-y-3 text-xs text-brand-cream/75 leading-relaxed">
+                            <p class="font-bold text-white uppercase tracking-wider">Atipicamente Psi</p>
+                            <p>Rua Interna &bull; Caldas Novas - GO</p>
+                            <p>Especialistas com registro no CRP 09</p>
+                            <p class="pt-2 text-brand-terracotta font-bold tracking-widest">
+                                WhatsApp: (64) 99999-9999
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Bottom Legal Bar (35% Opacidade) -->
+            <div class="pt-12 border-t border-white/15 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-[0.25em] text-brand-cream/35">
+                <span>&copy; 2026 ATIPICAMENTE PSI &bull; TODOS OS DIREITOS RESERVADOS</span>
+                <span>DESENVOLVIDO POR AHOLIC SITES</span>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Scroll Reveal Trigger Script (Cubic-Bezier 0.16, 1, 0.3, 1) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+</html>

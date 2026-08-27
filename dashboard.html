@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AHOLIC &bull; Web Studio OS</title>
+
+<!-- PWA & Mobile Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00D084">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Aholic OS">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="icon" type="image/png" href="assets/aholic-logo.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Supabase JS Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root {
+  --bg-gradient: radial-gradient(at 0% 0%, rgba(0, 208, 132, 0.08) 0px, transparent 45%),
+                 radial-gradient(at 100% 0%, rgba(255, 237, 224, 0.55) 0px, transparent 40%),
+                 radial-gradient(at 50% 100%, rgba(224, 242, 254, 0.45) 0px, transparent 50%),
+                 #F4F7FB;
+  --bg: #F4F7FB;
+  --card: #FFFFFF;
+  --sidebar-bg: rgba(255, 255, 255, 0.92);
+  
+  --ink: #111315;
+  --ink-secondary: #334155;
+  --muted: #64748B;
+  --dim: #94A3B8;
+  --line: rgba(226, 232, 240, 0.85);
+  --line-strong: #E2E8F0;
+  
+  /* Aholic Brand Colors */
+  --accent: #00D084;
+  --accent-dark: #00A86B;
+  --accent-light: #4EEDA8;
+  --accent-soft: rgba(0, 208, 132, 0.12);
+  --accent-glow: rgba(0, 208, 132, 0.25);
+  --dark-btn: #111315;
+  --dark-btn-hover: #1E2227;
+
+  /* Status Colors */
+  --ok: #00D084; --ok-soft: rgba(0, 208, 132, 0.14);
+  --warn: #F59E0B; --warn-soft: rgba(245, 158, 11, 0.14);
+  --info: #0284C7; --info-soft: rgba(2, 132, 199, 0.12);
+  --purple: #8B5CF6; --purple-soft: rgba(139, 92, 246, 0.12);
+  --novo: #64748B; --rede: #8B5CF6; --pub: #0284C7; --prop: #F59E0B; --resp: #00D084; --fech: #059669; --cinza: #94A3B8;
+
+  --shadow-sm: 0 2px 8px rgba(17, 19, 21, 0.03);
+  --shadow-md: 0 10px 30px -4px rgba(17, 19, 21, 0.04), 0 4px 12px rgba(17, 19, 21, 0.02);
+  --shadow-lg: 0 20px 40px -6px rgba(17, 19, 21, 0.07), 0 8px 16px rgba(17, 19, 21, 0.03);
+  --shadow-floating: 0 16px 36px rgba(17, 19, 21, 0.06);
+
+  --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --display: 'Space Grotesk', var(--font);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 30px;
+  --radius-pill: 9999px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar { height: 6px; width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* Floating Vertical Sidebar with Labels */
+aside {
+  width: 236px;
+  background: var(--sidebar-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-xl);
+  margin: 20px 0 20px 20px;
+  height: calc(100vh - 40px);
+  padding: 20px 14px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  box-shadow: var(--shadow-floating);
+}
+
+.logo-dock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 6px 18px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  text-decoration: none;
+}
+.logo-dock img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 208, 132, 0.3));
+}
+.logo-dock-text {
+  display: flex;
+  flex-direction: column;
+}
+.logo-dock-text b {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+}
+.logo-dock-text span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: var(--accent-dark);
+  text-transform: uppercase;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.nav-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: var(--radius-md);
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-btn svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 2;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.nav-btn span.label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-btn:hover {
+  background: rgba(0, 208, 132, 0.09);
+  color: var(--accent-dark);
+}
+.nav-btn:hover svg { transform: scale(1.08); }
+
+.nav-btn.on {
+  background: var(--dark-btn);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(17, 19, 21, 0.18);
+}
+.nav-btn.on svg {
+  stroke: #FFFFFF;
+}
+
+.nav-badge {
+  background: rgba(0, 208, 132, 0.15);
+  color: var(--accent-dark);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+.nav-btn.on .nav-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+.side-foot-user {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px;
+  border-top: 1px solid var(--line);
+  background: #F8FAFC;
+  border-radius: var(--radius-md);
+}
+.avatar-user {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #111315, #2D3748);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  border: 2px solid #FFFFFF;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.user-info b {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user-info span {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.btn-logout {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-logout:hover { color: #EF4444; background: rgba(239, 68, 68, 0.1); }
+
+/* Main Workspace */
+main {
+  margin-left: 272px;
+  margin-right: 20px;
+  flex: 1;
+  min-width: 0;
+  padding: 20px 10px 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Top Header Bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  flex: 0 0 auto;
+}
+
+.brand-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-title h1 {
+  font-size: 23px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.6px;
+  color: var(--ink);
+}
+
+.modo-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+}
+.modo-badge.supabase {
+  background: #FFFFFF;
+  color: var(--accent-dark);
+  border: 1px solid rgba(0, 208, 132, 0.4);
+}
+.modo-badge.supabase::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse-dot 2s infinite;
+}
+.modo-badge.db {
+  background: #FFFFFF;
+  color: var(--info);
+  border: 1px solid rgba(2, 132, 199, 0.4);
+}
+.modo-badge.file {
+  background: #FFFFFF;
+  color: var(--warn);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Filter dropdowns in pill shape */
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.sel-filter {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  font-family: var(--font);
+  cursor: pointer;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+}
+.sel-filter:hover, .sel-filter:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Search input in pill shape */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-wrapper svg {
+  position: absolute;
+  left: 14px;
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.busca {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 9px 16px 9px 38px;
+  font-size: 13px;
+  width: 240px;
+  color: var(--ink);
+  font-family: var(--font);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+.busca:focus {
+  width: 280px;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-md);
+}
+
+/* High-contrast Black CTA Pill Button */
+.btn-cta {
+  background: var(--dark-btn);
+  color: #FFFFFF;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(17, 19, 21, 0.15);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+.btn-cta:hover {
+  background: var(--dark-btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(17, 19, 21, 0.22);
+}
+.btn-cta svg { width: 16px; height: 16px; }
+
+#view {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 24px;
+}
+
+/* Top Stats Row in Bento */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.stat-pill-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-pill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+.stat-pill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+}
+.stat-pill-card.verde::before { background: var(--accent); }
+.stat-pill-card.ambar::before { background: var(--warn); }
+.stat-pill-card.azul::before { background: var(--info); }
+.stat-pill-card.roxo::before { background: var(--purple); }
+
+.stat-pill-card .n {
+  font-size: 26px;
+  font-weight: 800;
+  font-family: var(--display);
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.stat-pill-card .l {
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.stat-pill-card.verde .n { color: var(--accent-dark); }
+.stat-pill-card.ambar .n { color: #D97706; }
+
+/* Panels */
+.painel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+}
+.painel h2 {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0 0 18px;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Modern Funnel Chart */
+.funil .linha {
+  display: grid;
+  grid-template-columns: 150px 1fr 50px;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+.funil .barra {
+  height: 20px;
+  border-radius: var(--radius-pill);
+  background: #F1F5F9;
+  overflow: hidden;
+  position: relative;
+}
+.funil .fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  min-width: 4px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Priority Follow-up Item */
+.fup-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  transition: all 0.15s;
+}
+.fup-item:hover {
+  background: #FFFFFF;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(3px);
+}
+.fup-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--ink);
+}
+.fup-item .dias {
+  background: var(--warn-soft);
+  color: #D97706;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-family: var(--mono);
+}
+.fup-btn-zap {
+  background: #FFFFFF;
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s;
+}
+.fup-btn-zap:hover {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+/* Kanban Board */
+.board {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+  padding-bottom: 10px;
+}
+.col {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 16px 12px 12px 14px;
+  flex: 0 0 290px;
+  width: 290px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.cards {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 4px;
+}
+.col > h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 2px 4px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 800;
+  flex: 0 0 auto;
+}
+.col > h3 span {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Kanban Card */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--cor, var(--accent));
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: grab;
+}
+.card:hover {
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.card .nm {
+  font-weight: 800;
+  font-size: 13.5px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.card .mt {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 4px 0 8px;
+  font-weight: 500;
+}
+.card .motivo {
+  color: var(--ink-secondary);
+  font-size: 11.5px;
+  background: #F8FAFC;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin: 8px 0;
+  border-left: 2px solid var(--accent);
+  line-height: 1.45;
+}
+.card .valor {
+  color: var(--accent-dark);
+  font-weight: 800;
+  font-size: 13px;
+  font-family: var(--mono);
+  margin-top: 6px;
+}
+
+.acoes {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #F1F5F9;
+}
+.acoes a {
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: #F8FAFC;
+  color: var(--ink-secondary);
+  border: 1px solid var(--line);
+  transition: all 0.15s;
+}
+.acoes a:hover {
+  background: #FFFFFF;
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  box-shadow: var(--shadow-sm);
+}
+.acoes a.del:hover {
+  color: #EF4444;
+  border-color: #EF4444;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  margin-left: 6px;
+  vertical-align: 1px;
+  text-transform: uppercase;
+}
+.tag.fup {
+  background: var(--warn-soft);
+  color: #D97706;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Sites Grid */
+.sites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+}
+.site-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-md);
+}
+.site-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: #CBD5E1;
+}
+.site-card .prev {
+  height: 210px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: #111315;
+  position: relative;
+}
+.site-card iframe {
+  width: 200%;
+  height: 420px;
+  border: 0;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.site-card .info {
+  padding: 18px 20px;
+}
+.s-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.s-nm {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.s-sub {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 4px 0 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.s-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.s-main a {
+  text-align: center;
+  padding: 9px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.s-main .prim {
+  background: var(--dark-btn);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(17, 19, 21, 0.15);
+}
+.s-main .prim:hover {
+  background: var(--accent-dark);
+}
+.s-main .sec {
+  background: #F8FAFC;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.s-main .sec:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.s-icons {
+  display: flex;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  margin: 0 -4px;
+}
+.s-icons a {
+  flex: 1;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 2px;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+.s-icons a:hover {
+  background: #F1F5F9;
+  color: var(--ink);
+}
+
+/* Version pills */
+.v-box {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+}
+.v-label {
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.v-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.v-pill {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: #F8FAFC;
+  color: var(--ink-secondary);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s;
+}
+.v-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+}
+.v-pill.ativo {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+/* Table CRM */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+th {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line-strong);
+  cursor: pointer;
+  white-space: nowrap;
+}
+td {
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  color: var(--ink);
+}
+tr:hover td {
+  background: #F8FAFC;
+}
+.pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* Pagination */
+.pagin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.pagin .info { margin-right: auto; font-weight: 600; }
+.pagin button {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.pagin button:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+.pagin button.on {
+  background: var(--dark-btn);
+  border-color: var(--dark-btn);
+  color: #FFFFFF;
+}
+.pagin button:disabled { opacity: 0.35; cursor: default; }
+
+/* Modals */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 19, 21, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+}
+.modal-bg.aberto { display: flex; }
+.modal {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: 28px 32px;
+  width: 540px;
+  max-width: 92vw;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(17, 19, 21, 0.2);
+}
+.modal h2 {
+  font-size: 19px;
+  font-weight: 800;
+  margin: 0 0 16px;
+  color: var(--ink);
+  letter-spacing: -0.4px;
+}
+.modal label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  margin: 12px 0 5px;
+}
+.modal input, .modal select, .modal textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--ink);
+  background: #F8FAFC;
+  outline: none;
+  transition: all 0.15s;
+}
+.modal input:focus, .modal select:focus, .modal textarea:focus {
+  background: #FFFFFF;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.modal .mrow { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+.modal .mbot { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
+.modal button {
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+.modal .salvar {
+  background: var(--dark-btn);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(17, 19, 21, 0.15);
+}
+.modal .salvar:hover { background: var(--accent-dark); }
+.modal .cancelar {
+  background: #F1F5F9;
+  color: var(--ink-secondary);
+}
+.modal .cancelar:hover { background: #E2E8F0; }
+
+/* Login Modal Fullscreen Overlay */
+#login-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-gradient);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#login-overlay.aberto { display: flex; }
+.login-card {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: 40px 36px;
+  width: 420px;
+  max-width: 100%;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+.login-card img {
+  width: 58px;
+  height: 58px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 6px 14px rgba(0, 208, 132, 0.35));
+}
+.login-card h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+.login-card p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 6px 0 24px;
+}
+.login-card input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 12px 18px;
+  font-size: 13.5px;
+  font-family: var(--font);
+  background: #F8FAFC;
+  margin-bottom: 12px;
+  outline: none;
+}
+.login-card input:focus {
+  border-color: var(--accent);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.login-card button.btn-login {
+  width: 100%;
+  background: var(--dark-btn);
+  color: #FFFFFF;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 6px 18px rgba(17, 19, 21, 0.15);
+  transition: all 0.2s;
+}
+.login-card button.btn-login:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+/* Comparador */
+.cmp-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.cmp-tabs button {
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+.cmp-tabs button.on {
+  background: var(--dark-btn);
+  color: #FFFFFF;
+  border-color: var(--dark-btn);
+  box-shadow: var(--shadow-sm);
+}
+.cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1 1 auto; min-height: 0; }
+.cmp-col { display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; min-height: 0; box-shadow: var(--shadow-md); }
+.cmp-col .cab { padding: 12px 18px; font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--line); }
+.cmp-col .cab.antes { color: var(--muted); background: #F8FAFC; }
+.cmp-col .cab.depois { color: var(--accent-dark); background: var(--accent-soft); }
+.cmp-col iframe { flex: 1 1 auto; width: 100%; border: 0; min-height: 0; background: #FFFFFF; }
+
+/* Document Frame */
+#doc-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 19, 21, 0.7);
+  backdrop-filter: blur(8px);
+  display: none;
+  z-index: 100;
+  flex-direction: column;
+}
+#doc-bg.aberto { display: flex; }
+.doc-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 28px;
+  background: #FFFFFF;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  flex: 0 0 auto;
+}
+.doc-bar b { font-size: 16px; font-weight: 800; }
+.doc-bar .sp { flex: 1; }
+.doc-bar button {
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 9px 18px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.doc-bar .imp { background: var(--dark-btn); color: #fff; }
+.doc-bar .fech { background: #F1F5F9; color: var(--ink); }
+#doc-frame { flex: 1; border: 0; width: 100%; background: #fff; }
+
+.vazio { color: var(--dim); font-size: 13px; text-align: center; padding: 30px 10px; font-weight: 500; }
+
+@media(max-width: 860px) {
+  aside { display: none; }
+  main { margin-left: 10px; margin-right: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TELA DE LOGIN SUPABASE -->
+<div id="login-overlay">
+  <div class="login-card">
+    <img src="assets/aholic-logo.png" alt="Aholic Logo">
+    <h2>AHOLIC Studio OS</h2>
+    <p>Painel Restrito • Faça login para acessar o CRM</p>
+    
+    <form onsubmit="realizarLogin(event)">
+      <input id="log-email" type="email" placeholder="Seu e-mail administrativo" required autocomplete="email">
+      <input id="log-senha" type="password" placeholder="Sua senha de acesso" required autocomplete="current-password">
+      <button type="submit" class="btn-login" id="btn-login-submit">Entrar no Painel</button>
+    </form>
+    <div id="login-msg" style="color:#EF4444;font-size:12px;font-weight:600;margin-top:12px;display:none"></div>
+  </div>
+</div>
+
+<!-- FLOATING SIDEBAR -->
+<aside>
+  <div class="logo-dock" title="AHOLIC Web Studio OS">
+    <img src="assets/aholic-logo.png" alt="Aholic Logo">
+    <div class="logo-dock-text">
+      <b>AHOLIC</b>
+      <span>STUDIO OS</span>
+    </div>
+  </div>
+
+  <nav id="nav">
+    <!-- Populated by nav() -->
+  </nav>
+
+  <div class="side-foot-user">
+    <div class="avatar-user" title="Rafael • Aholic">R</div>
+    <div class="user-info">
+      <b>Rafael</b>
+      <span id="user-role">Diretor de Projetos</span>
+    </div>
+    <button class="btn-logout" title="Sair / Desconectar" onclick="realizarLogout()">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+    </button>
+  </div>
+</aside>
+
+<!-- MAIN WORKSPACE -->
+<main>
+  <div class="topbar">
+    <div class="brand-title">
+      <h1 id="titulo">Visão Geral</h1>
+      <span class="modo-badge file" id="modo" title="Status de Sincronização">Modo Offline</span>
+    </div>
+
+    <div class="filter-group">
+      <select id="f-cidade" class="sel-filter" onchange="setCidade(this.value)">
+        <option value="todos">📍 Todas as Cidades</option>
+      </select>
+      
+      <select id="f-nicho" class="sel-filter" onchange="setNicho(this.value)">
+        <option value="todos">🏷️ Todos os Nichos</option>
+      </select>
+
+      <div class="search-wrapper">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input class="busca" id="busca" placeholder="Buscar cliente, nicho, tag...">
+      </div>
+
+      <button class="btn-cta" onclick="abrirNovoLead()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        + Novo Lead
+      </button>
+    </div>
+  </div>
+
+  <div id="view"></div>
+</main>
+
+<!-- MODAL VISUALIZADOR DE CONTRATOS -->
+<div id="doc-bg">
+  <div class="doc-bar">
+    <b id="doc-titulo">Contrato de Prestação de Serviço</b>
+    <span class="sp"></span>
+    <button class="imp" onclick="printDoc()">🖨 Imprimir / Salvar PDF</button>
+    <button class="fech" onclick="fecharDoc()">Fechar ✕</button>
+  </div>
+  <iframe id="doc-frame"></iframe>
+</div>
+
+<!-- MODAL EDITAR LEAD -->
+<div id="modal-bg" class="modal-bg" onclick="if(event.target===this)fecharEdit()">
+  <div id="modal" class="modal">
+    <h2 id="m-titulo">Editar Lead</h2>
+    <label>Nome da Empresa / Profissional</label><input id="m-nome">
+    <div class="mrow">
+      <div><label>E-mail</label><input id="m-email"></div>
+      <div><label>Telefone</label><input id="m-telefone"></div>
+    </div>
+    <div class="mrow">
+      <div><label>WhatsApp (55DDDnúmero)</label><input id="m-whatsapp"></div>
+      <div><label>Cidade</label><input id="m-cidade"></div>
+    </div>
+    <div class="mrow">
+      <div><label>Nicho</label><input id="m-nicho"></div>
+      <div><label>Status no Funil</label><select id="m-status"></select></div>
+    </div>
+    <div class="mrow">
+      <div><label>Valor Fechado (R$)</label><input id="m-valor" type="number" step="50"></div>
+      <div><label>Data da Proposta</label><input id="m-dataProposta" type="date"></div>
+    </div>
+    <div class="mrow">
+      <div><label>Manutenção Mensal (R$)</label><input id="m-manutencao" type="number" step="10"></div>
+      <div><label>Pagamento Recebido?</label><select id="m-pago"><option value="0">Não</option><option value="1">Sim</option></select></div>
+    </div>
+    <div class="mrow">
+      <div><label>Contrato</label><select id="m-contratoStatus"><option value="pendente">Pendente</option><option value="enviado">Enviado</option><option value="assinado">Assinado</option></select></div>
+      <div><label>Data do Contrato</label><input id="m-contratoEm" type="date"></div>
+    </div>
+    <div class="mrow">
+      <div><label>CPF/CNPJ do Cliente</label><input id="m-docCliente" placeholder="para o contrato"></div>
+      <div><label>Endereço Completo</label><input id="m-endCliente" placeholder="para o contrato"></div>
+    </div>
+    <label>URL Publicada (no ar)</label><input id="m-urlNova">
+    <label>Observações do Projeto</label><textarea id="m-obs" rows="2"></textarea>
+    <div class="mbot">
+      <button class="cancelar" onclick="fecharEdit()">Cancelar</button>
+      <button class="salvar" onclick="salvarEdit()">Salvar Alterações</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOVO LEAD RÁPIDO -->
+<div id="m-novo-bg" class="modal-bg" onclick="if(event.target===this)fecharNovoLead()">
+  <div class="modal">
+    <h2>+ Cadastrar Novo Lead</h2>
+    <p style="font-size:12px;color:var(--muted);margin:0 0 14px">Cadastre uma nova empresa minerada no Google Maps ou Instagram diretamente no sistema.</p>
+    <label>Nome do Negócio / Profissional *</label><input id="nl-nome" placeholder="Ex: Studio Vivaz Arquitetura" required>
+    <div class="mrow">
+      <div><label>Cidade *</label><input id="nl-cidade" placeholder="Ex: Caldas Novas"></div>
+      <div><label>Nicho *</label><input id="nl-nicho" placeholder="Ex: Arquitetura, Odontologia"></div>
+    </div>
+    <div class="mrow">
+      <div><label>WhatsApp (DDD + Número)</label><input id="nl-whatsapp" placeholder="Ex: 5564999999999"></div>
+      <div><label>Instagram (@perfil)</label><input id="nl-email" placeholder="Ex: @studiovivaz"></div>
+    </div>
+    <label>Site Atual do Cliente (se houver)</label><input id="nl-siteAntigo" placeholder="https://...">
+    <label>Motivo da Abordagem / O que o site atual tem de ruim?</label>
+    <textarea id="nl-motivo" rows="2" placeholder="Ex: Site WordPress lento, layout quebrado no celular, sem botão de WhatsApp..."></textarea>
+    <div class="mbot">
+      <button class="cancelar" onclick="fecharNovoLead()">Cancelar</button>
+      <button class="salvar" onclick="salvarNovoLead()">Salvar Lead no Painel</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL COPIAR PROPOSTA WHATSAPP -->
+<div id="m-zap-bg" class="modal-bg" onclick="if(event.target===this)fecharZapModal()">
+  <div class="modal" style="width:580px">
+    <h2>💬 Copiar Proposta para WhatsApp</h2>
+    <p style="font-size:12px;color:var(--muted);margin:0 0 14px">Mensagem profissional com rapport pronta para você enviar diretamente para o lead:</p>
+    <textarea id="zap-texto" rows="8" style="font-size:12.5px;line-height:1.6"></textarea>
+    <div class="mbot">
+      <button class="cancelar" onclick="fecharZapModal()">Fechar</button>
+      <button id="btn-copiar-zap" class="salvar" onclick="copiarTextoZap()">📋 Copiar Mensagem</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL HISTÓRICO DE VERSÕES -->
+<div id="m-versoes-bg" class="modal-bg" onclick="if(event.target===this)fecharModalVersoes()">
+  <div class="modal" style="max-width:580px">
+    <h2 id="mv-titulo">Histórico de Versões do Site</h2>
+    <p id="mv-sub" style="font-size:12px;color:var(--muted);margin:0 0 16px"></p>
+    <div id="mv-lista" style="display:flex;flex-direction:column;gap:10px;max-height:400px;overflow-y:auto"></div>
+    <div style="margin-top:20px;text-align:right">
+      <button type="button" class="cancelar" onclick="fecharModalVersoes()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script id="dados" type="application/json">{"atualizado": "2026-08-27 12:45", "leads": [{"slug": "clinica-anielly-vilela", "nome": "Clínica Anielly Vilela | Estética Avançada", "nicho": "Harmonização Facial", "cidade": "Caldas Novas", "nota": 4.9, "avaliacoes": 42, "email": "", "telefone": "(64) 99336-8698", "whatsapp": "5564993368698", "siteAntigo": "", "motivo": "Sem site próprio. Atendimento com Ultraformer III e harmonização facial ativo só no Instagram/Maps.", "status": "redesenhado", "urlNova": "sites/clinica-anielly-vilela/clinica-anielly-vilela.html", "dataProposta": "", "valor": 1500.0, "obs": "Tipo: Do Zero | Rua B28, Qd 36, Itanhangá I", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 1, "nome_estilo": "Quiet Luxury Editorial", "descricao": "Linho off-white, tipografia Newsreader serifada e foco em procedimentos faciais", "arquivo": "sites/clinica-anielly-vilela/clinica-anielly-vilela.html", "criado_em": "2026-08-25 22:22", "ativo": 1}]}, {"slug": "dra-rosana-vecchi", "nome": "Dra. Rosana Vecchi | Rejuvenescimento Facial", "nicho": "Harmonização Facial", "cidade": "Caldas Novas", "nota": 4.8, "avaliacoes": 38, "email": "", "telefone": "(62) 98515-0061", "whatsapp": "5562985150061", "siteAntigo": "", "motivo": "Sem site próprio. Clínica de alto padrão (Edifício Eleve, Setor Oeste) com procedimentos de alto valor.", "status": "novo", "urlNova": "", "dataProposta": "", "valor": 1800.0, "obs": "Tipo: Do Zero | Endolift, Ultraformer, Fios", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "dra-anna-clara-junqueira", "nome": "Dra. Anna Clara Junqueira", "nicho": "Harmonização Orofacial", "cidade": "Caldas Novas", "nota": 4.8, "avaliacoes": 31, "email": "", "telefone": "(64) 99314-7000", "whatsapp": "5564993147000", "siteAntigo": "", "motivo": "Sem site oficial. Presente apenas em diretórios de saúde; sem portal próprio de autoridade.", "status": "novo", "urlNova": "", "dataProposta": "", "valor": 1200.0, "obs": "Tipo: Do Zero | Clínica Mais Saúde, Jardim Roma", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "quality-odontologia-face", "nome": "Quality Odontologia e Face", "nicho": "Harmonização Orofacial", "cidade": "Caldas Novas", "nota": 4.9, "avaliacoes": 57, "email": "", "telefone": "(64) 99271-4048", "whatsapp": "5564992714048", "siteAntigo": "qualityodontologiaeface.com.br", "motivo": "Site atual com layout datado, não otimizado para mobile e sem foco nos procedimentos estéticos.", "status": "redesenhado", "urlNova": "sites/quality-odontologia-face/quality-odontologia-face.html", "dataProposta": "", "valor": 1500.0, "obs": "Tipo: Redesign | Dra. Silvania Rossi & Dr. Eduardo", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 1, "nome_estilo": "Swiss Precision & Fotos Reais", "descricao": "Identidade clínica com Plus Jakarta Sans, logo original, fotos do Maps e feed do Instagram", "arquivo": "sites/quality-odontologia-face/quality-odontologia-face.html", "criado_em": "2026-08-26 16:57", "ativo": 1}]}, {"slug": "top-saude-estetica", "nome": "Top Saúde Estética Facial", "nicho": "Harmonização Facial", "cidade": "Caldas Novas", "nota": 4.7, "avaliacoes": 45, "email": "", "telefone": "(64) 3012-4615", "whatsapp": "556430124615", "siteAntigo": "topsaudeclinicasmedicas.com", "motivo": "Site genérico de clínica médica, sem landing page dedicada de alta conversão para estética facial.", "status": "novo", "urlNova": "", "dataProposta": "", "valor": 1200.0, "obs": "Tipo: Redesign / Nova LP | Lipo de papada, bioestimuladores", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "laura-frares-arquitetura", "nome": "Laura Frares Arquitetura & Interiores", "nicho": "Arquitetura & Interiores", "cidade": "Rio Verde", "nota": 5.0, "avaliacoes": 28, "email": null, "telefone": null, "whatsapp": "5564999999999", "siteAntigo": null, "motivo": "Criação do Primeiro Site Oficial (Portfólio de Luxo)", "status": "redesenhado", "urlNova": "sites/laura-frares-arquitetura/laura-frares-arquitetura.html", "dataProposta": null, "valor": 1800.0, "obs": "Foco em condomínio fechado e sedes de fazendas no agro", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 1, "nome_estilo": "Monografia Contemporânea", "descricao": "Foco em sedes de fazendas e casas de condomínio em Rio Verde (Space Grotesk + JetBrains Mono)", "arquivo": "sites/laura-frares-arquitetura/laura-frares-arquitetura.html", "criado_em": "2026-08-25 21:12", "ativo": 1}]}, {"slug": "kessio-guerreiro-arquitetura", "nome": "Késsio Guerreiro Arquitetura & Urbanismo", "nicho": "Arquitetura & Urbanismo", "cidade": "Rio Verde", "nota": 4.9, "avaliacoes": 34, "email": null, "telefone": null, "whatsapp": "5564999999998", "siteAntigo": null, "motivo": "Sem site oficial estruturado no Google Maps", "status": "novo", "urlNova": null, "dataProposta": null, "valor": null, "obs": "Projetos residenciais contemporâneos", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "hi-arquitetura-interiores", "nome": "Hi! Arquitetura e Interiores", "nicho": "Arquitetura & Interiores", "cidade": "Rio Verde", "nota": 4.9, "avaliacoes": 19, "email": null, "telefone": null, "whatsapp": "5564999999997", "siteAntigo": null, "motivo": "Sem site (presença apenas em guia local e Instagram)", "status": "novo", "urlNova": null, "dataProposta": null, "valor": null, "obs": "Arquitetura jovem e espaços comerciais", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "casatri-arquitetura", "nome": "CasaTri Arquitetura & Interiores", "nicho": "Arquitetura & Interiores", "cidade": "Rio Verde", "nota": 4.8, "avaliacoes": 22, "email": null, "telefone": "(64) 3050-0612", "whatsapp": "556430500612", "siteAntigo": null, "motivo": "Sem site oficial para captação de clientes", "status": "novo", "urlNova": null, "dataProposta": null, "valor": null, "obs": "Projetos residenciais e corporativos", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "tres-mais-arquitetura", "nome": "3+ Arquitetura (Três Mais)", "nicho": "Arquitetura & Interiores", "cidade": "Rio Verde", "nota": 4.8, "avaliacoes": 15, "email": null, "telefone": "(64) 3621-1661", "whatsapp": "556436211661", "siteAntigo": "http://tresmaisarquitetura.com", "motivo": "Site institucional antigo sem conversão mobile", "status": "novo", "urlNova": null, "dataProposta": null, "valor": null, "obs": "Escritório tradicional de Rio Verde", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "karla-barros-arquitetura", "nome": "Karla Barros Arquitetura & Interiores", "nicho": "Arquitetura & Interiores", "cidade": "João Pessoa", "nota": 4.9, "avaliacoes": 26, "email": "contato@karlabarros.com.br", "telefone": "(83) 3021-6161", "whatsapp": "558330216161", "siteAntigo": null, "motivo": "Criação do Primeiro Site Oficial (Foco em orla e alto padrão)", "status": "redesenhado", "urlNova": "sites/karla-barros-arquitetura/karla-barros-arquitetura.html", "dataProposta": null, "valor": 1900.0, "obs": "Residencial de luxo em Jardim Oceania, Altiplano e Bessa", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 3, "nome_estilo": "Super Travel Luxury", "descricao": "Design System Superdesign com tipografia League Spartan, paleta rose/mauve dusty e grid desalinhado", "arquivo": "sites/karla-barros-arquitetura/karla-barros-arquitetura.html", "criado_em": "2026-08-26 18:46", "ativo": 1}, {"numero": 2, "nome_estilo": "Quiet Luxury & CASACOR", "descricao": "Alta-costura com fontes Italiana e Cormorant Garamond, paleta champanhe bronze e tela obsidiana", "arquivo": "sites/karla-barros-arquitetura/versoes/v2-quiet-luxury-italiana.html", "criado_em": "2026-08-26 17:17", "ativo": 0}, {"numero": 1, "nome_estilo": "Monografia Minimalista", "descricao": "Estilo Studio MK27 com tipografia técnica Space Grotesk e respiro cinza mineral", "arquivo": "sites/karla-barros-arquitetura/versoes/v1-monografia-editorial.html", "criado_em": "2026-08-26 17:12", "ativo": 0}]}, {"slug": "cactos-arquitetos", "nome": "Cactos Arquitetos", "nicho": "Arquitetura & Urbanismo", "cidade": "João Pessoa", "nota": 5.0, "avaliacoes": 18, "email": null, "telefone": null, "whatsapp": "5583999999991", "siteAntigo": "http://cactos.arq.br", "motivo": "Redesign — Foco em arquitetura bioclimática litorânea", "status": "novo", "urlNova": null, "dataProposta": null, "valor": 1800.0, "obs": "Projetos sustentáveis e casas de praia contemporâneas", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "ponto-arquitetura-pb", "nome": "Ponto Arquitetura", "nicho": "Arquitetura & Interiores", "cidade": "João Pessoa", "nota": 4.9, "avaliacoes": 15, "email": null, "telefone": null, "whatsapp": "5583999999992", "siteAntigo": null, "motivo": "Sem site oficial estruturado (apenas diretórios)", "status": "novo", "urlNova": null, "dataProposta": null, "valor": 1600.0, "obs": "Projetos residenciais e consultórios corporativos em Manaíra", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 120.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "suna-arquitetura", "nome": "Suna Arquitetura & Design", "nicho": "Arquitetura & Interiores", "cidade": "João Pessoa", "nota": 4.8, "avaliacoes": 21, "email": null, "telefone": null, "whatsapp": "5583999999993", "siteAntigo": "https://sunaarquitetura.com.br", "motivo": "Redesign — Site institucional lento sem conversão mobile", "status": "novo", "urlNova": null, "dataProposta": null, "valor": 1700.0, "obs": "Reformas de alto padrão, retrofit e casas em Cabo Branco", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "mais-arquitetura-pb", "nome": "Mais Arquitetura Paraíba", "nicho": "Arquitetura & Interiores", "cidade": "João Pessoa", "nota": 4.8, "avaliacoes": 14, "email": null, "telefone": null, "whatsapp": "5583999999994", "siteAntigo": null, "motivo": "Sem site próprio (apenas portfólio no Homify)", "status": "novo", "urlNova": null, "dataProposta": null, "valor": 1500.0, "obs": "Design de interiores e apartamentos em Manaíra e Altiplano", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 120.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "atipicamente-psi", "nome": "Atipicamente Psi - Núcleo Clínico e Educacional", "nicho": "Psicologia & Neurodesenvolvimento", "cidade": "Caldas Novas", "nota": 5.0, "avaliacoes": 19, "email": "contato@atipicamentepsi.com.br", "telefone": null, "whatsapp": "5564999999999", "siteAntigo": null, "motivo": "Criação do Primeiro Site Oficial (Design Cream + Superdesign)", "status": "redesenhado", "urlNova": "sites/atipicamente-psi/atipicamente-psi.html", "dataProposta": "2026-08-26", "valor": 1900.0, "obs": "Clínica multidisciplinar com 5 psicólogos (CRP 09), método ABA, TEA e TDAH. Instagram @atipicamentepsi ativo.", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 4, "nome_estilo": "Editorial Industrial Cream", "descricao": "Estilo editorial de alto impacto com tipografia Anton (21vw) + Inter, ruído analógico 4%, seções empilhadas 5rem e botões blur-reveal", "arquivo": "sites/atipicamente-psi/atipicamente-psi.html", "criado_em": "2026-08-27 11:35", "ativo": 1}, {"numero": 3, "nome_estilo": "Fotos Reais Únicas do Google", "descricao": "Design Cream com 5 fotos 100% distintas oficiais do Google Maps (fachada, recepção, tenda infantil, consultório e salas)", "arquivo": "sites/atipicamente-psi/versoes/v3-galeria-fotos-reais-google.html", "criado_em": "2026-08-26 23:25", "ativo": 0}, {"numero": 2, "nome_estilo": "Galeria do Interior (Base)", "descricao": "Primeira versão com galeria de ambientes e estrutura da clínica", "arquivo": "sites/atipicamente-psi/versoes/v2-galeria-interior-completa.html", "criado_em": "2026-08-26 23:00", "ativo": 0}, {"numero": 1, "nome_estilo": "Design Cream & Superdesign", "descricao": "Conceito original cream minimalista com tipografia League Spartan e fotos dos 5 psicólogos", "arquivo": "sites/atipicamente-psi/versoes/v1-cream-superdesign.html", "criado_em": "2026-08-26 22:45", "ativo": 0}]}]}</script>
+
+<script>
+// Service Worker Registration for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js').then(function(reg) {
+      console.log('Aholic PWA ServiceWorker registrado com sucesso:', reg.scope);
+    }).catch(function(err) {
+      console.log('Falha ao registrar PWA ServiceWorker:', err);
+    });
+  });
+}
+
+// Global Variables
+var D = JSON.parse(document.getElementById('dados').textContent);
+var OV = JSON.parse(localStorage.getItem('prospector_ov') || '{}');
+var MODE = 'file';
+var sb = null; // Supabase Client
+
+function getSupabaseConfig() {
+  return {
+    url: localStorage.getItem('supabase_url') || 'https://gpignxwsxfbkelckrebd.supabase.co',
+    key: localStorage.getItem('supabase_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwaWdueHdzeGZia2VsY2tyZWJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NjQ3OTcsImV4cCI6MjEwMzQ0MDc5N30.Ex2iAC0VoW9svg2rMKNwWU9rYz5FNTQaz6qa9GL97tU'
+  };
+}
+
+function initSupabase() {
+  var cfg = getSupabaseConfig();
+  if (cfg.url && cfg.key && window.supabase) {
+    try {
+      sb = window.supabase.createClient(cfg.url, cfg.key);
+      sb.auth.getSession().then(function(res) {
+        if (res.data && res.data.session) {
+          MODE = 'supabase';
+          document.getElementById('login-overlay').classList.remove('aberto');
+          atualizarModoUI();
+          carregarDadosSupabase();
+          configurarRealtime();
+        } else {
+          document.getElementById('login-overlay').classList.add('aberto');
+        }
+      });
+      return true;
+    } catch(e) {
+      console.error('Erro ao conectar Supabase:', e);
+    }
+  }
+  return false;
+}
+
+function carregarDadosSupabase() {
+  if (!sb) return;
+  sb.from('leads').select('*').order('created_at', { ascending: false }).then(function(res) {
+    if (res.data) {
+      leads = res.data.map(normalizarLeadSupabase);
+      sb.from('versoes_site').select('*').order('numero', { ascending: false }).then(function(vRes) {
+        if (vRes.data) {
+          leads.forEach(function(l) {
+            l.versoes = vRes.data.filter(function(v) { return v.lead_slug === l.slug; });
+          });
+        }
+        render();
+      });
+    }
+  });
+}
+
+function normalizarLeadSupabase(row) {
+  return {
+    slug: row.slug,
+    nome: row.nome,
+    nicho: row.nicho,
+    cidade: row.cidade,
+    nota: row.nota,
+    avaliacoes: row.avaliacoes,
+    email: row.email,
+    telefone: row.telefone,
+    whatsapp: row.whatsapp,
+    siteAntigo: row.site_antigo,
+    motivo: row.motivo,
+    status: row.status,
+    urlNova: row.url_nova,
+    dataProposta: row.data_proposta,
+    valor: row.valor,
+    manutencao: row.manutencao,
+    pago: row.pago,
+    contratoStatus: row.contrato_status,
+    contratoEm: row.contrato_em,
+    docCliente: row.doc_cliente,
+    endCliente: row.end_cliente,
+    obs: row.obs,
+    versoes: []
+  };
+}
+
+function desnormalizarLeadSupabase(l) {
+  return {
+    slug: l.slug,
+    nome: l.nome,
+    nicho: l.nicho,
+    cidade: l.cidade,
+    nota: l.nota,
+    avaliacoes: l.avaliacoes,
+    email: l.email,
+    telefone: l.telefone,
+    whatsapp: l.whatsapp,
+    site_antigo: l.siteAntigo,
+    motivo: l.motivo,
+    status: l.status,
+    url_nova: l.urlNova,
+    data_proposta: l.dataProposta || null,
+    valor: l.valor,
+    manutencao: l.manutencao,
+    pago: l.pago,
+    contrato_status: l.contratoStatus,
+    contrato_em: l.contratoEm || null,
+    doc_cliente: l.docCliente,
+    end_cliente: l.endCliente,
+    obs: l.obs
+  };
+}
+
+function configurarRealtime() {
+  if (!sb) return;
+  sb.channel('realtime-leads')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'leads' }, function() {
+      carregarDadosSupabase();
+    })
+    .subscribe();
+}
+
+function realizarLogin(e) {
+  e.preventDefault();
+  var email = document.getElementById('log-email').value.trim();
+  var pass = document.getElementById('log-senha').value;
+  var btn = document.getElementById('btn-login-submit');
+  var msg = document.getElementById('login-msg');
+  btn.textContent = 'Autenticando...';
+  msg.style.display = 'none';
+
+  if (!sb) {
+    alert('Configure sua URL e chave Anon do Supabase nas configurações primeiro!');
+    document.getElementById('login-overlay').classList.remove('aberto');
+    setView('config');
+    return;
+  }
+
+  sb.auth.signInWithPassword({ email: email, password: pass }).then(function(res) {
+    btn.textContent = 'Entrar no Painel';
+    if (res.error) {
+      msg.textContent = 'Erro de acesso: ' + res.error.message;
+      msg.style.display = 'block';
+    } else {
+      document.getElementById('login-overlay').classList.remove('aberto');
+      MODE = 'supabase';
+      atualizarModoUI();
+      carregarDadosSupabase();
+      configurarRealtime();
+    }
+  });
+}
+
+function realizarLogout() {
+  if (sb) sb.auth.signOut();
+  MODE = 'file';
+  atualizarModoUI();
+  document.getElementById('login-overlay').classList.add('aberto');
+}
+
+function atualizarModoUI() {
+  var m = document.getElementById('modo');
+  if (MODE === 'supabase') {
+    m.textContent = '● Supabase Nuvem';
+    m.className = 'modo-badge supabase';
+    m.title = 'Conectado em tempo real ao PostgreSQL Supabase';
+  } else if (MODE === 'db') {
+    m.textContent = '● SQLite Local';
+    m.className = 'modo-badge db';
+    m.title = 'Servidor local conectado';
+  } else {
+    m.textContent = '● Modo Offline';
+    m.className = 'modo-badge file';
+    m.title = 'Dados em cache local';
+  }
+}
+
+function aplicaOv(arr) {
+  return arr.filter(function(l) { return !(OV[l.slug] && OV[l.slug]._del); })
+            .map(function(l) { return Object.assign({}, l, OV[l.slug] || {}); });
+}
+var leads = aplicaOv(D.leads || []);
+
+// Tenta conectar no servidor local se Supabase não estiver configurado
+if (!initSupabase()) {
+  fetch('/api/leads', { cache: 'no-store' }).then(function(r) {
+    if (!r.ok) throw 0;
+    return r.json();
+  }).then(function(j) {
+    MODE = 'db';
+    leads = j;
+    fetch('/api/config', { cache: 'no-store' }).then(function(r) { return r.json(); }).then(function(c) {
+      CFG = (c && c.contratante !== undefined) ? c.contratante : c;
+      HG = (c && c.hostgator) || {};
+      if (view === 'config') render();
+    });
+    atualizarModoUI();
+    render();
+  }).catch(function() {
+    atualizarModoUI();
+  });
+}
+
+var CORES = {
+  novo: 'var(--novo)',
+  redesenhado: 'var(--rede)',
+  publicado: 'var(--pub)',
+  proposta: 'var(--prop)',
+  respondeu: 'var(--resp)',
+  fechado: 'var(--fech)',
+  descartado: 'var(--cinza)'
+};
+var NOMES = {
+  novo: 'Novo',
+  redesenhado: 'Redesenhado',
+  publicado: 'Publicado',
+  proposta: 'Proposta Enviada',
+  respondeu: 'Respondeu',
+  fechado: 'Fechado',
+  descartado: 'Descartado'
+};
+var ORDEM = ['novo', 'redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'];
+var view = 'geral', busca = '', sortCol = 'nome', sortAsc = true, pag = 1, porPag = 'auto';
+
+function pagSize() {
+  if (porPag !== 'auto') return porPag;
+  var v = document.getElementById('view');
+  var h = v ? v.clientHeight : 600;
+  return Math.max(4, Math.floor((h - 165) / 59));
+}
+
+function dias(iso) {
+  if (!iso) return 0;
+  return Math.floor((Date.now() - new Date(iso + 'T12:00:00')) / 864e5);
+}
+function ativos() {
+  return fil().filter(function(l) { return l.status !== 'descartado'; });
+}
+
+var filtroCidade = 'todos', filtroNicho = 'todos';
+function setCidade(c) { filtroCidade = c; render(); }
+function setNicho(n) { filtroNicho = n; render(); }
+
+function atualizarFiltrosUI() {
+  var cSel = document.getElementById('f-cidade'), nSel = document.getElementById('f-nicho');
+  if (!cSel || !nSel) return;
+  var cidades = ['todos'].concat(Array.from(new Set(leads.map(function(l) { return l.cidade; }).filter(Boolean))));
+  var nichos = ['todos'].concat(Array.from(new Set(leads.map(function(l) { return l.nicho; }).filter(Boolean))));
+  cSel.innerHTML = cidades.map(function(c) {
+    return '<option value="' + c + '"' + (filtroCidade === c ? ' selected' : '') + '>' + (c === 'todos' ? '📍 Todas as Cidades' : '📍 ' + c) + '</option>';
+  }).join('');
+  nSel.innerHTML = nichos.map(function(n) {
+    return '<option value="' + n + '"' + (filtroNicho === n ? ' selected' : '') + '>' + (n === 'todos' ? '🏷️ Todos os Nichos' : '🏷️ ' + n) + '</option>';
+  }).join('');
+}
+
+function fil() {
+  var b = busca.toLowerCase();
+  return leads.filter(function(l) {
+    var matchBusca = !b || ((l.nome || '') + (l.nicho || '') + (l.cidade || '') + (l.status || '')).toLowerCase().indexOf(b) >= 0;
+    var matchCidade = (filtroCidade === 'todos') || ((l.cidade || '').toLowerCase() === filtroCidade.toLowerCase());
+    var matchNicho = (filtroNicho === 'todos') || ((l.nicho || '').toLowerCase() === filtroNicho.toLowerCase());
+    return matchBusca && matchCidade && matchNicho;
+  });
+}
+
+function recarrega() {
+  if (MODE === 'supabase') {
+    carregarDadosSupabase();
+    return;
+  }
+  return fetch('/api/leads', { cache: 'no-store' }).then(function(r) { return r.json(); }).then(function(j) { leads = j; render(); });
+}
+
+function salvarOv(slug, ch) {
+  if (MODE === 'supabase' && sb) {
+    var leadAtual = leads.find(function(x) { return x.slug === slug; }) || {};
+    var mesclado = Object.assign({}, leadAtual, ch);
+    var dbRow = desnormalizarLeadSupabase(mesclado);
+    sb.from('leads').upsert(dbRow).then(function() {
+      recarrega();
+    });
+    return;
+  }
+  if (MODE === 'db') {
+    fetch('/api/leads/' + encodeURIComponent(slug), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(ch)
+    }).then(recarrega);
+    return;
+  }
+  OV[slug] = Object.assign(OV[slug] || {}, ch);
+  localStorage.setItem('prospector_ov', JSON.stringify(OV));
+  leads = aplicaOv(D.leads || []);
+  render();
+}
+
+function deletar(slug) {
+  if (!confirm('Excluir este lead do painel?')) return;
+  if (MODE === 'supabase' && sb) {
+    sb.from('leads').delete().eq('slug', slug).then(function() {
+      recarrega();
+    });
+    return;
+  }
+  if (MODE === 'db') {
+    fetch('/api/leads/' + encodeURIComponent(slug), { method: 'DELETE' }).then(recarrega);
+    return;
+  }
+  OV[slug] = Object.assign(OV[slug] || {}, { _del: true });
+  localStorage.setItem('prospector_ov', JSON.stringify(OV));
+  leads = aplicaOv(D.leads || []);
+  render();
+}
+
+var CFG = {};
+var editSlug = null;
+
+function abrirEdit(slug) {
+  editSlug = slug;
+  var l = leads.filter(function(x) { return x.slug === slug; })[0] || {};
+  document.getElementById('m-titulo').textContent = 'Editar — ' + (l.nome || slug);
+  document.getElementById('m-status').innerHTML = Object.keys(NOMES).map(function(st) {
+    return '<option value="' + st + '"' + (l.status === st ? ' selected' : '') + '>' + NOMES[st] + '</option>';
+  }).join('');
+  ['nome', 'email', 'telefone', 'whatsapp', 'cidade', 'nicho', 'valor', 'dataProposta', 'urlNova', 'obs', 'manutencao', 'contratoEm', 'docCliente', 'endCliente'].forEach(function(k) {
+    document.getElementById('m-' + k).value = l[k] == null ? '' : l[k];
+  });
+  document.getElementById('m-pago').value = l.pago ? 1 : 0;
+  document.getElementById('m-contratoStatus').value = l.contratoStatus || 'pendente';
+  document.getElementById('modal-bg').classList.add('aberto');
+}
+function fecharEdit() {
+  document.getElementById('modal-bg').classList.remove('aberto');
+  editSlug = null;
+}
+
+function salvarEdit() {
+  if (!editSlug) return;
+  var ch = {};
+  ['nome', 'email', 'telefone', 'whatsapp', 'cidade', 'nicho', 'urlNova', 'obs', 'dataProposta', 'docCliente', 'endCliente'].forEach(function(k) {
+    ch[k] = document.getElementById('m-' + k).value || null;
+  });
+  ch.status = document.getElementById('m-status').value;
+  var v = document.getElementById('m-valor').value;
+  ch.valor = v === '' ? null : parseFloat(v);
+  var mn = document.getElementById('m-manutencao').value;
+  ch.manutencao = mn === '' ? null : parseFloat(mn);
+  ch.pago = parseInt(document.getElementById('m-pago').value);
+  ch.contratoStatus = document.getElementById('m-contratoStatus').value;
+  var slug = editSlug;
+  fecharEdit();
+  salvarOv(slug, ch);
+}
+
+function abrirNovoLead() { document.getElementById('m-novo-bg').classList.add('aberto'); }
+function fecharNovoLead() { document.getElementById('m-novo-bg').classList.remove('aberto'); }
+function salvarNovoLead() {
+  var nome = document.getElementById('nl-nome').value.trim();
+  if (!nome) { alert('Informe o nome da empresa/profissional.'); return; }
+  var cidade = document.getElementById('nl-cidade').value.trim() || 'Goiás';
+  var nicho = document.getElementById('nl-nicho').value.trim() || 'Geral';
+  var zap = document.getElementById('nl-whatsapp').value.trim();
+  var email = document.getElementById('nl-email').value.trim();
+  var site = document.getElementById('nl-siteAntigo').value.trim();
+  var motivo = document.getElementById('nl-motivo').value.trim();
+  var slug = nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  var novo = {
+    slug: slug, nome: nome, cidade: cidade, nicho: nicho, whatsapp: zap, email: email,
+    siteAntigo: site, motivo: motivo, status: 'novo', valor: 1200, manutencao: 120
+  };
+  if (MODE === 'supabase' && sb) {
+    sb.from('leads').insert(desnormalizarLeadSupabase(novo)).then(function() {
+      fecharNovoLead();
+      recarrega();
+      alert('Lead cadastrado com sucesso no Supabase!');
+    });
+  } else if (MODE === 'db') {
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(novo)
+    }).then(function() {
+      fecharNovoLead();
+      recarrega();
+    });
+  } else {
+    leads.unshift(novo);
+    fecharNovoLead();
+    render();
+  }
+}
+
+function getUrlPublicaSite(slug) {
+  var base = window.location.origin;
+  return base + '/sites/' + slug + '/' + slug + '.html';
+}
+
+function copiarLinkPublico(slug) {
+  var url = getUrlPublicaSite(slug);
+  navigator.clipboard.writeText(url).then(function() {
+    alert('🔗 Link de apresentação pública copiado:\n' + url);
+  });
+}
+
+function abrirZapModal(slug) {
+  var l = leads.find(function(x) { return x.slug === slug; });
+  if (!l) return;
+  var link = getUrlPublicaSite(l.slug);
+  var txt = 'Olá, ' + (l.nome || 'tudo bem') + '! Me chamo Rafael, sou diretor de projetos da Aholic Sites.\n\n'
+    + 'Estive analisando a presença digital de vocês no Google e notei que a página atual não transmite o nível de autoridade e excelência do trabalho que vocês entregam.\n\n'
+    + 'Por iniciativa nossa, desenvolvemos um redesign premium e interativo para demonstrar o potencial de conversão da marca de vocês.\n\n'
+    + 'Você pode visualizar a nova versão aqui: ' + link + '\n\n'
+    + 'Podemos bater um papo rápido de 5 minutos sobre esse projeto? Um abraço!';
+  document.getElementById('zap-texto').value = txt;
+  document.getElementById('m-zap-bg').classList.add('aberto');
+}
+function fecharZapModal() { document.getElementById('m-zap-bg').classList.remove('aberto'); }
+function copiarTextoZap() {
+  var ta = document.getElementById('zap-texto');
+  ta.select();
+  document.execCommand('copy');
+  var btn = document.getElementById('btn-copiar-zap');
+  btn.textContent = '✓ Copiado com sucesso!';
+  setTimeout(function() { btn.textContent = '📋 Copiar Mensagem'; }, 2000);
+}
+
+function setView(v) { view = v; render(); }
+
+/* Nav icons SVG definition */
+var ICONS = {
+  geral: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="14" width="7" height="7" rx="2"></rect><rect x="3" y="14" width="7" height="7" rx="2"></rect></svg>',
+  pipeline: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>',
+  clientes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+  sites: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>',
+  comparador: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>',
+  followup: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+  contratos: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>',
+  financeiro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>',
+  config: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>'
+};
+
+function nav() {
+  var fu = fil().filter(function(l) { return l.status === 'proposta' && dias(l.dataProposta) >= 4; });
+  var fechadosN = fil().filter(function(l) { return l.status === 'fechado'; }).length;
+  var itens = [
+    ['geral', 'Visão Geral', null],
+    ['pipeline', 'Pipeline Kanban', ativos().length],
+    ['clientes', 'Clientes & CRM', fil().length],
+    ['sites', 'Sites & Versões', fil().filter(function(l) { return ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length],
+    ['comparador', 'Comparador Split', fil().filter(function(l) { return l.slug && ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length],
+    ['followup', 'Follow-ups', fu.length],
+    ['contratos', 'Contratos', fechadosN],
+    ['financeiro', 'Financeiro', null],
+    ['config', 'Configurações', null]
+  ];
+  document.getElementById('nav').innerHTML = itens.map(function(i) {
+    var icon = ICONS[i[0]] || '';
+    var badge = i[2] !== null && i[2] > 0 ? '<span class="nav-badge">' + i[2] + '</span>' : '';
+    return '<button class="nav-btn ' + (view === i[0] ? 'on' : '') + '" onclick="setView(\'' + i[0] + '\')">' + icon + '<span class="label">' + i[1] + '</span>' + badge + '</button>';
+  }).join('');
+  document.getElementById('titulo').textContent = itens.filter(function(i) { return i[0] === view; })[0][1];
+}
+
+function pillStatus(s) {
+  return '<span class="pill" style="background:color-mix(in srgb,' + CORES[s] + ' 16%,transparent);color:' + CORES[s] + ';border:1px solid color-mix(in srgb,' + CORES[s] + ' 30%,transparent)">' + NOMES[s] + '</span>';
+}
+
+function acoes(l) {
+  var a = [];
+  if (l.siteAntigo) a.push('<a href="' + l.siteAntigo + '" target="_blank" title="Ver site antigo">antigo ↗</a>');
+  if (l.slug && ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0) {
+    a.push('<a href="sites/' + l.slug + '/' + l.slug + '.html" target="_blank" style="color:var(--info);font-weight:700">página ↗</a>');
+    a.push('<a href="sites/' + l.slug + '/' + l.slug + '-editor.html" target="_blank">editor</a>');
+    a.push('<a href="#" onclick="copiarLinkPublico(\'' + l.slug + '\');return false" title="Copiar link público para enviar ao cliente" style="color:var(--accent-dark);font-weight:700">🔗 link</a>');
+  }
+  if (l.whatsapp) a.push('<a href="#" onclick="abrirZapModal(\'' + l.slug + '\');return false" style="color:var(--ok);font-weight:700">💬 whatsapp</a>');
+  if (l.versoes && l.versoes.length) a.push('<a href="#" onclick="abrirModalVersoes(\'' + l.slug + '\');return false" style="color:var(--accent-dark);font-weight:700">📁 ' + l.versoes.length + ' vers.</a>');
+  a.push('<a href="#" onclick="abrirEdit(\'' + l.slug + '\');return false">✎ dados</a>');
+  a.push('<a href="#" class="del" onclick="deletar(\'' + l.slug + '\');return false">✕</a>');
+  return '<div class="acoes">' + a.join('') + '</div>';
+}
+
+function card(l) {
+  var f = l.status === 'proposta' && dias(l.dataProposta) >= 4 ? '<span class="tag fup">f-up ' + dias(l.dataProposta) + 'd</span>' : '';
+  return '<div class="card" draggable="true" ondragstart="dragIni(event,\'' + l.slug + '\')" ondragend="dragFim(event)" style="--cor:' + CORES[l.status] + '">' +
+    '<div class="nm">' + l.nome + f + '</div>' +
+    '<div class="mt">' + (l.nota ? '★ ' + l.nota + ' (' + l.avaliacoes + ')' : '') + (l.cidade ? ' &bull; ' + l.cidade : '') + '</div>' +
+    (l.motivo ? '<div class="motivo">' + l.motivo + '</div>' : '') +
+    (l.obs ? '<div class="mt" style="font-size:11px;color:var(--dim)">' + l.obs + '</div>' : '') +
+    (l.valor ? '<div class="valor">R$ ' + l.valor.toLocaleString('pt-BR') + (l.manutencao ? ' <span style="color:var(--dim);font-weight:600;font-size:11px">+ R$ ' + l.manutencao.toLocaleString('pt-BR') + '/mês</span>' : '') + '</div>' : '') +
+    acoes(l) + '</div>';
+}
+
+function vGeral() {
+  var ls = fil(), at = ativos();
+  var props = ls.filter(function(l) { return l.status === 'proposta'; });
+  var fu = props.filter(function(l) { return dias(l.dataProposta) >= 4; });
+  var fech = ls.filter(function(l) { return l.status === 'fechado'; });
+  var receita = fech.reduce(function(a, l) { return a + (l.valor || 0); }, 0);
+  var pot = at.length * 1200;
+
+  var statsData = [
+    ['Leads no Radar', at.length, ''],
+    ['Sites Prontos', ls.filter(function(l) { return ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length, 'azul'],
+    ['Propostas Enviadas', props.length, 'ambar'],
+    ['Contratos Fechados', fech.length, 'verde'],
+    ['Receita Fechada', 'R$ ' + receita.toLocaleString('pt-BR'), 'verde'],
+    ['Pipeline Estimado', 'R$ ' + pot.toLocaleString('pt-BR'), 'roxo']
+  ];
+
+  var html = '<div class="stats-row">' + statsData.map(function(s) {
+    return '<div class="stat-pill-card ' + s[2] + '"><div class="n">' + s[1] + '</div><div class="l">' + s[0] + '</div></div>';
+  }).join('') + '</div>';
+
+  var max = Math.max.apply(null, ORDEM.map(function(s) { return ls.filter(function(l) { return l.status === s; }).length; }).concat([1]));
+  
+  html += '<div style="display:grid;grid-template-columns:1.2fr 1fr;gap:18px">' +
+    '<div class="painel funil"><h2>Funil de Conversão Comercial</h2>' + ORDEM.map(function(s) {
+      var n = ls.filter(function(l) { return l.status === s; }).length;
+      return '<div class="linha"><span>' + NOMES[s] + '</span><div class="barra"><div class="fill" style="width:' + (n / max * 100) + '%;background:' + CORES[s] + '"></div></div><b style="font-family:var(--mono);color:var(--ink)">' + n + '</b></div>';
+    }).join('') + '</div>' +
+    '<div class="painel"><h2>Follow-ups Prioritários (4+ dias)</h2>' + (fu.length ? fu.map(function(l) {
+      return '<div class="fup-item">' +
+        '<div class="fup-avatar">' + (l.nome.charAt(0) || 'L') + '</div>' +
+        '<div><b style="color:var(--ink);font-size:13.5px">' + l.nome + '</b><div style="color:var(--muted);font-size:11.5px">Proposta enviada em ' + l.dataProposta + '</div></div>' +
+        '<span class="dias">' + dias(l.dataProposta) + 'd</span>' +
+        (l.whatsapp ? '<a class="fup-btn-zap" href="#" onclick="abrirZapModal(\'' + l.slug + '\');return false">WhatsApp →</a>' : '') +
+        '</div>';
+    }).join('') : '<div class="vazio">Nenhum follow-up pendente no momento. Pipeline 100% em dia! 🚀</div>') + '</div>' +
+  '</div>';
+
+  return html;
+}
+
+function vPipeline() {
+  var por = {}; fil().forEach(function(l) { (por[l.status] = por[l.status] || []).push(l); });
+  return '<p style="color:var(--muted);font-size:12.5px;margin:0 0 14px;font-weight:600">Arraste os cards entre as colunas para atualizar o estágio de negociação do cliente:</p>' +
+    '<div class="board">' + ORDEM.concat(['descartado']).map(function(s) {
+      var arr = por[s] || [];
+      return '<div class="col" data-st="' + s + '" ondragover="dragSobre(event)" ondragleave="dragSai(event)" ondrop="solta(event,\'' + s + '\')">' +
+        '<h3>' + NOMES[s] + '<span>' + arr.length + '</span></h3>' +
+        '<div class="cards">' + (arr.length ? arr.map(card).join('') : '<div class="vazio">arraste para cá</div>') + '</div>' +
+        '</div>';
+    }).join('') + '</div>';
+}
+
+function vClientes() {
+  var ls = fil().slice().sort(function(a, b) {
+    var x = a[sortCol] || '', y = b[sortCol] || '';
+    return (x < y ? -1 : x > y ? 1 : 0) * (sortAsc ? 1 : -1);
+  });
+  var pp = pagSize();
+  var total = ls.length, paginas = Math.max(1, Math.ceil(total / pp));
+  if (pag > paginas) pag = paginas;
+  var ini = (pag - 1) * pp, fim = Math.min(ini + pp, total);
+  ls = ls.slice(ini, fim);
+
+  return '<div class="painel" style="flex:1;display:flex;flex-direction:column;min-height:0">' +
+    '<div style="flex:1;overflow:auto"><table><thead><tr>' + [
+      ['nome', 'Cliente / Empresa'], ['nota', 'Nota'], ['avaliacoes', 'Avaliações'], ['cidade', 'Cidade'], ['nicho', 'Nicho'], ['status', 'Status'], ['valor', 'Valor'], ['x', 'Ações']
+    ].map(function(c) {
+      return '<th onclick="ordenar(\'' + c[0] + '\')">' + c[1] + (sortCol === c[0] ? (sortAsc ? ' ↑' : ' ↓') : '') + '</th>';
+    }).join('') + '</tr></thead><tbody>' + ls.map(function(l) {
+      return '<tr>' +
+        '<td><b style="color:var(--ink);font-size:13.5px">' + l.nome + '</b><div style="color:var(--muted);font-size:11.5px">' + (l.email || 'sem e-mail') + '</div></td>' +
+        '<td>' + (l.nota ? '★ ' + l.nota : '—') + '</td>' +
+        '<td>' + (l.avaliacoes || '—') + '</td>' +
+        '<td>' + (l.cidade || '—') + '</td>' +
+        '<td>' + (l.nicho || '—') + '</td>' +
+        '<td>' + pillStatus(l.status) + '</td>' +
+        '<td style="font-family:var(--mono);color:var(--accent-dark);font-weight:700">' + (l.valor ? 'R$ ' + l.valor.toLocaleString('pt-BR') : '—') + '</td>' +
+        '<td>' + acoes(l) + '</td>' +
+        '</tr>';
+    }).join('') + '</tbody></table></div>' +
+    '<div class="pagin"><span class="info">Mostrando ' + (total ? ini + 1 : 0) + '–' + fim + ' de ' + total + ' clientes</span>' +
+    '<button onclick="irPag(' + (pag - 1) + ')"' + (pag <= 1 ? ' disabled' : '') + '>‹ Anterior</button>' +
+    Array.apply(null, { length: paginas }).map(function(_, i) {
+      return '<button class="' + (pag === i + 1 ? 'on' : '') + '" onclick="irPag(' + (i + 1) + ')">' + (i + 1) + '</button>';
+    }).join('') +
+    '<button onclick="irPag(' + (pag + 1) + ')"' + (pag >= paginas ? ' disabled' : '') + '>Próximo ›</button>' +
+    '</div></div>';
+}
+function irPag(n) { pag = n; render(); }
+
+function vSites() {
+  var ls = fil().filter(function(l) {
+    return ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0;
+  });
+  return ls.length ? '<div class="sites-grid">' + ls.map(function(l) {
+    var pg = 'sites/' + l.slug + '/' + l.slug + '.html';
+    var prim = l.urlNova ? '<a class="prim" href="' + l.urlNova + '" target="_blank">Ver no ar ↗</a>' : '<a class="prim" href="' + pg + '" target="_blank">Abrir Site ↗</a>';
+    var ic = [];
+    if (l.siteAntigo) ic.push('<a href="' + l.siteAntigo + '" target="_blank" title="site antigo">antigo</a>');
+    ic.push('<a href="#" onclick="copiarLinkPublico(\'' + l.slug + '\');return false" style="color:var(--accent-dark);font-weight:700" title="Copiar Link Público da Vercel para enviar ao Cliente">🔗 copiar link</a>');
+    if (l.whatsapp) ic.push('<a href="#" onclick="abrirZapModal(\'' + l.slug + '\');return false" style="color:var(--ok);font-weight:700">whatsapp</a>');
+    ic.push('<a href="#" onclick="abrirEdit(\'' + l.slug + '\');return false">✎ dados</a>');
+    ic.push('<a href="#" class="del" onclick="deletar(\'' + l.slug + '\');return false">✕</a>');
+
+    var vBox = '';
+    if (l.versoes && l.versoes.length) {
+      vBox = '<div class="v-box"><div class="v-label"><span>📁 Versões Salvas (' + l.versoes.length + ')</span><a href="#" onclick="abrirModalVersoes(\'' + l.slug + '\');return false" style="color:var(--accent-dark);font-size:10.5px;text-decoration:underline">todas</a></div><div class="v-pills">' +
+        l.versoes.map(function(v) {
+          var st = v.ativo ? '<span style="font-size:8px;background:var(--accent);color:#000;padding:1px 4px;border-radius:4px;margin-left:3px;font-weight:800">ATUAL</span>' : '';
+          return '<a href="' + v.arquivo + '" target="_blank" class="v-pill ' + (v.ativo ? 'ativo' : '') + '" title="' + (v.descricao || '') + '">v' + v.numero + ' &bull; ' + v.nome_estilo + st + '</a>';
+        }).join('') + '</div></div>';
+    }
+    return '<div class="site-card">' +
+      '<div class="prev"><iframe src="' + pg + '" loading="lazy"></iframe></div>' +
+      '<div class="info">' +
+      '<div class="s-head"><span class="s-nm">' + l.nome + '</span>' + pillStatus(l.status) + '</div>' +
+      '<div class="s-sub">' + [l.nicho, l.cidade, (l.nota ? '★ ' + l.nota + ' (' + l.avaliacoes + ')' : null)].filter(Boolean).join(' &bull; ' + '') + '</div>' +
+      '<div class="s-main">' + prim + '<a class="sec" href="sites/' + l.slug + '/' + l.slug + '-editor.html" target="_blank">Editor Visual</a></div>' +
+      '<div class="s-icons">' + ic.join('') + '</div>' +
+      vBox +
+      '</div></div>';
+  }).join('') + '</div>' : '<div class="painel vazio">Nenhum site redesenhado ainda.</div>';
+}
+
+function vComparador() {
+  var ls = fil().filter(function(l) { return l.slug && ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; });
+  if (!ls.length) return '<div class="painel"><div class="vazio">Sem sites redesenhados ainda para comparar.</div></div>';
+  if (!cmpSel || !ls.some(function(l) { return l.slug === cmpSel; })) cmpSel = ls[0].slug;
+  var l = ls.filter(function(x) { return x.slug === cmpSel; })[0];
+  var antiga = l.siteAntigo ? ((l.siteAntigo.indexOf('http') === 0 ? l.siteAntigo : 'https://' + l.siteAntigo)) : null;
+  var nova = 'sites/' + l.slug + '/' + l.slug + '.html';
+  return '<div class="cmp-tabs">' + ls.map(function(x) {
+    return '<button class="' + (x.slug === cmpSel ? 'on' : '') + '" onclick="cmpSel=\'' + x.slug + '\';render()">' + x.nome + '</button>';
+  }).join('') + '</div>' +
+  '<div class="cmp-grid">' +
+    '<div class="cmp-col"><div class="cab antes">Antes &mdash; Site Antigo do Cliente' + (antiga ? ' &bull; <a href="' + antiga + '" target="_blank" style="color:inherit">abrir em nova aba ↗</a>' : '') + '</div>' + (antiga ? '<iframe src="' + antiga + '" loading="lazy"></iframe>' : '<div class="vazio" style="padding:40px">Sem site antigo cadastrado.</div>') + '</div>' +
+    '<div class="cmp-col"><div class="cab depois">Depois &mdash; Versão Aholic Sites &bull; <a href="' + nova + '" target="_blank" style="color:inherit">abrir página ↗</a></div><iframe src="' + nova + '"></iframe></div>' +
+  '</div>';
+}
+
+function vFollowup() {
+  var fu = fil().filter(function(l) { return l.status === 'proposta' && dias(l.dataProposta) >= 4; });
+  return '<div class="painel"><h2>Propostas Aguardando Follow-up</h2>' + (fu.length ? fu.map(card).join('') : '<div class="vazio">Nenhum follow-up pendente no momento.</div>') + '</div>';
+}
+
+function abrirContrato(slug, nome) {
+  document.getElementById('doc-titulo').textContent = 'Contrato — ' + nome;
+  document.getElementById('doc-frame').src = 'sites/' + slug + '/contrato-' + slug + '.html';
+  document.getElementById('doc-bg').classList.add('aberto');
+}
+function fecharDoc() { document.getElementById('doc-bg').classList.remove('aberto'); document.getElementById('doc-frame').src = 'about:blank'; }
+function printDoc() { var f = document.getElementById('doc-frame'); try { f.contentWindow.focus(); f.contentWindow.print(); } catch (e) { window.open(f.src, '_blank'); } }
+
+function vContratos() {
+  var ls = fil().filter(function(l) { return l.status === 'fechado'; });
+  if (!ls.length) return '<div class="painel vazio">Nenhum cliente fechado ainda no funil. Quando fechar, arraste o card para "Fechado".</div>';
+  return '<div class="painel" style="overflow-x:auto"><table><thead><tr><th>Cliente</th><th>Valor</th><th>Manutenção</th><th>Contrato</th><th>Data</th><th>Pago</th><th>Documentos</th></tr></thead><tbody>' + ls.map(function(l) {
+    var acao = (l.contratoStatus && l.contratoStatus !== 'pendente') ? '<a href="#" class="btn-cta" style="padding:6px 14px;font-size:11px" onclick="abrirContrato(\'' + l.slug + '\',\'' + l.nome.replace(/'/g, '') + '\');return false">👁 Ver Contrato</a>' : '<span style="color:var(--dim);font-size:12px">peça o contrato</span>';
+    return '<tr><td><b style="color:var(--ink)">' + l.nome + '</b></td><td style="font-family:var(--mono);color:var(--accent-dark);font-weight:700">' + (l.valor ? 'R$ ' + l.valor.toLocaleString('pt-BR') : '—') + '</td><td style="font-family:var(--mono);color:var(--muted)">' + (l.manutencao ? 'R$ ' + l.manutencao.toLocaleString('pt-BR') + '/mês' : '—') + '</td><td><select class="sel-filter" style="padding:4px 8px;font-size:11.5px" onchange="salvarOv(\'' + l.slug + '\',{contratoStatus:this.value})">' + ['pendente', 'enviado', 'assinado'].map(function(cs) { return '<option value="' + cs + '"' + ((l.contratoStatus || 'pendente') === cs ? ' selected' : '') + '>' + cs + '</option>'; }).join('') + '</select></td><td>' + (l.contratoEm || '—') + '</td><td><input type="checkbox" ' + (l.pago ? 'checked' : '') + ' onchange="salvarOv(\'' + l.slug + '\',{pago:this.checked?1:0})"></td><td>' + acao + '</td></tr>';
+  }).join('') + '</tbody></table></div>';
+}
+
+function vFinanceiro() {
+  var ls = fil().filter(function(l) { return l.status === 'fechado'; });
+  var recebido = ls.filter(function(l) { return l.pago; }).reduce(function(a, l) { return a + (l.valor || 0); }, 0);
+  var areceber = ls.filter(function(l) { return !l.pago; }).reduce(function(a, l) { return a + (l.valor || 0); }, 0);
+  var mrr = ls.reduce(function(a, l) { return a + (l.manutencao || 0); }, 0);
+  var fmt = function(n) { return 'R$ ' + n.toLocaleString('pt-BR'); };
+  return '<div class="stats-row">' + [
+    ['Recebido (Caixa)', fmt(recebido), 'verde'],
+    ['A Receber (Fechados)', fmt(areceber), 'ambar'],
+    ['MRR Mensalidades', fmt(mrr) + '/mês', 'azul'],
+    ['Projeção Anual (12M)', fmt(recebido + areceber + mrr * 12), 'verde']
+  ].map(function(x) { return '<div class="stat-pill-card ' + x[2] + '"><div class="n">' + x[1] + '</div><div class="l">' + x[0] + '</div></div>'; }).join('') + '</div>' +
+  '<div class="painel"><h2>Resumo Financeiro por Cliente</h2>' + (ls.length ? '<table><thead><tr><th>Cliente</th><th>Valor Fechado</th><th>Recebido?</th><th>Manutenção Mensal</th><th>Status Contrato</th></tr></thead><tbody>' + ls.map(function(l) {
+    return '<tr><td><b style="color:var(--ink)">' + l.nome + '</b></td><td style="font-family:var(--mono);color:var(--accent-dark);font-weight:700">' + (l.valor ? fmt(l.valor) : '—') + '</td><td><input type="checkbox" ' + (l.pago ? 'checked' : '') + ' onchange="salvarOv(\'' + l.slug + '\',{pago:this.checked?1:0})"></td><td style="font-family:var(--mono)">' + (l.manutencao ? fmt(l.manutencao) : '—') + '</td><td>' + pillStatus(l.contratoStatus || 'pendente') + '</td></tr>';
+  }).join('') + '</tbody></table>' : '<div class="vazio">Arraste os cards para Fechado para projetar o faturamento da Aholic.</div>') + '</div>';
+}
+
+var CFG_CAMPOS = [['nome', 'Razão Social / Nome'], ['cpfCnpj', 'CPF ou CNPJ'], ['endereco', 'Endereço Comercial'], ['cidadeUf', 'Cidade/UF'], ['email', 'E-mail'], ['whatsapp', 'WhatsApp Oficial']];
+function vConfig() {
+  var sbCfg = getSupabaseConfig();
+  var campos = CFG_CAMPOS.map(function(c) {
+    return '<div><label style="display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:12px 0 4px">' + c[1] + '</label><input id="cfg-' + c[0] + '" value="' + ((CFG[c[0]] || '').replace(/"/g, '&quot;')) + '" style="width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;font-family:var(--font);color:var(--ink);background:#F8FAFC"></div>';
+  }).join('');
+
+  return '<div class="painel" style="max-width:680px"><h2>☁️ Conexão Supabase (Nuvem & Auth)</h2><p style="font-size:12.5px;color:var(--muted);margin:0 0 14px">Conecte seu projeto Supabase para sincronizar leads em tempo real e ativar o login seguro:</p>' +
+    '<div><label style="display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:12px 0 4px">Supabase Project URL</label><input id="cfg-sb-url" placeholder="https://xyzcompany.supabase.co" value="' + sbCfg.url + '" style="width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;background:#F8FAFC"></div>' +
+    '<div><label style="display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:12px 0 4px">Supabase Anon Key (Chave Pública)</label><input id="cfg-sb-key" type="password" placeholder="eyJhbGciOi..." value="' + sbCfg.key + '" style="width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;background:#F8FAFC"></div>' +
+    '<div style="margin-top:18px"><button class="btn-cta" onclick="salvarSupabaseConfig()">Salvar Conexão Supabase</button><span id="sb-ok" style="color:var(--accent-dark);font-weight:700;font-size:13px;margin-left:12px;display:none">salvo ✓</span></div></div>' +
+  '<div class="painel" style="max-width:680px"><h2>Dados da Agência (Aholic) &mdash; Emissão de Contratos</h2><p style="font-size:12.5px;color:var(--muted);margin:0 0 10px">Seus dados oficiais que saem nos contratos como CONTRATADO(A):</p>' + campos + '<div style="margin-top:18px"><button class="btn-cta" onclick="salvarCfg()">Salvar Dados da Aholic</button><span id="cfg-ok" style="color:var(--accent-dark);font-weight:700;font-size:13px;margin-left:12px;display:none">salvo ✓</span></div></div>' +
+  '<div class="painel" style="max-width:680px"><h2>Conexão HostGator &mdash; Publicação Automática</h2><p style="font-size:12.5px;color:var(--muted);margin:0 0 10px">Configuração de FTP/cPanel para publicação direta com 1 clique:</p>' + [['usuario', 'Usuário cPanel', 'text'], ['dominio', 'Domínio Principal', 'text'], ['servidor', 'Servidor cPanel', 'text'], ['pastaBase', 'Pasta Base (padrão: clientes)', 'text'], ['senha', 'Senha cPanel', 'password']].map(function(c) {
+    return '<div><label style="display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:12px 0 4px">' + c[1] + '</label><input id="hg-' + c[0] + '" type="' + c[2] + '" value="' + (c[0] === 'senha' ? '' : ((HG[c[0]] || '').replace(/"/g, '&quot;'))) + '" style="width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;font-family:var(--font);color:var(--ink);background:#F8FAFC"></div>';
+  }).join('') + '<div style="margin-top:18px"><button class="btn-cta" onclick="salvarHG()">Salvar Conexão HostGator</button><span id="hg-ok" style="color:var(--accent-dark);font-weight:700;font-size:13px;margin-left:12px;display:none">salvo ✓</span></div></div>';
+}
+
+function salvarSupabaseConfig() {
+  var url = document.getElementById('cfg-sb-url').value.trim();
+  var key = document.getElementById('cfg-sb-key').value.trim();
+  localStorage.setItem('supabase_url', url);
+  localStorage.setItem('supabase_key', key);
+  var ok = document.getElementById('sb-ok');
+  ok.style.display = 'inline';
+  setTimeout(function() {
+    ok.style.display = 'none';
+    if (initSupabase()) {
+      alert('Supabase conectado com sucesso!');
+    }
+  }, 1000);
+}
+
+function salvarCfg() {
+  var body = {}; CFG_CAMPOS.forEach(function(c) { body[c[0]] = document.getElementById('cfg-' + c[0]).value || ''; });
+  if (MODE === 'supabase' && sb) {
+    sb.from('agencia_config').upsert({ id: 'principal', razao_social: body.nome, cpf_cnpj: body.cpfCnpj, endereco: body.endereco, cidade_uf: body.cidadeUf, email: body.email, whatsapp: body.whatsapp }).then(function() {
+      CFG = body; var ok = document.getElementById('cfg-ok'); ok.style.display = 'inline'; setTimeout(function() { ok.style.display = 'none'; }, 2000);
+    });
+    return;
+  }
+  fetch('/api/config', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contratante: body }) }).then(function() {
+    CFG = body; var ok = document.getElementById('cfg-ok'); ok.style.display = 'inline'; setTimeout(function() { ok.style.display = 'none'; }, 2000);
+  });
+}
+
+function salvarHG() {
+  var body = {}; ['usuario', 'dominio', 'servidor', 'pastaBase', 'senha'].forEach(function(k) { var el = document.getElementById('hg-' + k); if (el) body[k] = el.value || ''; });
+  fetch('/api/config', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ hostgator: body }) }).then(function() {
+    if (body.senha) HG.senhaDefinida = true; ['usuario', 'dominio', 'servidor', 'pastaBase'].forEach(function(k) { if (body[k] !== undefined) HG[k] = body[k]; });
+    var ok = document.getElementById('hg-ok'); ok.style.display = 'inline'; setTimeout(function() { ok.style.display = 'none'; }, 2000);
+  });
+}
+
+function ordenar(c) { if (c === 'x') return; if (sortCol === c) sortAsc = !sortAsc; else { sortCol = c; sortAsc = true; } pag = 1; render(); }
+var cmpSel = null; var HG = {};
+
+function abrirModalVersoes(slug) {
+  var l = leads.find(function(x) { return x.slug === slug; });
+  if (!l) return;
+  document.getElementById('mv-titulo').textContent = 'Versões do Site — ' + l.nome;
+  document.getElementById('mv-sub').textContent = (l.versoes ? l.versoes.length : 0) + ' versão(ões) registradas no histórico.';
+  var lista = document.getElementById('mv-lista');
+  if (!l.versoes || !l.versoes.length) {
+    lista.innerHTML = '<div class="vazio">Nenhuma versão anterior registrada.</div>';
+  } else {
+    lista.innerHTML = l.versoes.map(function(v) {
+      return '<div style="background:#F8FAFC;border:1px solid ' + (v.ativo ? 'var(--accent)' : 'var(--line)') + ';border-radius:12px;padding:14px;display:flex;justify-content:space-between;align-items:center">' +
+        '<div><div style="font-weight:800;font-size:13.5px;color:var(--ink)">v' + v.numero + ' &bull; ' + v.nome_estilo + (v.ativo ? ' <span style="background:var(--accent);color:#000;font-size:9.5px;padding:2px 6px;border-radius:5px;margin-left:6px;font-weight:800">VERSÃO ATIVA</span>' : '') + '</div>' +
+        '<div style="font-size:11.5px;color:var(--muted);margin-top:3px">' + (v.descricao || '') + '</div>' +
+        '<div style="font-size:10px;color:var(--dim);margin-top:4px;font-family:var(--mono)">Salvo em: ' + v.criado_em + '</div></div>' +
+        '<div style="display:flex;gap:6px">' +
+        '<a href="' + v.arquivo + '" target="_blank" class="btn-cta" style="padding:6px 12px;font-size:11px;text-decoration:none;border-radius:8px">Abrir Página ↗</a>' +
+        '</div></div>';
+    }).join('');
+  }
+  document.getElementById('m-versoes-bg').classList.add('aberto');
+}
+function fecharModalVersoes() { document.getElementById('m-versoes-bg').classList.remove('aberto'); }
+
+function render() {
+  atualizarFiltrosUI();
+  nav();
+  document.getElementById('view').innerHTML = {
+    geral: vGeral,
+    pipeline: vPipeline,
+    clientes: vClientes,
+    sites: vSites,
+    comparador: vComparador,
+    followup: vFollowup,
+    contratos: vContratos,
+    financeiro: vFinanceiro,
+    config: vConfig
+  }[view]();
+}
+
+var dragSlug = null;
+function dragIni(e, slug) { dragSlug = slug; e.target.classList.add('arrastando'); e.dataTransfer.effectAllowed = 'move'; }
+function dragFim(e) { e.target.classList.remove('arrastando'); }
+function dragSobre(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; e.currentTarget.classList.add('alvo'); }
+function dragSai(e) { e.currentTarget.classList.remove('alvo'); }
+function solta(e, st) {
+  e.preventDefault(); e.currentTarget.classList.remove('alvo'); if (!dragSlug) return;
+  var ch = { status: st };
+  if (st === 'fechado') { var v = prompt('Fechamento confirmado! Valor total cobrado (R$):', '1200'); if (v !== null && v !== '' && !isNaN(parseFloat(v))) ch.valor = parseFloat(v); }
+  if (st === 'proposta' && !leads.filter(function(l) { return l.slug === dragSlug; })[0].dataProposta) ch.dataProposta = new Date().toISOString().slice(0, 10);
+  salvarOv(dragSlug, ch); dragSlug = null;
+}
+
+document.getElementById('busca').addEventListener('input', function() { busca = this.value; pag = 1; render(); });
+var rsz; window.addEventListener('resize', function() { clearTimeout(rsz); rsz = setTimeout(render, 150); });
+render();
+</script>
+</body>
+</html>
