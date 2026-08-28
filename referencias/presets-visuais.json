@@ -750,5 +750,87 @@
     ],
     "prioridade_conversao": 1,
     "ativo": true
+  },
+  {
+    "id": "high-contrast-saas-golden",
+    "nome": "High-Contrast Editorial SaaS & Golden Yellow",
+    "descricao": "Brutalist-lite B2C SaaS landing page com tipografia Anton (8xl-9xl) + Satoshi, destaque amarelo ouro #ffe17c, grid pattern 40px, blocos de contraste problema/solução e bento grid de features.",
+    "origem": "https://superdesign.dev/high-contrast-saas-golden",
+    "screenshot": "assets/presets/high-contrast-saas-golden.webp",
+    "tags": [
+      "saas",
+      "b2c",
+      "brutalist-lite",
+      "golden-yellow",
+      "anton",
+      "satoshi",
+      "high-contrast",
+      "grid-pattern"
+    ],
+    "nichos_recomendados": [
+      "SaaS & Software",
+      "Startups B2C",
+      "Aplicativos & Ferramentas Digitais",
+      "Agências Tech",
+      "Produtos Digitais de Alta Conversão"
+    ],
+    "nichos_evitar": [
+      "Clínicas Tradicionais",
+      "Consultório Formal Conservador",
+      "Advocacia Clássica"
+    ],
+    "composicao": "bento-grid-contrast-funnel",
+    "navegacao": "fixed-header-pill-cta",
+    "densidade": "alta",
+    "tipografia": {
+      "display": "Anton (Uppercase, tracking normal, leading 0.9, escala 8xl-9xl)",
+      "body": "Satoshi / Inter (Weights 400, 500, 700)",
+      "labels": "Satoshi / JetBrains Mono (Tracking-widest, text-xs com dot amarelo)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "abstract-ui-mockup-and-grayscale-avatars (Mockup de browser com semáforos, grid e swatch #FFE17C + avatares 48px em escala de cinza)",
+      "proporcoes": ["3:4", "16:9", "1:1", "auto-rows-400px"]
+    },
+    "movimento": {
+      "estilo": [
+        "card-cubic-bezier-transform-300ms",
+        "numeral-opacity-reveal-on-hover",
+        "pulse-yellow-indicator-dot",
+        "cta-scale-105-hover"
+      ],
+      "intensidade_interacao": 3,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "charcoal-white-golden-yellow (adaptavel a marca do cliente)",
+      "sugestoes": {
+        "fundo": "#FFFFFF",
+        "superficie": "#171E19",
+        "texto": "#171E19",
+        "texto_secundario": "#71717A",
+        "acento": "#FFE17C",
+        "acento_secundario": "#272727",
+        "linha": "rgba(23, 30, 25, 0.1)"
+      }
+    },
+    "componentes_permitidos": [
+      "rotated-15deg-highlight-bars",
+      "grid-pattern-hero-40px",
+      "problem-solution-contrast-split",
+      "abstract-browser-ui-mockup",
+      "bento-feature-grid-3col",
+      "how-it-works-massive-8xl-numerals",
+      "testimonial-high-contrast-cards",
+      "high-impact-golden-footer-cta"
+    ],
+    "proibicoes": [
+      "gradientes-pasteis-suaves-genericos",
+      "bordas-arredondadas-infantis-sem-contraste",
+      "cards-flutuantes-sem-estrutura-de-grid",
+      "textos-longos-sem-destaque-visual"
+    ],
+    "prioridade_conversao": 1,
+    "ativo": true
   }
 ]
