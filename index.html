@@ -1813,7 +1813,7 @@ function initSupabase() {
 function carregarDadosSupabase() {
   if (!sb) return;
   sb.from('leads').select('*').order('created_at', { ascending: false }).then(function(res) {
-    if (res.data) {
+    if (res && res.data) {
       var sbLeads = res.data.map(normalizarLeadSupabase);
       var sbSlugs = new Set(sbLeads.map(function(l) { return l.slug; }));
 
@@ -1825,38 +1825,51 @@ function carregarDadosSupabase() {
             sbSlugs.add(localLead.slug);
             var payload = desnormalizarLeadSupabase(localLead);
             delete payload.direcao_criativa;
-            sb.from('leads').upsert(payload).then(function() {
-              if (localLead.versoes && localLead.versoes.length > 0) {
-                localLead.versoes.forEach(function(v) {
-                  sb.from('versoes_site').insert({
-                    lead_slug: localLead.slug,
-                    numero: v.numero,
-                    nome_estilo: v.nome_estilo,
-                    descricao: v.descricao,
-                    arquivo: v.arquivo,
-                    criado_em: v.criado_em,
-                    ativo: v.ativo === 1 || v.ativo === true ? 1 : 0
+            try {
+              sb.from('leads').upsert(payload).then(function() {
+                if (localLead.versoes && localLead.versoes.length > 0) {
+                  localLead.versoes.forEach(function(v) {
+                    sb.from('versoes_site').insert({
+                      lead_slug: localLead.slug,
+                      numero: v.numero,
+                      nome_estilo: v.nome_estilo,
+                      descricao: v.descricao,
+                      arquivo: v.arquivo,
+                      criado_em: v.criado_em,
+                      ativo: v.ativo === 1 || v.ativo === true ? 1 : 0
+                    });
                   });
-                });
-              }
-            });
+                }
+              });
+            } catch(e) {}
           }
         });
       }
 
       leads = sbLeads;
       sb.from('versoes_site').select('*').order('numero', { ascending: false }).then(function(vRes) {
-        if (vRes.data) {
+        if (vRes && vRes.data) {
           leads.forEach(function(l) {
             var dbVersoes = vRes.data.filter(function(v) { return v.lead_slug === l.slug; });
             if (dbVersoes && dbVersoes.length > 0) {
               l.versoes = dbVersoes;
+            } else {
+              var localMatch = D.leads.find(function(dl) { return dl.slug === l.slug; });
+              if (localMatch && localMatch.versoes && localMatch.versoes.length > 0) {
+                l.versoes = localMatch.versoes;
+              }
             }
           });
         }
         render();
+      }).catch(function() {
+        render();
       });
+    } else {
+      render();
     }
+  }).catch(function() {
+    render();
   });
 }
 
