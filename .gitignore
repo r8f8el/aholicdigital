@@ -13,3 +13,5 @@ prospector.db-journal
 # Node
 node_modules/
 .vercel
+.agents/mcp_config.json
+
