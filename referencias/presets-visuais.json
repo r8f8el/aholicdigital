@@ -314,5 +314,79 @@
     ],
     "prioridade_conversao": 2,
     "ativo": true
+  },
+  {
+    "id": "technical-blueprint-wireframe",
+    "nome": "Blueprint Técnico & Grid Estrutural",
+    "descricao": "Sistema de design estrutural inspirado em plantas técnicas e wireframes de alta precisão: mosaico de painéis retangulares com linhas de 1px (hairlines), marcadores de canto em L (corner markers), tipografia Space Grotesk + JetBrains Mono, imagens com blend luminosity e zero sombras.",
+    "origem": "https://superdesign.dev/blueprint-wireframe",
+    "screenshot": "assets/presets/technical-blueprint.webp",
+    "tags": ["blueprint", "wireframe", "tecnico", "estrutural", "precisao", "hairlines", "monospaced", "corner-markers", "mosaic-grid"],
+    "nichos_recomendados": [
+      "Engenharia Civil & Construção",
+      "Clínicas Médicas & Diagnóstico por Imagem",
+      "Arquitetura Estrutural & BIM",
+      "Postos de Combustível & Logística",
+      "Consultoria de Processos & Auditoria",
+      "Gastronomia Industrial / Steakhouse",
+      "Tecnologia & Segurança"
+    ],
+    "nichos_evitar": [
+      "Clínicas Pediátricas Lúdicas",
+      "Spas Românticos / Florais",
+      "Brechós Vintage"
+    ],
+    "composicao": "mosaic-panel-bento-grid",
+    "navegacao": "technical-header-with-numbered-indices",
+    "densidade": "alta",
+    "tipografia": {
+      "display": "Space Grotesk (Bold, tracking-tight -0.05em, leading 0.9)",
+      "body": "General Sans / Inter (Leitura nítida, neutra e funcional)",
+      "labels": "JetBrains Mono (10-12px, tracking 0.1em, com prefixos numéricos 01. / 02.)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "mix-blend-luminosity-shift (Opacidade 90% com blend luminosity e transição suave para cor natural no hover)",
+      "proporcoes": ["1:1", "16:9", "4:5"]
+    },
+    "movimento": {
+      "estilo": [
+        "network-orbit-rotation",
+        "snappy-linear-hover",
+        "corner-marker-glow",
+        "luminosity-to-color-reveal"
+      ],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "papel-tecnico-e-accent-marca (adaptavel a qualquer cor de marca)",
+      "sugestoes": {
+        "fundo": "#F7F7F5",
+        "superficie": "#FFFFFF",
+        "texto": "#1A1A18",
+        "texto_secundario": "#5A5A56",
+        "acento": "#1A3C2B",
+        "acento_secundario": "#FF8C69",
+        "linha": "rgba(58, 58, 56, 0.2)"
+      }
+    },
+    "componentes_permitidos": [
+      "mosaic-background-panels",
+      "technical-bento-grid-with-color-tabs",
+      "corner-marker-container",
+      "network-topology-graph",
+      "status-badge-square-dot",
+      "monospaced-testimonial-card",
+      "technical-form-cta"
+    ],
+    "proibicoes": [
+      "sombras-difusas-ou-drop-shadows",
+      "gradientes-pesados-saas",
+      "bordas-arredondadas-excessivas (max 2px)",
+      "textos-vendedores-sem-dados"
+    ],
+    "prioridade_conversao": 1,
+    "ativo": true
   }
 ]
