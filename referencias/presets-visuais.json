@@ -461,5 +461,77 @@
     ],
     "prioridade_conversao": 2,
     "ativo": true
+  },
+  {
+    "id": "super-travel-luxury",
+    "nome": "Super Travel Luxury & Boutique Rose",
+    "descricao": "Sistema de design de alta-costura com forte impacto editorial: tipografia geométrica pura (League Spartan em todos os pesos), grid desalinhado com offset de 100px, selo flutuante de concierge com bounce de 4s, cards com preenchimento dinâmico e revelação suave de fotos em escala de cinza para cor.",
+    "origem": "https://superdesign.dev/super-travel",
+    "screenshot": "assets/presets/super-travel.webp",
+    "tags": ["luxury", "boutique", "league-spartan", "staggered-grid", "dusty-rose", "editorial", "alta-costura", "bounce-badge"],
+    "nichos_recomendados": [
+      "Arquitetura & Design de Interiores de Luxo",
+      "Clínicas Boutique & Estética Facial Avançada",
+      "Psicologia & Desenvolvimento Humano de Elite",
+      "Hotelaria Boutique & Viagens Exclusivas",
+      "Alta Joalheria & Moda Conceitual",
+      "Consultoria Estratégica & M&A"
+    ],
+    "nichos_evitar": [
+      "Comércio Popular",
+      "Serviços Mecânicos / Oficinas",
+      "Lojas de Departamento"
+    ],
+    "composicao": "staggered-asymmetric-gallery",
+    "navegacao": "glassmorphic-top-bar-80px",
+    "densidade": "baixa",
+    "tipografia": {
+      "display": "League Spartan (Bold/Heavy 700-900, tracking-tighter, line-height 0.8, com 1 palavra em itálico minúsculo)",
+      "body": "League Spartan (Regular 400-500, leitura geométrica e pura)",
+      "labels": "League Spartan Uppercase (10px, 900 weight, tracking 0.4em)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "grayscale-to-color-zoom (Inicia em grayscale 100%, transição de 1s para cor total e zoom 1.08 no hover)",
+      "proporcoes": ["3:4", "4:5", "16:9"]
+    },
+    "movimento": {
+      "estilo": [
+        "floating-concierge-bounce-4s",
+        "weighted-cubic-bezier-reveal-1s",
+        "service-card-color-fill-0.7s",
+        "hover-overlay-circle-view-case"
+      ],
+      "intensidade_interacao": 3,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "warm-sand-charcoal-e-accent-rose (adaptavel a marca do cliente)",
+      "sugestoes": {
+        "fundo": "#FDF8F3",
+        "superficie": "#F5F0EB",
+        "texto": "#262626",
+        "texto_secundario": "rgba(38, 38, 38, 0.7)",
+        "acento": "#E4A4BD",
+        "acento_secundario": "#DF93A6",
+        "linha": "rgba(38, 38, 38, 0.1)"
+      }
+    },
+    "componentes_permitidos": [
+      "hero-editorial-staggered-heading",
+      "floating-concierge-badge-bounce",
+      "service-grid-dynamic-color-fill",
+      "portfolio-staggered-grid-100px-offset",
+      "hover-black-circle-overlay",
+      "split-footer-12-columns"
+    ],
+    "proibicoes": [
+      "gradientes-vibrantes-multicoloridos",
+      "mistura-de-fontes-sem-proposito",
+      "sombras-escuras-pesadas",
+      "bordas-arredondadas-gigantes (padrão 16px/24px)"
+    ],
+    "prioridade_conversao": 1,
+    "ativo": true
   }
 ]
