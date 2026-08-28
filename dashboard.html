@@ -1814,11 +1814,44 @@ function carregarDadosSupabase() {
   if (!sb) return;
   sb.from('leads').select('*').order('created_at', { ascending: false }).then(function(res) {
     if (res.data) {
-      leads = res.data.map(normalizarLeadSupabase);
+      var sbLeads = res.data.map(normalizarLeadSupabase);
+      var sbSlugs = new Set(sbLeads.map(function(l) { return l.slug; }));
+
+      // Mescla e envia para o Supabase quaisquer leads locais que ainda não existam na nuvem
+      if (D && D.leads && Array.isArray(D.leads)) {
+        D.leads.forEach(function(localLead) {
+          if (!sbSlugs.has(localLead.slug)) {
+            sbLeads.unshift(localLead);
+            sbSlugs.add(localLead.slug);
+            var payload = desnormalizarLeadSupabase(localLead);
+            delete payload.direcao_criativa;
+            sb.from('leads').upsert(payload).then(function() {
+              if (localLead.versoes && localLead.versoes.length > 0) {
+                localLead.versoes.forEach(function(v) {
+                  sb.from('versoes_site').insert({
+                    lead_slug: localLead.slug,
+                    numero: v.numero,
+                    nome_estilo: v.nome_estilo,
+                    descricao: v.descricao,
+                    arquivo: v.arquivo,
+                    criado_em: v.criado_em,
+                    ativo: v.ativo === 1 || v.ativo === true ? 1 : 0
+                  });
+                });
+              }
+            });
+          }
+        });
+      }
+
+      leads = sbLeads;
       sb.from('versoes_site').select('*').order('numero', { ascending: false }).then(function(vRes) {
         if (vRes.data) {
           leads.forEach(function(l) {
-            l.versoes = vRes.data.filter(function(v) { return v.lead_slug === l.slug; });
+            var dbVersoes = vRes.data.filter(function(v) { return v.lead_slug === l.slug; });
+            if (dbVersoes && dbVersoes.length > 0) {
+              l.versoes = dbVersoes;
+            }
           });
         }
         render();
