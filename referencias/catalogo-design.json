@@ -1,0 +1,92 @@
+{
+  "versao": "1.0",
+  "descricao": "Catálogo Central de Referências Visuais, Arquétipos e Diretrizes Anti-Slop",
+  "diretrizes_anti_slop": [
+    "PROIBIDO usar gradientes genéricos roxo/azul/ciano neon sem propósito de marca",
+    "PROIBIDO usar textos robóticos clichês ('Revolucione sua jornada', 'Descubra a excelência')",
+    "PROIBIDO usar fotos de stock com pessoas artificiais que não combinam com o público brasileiro",
+    "OBRIGATÓRIO coletar o Instagram (@perfil) ou Google Maps para extrair fotos e identidade real",
+    "OBRIGATÓRIO perguntar ao usuário o arquétipo visual ou referências antes de gerar o código"
+  ],
+  "arquetipos": {
+    "quiet_luxury": {
+      "nome": "🏛️ Quiet Luxury / Editorial Sofisticado",
+      "nichos": ["Estética Facial Avançada", "Dermatologia", "Cirurgia Plástica", "Consultorias Exclusivas"],
+      "tipografia": {
+        "titulos": "Newsreader / Playfair Display (Serifada elegante)",
+        "corpo": "Inter / Plus Jakarta Sans"
+      },
+      "paleta": {
+        "fundo": "#FBFBFA (Linho / Off-white)",
+        "superficie": "#FFFFFF",
+        "texto_principal": "#18181B (Grafite profundo)",
+        "texto_secundario": "#71717A",
+        "acento": "#C5A880 (Champagne / Ouro nobre sutil) ou #8B7355"
+      },
+      "referencia_local": "sites/clinica-anielly-vilela/clinica-anielly-vilela.html"
+    },
+    "swiss_tech": {
+      "nome": "⚡ Swiss Precision / High-Tech Cirúrgico",
+      "nichos": ["Odontologia Digital", "Implantes Guiados", "Ortodontia Invisível", "Tecnologia Médica"],
+      "tipografia": {
+        "titulos": "Plus Jakarta Sans (Sans geométrica de precisão)",
+        "corpo": "Inter"
+      },
+      "paleta": {
+        "fundo": "#F8FAFC",
+        "superficie": "#FFFFFF",
+        "texto_principal": "#0F172A (Navy / Slate profundo)",
+        "texto_secundario": "#64748B",
+        "acento": "#0284C7 (Azul Cirúrgico) ou #0D9488 (Teal Médico)"
+      },
+      "referencia_local": "sites/quality-odontologia-face/quality-odontologia-face.html"
+    },
+    "monografia_editorial": {
+      "nome": "📐 Monografia Editorial / Minimalismo Arquitetônico",
+      "nichos": ["Arquitetura de Alto Padrão", "Design de Interiores", "Engenharia Conceito"],
+      "tipografia": {
+        "titulos": "Cinzel / Cormorant Garamond / Plus Jakarta Sans 600",
+        "corpo": "Inter"
+      },
+      "paleta": {
+        "fundo": "#F7F6F2 (Linho claro)",
+        "superficie": "#FFFFFF",
+        "texto_principal": "#1C1917 (Stone escuro)",
+        "texto_secundario": "#78716C",
+        "acento": "#292524"
+      },
+      "referencia_local": "sites/karla-barros-arquitetura/versoes/v2-quiet-luxury-italiana.html"
+    },
+    "warm_organic": {
+      "nome": "🌿 Warm Organic / Humanizado & Acolhedor",
+      "nichos": ["Psicologia", "Nutrição", "Medicina Integrativa", "Pediatria", "Spas & Bem-Estar"],
+      "tipografia": {
+        "titulos": "Outfit / Lora / DM Sans",
+        "corpo": "Inter"
+      },
+      "paleta": {
+        "fundo": "#FAF8F5 (Creme quente)",
+        "superficie": "#FFFFFF",
+        "texto_principal": "#2D2823",
+        "texto_secundario": "#7C746A",
+        "acento": "#8F9E8B (Verde Sálvia Suave) ou #D4A373 (Terracota Leve)"
+      },
+      "referencia_local": "sites/atipicamente-psi/versoes/v1-cream-superdesign.html"
+    },
+    "dark_authority": {
+      "nome": "⚖️ Dark Authority & Contemporâneo",
+      "nichos": ["Advocacia Tributária / Criminal / Cível", "Perícias Judiciais", "Finanças"],
+      "tipografia": {
+        "titulos": "Plus Jakarta Sans Bold / Cinzel",
+        "corpo": "Inter"
+      },
+      "paleta": {
+        "fundo": "#0F172A (Navy Carvão profundo)",
+        "superficie": "#1E293B",
+        "texto_principal": "#F8FAFC",
+        "texto_secundario": "#94A3B8",
+        "acento": "#D4AF37 (Dourado Nobre) ou #C5A059"
+      }
+    }
+  }
+}

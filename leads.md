@@ -12,3 +12,4 @@ ovo |
 ovo |
 | 5 | **Top Saúde Estética Facial** | 4.7 ★ | 45 | (64) 3012-4615 | **Redesign / LP** | 	opsaudeclinicasmedicas.com | Portal geral de clínica médica. Falta uma landing page dedicada exclusiva de estética e bioestimuladores. | 
 ovo |
+| 6 | **Patrícia Margotti | Psicóloga TCC** | 5.0 ★ | 30 | (48) 99999-9999 | **Do Zero** | *(Nenhum)* | Foco em psicoterapia TCC na Trindade/Online. Design 'Softly Digital Wellness' com estética acolhedora de alto padrão. | redesenhado |
