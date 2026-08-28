@@ -1740,22 +1740,39 @@ tr:hover td {
   </div>
 </div>
 
-<!-- MODAL PREVIEW DO PRESET -->
+<!-- MODAL PREVIEW DO PRESET (LIVE DEMO & TOKENS) -->
 <div id="m-preset-preview-bg" class="modal-bg" onclick="if(event.target===this)fecharPreviewPreset()">
-  <div class="modal" style="width:760px;max-width:95vw">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+  <div class="modal" style="width:1080px;max-width:96vw;height:90vh;display:flex;flex-direction:column;padding:24px;border-radius:var(--radius-xl)">
+    <!-- Header do Modal -->
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px;flex-shrink:0">
       <div>
-        <h2 id="mpp-titulo" style="margin:0">Preview do Preset</h2>
-        <p id="mpp-sub" style="font-size:12px;color:var(--muted);margin:4px 0 16px"></p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <h2 id="mpp-titulo" style="margin:0;font-size:18px;font-weight:800;color:var(--ink)">Preview do Preset</h2>
+          <span id="mpp-tag-estilo" style="background:var(--accent-soft);color:var(--accent-dark);font-size:11px;font-weight:800;padding:3px 8px;border-radius:var(--radius-pill)"></span>
+        </div>
+        <p id="mpp-sub" style="font-size:12px;color:var(--muted);margin:3px 0 0"></p>
       </div>
-      <button class="cancelar" style="padding:4px 10px;font-size:12px" onclick="fecharPreviewPreset()">✕</button>
-    </div>
-    
-    <div id="mpp-conteudo" style="max-height:65vh;overflow-y:auto"></div>
 
-    <div class="mbot">
-      <button class="cancelar" onclick="fecharPreviewPreset()">Fechar</button>
+      <!-- Controles de Viewport & Ações -->
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="background:#F1F5F9;padding:3px;border-radius:var(--radius-pill);display:flex;gap:2px">
+          <button id="btn-prev-desk" onclick="setPresetPreviewMode('desktop')" style="border:0;background:#FFFFFF;color:var(--ink);padding:5px 12px;border-radius:var(--radius-pill);font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-sm)">🖥️ Desktop</button>
+          <button id="btn-prev-mob" onclick="setPresetPreviewMode('mobile')" style="border:0;background:transparent;color:var(--muted);padding:5px 12px;border-radius:var(--radius-pill);font-size:11.5px;font-weight:700;cursor:pointer">📱 Mobile</button>
+        </div>
+        <button onclick="copiarPromptPresetAtual()" class="btn-cta" style="background:#1E293B;padding:6px 14px;font-size:11.5px;box-shadow:none">📋 Copiar Prompt</button>
+        <button class="cancelar" style="padding:6px 12px;font-size:12px" onclick="fecharPreviewPreset()">✕</button>
+      </div>
     </div>
+
+    <!-- Área de Visualização Interativa com Iframe -->
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column;background:#0F172A;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);position:relative">
+      <div id="mpp-iframe-wrapper" style="width:100%;height:100%;transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);margin:0 auto;display:flex">
+        <iframe id="mpp-frame" style="width:100%;height:100%;border:0;background:#FFFFFF" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- Gaveta de Especificações Técnicas e Tokens abaixo do Iframe -->
+    <div id="mpp-conteudo" style="margin-top:14px;flex-shrink:0;max-height:180px;overflow-y:auto;background:#F8FAFC;border:1px solid var(--line);border-radius:var(--radius-md);padding:14px"></div>
   </div>
 </div>
 
@@ -3363,43 +3380,240 @@ function toggleAtivoPreset(id) {
   render();
 }
 
+var presetPreviewAtualObj = null;
+
+function setPresetPreviewMode(mode) {
+  var wrap = document.getElementById('mpp-iframe-wrapper');
+  var bDesk = document.getElementById('btn-prev-desk');
+  var bMob = document.getElementById('btn-prev-mob');
+  if (!wrap || !bDesk || !bMob) return;
+
+  if (mode === 'mobile') {
+    wrap.style.width = '375px';
+    bMob.style.background = '#FFFFFF';
+    bMob.style.color = 'var(--ink)';
+    bMob.style.boxShadow = 'var(--shadow-sm)';
+    bDesk.style.background = 'transparent';
+    bDesk.style.color = 'var(--muted)';
+    bDesk.style.boxShadow = 'none';
+  } else {
+    wrap.style.width = '100%';
+    bDesk.style.background = '#FFFFFF';
+    bDesk.style.color = 'var(--ink)';
+    bDesk.style.boxShadow = 'var(--shadow-sm)';
+    bMob.style.background = 'transparent';
+    bMob.style.color = 'var(--muted)';
+    bMob.style.boxShadow = 'none';
+  }
+}
+
+function copiarPromptPresetAtual() {
+  if (!presetPreviewAtualObj) return;
+  var p = presetPreviewAtualObj;
+  var s = (p.paleta && p.paleta.sugestoes) || {};
+  var txt = '# Especificação Visual & Design System — ' + p.nome + '\n\n' +
+    '## Resumo\n' + p.descricao + '\n\n' +
+    '## Estilo & Identidade\n' +
+    '- ID do Preset: ' + p.id + '\n' +
+    '- Composição: ' + (p.composicao || 'Editorial') + '\n' +
+    '- Navegação: ' + (p.navegacao || 'Fixed Header') + '\n' +
+    '- Densidade: ' + (p.densidade || 'Média') + '\n\n' +
+    '## Tipografia\n' +
+    '- Display / Títulos: ' + (p.tipografia ? p.tipografia.display : '—') + '\n' +
+    '- Body / Textos: ' + (p.tipografia ? p.tipografia.body : '—') + '\n' +
+    '- Labels / Metadados: ' + (p.tipografia ? p.tipografia.labels : 'JetBrains Mono') + '\n\n' +
+    '## Paleta Sugerida (Adaptável à marca do cliente)\n' +
+    '- Fundo: ' + (s.fundo || '#FBFBFA') + '\n' +
+    '- Superfície: ' + (s.superficie || '#FFFFFF') + '\n' +
+    '- Texto: ' + (s.texto || '#111315') + '\n' +
+    '- Acento Principal: ' + (s.acento || '#00D084') + '\n' +
+    (s.acento_secundario ? '- Acento Secundário: ' + s.acento_secundario + '\n' : '') +
+    '- Linhas / Bordas: ' + (s.linha || 'rgba(0,0,0,0.1)') + '\n\n' +
+    '## Componentes Permitidos\n' +
+    (p.componentes_permitidos || []).map(function(c) { return '- ' + c; }).join('\n') + '\n\n' +
+    '## Restrições Anti-Slop (Proibições)\n' +
+    (p.proibicoes || []).map(function(c) { return '- PROIBIDO: ' + c; }).join('\n');
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function() {
+      alert('📋 Prompt e especificação técnica de ' + p.nome + ' copiados com sucesso!');
+    });
+  } else {
+    prompt('Copie o prompt do preset:', txt);
+  }
+}
+
+function gerarHtmlDemoPreset(p) {
+  var s = (p.paleta && p.paleta.sugestoes) || { fundo: '#FBFBFA', superficie: '#FFFFFF', texto: '#111315', acento: '#00D084', linha: 'rgba(0,0,0,0.1)' };
+  var fDisplay = (p.tipografia && p.tipografia.display) ? p.tipografia.display.split(' ')[0].replace(/['",]/g, '') : 'Plus Jakarta Sans';
+  var fBody = (p.tipografia && p.tipografia.body) ? p.tipografia.body.split(' ')[0].replace(/['",]/g, '') : 'Inter';
+  var fLabels = (p.tipografia && p.tipografia.labels) ? p.tipografia.labels.split(' ')[0].replace(/['",]/g, '') : 'JetBrains Mono';
+
+  var isDark = s.fundo && (s.fundo === '#050505' || s.fundo === '#0A0B0D' || s.fundo === '#0C0D0E' || s.fundo === '#111111' || s.fundo.toLowerCase() === '#1b0e0d');
+  var isOrange = p.id === 'kinetic-electric-orange';
+  var isBlueprint = p.id === 'technical-blueprint-wireframe';
+  var isLuxuryRose = p.id === 'super-travel-luxury';
+  var isRawForm = p.id === 'raw-form-brutalist-blobs';
+  var isCinema3D = p.id === 'cinematic-3d-spatial';
+  var isFashion = p.id === 'season-04-high-fashion-brutalist';
+  var isEcho = p.id === 'luxury-brutalist-echo';
+
+  return '<!DOCTYPE html>' +
+    '<html lang="pt-BR">' +
+    '<head>' +
+    '<meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+    '<title>Demo ' + p.nome + '</title>' +
+    '<link rel="preconnect" href="https://fonts.googleapis.com">' +
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
+    '<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cinzel:wght@700;900&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600;800&family=League+Spartan:wght@300;400;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">' +
+    '<style>' +
+    '@import url("https://api.fontshare.com/v2/css?f[]=clash-display@700,600,500&f[]=clash-grotesk@700,600&f[]=satoshi@500,700,400&f[]=general-sans@500,600&display=swap");' +
+    '* { box-sizing: border-box; margin: 0; padding: 0; }' +
+    'body { background: ' + s.fundo + '; color: ' + (s.texto || '#111315') + '; font-family: "' + fBody + '", "Plus Jakarta Sans", sans-serif; line-height: 1.5; overflow-x: hidden; -webkit-font-smoothing: antialiased; }' +
+    'h1, h2, h3, .display-font { font-family: "' + fDisplay + '", "' + fBody + '", sans-serif; }' +
+    '.mono-font { font-family: "' + fLabels + '", "JetBrains Mono", monospace; }' +
+    '.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }' +
+    
+    /* Dynamic Animation keyframes */
+    '@keyframes bounceSlow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }' +
+    '@keyframes rotateCube { 0% { transform: rotateX(0deg) rotateY(15deg); } 100% { transform: rotateX(360deg) rotateY(15deg); } }' +
+    '@keyframes spinLinear { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }' +
+    '@keyframes pulseBlob { 0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.65; } 50% { transform: scale(1.15) translate(20px, -20px); opacity: 0.9; } }' +
+    '@keyframes marqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }' +
+    '@keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }' +
+    
+    /* Specific Styles */
+    (isFashion ? '.noise-overlay { position: fixed; inset: 0; pointer-events: none; opacity: 0.08; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E"); z-index: 99; }' : '') +
+    
+    (isLuxuryRose ? '.rose-badge { animation: bounceSlow 4s ease-in-out infinite; }' : '') +
+    (isCinema3D ? '.cube-3d-scene { perspective: 2000px; } .cube-3d-wrapper { width: 140px; height: 140px; position: relative; transform-style: preserve-3d; animation: rotateCube 16s linear infinite; } .cube-face { position: absolute; width: 140px; height: 140px; border: 1px solid rgba(255,255,255,0.3); background: rgba(17,17,17,0.85); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #FFF; text-transform: uppercase; } .face-f { transform: rotateX(0deg) translateZ(70px); } .face-b { transform: rotateX(180deg) translateZ(70px); } .face-t { transform: rotateX(90deg) translateZ(70px); } .face-bt { transform: rotateX(-90deg) translateZ(70px); }' : '') +
+    
+    (isRawForm ? '.blob-1 { position: absolute; width: 280px; height: 280px; border-radius: 50%; background: ' + s.acento + '; filter: blur(70px); mix-blend-mode: multiply; animation: pulseBlob 12s ease-in-out infinite; z-index: 1; top: 10%; right: 10%; } .blob-2 { position: absolute; width: 240px; height: 240px; border-radius: 50%; background: ' + (s.acento_secundario || '#F8A348') + '; filter: blur(80px); mix-blend-mode: multiply; animation: pulseBlob 14s ease-in-out infinite reverse; z-index: 1; top: 30%; left: 5%; }' : '') +
+    
+    'header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid ' + (s.linha || 'rgba(0,0,0,0.1)') + '; position: sticky; top: 0; background: ' + (isDark ? 'rgba(5,5,5,0.85)' : 'rgba(255,255,255,0.85)') + '; backdrop-filter: blur(12px); z-index: 50; }' +
+    '.logo { font-weight: 900; font-size: 16px; letter-spacing: 0.5px; text-transform: uppercase; color: ' + (s.texto || '#111315') + '; display: flex; align-items: center; gap: 8px; }' +
+    '.live-dot { width: 8px; height: 8px; border-radius: 50%; background: #EF4444; animation: pulseBlob 1.5s infinite; }' +
+    '.btn-cta-demo { background: ' + (isOrange ? '#000000' : (s.acento || '#00D084')) + '; color: ' + (isOrange ? '#FFFFFF' : (isDark ? '#000000' : '#FFFFFF')) + '; font-weight: 800; font-size: 12px; padding: 10px 22px; border-radius: ' + (isBlueprint || isFashion || isOrange ? '2px' : '999px') + '; border: ' + (isOrange ? '2px solid #000' : (isBlueprint ? '1px solid ' + (s.linha || '#000') : '0')) + '; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.25s; }' +
+    '.btn-cta-demo:hover { transform: translateY(-2px); opacity: 0.92; }' +
+    
+    /* Hero section */
+    '.hero-sec { padding: 60px 0 50px; position: relative; overflow: hidden; }' +
+    '.tag-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: ' + (isBlueprint ? '2px' : '999px') + '; border: 1px solid ' + (s.linha || 'rgba(0,0,0,0.15)') + '; background: ' + (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)') + '; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px; }' +
+    '.hero-title { font-size: clamp(32px, 5.5vw, 68px); font-weight: 900; line-height: 0.92; letter-spacing: -0.04em; margin-bottom: 20px; text-transform: uppercase; }' +
+    '.hero-sub { font-size: 15px; line-height: 1.6; opacity: 0.85; max-width: 540px; margin-bottom: 28px; }' +
+    
+    /* Cards grid */
+    '.grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 40px 0; }' +
+    '.demo-card { background: ' + (s.superficie || '#FFFFFF') + '; border: 1px solid ' + (s.linha || 'rgba(0,0,0,0.1)') + '; border-radius: ' + (isBlueprint ? '2px' : '16px') + '; padding: 24px; position: relative; transition: all 0.3s; }' +
+    '.demo-card:hover { transform: translateY(-4px); border-color: ' + s.acento + '; }' +
+    '.corner-marker { position: absolute; width: 8px; height: 8px; border: 2px solid ' + s.acento + '; }' +
+    '.cm-tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }' +
+    '.cm-tr { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }' +
+    '.cm-bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }' +
+    '.cm-br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }' +
+    '</style>' +
+    '</head>' +
+    '<body>' +
+    (isFashion ? '<div class="noise-overlay"></div>' : '') +
+    (isRawForm ? '<div class="blob-1"></div><div class="blob-2"></div>' : '') +
+    
+    '<header>' +
+    '<div class="logo"><span class="live-dot"></span> ' + p.nome.toUpperCase() + '</div>' +
+    '<div class="mono-font" style="font-size:11px;opacity:0.7;display:none;gap:16px;@media(min-width:600px){display:flex}"><span>01. MANIFESTO</span><span>02. SERVIÇOS</span><span>03. CONTATO</span></div>' +
+    '<a class="btn-cta-demo mono-font">SOLICITAR PROPOSTA ↗</a>' +
+    '</header>' +
+    
+    '<section class="hero-sec">' +
+    '<div class="container">' +
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap">' +
+    '<div style="flex:1;min-width:280px;z-index:2">' +
+    '<div class="tag-pill mono-font"><span style="display:inline-block;width:6px;height:6px;background:' + s.acento + ';border-radius:' + (isBlueprint ? '0' : '50%') + '"></span> ' + (p.composicao || 'ESTÉTICA EXCLUSIVA') + '</div>' +
+    '<h1 class="hero-title">' +
+    (isLuxuryRose ? 'ARQUITETURA & <span style="font-style:italic;color:' + s.acento + ';font-weight:400">alta-costura</span>' : (isOrange ? 'VELOCIDADE &<br>CONVERSÃO BRUTA' : (isFashion ? 'SEASON 04<br><span style="padding-left:15%">EDITORIAL</span>' : p.nome.toUpperCase()))) +
+    '</h1>' +
+    '<p class="hero-sub">' + p.descricao + '</p>' +
+    '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">' +
+    '<a class="btn-cta-demo mono-font">INICIAR AGENDAMENTO ↗</a>' +
+    '<span class="mono-font" style="font-size:12px;opacity:0.75;margin-left:8px">Avaliação 5.0 ★ no Google</span>' +
+    '</div>' +
+    '</div>' +
+    
+    /* Interactive showcase box */
+    '<div style="flex:0 0 auto;display:flex;justify-content:center;align-items:center;z-index:2;margin:20px auto">' +
+    (isLuxuryRose ? '<div class="rose-badge" style="width:140px;height:140px;border-radius:50%;background:' + s.acento + ';color:#262626;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;text-align:center;box-shadow:0 12px 30px rgba(228,164,189,0.35)"><span style="font-size:26px;font-style:italic;font-family:Playfair Display, serif">01</span><span style="font-size:8px;letter-spacing:0.2em;text-transform:uppercase">CONCIERGE VIP</span></div>' :
+     isCinema3D ? '<div class="cube-3d-scene"><div class="cube-3d-wrapper"><div class="cube-face face-f">CINEMA 4K</div><div class="cube-face face-t">VFX & 3D</div><div class="cube-face face-b">AUDIOVISUAL</div><div class="cube-face face-bt">SPATIAL</div></div></div>' :
+     isBlueprint ? '<div style="position:relative;width:150px;height:150px;border:1px dashed ' + (s.linha || '#1A3C2B') + ';border-radius:50%;display:flex;align-items:center;justify-content:center;animation:spinLinear 20s linear infinite"><div style="width:18px;height:18px;background:' + s.acento + ';border-radius:2px"></div><div style="position:absolute;top:10px;width:10px;height:10px;background:' + (s.acento_secundario || '#FF8C69') + ';border-radius:2px"></div></div>' :
+     isOrange ? '<div style="width:130px;height:130px;border-radius:50%;border:2px solid #000;display:flex;align-items:center;justify-content:center;animation:spinLinear 12s linear infinite;font-size:9px;font-weight:900;letter-spacing:1px" class="mono-font">SCROLL DOWN • SCROLL • </div>' :
+     '<div style="width:140px;height:140px;background:' + (s.superficie || '#FFF') + ';border:1px solid ' + (s.linha || '#E2E8F0') + ';border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,0.05)"><span style="font-size:32px;margin-bottom:6px">⚡</span><span class="mono-font" style="font-size:10px;font-weight:800">' + (p.tags && p.tags[0] ? p.tags[0].toUpperCase() : 'PREMIUM') + '</span></div>') +
+    '</div>' +
+    '</div>' +
+    
+    /* Feature Cards */
+    '<div class="grid-cards">' +
+    '<div class="demo-card">' +
+    (isBlueprint ? '<div class="corner-marker cm-tl"></div><div class="corner-marker cm-tr"></div><div class="corner-marker cm-bl"></div><div class="corner-marker cm-br"></div>' : '') +
+    '<div class="mono-font" style="font-size:11px;color:' + s.acento + ';font-weight:800;margin-bottom:8px">01. EXPERIÊNCIA & UX</div>' +
+    '<h3 style="font-size:16px;margin-bottom:8px;font-weight:800">Hierarquia Visual de Alto Padrão</h3>' +
+    '<p style="font-size:12.5px;opacity:0.8;line-height:1.6">Desenvolvido com foco absoluto em clareza, velocidade e conversão qualificada.</p>' +
+    '</div>' +
+    '<div class="demo-card">' +
+    (isBlueprint ? '<div class="corner-marker cm-tl"></div><div class="corner-marker cm-tr"></div><div class="corner-marker cm-bl"></div><div class="corner-marker cm-br"></div>' : '') +
+    '<div class="mono-font" style="font-size:11px;color:' + s.acento + ';font-weight:800;margin-bottom:8px">02. TIPOGRAFIA</div>' +
+    '<h3 style="font-size:16px;margin-bottom:8px;font-weight:800">' + fDisplay + ' + ' + fBody + '</h3>' +
+    '<p style="font-size:12.5px;opacity:0.8;line-height:1.6">Combinação tipográfica internacional para autoridade imediata sem parecer template genérico.</p>' +
+    '</div>' +
+    '<div class="demo-card">' +
+    (isBlueprint ? '<div class="corner-marker cm-tl"></div><div class="corner-marker cm-tr"></div><div class="corner-marker cm-bl"></div><div class="corner-marker cm-br"></div>' : '') +
+    '<div class="mono-font" style="font-size:11px;color:' + s.acento + ';font-weight:800;margin-bottom:8px">03. ADAPTABILIDADE</div>' +
+    '<h3 style="font-size:16px;margin-bottom:8px;font-weight:800">Cores Oficiais da Marca</h3>' +
+    '<p style="font-size:12.5px;opacity:0.8;line-height:1.6">A estrutura se molda e respeita fielmente as cores, fotos e posicionamento de cada cliente.</p>' +
+    '</div>' +
+    '</div>' +
+    '</div>' +
+    '</section>' +
+    
+    '</body>' +
+    '</html>';
+}
+
 function abrirPreviewPreset(id) {
   var p = PRESETS.find(function(x) { return x.id === id; });
   if (!p) return;
+  presetPreviewAtualObj = p;
 
-  document.getElementById('mpp-titulo').textContent = 'Preview do Preset — ' + p.nome;
-  document.getElementById('mpp-sub').textContent = 'Visualização de tokens, regras de composição e simulação de layout.';
+  document.getElementById('mpp-titulo').textContent = p.nome;
+  document.getElementById('mpp-tag-estilo').textContent = p.id;
+  document.getElementById('mpp-sub').textContent = p.descricao;
 
   var s = (p.paleta && p.paleta.sugestoes) || { fundo: '#FBFBFA', superficie: '#FFFFFF', texto: '#111315', acento: '#00D084' };
   var fDisplay = (p.tipografia && p.tipografia.display) || 'Plus Jakarta Sans';
   var fBody = (p.tipografia && p.tipografia.body) || 'Inter';
 
-  var html = '<div style="background:' + s.fundo + ';color:' + (s.texto || '#111315') + ';border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-md);margin-bottom:16px">' +
-    '<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid ' + (s.linha || 'rgba(0,0,0,0.08)') + ';padding-bottom:14px;margin-bottom:20px">' +
-    '<span style="font-weight:800;font-size:14px;letter-spacing:1px;text-transform:uppercase">ESTÚDIO DE DEMO &bull; ' + p.nome.toUpperCase() + '</span>' +
-    '<span style="background:' + s.acento + ';color:#000;font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px">' + (p.composicao || 'Editorial') + '</span>' +
-    '</div>' +
-    '<div style="margin-bottom:24px">' +
-    '<h1 style="font-size:26px;font-weight:800;line-height:1.2;margin:0 0 10px">' + p.nome + ': Arquitetura de Conversão Visual</h1>' +
-    '<p style="font-size:13.5px;line-height:1.6;opacity:0.85;margin:0">' + p.descricao + '</p>' +
-    '</div>' +
-    '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:12px;margin-bottom:20px">' +
-    '<div style="background:' + s.superficie + ';border:1px solid var(--line);border-radius:12px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--muted)">Tipografia Display</div><div style="font-size:13.5px;font-weight:700;margin-top:4px">' + fDisplay + '</div></div>' +
-    '<div style="background:' + s.superficie + ';border:1px solid var(--line);border-radius:12px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--muted)">Tipografia Body</div><div style="font-size:13.5px;font-weight:700;margin-top:4px">' + fBody + '</div></div>' +
-    '<div style="background:' + s.superficie + ';border:1px solid var(--line);border-radius:12px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--muted)">Navegação</div><div style="font-size:13.5px;font-weight:700;margin-top:4px">' + (p.navegacao || 'chapter-index') + '</div></div>' +
-    '</div>' +
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' +
-    '<div style="background:' + s.superficie + ';border:1px solid #BBF7D0;border-radius:12px;padding:14px"><b style="color:#16A34A;font-size:11.5px;text-transform:uppercase">✓ Componentes Recomendados</b><ul style="margin:6px 0 0 16px;padding:0;font-size:12px;line-height:1.6">' + ((p.componentes_permitidos || []).map(function(c) { return '<li>' + c + '</li>'; }).join('') || '<li>Todos os componentes padrão</li>') + '</ul></div>' +
-    '<div style="background:' + s.superficie + ';border:1px solid #FECACA;border-radius:12px;padding:14px"><b style="color:#DC2626;font-size:11.5px;text-transform:uppercase">🚫 Proibições (Anti-Slop)</b><ul style="margin:6px 0 0 16px;padding:0;font-size:12px;line-height:1.6">' + ((p.proibicoes || []).map(function(c) { return '<li>' + c + '</li>'; }).join('') || '<li>Sem restrições extras</li>') + '</ul></div>' +
-    '</div>' +
+  // Renderiza o Iframe com a Mini-Landing Page ao Vivo
+  var frame = document.getElementById('mpp-frame');
+  frame.srcdoc = gerarHtmlDemoPreset(p);
+
+  // Renderiza os tokens e detalhes na gaveta inferior
+  var swatches = Object.keys(s).map(function(k) {
+    return s[k] ? '<div style="display:flex;align-items:center;gap:6px;background:#FFF;border:1px solid var(--line);padding:4px 8px;border-radius:6px;font-size:11px;font-family:var(--mono)"><div style="width:14px;height:14px;border-radius:3px;background:' + s[k] + ';border:1px solid rgba(0,0,0,0.1)"></div><b style="color:var(--ink)">' + k + ':</b> <span>' + s[k] + '</span></div>' : '';
+  }).join('');
+
+  var htmlTokens = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px">' +
+    '<div><b style="font-size:11px;text-transform:uppercase;color:var(--muted)">🎨 Paleta de Cores do Preset</b><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">' + swatches + '</div></div>' +
+    '<div><b style="font-size:11px;text-transform:uppercase;color:var(--muted)">✍️ Tipografia Oficial</b><div style="font-size:12px;color:var(--ink);margin-top:6px"><b>Display:</b> ' + fDisplay + '<br><b>Body:</b> ' + fBody + '</div></div>' +
+    '<div><b style="font-size:11px;text-transform:uppercase;color:var(--muted)">🎯 Nichos Recomendados</b><div style="font-size:12px;color:var(--ink-secondary);margin-top:6px">' + ((p.nichos_recomendados || []).join(', ') || 'Geral') + '</div></div>' +
     '</div>';
 
-  document.getElementById('mpp-conteudo').innerHTML = html;
+  document.getElementById('mpp-conteudo').innerHTML = htmlTokens;
+  setPresetPreviewMode('desktop');
   document.getElementById('m-preset-preview-bg').classList.add('aberto');
 }
 
 function fecharPreviewPreset() {
   document.getElementById('m-preset-preview-bg').classList.remove('aberto');
+  var frame = document.getElementById('mpp-frame');
+  if (frame) frame.srcdoc = 'about:blank';
 }
 
 function setView(v) { view = v; render(); }
