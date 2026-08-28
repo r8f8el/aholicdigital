@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea de Oliveira Melo &bull; Psicologia Clínica & Neurociência | Anápolis - GO</title>
+    <meta name="description" content="Psicologia Clínica, Terapia Cognitivo-Comportamental (TCC) e Neurociência da Aprendizagem em Anápolis - GO. Atendimento acolhedor e baseado em evidências no Bairro Jundiaí.">
+    
+    <!-- Google Fonts: Anton (Display) + Plus Jakarta Sans / Inter (Utility) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#1B2838',        /* Base escura nobre profunda */
+                            terracotta: '#C86849',  /* Terracota acolhedor */
+                            terracotta_light: '#F7EBE6',
+                            sand: '#EFE8DC',        /* Areia quente orgânico */
+                            cream: '#FAF6EE',       /* Creme base acolhedor */
+                            cream_light: '#FDFBF7', /* Off-white puro */
+                            sage: '#6D8A78',        /* Sálvia / Eucalipto natural */
+                            sage_light: '#E8EFEA',
+                            charcoal: '#222831'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Anton"', 'sans-serif'],
+                        serif_italic: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        ::selection { background: #C86849; color: #FAF6EE; }
+
+        /* 1. Reveal Animations */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 2. Floating Parallax Animations */
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(2.5deg); }
+        }
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(14px) rotate(-2deg); }
+        }
+        .animate-float-1 {
+            animation: float1 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+        .animate-float-2 {
+            animation: float2 6.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+
+        /* 3. Staggered Char Slide Up */
+        .char-reveal {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: charSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes charSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 4. Blur-Card Effects */
+        .blur-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -15px rgba(27, 40, 56, 0.12);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .blur-card img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .blur-card:hover img {
+            transform: scale(1.06);
+        }
+        .blur-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(27, 40, 56, 0.45);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .blur-card:hover .blur-overlay {
+            opacity: 1;
+        }
+        .blur-btn {
+            transform: translateY(24px);
+            opacity: 0;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .blur-card:hover .blur-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* 5. Acordeon Sanfonado FAQ */
+        .faq-item {
+            border-bottom: 1px solid rgba(27, 40, 56, 0.12);
+            transition: all 0.3s ease;
+        }
+        .faq-item.aberto .faq-resposta {
+            max-height: 300px;
+            opacity: 1;
+            padding-top: 14px;
+        }
+        .faq-resposta {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-item.aberto .faq-icon {
+            transform: rotate(45deg);
+            background: #C86849;
+            color: #FAF6EE;
+        }
+    </style>
+</head>
+<body class="bg-brand-sand text-brand-navy font-sans antialiased overflow-x-hidden relative selection:bg-brand-terracotta selection:text-white">
+
+    <!-- 🌀 PERSISTENT SVG FRACTAL NOISE OVERLAY (3.5% Opacidade Orgânica) -->
+    <div class="fixed inset-0 pointer-events-none z-[9999] opacity-[0.035]" 
+         style="background-image: url('data:image/svg+xml;utf8,<svg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'noiseFilter\'><feTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/></filter><rect width=\'100%\' height=\'100%\' filter=\'url(%23noiseFilter)\'/></svg>');">
+    </div>
+
+    <!-- 1️⃣ FIXED TOP NAVIGATION (Pill-shaped com Blur) -->
+    <header class="fixed top-5 left-0 right-0 z-50 px-4 sm:px-8">
+        <div class="max-w-[1380px] mx-auto flex items-center justify-between">
+            
+            <!-- Left: Logo & Nome -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-brand-navy text-brand-cream flex items-center justify-center font-display text-lg tracking-wider transition-transform duration-300 group-hover:scale-105">
+                    AM
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display tracking-wide text-lg sm:text-xl text-brand-navy leading-none">
+                        ANDREA DE OLIVEIRA MELO
+                    </span>
+                    <span class="font-mono text-[10px] tracking-wider uppercase text-brand-navy/60 font-semibold mt-0.5">
+                        Psicologia &bull; Neurociência da Aprendizagem &bull; TCC
+                    </span>
+                </div>
+            </a>
+
+            <!-- Center Menu (Desktop Pill) -->
+            <nav class="hidden md:flex items-center gap-7 bg-brand-cream/90 backdrop-blur-md px-7 py-2.5 rounded-full border border-brand-navy/10 shadow-sm">
+                <a href="#sobre" class="text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-terracotta transition-colors">Sobre</a>
+                <a href="#especialidades" class="text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-terracotta transition-colors">Abordagens</a>
+                <a href="#metodologia" class="text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-terracotta transition-colors">Como Funciona</a>
+                <a href="#depoimentos" class="text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-terracotta transition-colors">Depoimentos</a>
+                <a href="#faq" class="text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-terracotta transition-colors">Dúvidas</a>
+            </nav>
+
+            <!-- Right: CTA WhatsApp -->
+            <div class="flex items-center gap-3">
+                <a href="https://wa.me/5562999990000?text=Ol%C3%A1%2C%20Dra.%20Andrea!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20atendimento%20psicol%C3%B3gico%20em%20An%C3%A1polis." 
+                   target="_blank" 
+                   class="inline-flex items-center gap-2.5 bg-brand-terracotta text-brand-cream px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-xs sm:text-sm tracking-wider uppercase shadow-md hover:bg-brand-navy hover:text-brand-cream transition-all duration-300 transform hover:-translate-y-0.5">
+                    <span>Agendar Consulta</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2️⃣ HERO SECTION (Impacto Editorial & Narrativa Humanizada) -->
+    <section class="min-h-screen pt-36 pb-20 px-4 sm:px-8 flex flex-col justify-between max-w-[1380px] mx-auto relative">
+        
+        <!-- Top Tags & Badges -->
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-brand-navy/15 pb-6">
+            <div class="flex items-center gap-3">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-brand-terracotta animate-ping"></span>
+                <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-navy">
+                    Anápolis &bull; Bairro Jundiaí
+                </span>
+            </div>
+            <div class="flex items-center gap-3 bg-brand-cream px-4 py-1.5 rounded-full border border-brand-navy/10">
+                <span class="text-amber-500 font-bold text-sm">★ 5.0</span>
+                <span class="text-xs font-semibold text-brand-navy/80">Avaliação Máxima de Pacientes no Google</span>
+            </div>
+        </div>
+
+        <!-- Massive Hero Statement -->
+        <div class="my-12 sm:my-16">
+            <div class="overflow-hidden">
+                <h1 class="font-display text-[14vw] sm:text-[10vw] lg:text-[7.5vw] leading-[0.88] tracking-tight uppercase text-brand-navy">
+                    <span class="char-reveal" style="animation-delay: 0.1s">NEUROCIÊNCIA</span><br>
+                    <span class="char-reveal text-brand-terracotta" style="animation-delay: 0.25s">&amp; ACOLHIMENTO</span><br>
+                    <span class="char-reveal" style="animation-delay: 0.4s">PARA A VIDA REAL.</span>
+                </h1>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-10 items-end">
+                <div class="lg:col-span-7">
+                    <p class="text-lg sm:text-2xl font-medium text-brand-navy/85 leading-relaxed">
+                        Terapia Cognitivo-Comportamental e suporte especializado no desenvolvimento emocional e cognitivo de crianças, jovens e adultos em Anápolis.
+                    </p>
+                </div>
+                <div class="lg:col-span-5 flex flex-col sm:flex-row gap-4 lg:justify-end">
+                    <div class="bg-brand-sage_light border border-brand-sage/30 rounded-2xl p-5 text-brand-navy">
+                        <span class="font-mono text-[11px] font-bold uppercase text-brand-sage tracking-wider block mb-1">Localização Nobre</span>
+                        <span class="text-sm font-bold block">Rua Rodrigues Tomaz &bull; Jundiaí</span>
+                        <span class="text-xs text-brand-navy/70">Atendimento Presencial e Teleconsulta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Showcase Grid (Hero Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+            
+            <!-- Card 1: TCC Evidências -->
+            <div class="bg-brand-cream rounded-3xl p-7 border border-brand-navy/10 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                <div class="flex justify-between items-start mb-8">
+                    <span class="font-mono text-xs font-bold text-brand-terracotta tracking-wider">01 / ABORDAGEM</span>
+                    <span class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-xs font-bold">↗</span>
+                </div>
+                <div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide mb-2 text-brand-navy">Terapia Cognitivo-Comportamental</h3>
+                    <p class="text-xs sm:text-sm text-brand-navy/75 leading-relaxed">
+                        Metodologia padrão-ouro baseada em evidências científicas para manejo de ansiedade, regulação emocional e autoconhecimento.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2: Neurociência da Aprendizagem -->
+            <div class="bg-brand-navy text-brand-cream rounded-3xl p-7 border border-brand-navy flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                <div class="flex justify-between items-start mb-8">
+                    <span class="font-mono text-xs font-bold text-brand-sand tracking-wider">02 / ESPECIALIDADE</span>
+                    <span class="w-8 h-8 rounded-full bg-brand-cream/10 flex items-center justify-center text-xs font-bold">↗</span>
+                </div>
+                <div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide mb-2 text-brand-cream">Neurociência da Aprendizagem</h3>
+                    <p class="text-xs sm:text-sm text-brand-cream/80 leading-relaxed">
+                        Intervenções estratégicas para TDAH, dificuldades escolares, funções executivas e neurodesenvolvimento de excelência.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3: Espaço Terapêutico Jundiaí -->
+            <div class="bg-brand-terracotta text-brand-cream rounded-3xl p-7 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+                <div class="flex justify-between items-start mb-8">
+                    <span class="font-mono text-xs font-bold text-brand-sand tracking-wider">03 / ATENDIMENTO</span>
+                    <span class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">↗</span>
+                </div>
+                <div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide mb-2 text-white">Acolhimento &amp; Escuta Atenta</h3>
+                    <p class="text-xs sm:text-sm text-brand-cream/90 leading-relaxed">
+                        Ambiente seguro, reservado e acolhedor no bairro Jundiaí em Anápolis, preparado para proporcionar conforto e sigilo total.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- 3️⃣ MANIFESTO & FILOSOFIA CLÍNICA -->
+    <section id="sobre" class="py-24 bg-brand-navy text-brand-cream px-4 sm:px-8 relative overflow-hidden">
+        <div class="max-w-[1380px] mx-auto">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left: Big Editorial Quote -->
+                <div class="lg:col-span-7">
+                    <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-terracotta block mb-4">
+                        // A Filosofia do Consultório
+                    </span>
+                    <h2 class="font-display text-4xl sm:text-6xl lg:text-7xl uppercase leading-[0.95] tracking-tight">
+                        CUIDAR DA MENTE É COMPREENDER A CIÊNCIA DO <span class="font-serif_italic lowercase font-normal text-brand-terracotta text-5xl sm:text-7xl">comportamento</span> COM PROFUNDO RESPEITO À SUA HISTÓRIA.
+                    </h2>
+                    <div class="mt-8 space-y-4 text-brand-cream/80 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+                        <p>
+                            No consultório da <b>Dra. Andrea de Oliveira Melo</b>, a psicologia não é um processo frio ou abstrato. Unimos o rigor da <b>TCC (Terapia Cognitivo-Comportamental)</b> e os avanços da <b>Neurociência da Aprendizagem</b> para construir caminhos reais de superação e autonomia.
+                        </p>
+                        <p>
+                            Seja para destravar o potencial escolar de uma criança, superar crises de ansiedade em adultos ou reestruturar padrões de pensamento, nosso compromisso é oferecer um suporte técnico seguro e afetuoso.
+                        </p>
+                    </div>
+
+                    <!-- Credenciais Rápidas -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-10 pt-8 border-t border-brand-cream/15">
+                        <div>
+                            <span class="font-display text-3xl text-brand-sand block">100%</span>
+                            <span class="text-xs text-brand-cream/60 uppercase font-mono">Base Científica</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl text-brand-terracotta block">JUNDIAÍ</span>
+                            <span class="text-xs text-brand-cream/60 uppercase font-mono">Bairro Nobre</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl text-brand-sage block">5.0 ★</span>
+                            <span class="text-xs text-brand-cream/60 uppercase font-mono">Reputação Máxima</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Visual Box & Diferenciais -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-brand-cream/5 border border-brand-cream/10 p-8 rounded-3xl backdrop-blur-sm">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-terracotta/20 flex items-center justify-center text-brand-terracotta text-2xl font-bold mb-4">
+                            🧠
+                        </div>
+                        <h4 class="font-display text-xl uppercase tracking-wide mb-2 text-brand-cream">Neurociência Aplicada</h4>
+                        <p class="text-sm text-brand-cream/70 leading-relaxed">
+                            Entendimento claro sobre como as funções executivas, atenção, memória e regulação emocional operam no cotidiano.
+                        </p>
+                    </div>
+
+                    <div class="bg-brand-cream/5 border border-brand-cream/10 p-8 rounded-3xl backdrop-blur-sm">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-sage/20 flex items-center justify-center text-brand-sage text-2xl font-bold mb-4">
+                            🤝
+                        </div>
+                        <h4 class="font-display text-xl uppercase tracking-wide mb-2 text-brand-cream">Plano Terapêutico Sob Medida</h4>
+                        <p class="text-sm text-brand-cream/70 leading-relaxed">
+                            Metas claras, ferramentas práticas entre sessões e acompanhamento conjunto com escolas e famílias quando necessário.
+                        </p>
+                    </div>
+
+                    <div class="bg-brand-cream/5 border border-brand-cream/10 p-8 rounded-3xl backdrop-blur-sm">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-sand/20 flex items-center justify-center text-brand-sand text-2xl font-bold mb-4">
+                            🌿
+                        </div>
+                        <h4 class="font-display text-xl uppercase tracking-wide mb-2 text-brand-cream">Espaço Aconchegante</h4>
+                        <p class="text-sm text-brand-cream/70 leading-relaxed">
+                            Consultório preparado para promover calma e descompressão desde o momento da sua chegada no Bairro Jundiaí.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4️⃣ ESPECIALIDADES & ABORDAGENS (Asymmetrical Grid) -->
+    <section id="especialidades" class="py-24 px-4 sm:px-8 max-w-[1380px] mx-auto">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div>
+                <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-terracotta block mb-2">
+                    // Áreas de Atuação Clínica
+                </span>
+                <h2 class="font-display text-4xl sm:text-6xl uppercase tracking-tight text-brand-navy">
+                    SOLUÇÕES TERAPÊUTICAS &bull; CUIDADO INTEGRAL
+                </h2>
+            </div>
+            <p class="text-sm sm:text-base text-brand-navy/70 max-w-md">
+                Atendimento estruturado para crianças, adolescentes e adultos que buscam transformação real em Anápolis.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Item 1: Dificuldades de Aprendizagem & TDAH -->
+            <div class="bg-brand-cream p-8 rounded-3xl border border-brand-navy/10 hover:border-brand-terracotta transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="text-3xl mb-4">📚</div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide text-brand-navy mb-3">TDAH &amp; Aprendizagem</h3>
+                    <p class="text-sm text-brand-navy/75 leading-relaxed mb-6">
+                        Avaliação e reabilitação de dificuldades escolares, déficit de atenção, dislexia, hiperatividade e fortalecimento de funções executivas.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-navy/10 flex justify-between items-center text-xs font-mono font-bold text-brand-terracotta">
+                    <span>INFANTOJUVENIL &bull; ADULTO</span>
+                    <span>→</span>
+                </div>
+            </div>
+
+            <!-- Item 2: Ansiedade & Regulação Emocional -->
+            <div class="bg-brand-cream p-8 rounded-3xl border border-brand-navy/10 hover:border-brand-terracotta transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="text-3xl mb-4">🌊</div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide text-brand-navy mb-3">Ansiedade &amp; Pânico</h3>
+                    <p class="text-sm text-brand-navy/75 leading-relaxed mb-6">
+                        Ferramentas da TCC para controle de pensamentos automáticos, alívio de crises de angústia, fobias e estresse crônico.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-navy/10 flex justify-between items-center text-xs font-mono font-bold text-brand-terracotta">
+                    <span>MANEJO COGNITIVO</span>
+                    <span>→</span>
+                </div>
+            </div>
+
+            <!-- Item 3: Psicoterapia Adulto & Burnout -->
+            <div class="bg-brand-cream p-8 rounded-3xl border border-brand-navy/10 hover:border-brand-terracotta transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="text-3xl mb-4">💼</div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide text-brand-navy mb-3">Burnout &amp; Carreira</h3>
+                    <p class="text-sm text-brand-navy/75 leading-relaxed mb-6">
+                        Acompanhamento para profissionais sobrecarregados, esgotamento mental, síndrome do impostor e tomada de decisões difíceis.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-navy/10 flex justify-between items-center text-xs font-mono font-bold text-brand-terracotta">
+                    <span>EQUILÍBRIO &bull; CLAREZA</span>
+                    <span>→</span>
+                </div>
+            </div>
+
+            <!-- Item 4: Orientação de Pais & Famílias -->
+            <div class="bg-brand-cream p-8 rounded-3xl border border-brand-navy/10 hover:border-brand-terracotta transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="text-3xl mb-4">👨‍👩‍👧</div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide text-brand-navy mb-3">Orientação Parental</h3>
+                    <p class="text-sm text-brand-navy/75 leading-relaxed mb-6">
+                        Mentoria e suporte para mães e pais na condução de limites, rotinas de estudo, birras e desenvolvimento emocional saudável.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-navy/10 flex justify-between items-center text-xs font-mono font-bold text-brand-terracotta">
+                    <span>PARCERIA FAMILIAR</span>
+                    <span>→</span>
+                </div>
+            </div>
+
+            <!-- Item 5: Terapia Cognitivo-Comportamental (TCC) -->
+            <div class="bg-brand-cream p-8 rounded-3xl border border-brand-navy/10 hover:border-brand-terracotta transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="text-3xl mb-4">🎯</div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide text-brand-navy mb-3">Terapia do Esquema &amp; TCC</h3>
+                    <p class="text-sm text-brand-navy/75 leading-relaxed mb-6">
+                        Compreensão de crenças centrais arraigadas na infância que sabotam relacionamentos, autoimagem e metas na vida adulta.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-navy/10 flex justify-between items-center text-xs font-mono font-bold text-brand-terracotta">
+                    <span>REESTRUTURAÇÃO</span>
+                    <span>→</span>
+                </div>
+            </div>
+
+            <!-- Item 6: Teleconsulta Oficial -->
+            <div class="bg-brand-navy text-brand-cream p-8 rounded-3xl border border-brand-navy flex flex-col justify-between">
+                <div>
+                    <div class="text-3xl mb-4">💻</div>
+                    <h3 class="font-display text-2xl uppercase tracking-wide text-brand-cream mb-3">Atendimento Online</h3>
+                    <p class="text-sm text-brand-cream/80 leading-relaxed mb-6">
+                        Sessões seguras via plataforma criptografada para pacientes em qualquer cidade do Brasil e exterior, com a mesma eficácia presencial.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-cream/15 flex justify-between items-center text-xs font-mono font-bold text-brand-sand">
+                    <span>FLEXIBILIDADE TOTAL</span>
+                    <span>→</span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- 5️⃣ PASSO A PASSO / METODOLOGIA -->
+    <section id="metodologia" class="py-24 bg-brand-cream border-y border-brand-navy/10 px-4 sm:px-8">
+        <div class="max-w-[1380px] mx-auto">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-terracotta block mb-2">
+                    // A Jornada de Atendimento
+                </span>
+                <h2 class="font-display text-4xl sm:text-5xl uppercase tracking-tight text-brand-navy">
+                    COMO INICIAR SEU ACOMPANHAMENTO
+                </h2>
+                <p class="text-sm sm:text-base text-brand-navy/70 mt-3">
+                    Um processo claro, transparente e acolhedor desde a primeira mensagem.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Etapa 1 -->
+                <div class="relative bg-brand-sand/50 p-7 rounded-3xl border border-brand-navy/10">
+                    <span class="font-display text-5xl text-brand-terracotta/40 block mb-3">01</span>
+                    <h4 class="font-display text-xl uppercase text-brand-navy mb-2">Primeiro Contato</h4>
+                    <p class="text-xs sm:text-sm text-brand-navy/75 leading-relaxed">
+                        Você envia uma mensagem no WhatsApp. Alinhamos horários disponíveis, valores e tiramos todas as suas dúvidas.
+                    </p>
+                </div>
+
+                <!-- Etapa 2 -->
+                <div class="relative bg-brand-sand/50 p-7 rounded-3xl border border-brand-navy/10">
+                    <span class="font-display text-5xl text-brand-terracotta/40 block mb-3">02</span>
+                    <h4 class="font-display text-xl uppercase text-brand-navy mb-2">Sessão Inicial</h4>
+                    <p class="text-xs sm:text-sm text-brand-navy/75 leading-relaxed">
+                        Momento de escuta profunda para entender sua demanda, queixas principais e histórico pessoal ou escolar.
+                    </p>
+                </div>
+
+                <!-- Etapa 3 -->
+                <div class="relative bg-brand-sand/50 p-7 rounded-3xl border border-brand-navy/10">
+                    <span class="font-display text-5xl text-brand-terracotta/40 block mb-3">03</span>
+                    <h4 class="font-display text-xl uppercase text-brand-navy mb-2">Plano Estruturado</h4>
+                    <p class="text-xs sm:text-sm text-brand-navy/75 leading-relaxed">
+                        Definição conjunta de objetivos terapêuticos, técnicas aplicadas e ferramentas práticas para o seu dia a dia.
+                    </p>
+                </div>
+
+                <!-- Etapa 4 -->
+                <div class="relative bg-brand-sand/50 p-7 rounded-3xl border border-brand-navy/10">
+                    <span class="font-display text-5xl text-brand-terracotta/40 block mb-3">04</span>
+                    <h4 class="font-display text-xl uppercase text-brand-navy mb-2">Evolução Contínua</h4>
+                    <p class="text-xs sm:text-sm text-brand-navy/75 leading-relaxed">
+                        Acompanhamento periódico dos ganhos emocionais, autonomia e consolidação de novos hábitos e aprendizados.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Banner Agendamento Rápido -->
+            <div class="mt-14 bg-brand-navy text-brand-cream rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                <div>
+                    <h3 class="font-display text-2xl sm:text-3xl uppercase tracking-wide text-brand-cream">
+                        Pronto para dar o primeiro passo?
+                    </h3>
+                    <p class="text-sm text-brand-cream/80 mt-1">
+                        Horários disponíveis para atendimento presencial em Anápolis e online para todo o Brasil.
+                    </p>
+                </div>
+                <a href="https://wa.me/5562999990000?text=Ol%C3%A1%2C%20Dra.%20Andrea!%20Gostaria%20de%20verificar%20hor%C3%A1rios%20para%20consulta." 
+                   target="_blank"
+                   class="bg-brand-terracotta hover:bg-brand-cream hover:text-brand-navy text-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 whitespace-nowrap shadow-lg">
+                    Conversar no WhatsApp →
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6️⃣ PROVA SOCIAL & DEPOIMENTOS 5★ -->
+    <section id="depoimentos" class="py-24 px-4 sm:px-8 max-w-[1380px] mx-auto">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div>
+                <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-terracotta block mb-2">
+                    // Depoimentos Reais de Pacientes &bull; 5.0 Estrelas
+                </span>
+                <h2 class="font-display text-4xl sm:text-6xl uppercase tracking-tight text-brand-navy">
+                    O IMPACTO DO CUIDADO NA VIDA REAL
+                </h2>
+            </div>
+            <div class="flex items-center gap-2 bg-brand-cream px-5 py-2.5 rounded-full border border-brand-navy/10">
+                <span class="text-amber-500 font-bold">★★★★★</span>
+                <span class="text-xs font-bold text-brand-navy">100% de Avaliações Positivas</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Depoimento 1 -->
+            <div class="bg-brand-cream p-8 rounded-3xl border border-brand-navy/10 flex flex-col justify-between shadow-sm">
+                <div>
+                    <div class="text-amber-500 mb-4 text-sm font-bold">★★★★★</div>
+                    <p class="text-sm text-brand-navy/85 leading-relaxed italic mb-6">
+                        "A Dra. Andrea foi essencial no diagnóstico e no acompanhamento do meu filho. O acolhimento com a nossa família e o diálogo aberto com a escola transformaram o rendimento e a confiança dele."
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-navy/10 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-brand-terracotta text-white flex items-center justify-center font-bold text-xs">
+                        MF
+                    </div>
+                    <div>
+                        <b class="text-xs font-bold text-brand-navy block">Mariana F.</b>
+                        <span class="text-[11px] text-brand-navy/60">Mãe de Paciente &bull; Anápolis</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Depoimento 2 -->
+            <div class="bg-brand-cream p-8 rounded-3xl border border-brand-navy/10 flex flex-col justify-between shadow-sm">
+                <div>
+                    <div class="text-amber-500 mb-4 text-sm font-bold">★★★★★</div>
+                    <p class="text-sm text-brand-navy/85 leading-relaxed italic mb-6">
+                        "Cheguei ao consultório no Bairro Jundiaí com crises severas de ansiedade. A abordagem prática da TCC me deu ferramentas reais para retomar o controle da minha rotina de trabalho. Recomendo de olhos fechados!"
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-navy/10 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-brand-navy text-white flex items-center justify-center font-bold text-xs">
+                        RC
+                    </div>
+                    <div>
+                        <b class="text-xs font-bold text-brand-navy block">Rodrigo C.</b>
+                        <span class="text-[11px] text-brand-navy/60">Paciente Adulto &bull; Jundiaí</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Depoimento 3 -->
+            <div class="bg-brand-cream p-8 rounded-3xl border border-brand-navy/10 flex flex-col justify-between shadow-sm">
+                <div>
+                    <div class="text-amber-500 mb-4 text-sm font-bold">★★★★★</div>
+                    <p class="text-sm text-brand-navy/85 leading-relaxed italic mb-6">
+                        "Profissional extremamente capacitada, pontual e ética. O consultório é impecável e a sensação de segurança durante as sessões faz toda a diferença no processo terapêutico."
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-brand-navy/10 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-brand-sage text-white flex items-center justify-center font-bold text-xs">
+                        LS
+                    </div>
+                    <div>
+                        <b class="text-xs font-bold text-brand-navy block">Larissa S.</b>
+                        <span class="text-[11px] text-brand-navy/60">Paciente Clínica &bull; Anápolis</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- 7️⃣ FAQ INTERATIVO SANFONADO -->
+    <section id="faq" class="py-24 bg-brand-cream border-t border-brand-navy/10 px-4 sm:px-8">
+        <div class="max-w-[980px] mx-auto">
+            
+            <div class="text-center mb-16">
+                <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-terracotta block mb-2">
+                    // Dúvidas Frequentes
+                </span>
+                <h2 class="font-display text-4xl sm:text-5xl uppercase tracking-tight text-brand-navy">
+                    PERGUNTAS &amp; RESPOSTAS
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- FAQ 1 -->
+                <div class="faq-item bg-brand-sand/40 p-6 rounded-2xl cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-base sm:text-lg text-brand-navy">Como funciona a primeira consulta?</h4>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-brand-navy/10 flex items-center justify-center text-sm font-bold transition-transform duration-300">+</span>
+                    </div>
+                    <div class="faq-resposta text-sm text-brand-navy/80 leading-relaxed">
+                        A primeira sessão é uma entrevista inicial de acolhimento e compreensão da sua história. Nela, entendemos as queixas que motivaram a busca pelo atendimento e definimos a frequência e o direcionamento do tratamento.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item bg-brand-sand/40 p-6 rounded-2xl cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-base sm:text-lg text-brand-navy">O que é a Neurociência da Aprendizagem?</h4>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-brand-navy/10 flex items-center justify-center text-sm font-bold transition-transform duration-300">+</span>
+                    </div>
+                    <div class="faq-resposta text-sm text-brand-navy/80 leading-relaxed">
+                        É a aplicação prática de como o cérebro processa, armazena e consolida informações. Ela permite identificar bloqueios cognitivos, dificuldades de atenção (TDAH) e criar estratégias personalizadas de estudo e aprendizagem.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item bg-brand-sand/40 p-6 rounded-2xl cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-base sm:text-lg text-brand-navy">Vocês atendem por convênio ou emitem recibo para reembolso?</h4>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-brand-navy/10 flex items-center justify-center text-sm font-bold transition-transform duration-300">+</span>
+                    </div>
+                    <div class="faq-resposta text-sm text-brand-navy/80 leading-relaxed">
+                        Os atendimentos são particulares para garantir tempo e dedicação exclusiva a cada caso. Emitimos recibos e relatórios oficiais para que você possa solicitar o reembolso integral ou parcial junto ao seu plano de saúde (Bradesco, Unimed, Cassi, SulAmérica, etc.).
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item bg-brand-sand/40 p-6 rounded-2xl cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-base sm:text-lg text-brand-navy">Onde fica localizado o consultório presencial?</h4>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-brand-navy/10 flex items-center justify-center text-sm font-bold transition-transform duration-300">+</span>
+                    </div>
+                    <div class="faq-resposta text-sm text-brand-navy/80 leading-relaxed">
+                        O consultório está localizado na <b>Rua Rodrigues Tomaz, Bairro Jundiaí, Anápolis - GO</b>. Uma região nobre, com fácil estacionamento, acessibilidade e ambiente reservado.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8️⃣ FOOTER & CONTATO OFICIAL -->
+    <footer class="bg-brand-navy text-brand-cream pt-20 pb-12 px-4 sm:px-8">
+        <div class="max-w-[1380px] mx-auto">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-brand-cream/15">
+                
+                <!-- Col 1: Bio & Autoridade -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-brand-terracotta text-brand-cream flex items-center justify-center font-display text-xl">
+                            AM
+                        </div>
+                        <div>
+                            <span class="font-display text-2xl tracking-wide uppercase block">ANDREA DE OLIVEIRA MELO</span>
+                            <span class="font-mono text-xs text-brand-cream/60 uppercase tracking-widest">Psicologia &bull; Neurociência &bull; TCC</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-brand-cream/70 leading-relaxed max-w-md pt-2">
+                        Atendimento psicológico de alto padrão baseado em evidências científicas e acolhimento humano em Anápolis - Goiás.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="https://instagram.com/andreamelopsi" target="_blank" class="w-10 h-10 rounded-full bg-brand-cream/10 hover:bg-brand-terracotta flex items-center justify-center transition-colors text-xs font-bold">
+                            IG
+                        </a>
+                        <a href="https://wa.me/5562999990000" target="_blank" class="w-10 h-10 rounded-full bg-brand-cream/10 hover:bg-brand-terracotta flex items-center justify-center transition-colors text-xs font-bold">
+                            WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Links Rápidos -->
+                <div class="lg:col-span-3 space-y-3">
+                    <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-terracotta block mb-2">Navegação</span>
+                    <ul class="space-y-2 text-sm text-brand-cream/80">
+                        <li><a href="#sobre" class="hover:text-brand-terracotta transition-colors">Sobre a Profissional</a></li>
+                        <li><a href="#especialidades" class="hover:text-brand-terracotta transition-colors">Abordagens Clínicas</a></li>
+                        <li><a href="#metodologia" class="hover:text-brand-terracotta transition-colors">Etapas do Atendimento</a></li>
+                        <li><a href="#depoimentos" class="hover:text-brand-terracotta transition-colors">Avaliações de Pacientes</a></li>
+                        <li><a href="#faq" class="hover:text-brand-terracotta transition-colors">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Informações de Consultório -->
+                <div class="lg:col-span-4 space-y-3">
+                    <span class="font-mono text-xs font-bold uppercase tracking-widest text-brand-terracotta block mb-2">Consultório Presencial</span>
+                    <div class="text-sm text-brand-cream/80 space-y-2 leading-relaxed">
+                        <p>📍 Rua Rodrigues Tomaz &bull; Bairro Jundiaí<br>Anápolis &mdash; GO</p>
+                        <p>💬 WhatsApp: (62) 99999-0000</p>
+                        <p>🕒 Seg a Sex: 08:00 às 19:00 (Com agendamento prévio)</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-cream/50 font-mono">
+                <div>
+                    &copy; 2026 Andrea de Oliveira Melo &bull; Todos os direitos reservados.
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>Design &amp; Conversão por</span>
+                    <b class="text-brand-terracotta">Aholic Sites</b>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- 🟢 FLOATING WHATSAPP BUTTON (Pill com Glow) -->
+    <a href="https://wa.me/5562999990000?text=Ol%C3%A1%2C%20Dra.%20Andrea!%20Vim%20pelo%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20atendimento%20psicol%C3%B3gico." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#25D366] text-white px-5 py-3.5 rounded-full shadow-2xl hover:scale-105 hover:bg-[#1EBE5D] transition-all duration-300 group">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.54 1.761.817 2.796.817 3.182 0 5.768-2.587 5.769-5.766.001-3.182-2.585-5.768-5.769-5.768zm0-2.172c4.379 0 7.931 3.552 7.931 7.938 0 4.387-3.552 7.938-7.931 7.938-1.341 0-2.61-.337-3.73-1.002l-4.27 1.118 1.144-4.179c-.742-1.189-1.144-2.548-1.144-3.875 0-4.386 3.552-7.938 7.931-7.938z"/></svg>
+        <span class="font-bold text-xs uppercase tracking-wider hidden sm:inline">Agendar no WhatsApp</span>
+    </a>
+
+    <!-- Scripts de Interatividade -->
+    <script>
+        // Scroll Reveal Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+        // Sanfonado FAQ
+        function toggleFaq(el) {
+            const aberto = el.classList.contains('aberto');
+            document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('aberto'));
+            if (!aberto) el.classList.add('aberto');
+        }
+    </script>
+</body>
+</html>
