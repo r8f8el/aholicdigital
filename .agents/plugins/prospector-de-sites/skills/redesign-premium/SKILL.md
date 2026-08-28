@@ -49,11 +49,22 @@ Antes de gerar qualquer linha de código HTML, a IA **DEVE verificar ou consulta
 
 ---
 
+## 🚀 Etapa 5: Deploy Automático na Vercel (https://aholicdigital.vercel.app/)
+
+Toda vez que um site for **criado ou modificado**:
+1. Atualizar os dados do lead e a versão em `dashboard.html` e sincronizar com `index.html`.
+2. Executar o commit com `git add .` e mensagem descritiva (ex: `feat: publica site [slug] na Vercel`).
+3. Disparar o `git push origin main` para que a Vercel atualize instantaneamente o site oficial.
+4. Fornecer o link oficial público ao vivo: `https://aholicdigital.vercel.app/sites/[slug]/[slug].html`.
+
+---
+
 ## 📋 Checklist Final de Entrega
 
 - [ ] Instagram do cliente consultado e fotos reais aplicadas
-- [ ] Arquétipo de design respeitado (cores, tipografia e espaçamento alinhados a `referencias/catalogo-design.json`)
+- [ ] Arquétipo de design respeitado (cores, tipografia e espaçamento alinhados aos presets visuais)
 - [ ] Zero texto de preenchimento ou clichês de IA
 - [ ] Todos os botões e CTAs com link direto para o WhatsApp no formato correto
 - [ ] 100% responsivo no mobile (360px a 430px) sem rolagem horizontal
-- [ ] `[slug]-editor.html` gerado e `comparar.html` atualizado
+- [ ] `[slug]-editor.html` gerado e registrado no dashboard
+- [ ] Sincronizado no GitHub e publicado na Vercel (`https://aholicdigital.vercel.app/`)
