@@ -388,5 +388,78 @@
     ],
     "prioridade_conversao": 1,
     "ativo": true
+  },
+  {
+    "id": "raw-form-brutalist-blobs",
+    "nome": "Raw Form & Cartaz Atmosférico",
+    "descricao": "Estética brutalista contemporânea que combina tipografia monumental dramática (18vw com recuo) e profundidade atmosférica com manchas gradientes orgânicas (blurred blobs em multiply), grids sem borda e transições cubic-bezier de alto padrão.",
+    "origem": "https://superdesign.dev/raw-form",
+    "screenshot": "assets/presets/raw-form.webp",
+    "tags": ["brutalista", "poster", "atmosferico", "blobs-gradient", "clash-display", "dramatico", "editorial", "alto-impacto"],
+    "nichos_recomendados": [
+      "Restaurantes Conceituais & Gastronomia Urbana",
+      "Cafés Especiais & Torrefações",
+      "Moda Autoral & Streetwear",
+      "Estúdios de Arquitetura & Design",
+      "Barbearias Conceito & Estética Masculina",
+      "Produtoras Culturais & Eventos"
+    ],
+    "nichos_evitar": [
+      "Clínicas Odontológicas Tradicionais",
+      "Escritórios Contábeis Conservadores",
+      "Serviços B2B Técnicos Formais"
+    ],
+    "composicao": "full-viewport-poster-breaks",
+    "navegacao": "minimalist-fixed-dock-with-mix-blend",
+    "densidade": "moderada",
+    "tipografia": {
+      "display": "Clash Display (Bold 700, tracking -0.05em, leading 0.75, segunda linha com recuo)",
+      "body": "Satoshi (Medium 500, limpa e funcional)",
+      "labels": "Satoshi Uppercase (14px, tracking 0.15em)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "borderless-subtle-zoom (Aspecto 3:4 sem moldura com zoom 1.05 e troca de cor no título)",
+      "proporcoes": ["3:4", "1:1", "16:9"]
+    },
+    "movimento": {
+      "estilo": [
+        "pulsing-gradient-blobs",
+        "cubic-bezier-slide-up-0.8s",
+        "directional-slide-fill-button",
+        "title-color-shift-hover"
+      ],
+      "intensidade_interacao": 3,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "warm-stone-e-accent-vibrante (adaptavel a marca do cliente)",
+      "sugestoes": {
+        "fundo": "#E4E2DD",
+        "superficie": "#D9D6D0",
+        "texto": "#1E1E1E",
+        "texto_secundario": "#444444",
+        "acento": "#DB4A2B",
+        "acento_secundario": "#F8A348",
+        "linha": "rgba(30, 30, 30, 0.15)"
+      }
+    },
+    "componentes_permitidos": [
+      "hero-poster-typographic-break",
+      "animated-gradient-blobs-multiply",
+      "borderless-product-or-service-grid",
+      "massive-category-divider",
+      "campaign-block-12-columns",
+      "interactive-cta-slide-fill",
+      "monospaced-year-giant-footer"
+    ],
+    "proibicoes": [
+      "cards-com-muitas-sombras-brancas",
+      "gradientes-neon-estilo-cripto",
+      "fontes-cursivas-finas",
+      "layouts-cheios-de-linhas-desnecessarias"
+    ],
+    "prioridade_conversao": 2,
+    "ativo": true
   }
 ]
