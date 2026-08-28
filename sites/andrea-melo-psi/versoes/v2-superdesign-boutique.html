@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANDREA DE OLIVEIRA MELO &bull; Psicologia & Neurociência | Anápolis</title>
+    <meta name="description" content="Psicologia Clínica, Terapia Cognitivo-Comportamental e Neurociência da Aprendizagem em Anápolis - GO. Consultório no Bairro Jundiaí.">
+    
+    <!-- Google Fonts: League Spartan (100% Fidelity) + Playfair Display Italic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        st: {
+                            bg: '#fdf8f3',
+                            surface: '#f5f0eb',
+                            accent: '#e4a4bd',
+                            text: '#262626',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"League Spartan"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    transitionTimingFunction: {
+                        'luxury': 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'League Spartan', sans-serif; }
+        ::selection { background: #e4a4bd; color: #262626; }
+        
+        /* Slow Bounce for Floating Badge */
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(-5%); }
+            50% { transform: translateY(5%); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 4s ease-in-out infinite;
+        }
+
+        /* Stagger Grid Offset for Even Items on Desktop */
+        @media (min-width: 768px) {
+            .stagger-grid .stagger-item:nth-child(even) {
+                margin-top: 100px;
+            }
+        }
+
+        /* Scroll-Triggered Reveal */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grayscale to Color Image Zoom Hover */
+        .luxury-img-card {
+            overflow: hidden;
+            border-radius: 24px;
+            position: relative;
+        }
+        .luxury-img-card img {
+            filter: grayscale(100%);
+            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .luxury-img-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+
+        /* Portfolio Stagger Item Hover */
+        .portfolio-item-card {
+            overflow: hidden;
+            border-radius: 16px;
+            position: relative;
+        }
+        .portfolio-item-card img {
+            filter: grayscale(100%);
+            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portfolio-item-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+        .portfolio-overlay-circle {
+            width: 96px;
+            height: 96px;
+            background: #000000;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .portfolio-item-card:hover .portfolio-overlay-circle {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Service Cards Smooth 0.7s Hover */
+        .service-card {
+            background-color: #fdf8f3;
+            transition: background-color 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover {
+            background-color: #e4a4bd;
+        }
+        .service-card .service-icon {
+            color: #e4a4bd;
+            transition: color 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover .service-icon {
+            color: #262626;
+        }
+
+        /* FAQ Acordeon */
+        .faq-item {
+            border-bottom: 1px solid rgba(38, 38, 38, 0.12);
+            transition: all 0.3s ease;
+        }
+        .faq-item.aberto .faq-resposta {
+            max-height: 280px;
+            opacity: 1;
+            padding-top: 12px;
+        }
+        .faq-resposta {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-item.aberto .faq-icon {
+            transform: rotate(45deg);
+            background: #e4a4bd;
+            color: #262626;
+        }
+    </style>
+</head>
+<body class="bg-[#fdf8f3] text-[#262626] antialiased selection:bg-[#e4a4bd] selection:text-[#262626]">
+
+    <!-- 1️⃣ NAVEGAÇÃO (Fixed Top 80px, Glassmorphism) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 h-[80px] px-6 sm:px-12 flex items-center justify-between border-b border-[#262626]/10"
+         style="background: rgba(253, 248, 243, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+        
+        <!-- Esquerda: Logo / Nome em Caps -->
+        <a href="#" class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#262626] text-[#fdf8f3] flex items-center justify-center font-[900] text-xs">
+                AM
+            </div>
+            <span class="text-2xl sm:text-[26px] font-[900] tracking-tighter uppercase text-[#262626] leading-none">
+                ANDREA DE OLIVEIRA MELO
+            </span>
+        </a>
+
+        <!-- Centro: Links de Navegação (hidden em mobile) -->
+        <div class="hidden md:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <a href="#abordagens" class="hover:text-[#e4a4bd] transition-colors">Abordagens</a>
+            <a href="#consultorio" class="hover:text-[#e4a4bd] transition-colors">Consultório</a>
+            <a href="#sobre" class="hover:text-[#e4a4bd] transition-colors">Sobre</a>
+            <a href="#metodologia" class="hover:text-[#e4a4bd] transition-colors">Como Funciona</a>
+            <a href="#faq" class="hover:text-[#e4a4bd] transition-colors">Dúvidas</a>
+        </div>
+
+        <!-- Direita: CTA Button -->
+        <a href="https://wa.me/5562999990000?text=Ol%C3%A1%2C%20Dra.%20Andrea!%20Acessei%20o%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20atendimento%20psicol%C3%B3gico%20em%20An%C3%A1polis." 
+           target="_blank"
+           class="bg-[#e4a4bd] hover:brightness-95 text-[#262626] text-xs font-[800] tracking-wider uppercase px-7 py-3 rounded-full transition-all duration-300 shadow-sm">
+            Agendar Consulta
+        </a>
+    </nav>
+
+    <!-- 2️⃣ HERO SECTION (Full Viewport Height, 12 cols, 7:5 split) -->
+    <section class="min-h-screen pt-28 pb-16 sm:py-0 sm:h-screen flex items-center justify-center px-6 sm:px-12 border-b border-[#262626]/10">
+        <div class="max-w-[1440px] w-full mx-auto grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+            
+            <!-- Coluna Esquerda (7 cols) -->
+            <div class="lg:col-span-7 space-y-6 sm:space-y-8 reveal-up active">
+                <span class="text-[10px] font-bold tracking-[0.4em] uppercase text-[#e4a4bd] block">
+                    ANÁPOLIS &bull; BAIRRO JUNDIAÍ &bull; NEUROCIÊNCIA &amp; TCC
+                </span>
+
+                <!-- Headline com palavra em italic serif lowercase -->
+                <h1 class="text-5xl sm:text-7xl lg:text-[6.5vw] font-[900] leading-[0.88] tracking-tight uppercase text-[#262626]">
+                    Neurociência &amp; <span class="italic font-serif lowercase text-[#e4a4bd]">acolhimento</span> para a vida real.
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="text-xl sm:text-2xl text-[#262626]/70 leading-relaxed font-medium max-w-xl">
+                    Psicologia Clínica baseada em evidências científicas para crianças, jovens e adultos no Bairro Jundiaí em Anápolis.
+                </p>
+
+                <!-- CTA Arrow Link -->
+                <div class="pt-2 flex flex-wrap items-center gap-6">
+                    <a href="https://wa.me/5562999990000?text=Ol%C3%A1%2C%20Dra.%20Andrea!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio." 
+                       target="_blank"
+                       class="inline-flex items-center gap-3 text-sm sm:text-base font-bold uppercase tracking-widest pb-1 border-b-2 border-[#e4a4bd] text-[#262626] hover:text-[#e4a4bd] transition-colors">
+                        <span>Iniciar Atendimento no WhatsApp</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Coluna Direita (5 cols) -->
+            <div class="lg:col-span-5 relative reveal-up active pt-4 sm:pt-0">
+                
+                <!-- Imagem Card (aspecto 4:5, 24px border-radius, grayscale(100%) -> hover color) -->
+                <div class="luxury-img-card aspect-[4/5] bg-[#f5f0eb] shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80" 
+                         alt="Dra. Andrea de Oliveira Melo &mdash; Consultório de Psicologia e Neurociência" 
+                         class="w-full h-full object-cover">
+                </div>
+
+                <!-- Floating Badge Circle (160px diameter, #e4a4bd, -bottom-10 -left-10, bounce-slow) -->
+                <div class="absolute -bottom-6 -left-6 sm:-bottom-10 sm:-left-10 w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] rounded-full bg-[#e4a4bd] text-[#262626] flex flex-col items-center justify-center shadow-lg animate-bounce-slow border-2 border-[#fdf8f3]">
+                    <span class="font-serif italic text-3xl sm:text-4xl font-bold leading-none">5.0 ★</span>
+                    <span class="text-[8px] sm:text-[9px] uppercase font-bold tracking-[0.2em] mt-1 text-center px-2">
+                        AVALIAÇÃO MÁXIMA
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3️⃣ ABORDAGENS CLÍNICAS (Background #f5f0eb) -->
+    <section id="abordagens" class="py-24 sm:py-32 bg-[#f5f0eb] border-b border-[#262626]/10">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <!-- Header Section -->
+            <div class="mb-16 reveal-up">
+                <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[#e4a4bd] block mb-2">
+                    ESPECIALIDADES &bull; EVIDÊNCIAS
+                </span>
+                <h2 class="text-5xl sm:text-7xl lg:text-[7vw] font-[900] leading-[0.85] uppercase text-[#262626]">
+                    Abordagens
+                </h2>
+            </div>
+
+            <!-- Grid 3 Colunas com hover 0.7s -->
+            <div class="grid md:grid-cols-3 border-t border-[#262626]/10 divide-y md:divide-y-0 md:divide-x divide-[#262626]/10">
+                
+                <!-- Card 1: TDAH & Neuroaprendizagem -->
+                <div class="service-card p-10 md:p-14 space-y-6 reveal-up">
+                    <div class="service-icon text-5xl sm:text-6xl">
+                        <!-- Brain Icon -->
+                        <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-[900] uppercase text-[#262626] leading-tight">
+                        TDAH &amp; Aprendizagem
+                    </h3>
+                    <p class="text-base sm:text-lg text-[#262626]/70 leading-relaxed font-normal">
+                        Intervenções precisas para dificuldades escolares, regulação de foco, funções executivas e potencialização do neurodesenvolvimento.
+                    </p>
+                </div>
+
+                <!-- Card 2: TCC & Ansiedade -->
+                <div class="service-card p-10 md:p-14 space-y-6 reveal-up">
+                    <div class="service-icon text-5xl sm:text-6xl">
+                        <!-- Compass / Target Icon -->
+                        <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-[900] uppercase text-[#262626] leading-tight">
+                        Ansiedade &amp; Regulação
+                    </h3>
+                    <p class="text-base sm:text-lg text-[#262626]/70 leading-relaxed font-normal">
+                        Manejo de pensamentos automáticos, síndrome do pânico e burnout com a eficácia comprovada da Terapia Cognitivo-Comportamental.
+                    </p>
+                </div>
+
+                <!-- Card 3: Orientação Parental & Adultos -->
+                <div class="service-card p-10 md:p-14 space-y-6 reveal-up">
+                    <div class="service-icon text-5xl sm:text-6xl">
+                        <!-- Heart / Care Icon -->
+                        <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-[900] uppercase text-[#262626] leading-tight">
+                        Família &amp; Vida Adulta
+                    </h3>
+                    <p class="text-base sm:text-lg text-[#262626]/70 leading-relaxed font-normal">
+                        Mentoria de pais na condução de limites saudáveis e psicoterapia individual profunda para autoconhecimento e clareza de decisões.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4️⃣ STAGGERED SHOWCASE (Offset 100px on desktop) -->
+    <section id="consultorio" class="py-24 sm:py-36 bg-white border-b border-[#262626]/10">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-16 pb-8 border-b border-[#262626]/10 reveal-up">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[#e4a4bd] block mb-2">
+                        ESPAÇO DE DESENVOLVIMENTO
+                    </span>
+                    <h2 class="text-4xl sm:text-6xl font-[900] uppercase text-[#262626]">
+                        Cuidado em Cada Detalhe
+                    </h2>
+                </div>
+                <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#262626]/50">
+                    BAIRRO JUNDIAÍ &bull; ANÁPOLIS - GO
+                </div>
+            </div>
+
+            <!-- Staggered Grid -->
+            <div class="grid md:grid-cols-2 gap-12 sm:gap-16 stagger-grid">
+                
+                <!-- Item 01 -->
+                <div class="stagger-item space-y-6 reveal-up">
+                    <div class="portfolio-item-card aspect-[3/4] bg-[#f5f0eb]">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80" alt="Ambiente Clínico" class="w-full h-full object-cover">
+                        <div class="portfolio-overlay-circle">
+                            <span class="text-white text-[10px] font-[800] uppercase tracking-widest text-center leading-tight">
+                                VER<br>ESPAÇO
+                            </span>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-[#e4a4bd] font-bold tracking-widest uppercase block">
+                            CONSULTÓRIO PRESENCIAL
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-[900] text-[#262626]">
+                            Ambiente Aconchegante no Bairro Jundiaí
+                        </h3>
+                        <p class="text-[10px] font-bold tracking-widest text-[#262626]/40 uppercase">
+                            RUA RODRIGUES TOMAZ &bull; ANÁPOLIS
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 02 -->
+                <div class="stagger-item space-y-6 reveal-up">
+                    <div class="portfolio-item-card aspect-[3/4] bg-[#f5f0eb]">
+                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1000&q=80" alt="Neurociência da Aprendizagem" class="w-full h-full object-cover">
+                        <div class="portfolio-overlay-circle">
+                            <span class="text-white text-[10px] font-[800] uppercase tracking-widest text-center leading-tight">
+                                VER<br>MÉTODO
+                            </span>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-[#e4a4bd] font-bold tracking-widest uppercase block">
+                            NEUROCIÊNCIA APLICADA
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-[900] text-[#262626]">
+                            Estratégias para Potencializar a Aprendizagem
+                        </h3>
+                        <p class="text-[10px] font-bold tracking-widest text-[#262626]/40 uppercase">
+                            INFANTOJUVENIL &bull; ESCOLAR
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 03 -->
+                <div class="stagger-item space-y-6 reveal-up">
+                    <div class="portfolio-item-card aspect-[3/4] bg-[#f5f0eb]">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=80" alt="Psicoterapia Adulto" class="w-full h-full object-cover">
+                        <div class="portfolio-overlay-circle">
+                            <span class="text-white text-[10px] font-[800] uppercase tracking-widest text-center leading-tight">
+                                VER<br>PLANO
+                            </span>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-[#e4a4bd] font-bold tracking-widest uppercase block">
+                            PSICOTERAPIA ADULTO
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-[900] text-[#262626]">
+                            Clareza Mental &amp; Reestruturação de Hábitos
+                        </h3>
+                        <p class="text-[10px] font-bold tracking-widest text-[#262626]/40 uppercase">
+                            TERAPIA COGNITIVO-COMPORTAMENTAL
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 04 -->
+                <div class="stagger-item space-y-6 reveal-up">
+                    <div class="portfolio-item-card aspect-[3/4] bg-[#f5f0eb]">
+                        <img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=1000&q=80" alt="Teleconsulta Online" class="w-full h-full object-cover">
+                        <div class="portfolio-overlay-circle">
+                            <span class="text-white text-[10px] font-[800] uppercase tracking-widest text-center leading-tight">
+                                VER<br>ONLINE
+                            </span>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-[#e4a4bd] font-bold tracking-widest uppercase block">
+                            FLEXIBILIDADE DIGITAL
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-[900] text-[#262626]">
+                            Atendimento Online Seguro &bull; Todo o Brasil
+                        </h3>
+                        <p class="text-[10px] font-bold tracking-widest text-[#262626]/40 uppercase">
+                            PLATAFORMA CRIPTOGRAFADA
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5️⃣ SOBRE A PROFISSIONAL & NARRATIVA -->
+    <section id="sobre" class="py-24 sm:py-36 bg-[#fdf8f3] border-b border-[#262626]/10">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            <div class="lg:col-span-6 space-y-8 reveal-up">
+                <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[#e4a4bd] block">
+                    BIOGRAFIA &bull; AUTORIDADE
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-[900] uppercase text-[#262626] leading-tight">
+                    Ciência, escuta atenta e <span class="italic font-serif lowercase text-[#e4a4bd]">transformação</span> humana.
+                </h2>
+                <div class="space-y-4 text-base sm:text-lg text-[#262626]/75 leading-relaxed font-normal">
+                    <p>
+                        A <b>Dra. Andrea de Oliveira Melo</b> dedica sua trajetória clínica ao desenvolvimento cognitivo, emocional e comportamental de pacientes em Anápolis e em todo o Brasil.
+                    </p>
+                    <p>
+                        Aliando o rigor científico da <b>Terapia Cognitivo-Comportamental (TCC)</b> com os avanços mais recentes da <b>Neurociência da Aprendizagem</b>, cada atendimento é conduzido com plano individualizado, metas claras e acolhimento ético inegociável.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 bg-[#f5f0eb] p-10 sm:p-14 rounded-3xl space-y-8 reveal-up">
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <span class="font-serif italic text-4xl sm:text-5xl font-bold text-[#262626] block">100%</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-[#262626]/60">Base em Evidências</span>
+                    </div>
+                    <div>
+                        <span class="font-serif italic text-4xl sm:text-5xl font-bold text-[#e4a4bd] block">5.0 ★</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-[#262626]/60">Avaliações Positivas</span>
+                    </div>
+                    <div>
+                        <span class="font-serif italic text-4xl sm:text-5xl font-bold text-[#262626] block">Jundiaí</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-[#262626]/60">Bairro Nobre Anápolis</span>
+                    </div>
+                    <div>
+                        <span class="font-serif italic text-4xl sm:text-5xl font-bold text-[#e4a4bd] block">TCC</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-[#262626]/60">Padrão-Ouro Clínico</span>
+                    </div>
+                </div>
+                <div class="pt-6 border-t border-[#262626]/10">
+                    <p class="text-xs uppercase font-bold tracking-widest text-[#262626]/50">
+                        ATENDIMENTO PRESENCIAL NA RUA RODRIGUES TOMAZ &bull; ONLINE VIA TELECONSULTA
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6️⃣ METODOLOGIA EM 4 PASSOS -->
+    <section id="metodologia" class="py-24 sm:py-32 bg-[#f5f0eb] border-b border-[#262626]/10">
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
+            
+            <div class="mb-16 reveal-up">
+                <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[#e4a4bd] block mb-2">
+                    ETAPAS DO ATENDIMENTO
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-[900] uppercase text-[#262626]">
+                    Como Funciona a Jornada
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                
+                <div class="bg-[#fdf8f3] p-8 rounded-2xl space-y-4 reveal-up border border-[#262626]/5">
+                    <span class="font-serif italic text-3xl font-bold text-[#e4a4bd]">01</span>
+                    <h4 class="text-xl font-[900] uppercase text-[#262626]">Contato Inicial</h4>
+                    <p class="text-sm text-[#262626]/70 leading-relaxed">
+                        Envio de mensagem via WhatsApp para alinhamento de horários e esclarecimento de dúvidas.
+                    </p>
+                </div>
+
+                <div class="bg-[#fdf8f3] p-8 rounded-2xl space-y-4 reveal-up border border-[#262626]/5">
+                    <span class="font-serif italic text-3xl font-bold text-[#e4a4bd]">02</span>
+                    <h4 class="text-xl font-[900] uppercase text-[#262626]">Sessão de Escuta</h4>
+                    <p class="text-sm text-[#262626]/70 leading-relaxed">
+                        Entrevista inicial para compreender sua queixa principal, objetivos e histórico de vida.
+                    </p>
+                </div>
+
+                <div class="bg-[#fdf8f3] p-8 rounded-2xl space-y-4 reveal-up border border-[#262626]/5">
+                    <span class="font-serif italic text-3xl font-bold text-[#e4a4bd]">03</span>
+                    <h4 class="text-xl font-[900] uppercase text-[#262626]">Plano Terapêutico</h4>
+                    <p class="text-sm text-[#262626]/70 leading-relaxed">
+                        Definição conjunta de metas práticas, ferramentas da TCC e exercícios para o cotidiano.
+                    </p>
+                </div>
+
+                <div class="bg-[#fdf8f3] p-8 rounded-2xl space-y-4 reveal-up border border-[#262626]/5">
+                    <span class="font-serif italic text-3xl font-bold text-[#e4a4bd]">04</span>
+                    <h4 class="text-xl font-[900] uppercase text-[#262626]">Evolução Contínua</h4>
+                    <p class="text-sm text-[#262626]/70 leading-relaxed">
+                        Acompanhamento periódico dos ganhos de autonomia, clareza mental e regulação emocional.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7️⃣ FAQ INTERATIVO -->
+    <section id="faq" class="py-24 sm:py-32 bg-[#fdf8f3] border-b border-[#262626]/10">
+        <div class="max-w-[980px] mx-auto px-6 sm:px-12">
+            
+            <div class="text-center mb-16 reveal-up">
+                <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-[#e4a4bd] block mb-2">
+                    DÚVIDAS FREQUENTES
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-[900] uppercase text-[#262626]">
+                    Perguntas Frequentes
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                
+                <div class="faq-item bg-[#f5f0eb] p-6 sm:p-8 rounded-2xl cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-[800] text-base sm:text-lg text-[#262626]">Como é feita a primeira consulta?</h4>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-[#262626]/10 flex items-center justify-center text-sm font-bold transition-transform duration-300">+</span>
+                    </div>
+                    <div class="faq-resposta text-sm sm:text-base text-[#262626]/75 leading-relaxed">
+                        A primeira sessão é dedicada ao acolhimento e entendimento detalhado das suas necessidades ou das dificuldades escolares do seu filho. Nela estabelecemos as primeiras orientações e estruturamos a frequência ideal de atendimento.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-[#f5f0eb] p-6 sm:p-8 rounded-2xl cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-[800] text-base sm:text-lg text-[#262626]">Como funciona o suporte em Neurociência da Aprendizagem?</h4>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-[#262626]/10 flex items-center justify-center text-sm font-bold transition-transform duration-300">+</span>
+                    </div>
+                    <div class="faq-resposta text-sm sm:text-base text-[#262626]/75 leading-relaxed">
+                        Através da avaliação de funções cognitivas como atenção, memória de trabalho e planejamento, identificamos bloqueios e desenvolvemos estratégias práticas para superar desafios acadêmicos e comportamentais.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-[#f5f0eb] p-6 sm:p-8 rounded-2xl cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-[800] text-base sm:text-lg text-[#262626]">Emitem recibo para reembolso em convênio?</h4>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-[#262626]/10 flex items-center justify-center text-sm font-bold transition-transform duration-300">+</span>
+                    </div>
+                    <div class="faq-resposta text-sm sm:text-base text-[#262626]/75 leading-relaxed">
+                        Sim. Fornecemos recibos e relatórios oficiais para que você possa solicitar o reembolso integral ou parcial junto ao seu plano de saúde (Unimed, Bradesco, Cassi, SulAmérica, etc.).
+                    </div>
+                </div>
+
+                <div class="faq-item bg-[#f5f0eb] p-6 sm:p-8 rounded-2xl cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-[800] text-base sm:text-lg text-[#262626]">Qual o endereço do consultório presencial?</h4>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-[#262626]/10 flex items-center justify-center text-sm font-bold transition-transform duration-300">+</span>
+                    </div>
+                    <div class="faq-resposta text-sm sm:text-base text-[#262626]/75 leading-relaxed">
+                        Estamos localizados na <b>Rua Rodrigues Tomaz, nº 95, Bairro Jundiaí, Anápolis - GO</b>, em ambiente reservado, acessível e de fácil localização.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8️⃣ FOOTER DE ALTO IMPACTO -->
+    <footer class="bg-[#262626] text-[#fdf8f3] pt-20 pb-12 px-6 sm:px-12">
+        <div class="max-w-[1440px] mx-auto">
+            
+            <div class="grid lg:grid-cols-12 gap-12 pb-16 border-b border-[#fdf8f3]/15">
+                
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-3xl sm:text-4xl font-[900] uppercase tracking-tight block">
+                        ANDREA DE OLIVEIRA MELO
+                    </span>
+                    <p class="text-sm text-[#fdf8f3]/70 leading-relaxed max-w-md">
+                        Psicologia Clínica &bull; TCC &bull; Neurociência da Aprendizagem. Atendimento presencial no Bairro Jundiaí em Anápolis e online para todo o Brasil.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://wa.me/5562999990000?text=Ol%C3%A1%2C%20Dra.%20Andrea!" 
+                           target="_blank"
+                           class="bg-[#e4a4bd] text-[#262626] text-xs font-[900] uppercase tracking-wider px-8 py-3.5 rounded-full inline-block hover:brightness-95 transition-all">
+                            Falar Diretamente no WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 space-y-3 text-xs uppercase font-bold tracking-widest text-[#fdf8f3]/60">
+                    <span class="text-[#e4a4bd] block mb-4">Navegação</span>
+                    <p><a href="#abordagens" class="hover:text-[#fdf8f3]">Abordagens Clínicas</a></p>
+                    <p><a href="#consultorio" class="hover:text-[#fdf8f3]">Consultório Jundiaí</a></p>
+                    <p><a href="#sobre" class="hover:text-[#fdf8f3]">Sobre a Profissional</a></p>
+                    <p><a href="#metodologia" class="hover:text-[#fdf8f3]">Como Funciona</a></p>
+                    <p><a href="#faq" class="hover:text-[#fdf8f3]">Perguntas Frequentes</a></p>
+                </div>
+
+                <div class="lg:col-span-3 space-y-3 text-xs uppercase font-bold tracking-widest text-[#fdf8f3]/60">
+                    <span class="text-[#e4a4bd] block mb-4">Localização</span>
+                    <p class="text-[#fdf8f3]">Rua Rodrigues Tomaz, 95</p>
+                    <p>Bairro Jundiaí &bull; Anápolis - GO</p>
+                    <p class="pt-2 text-[#e4a4bd]">WhatsApp: (62) 99999-0000</p>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[#fdf8f3]/40">
+                <span>&copy; 2026 ANDREA DE OLIVEIRA MELO &bull; TODOS OS DIREITOS RESERVADOS</span>
+                <span>DESIGN &bull; AHOLIC SITES</span>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Scroll Reveal Trigger Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+        });
+
+        // FAQ Toggle
+        function toggleFaq(el) {
+            const aberto = el.classList.contains('aberto');
+            document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('aberto'));
+            if (!aberto) el.classList.add('aberto');
+        }
+    </script>
+</body>
+</html>
