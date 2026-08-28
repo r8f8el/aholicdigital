@@ -2203,6 +2203,61 @@ var PRESETS_PADRAO = [
     "proibicoes": ["fontes-manuscritas", "elementos-tortos-sem-grid", "decoracoes-desconexas-da-ciencia", "gradientes-arco-iris"],
     "prioridade_conversao": 1,
     "ativo": true
+  },
+  {
+    "id": "luxury-brutalist-echo",
+    "nome": "Brutalismo Suíço & Echo Stack",
+    "descricao": "Estética luxury-brutalist de raiz suíça com tipografia display monumental, camadas de texto em eco (offset text layering), alto contraste monocromático e grid assimétrico com cartazes em pílula.",
+    "origem": "https://curated-design.com/swiss-luxury-brutalist-echo",
+    "tags": ["swiss-design", "editorial", "luxury-brutalist", "echo-stack", "monocromatico", "tipografico", "alto-impacto"],
+    "nichos_recomendados": ["Arquitetura & Urbanismo", "Estúdios de Design & Branding", "Moda Autoral & Alta Joalheria", "Consultoria Estratégica & M&A", "Advocacia de Elite", "Hotelaria Boutique & Conceito", "Restaurantes & Bares Conceituais"],
+    "nichos_evitar": ["Comércio Popular", "Serviços de Emergência 24h", "Clínica Pediátrica Infantil"],
+    "composicao": "swiss-echo-asymmetrical-grid",
+    "navegacao": "sticky-header-blur-with-inverted-pill",
+    "densidade": "moderada",
+    "tipografia": {
+      "display": "Clash Display Bold 700 (Tracking -0.05em, leading 0.9, com camadas de eco offset)",
+      "body": "Satoshi Medium 500 (Sans limpa, funcional e equilibrada)",
+      "labels": "Satoshi Uppercase 14px (Espaçamento largo e transição sutil)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "editorial-grayscale-reveal (Inicia em 20% grayscale, transição para 100% cor e 1.05x scale no hover com clip-path reveal)",
+      "proporcoes": ["1:1", "16:9", "4:5", "pill-vertical-500px"]
+    },
+    "movimento": {
+      "estilo": ["echo-text-stack", "clip-path-inset-reveal", "scale-1.05-hover", "grayscale-to-color-transition", "icon-12deg-rotation"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "monocromatico-alto-contraste-suico",
+      "sugestoes": {
+        "fundo": "#F2F2F2",
+        "superficie": "#FFFFFF",
+        "texto": "#111111",
+        "texto_secundario": "#838282",
+        "acento": "#1E1E1E",
+        "acento_secundario": "#BFBFBF",
+        "linha": "rgba(30, 30, 30, 0.1)"
+      }
+    },
+    "componentes_permitidos": [
+      "typographic-echo-stack",
+      "philosophy-editorial-quote",
+      "asymmetrical-showcase-grid",
+      "bespoke-service-cards",
+      "pill-shaped-vertical-showcase",
+      "deep-dark-footer"
+    ],
+    "proibicoes": [
+      "icones-e-ilustracoes-fofas",
+      "gradientes-neon-ou-arco-iris",
+      "sombras-pesadas-flutuantes",
+      "bento-grid-colorido-saas"
+    ],
+    "prioridade_conversao": 2,
+    "ativo": true
   }
 ];
 
@@ -2529,7 +2584,7 @@ function calcularDirecaoCriativa(lead) {
     }
 
     // 2. Personalidade & Ticket (25%)
-    if (ticket >= 1700 && (p.id === 'editorial-atelier' || p.id === 'cinema-local')) {
+    if (ticket >= 1700 && (p.id === 'editorial-atelier' || p.id === 'cinema-local' || p.id === 'luxury-brutalist-echo')) {
       score += 16;
       justificativas.push('Excelente para posicionamento de alto ticket (R$ ' + ticket.toLocaleString('pt-BR') + ') e público exigente.');
     }
@@ -2539,7 +2594,7 @@ function calcularDirecaoCriativa(lead) {
     }
 
     // 3. Material Visual & Prova Social (15%)
-    if (temFotos && (p.id === 'editorial-atelier' || p.id === 'cinema-local')) {
+    if (temFotos && (p.id === 'editorial-atelier' || p.id === 'cinema-local' || p.id === 'luxury-brutalist-echo')) {
       score += 12;
       justificativas.push('Aproveita o acervo fotográfico/Instagram para compor uma narrativa visual rica.');
     }
@@ -2552,12 +2607,12 @@ function calcularDirecaoCriativa(lead) {
 
     // 4. Diagnóstico do Site Atual (20%)
     if (!temSite) {
-      if (p.id === 'cartaz-modular' || p.id === 'editorial-atelier' || p.id === 'instrumento-digital') {
+      if (p.id === 'cartaz-modular' || p.id === 'editorial-atelier' || p.id === 'instrumento-digital' || p.id === 'luxury-brutalist-echo') {
         score += 8;
         justificativas.push('Perfeito para a 1ª página oficial da marca.');
       }
     } else {
-      if (p.id === 'instrumento-digital' || p.id === 'brutalismo-comercial') {
+      if (p.id === 'instrumento-digital' || p.id === 'brutalismo-comercial' || p.id === 'luxury-brutalist-echo') {
         score += 6;
         justificativas.push('Corrige a falta de hierarquia do site antigo com foco cirúrgico na conversão.');
       }
