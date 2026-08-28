@@ -1,0 +1,262 @@
+[
+  {
+    "id": "editorial-atelier",
+    "nome": "Editorial de Atelier",
+    "descricao": "Estética autoral de ateliê com foco em alta elegância, fotografia de grande porte e espaço negativo generoso.",
+    "origem": "https://curated-design.com/editorial-atelier",
+    "screenshot": "assets/presets/editorial-atelier.webp",
+    "tags": ["editorial", "sofisticado", "cultural", "fotografico", "minimalista"],
+    "nichos_recomendados": ["Arquitetura", "Design de Interiores", "Estética Facial Avançada", "Dermatologia", "Restaurante Autoral", "Alta Joalheria"],
+    "nichos_evitar": ["Comércio Popular", "Serviços de Emergência 24h", "Desentupidoras / Chaveiros"],
+    "composicao": "asymmetrical-editorial",
+    "navegacao": "chapter-index",
+    "densidade": "baixa",
+    "tipografia": {
+      "display": "Newsreader / Playfair Display (Serifada elegante e editorial)",
+      "body": "Plus Jakarta Sans (Sans neutra, limpa e legível)",
+      "labels": "JetBrains Mono (Mono técnica discreta para metadados)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "large-crops-overlap (recortes verticais nobres, sobreposição e bordas finas)",
+      "proporcoes": ["3:4", "16:9", "1:1"]
+    },
+    "movimento": {
+      "estilo": ["mask-reveal", "slow-scroll", "image-hover-shift", "subtle-fade"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "neutros-nobres-com-acento-champagne",
+      "sugestoes": {
+        "fundo": "#FBFBFA",
+        "superficie": "#FFFFFF",
+        "texto": "#18181B",
+        "texto_secundario": "#71717A",
+        "acento": "#C5A880",
+        "linha": "rgba(226, 232, 240, 0.8)"
+      }
+    },
+    "componentes_permitidos": ["manifesto", "projetos-autorais", "galeria-editorial", "depoimentos-em-aspas", "contato-agendamento"],
+    "proibicoes": ["bento-grid-saturado", "gradiente-neon", "cards-flutuantes-com-sombra-pesada", "hero-saas-falso"],
+    "prioridade_conversao": 3,
+    "ativo": true
+  },
+  {
+    "id": "brutalismo-comercial",
+    "nome": "Brutalismo Comercial",
+    "descricao": "Grid geométrico marcado, tipografia display ultra-pesada, contraste preto/branco e alto impacto visual urbano.",
+    "origem": "https://curated-design.com/commercial-brutalism",
+    "screenshot": "assets/presets/brutalismo-comercial.webp",
+    "tags": ["brutalista", "urbano", "alto-impacto", "tipografico", "direto"],
+    "nichos_recomendados": ["Barbearia Conceito", "Academia Boutique / Crossfit", "Estúdio de Tatuagem", "Gastronomia Urbana / Burger", "Marcas Jovens"],
+    "nichos_evitar": ["Clínica Pediátrica", "Consultório de Psicologia Sensível", "Escritório de Advocacia Conservador"],
+    "composicao": "heavy-grid-blocks",
+    "navegacao": "fixed-top-border-dock",
+    "densidade": "alta",
+    "tipografia": {
+      "display": "Space Grotesk / Syne 800 (Sans-serif display ultra-pesada e expansiva)",
+      "body": "Inter (Sans compacta e direta)",
+      "labels": "Space Mono (Mono crua em caixas com borda sólida)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "high-contrast-monochrome (alto contraste, filtros duotone ou preto e branco com acentos vibrantes)",
+      "proporcoes": ["1:1", "4:5"]
+    },
+    "movimento": {
+      "estilo": ["ticker-marquee", "instant-hover-invert", "snap-scroll", "border-glow"],
+      "intensidade_interacao": 3,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "alto-contraste-preto-e-branco-com-neon",
+      "sugestoes": {
+        "fundo": "#0C0D0E",
+        "superficie": "#16181A",
+        "texto": "#F8FAFC",
+        "texto_secundario": "#94A3B8",
+        "acento": "#00D084",
+        "linha": "#27272A"
+      }
+    },
+    "componentes_permitidos": ["marquee-infinito", "cardapio-tabela-bruta", "galeria-em-mural", "cta-bold-whatsapp", "localizacao-mapa-escuro"],
+    "proibicoes": ["sombras-difusas", "tons-pasteis-apagados", "fontes-cursivas-romanticas", "ilustracoes-fofas"],
+    "prioridade_conversao": 1,
+    "ativo": true
+  },
+  {
+    "id": "arquivo-vivo",
+    "nome": "Arquivo Vivo",
+    "descricao": "Organização inspirada em fichários, índices técnicos e catálogos de precisão, transmitindo autoridade analítica e profundidade.",
+    "origem": "https://curated-design.com/living-archive",
+    "screenshot": "assets/presets/arquivo-vivo.webp",
+    "tags": ["arquivo", "catalogo", "analitico", "tecnico", "autoridade"],
+    "nichos_recomendados": ["Advocacia Consultiva / Tributária", "Consultoria de Engenharia", "Perícias e Auditorias", "Institutos de Pesquisa", "Clínicas Especializadas"],
+    "nichos_evitar": ["Baladas / Eventos", "Restaurantes Fast-Food", "Pet Shops"],
+    "composicao": "structured-index-matrix",
+    "navegacao": "drawer-and-filter-bar",
+    "densidade": "alta",
+    "tipografia": {
+      "display": "Plus Jakarta Sans 700 / Syne (Sans estruturada e firme)",
+      "body": "Inter / Roboto (Sans neutra de alta densidade informativa)",
+      "labels": "JetBrains Mono (Monospace para números de processos, referências e datas)",
+      "escala": "moderada"
+    },
+    "imagem": {
+      "tratamento": "documentary-grayscale (fotos documentais, retratos institucionais sóbrios e esquemas explicativos)",
+      "proporcoes": ["16:9", "3:2"]
+    },
+    "movimento": {
+      "estilo": ["accordion-drawer", "smooth-tab-switch", "data-counter", "list-expand"],
+      "intensidade_interacao": 1,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "sobriedade-institucional-navy-e-slate",
+      "sugestoes": {
+        "fundo": "#F1F5F9",
+        "superficie": "#FFFFFF",
+        "texto": "#0F172A",
+        "texto_secundario": "#475569",
+        "acento": "#0369A1",
+        "linha": "#CBD5E1"
+      }
+    },
+    "componentes_permitidos": ["indice-de-atuacao", "acervo-de-artigos-e-casos", "tabela-comparativa-de-risco", "credenciais-e-titulos", "formulario-de-consulta"],
+    "proibicoes": ["animacoes-saltitantes", "cores-neon-gritantes", "cards-desalinhados", "copys-vendedoras-agressivas"],
+    "prioridade_conversao": 2,
+    "ativo": true
+  },
+  {
+    "id": "cinema-local",
+    "nome": "Cinema Local",
+    "descricao": "Atmosfera dark luxury imersiva com imagens full-bleed, transições cinematográficas e foco na experiência sensorial da marca.",
+    "origem": "https://curated-design.com/local-cinema",
+    "screenshot": "assets/presets/cinema-local.webp",
+    "tags": ["cinematografico", "imersivo", "dark-luxury", "sensorial", "experiencia"],
+    "nichos_recomendados": ["Rejuvenescimento Facial & Harmonização", "Spas & Resorts", "Restaurantes de Alta Gastronomia", "Hotelaria Boutique", "Estética Premium"],
+    "nichos_evitar": ["Contabilidade", "Autoescolas", "Serviços Técnicos de Informática"],
+    "composicao": "fullbleed-cinematic-scroll",
+    "navegacao": "translucent-floating-header",
+    "densidade": "baixa",
+    "tipografia": {
+      "display": "Cinzel / Cormorant Garamond (Serifada cinematográfica refinada com tracking ampliado)",
+      "body": "Plus Jakarta Sans / Inter 300 (Sans leve e elegante)",
+      "labels": "Space Grotesk (Labels com espaçamento generoso)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "ambient-fullwidth (fotografia de ambiente em alta resolução, iluminação dramática e sobreposições sutis)",
+      "proporcoes": ["16:9", "21:9", "9:16"]
+    },
+    "movimento": {
+      "estilo": ["parallax-smooth", "curtain-reveal", "glow-pulse", "video-backdrop"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "dark-luxury-carvao-e-ouro-antigo",
+      "sugestoes": {
+        "fundo": "#0A0B0D",
+        "superficie": "#14161B",
+        "texto": "#F8FAFC",
+        "texto_secundario": "#A1A1AA",
+        "acento": "#D4AF37",
+        "linha": "rgba(255, 255, 255, 0.1)"
+      }
+    },
+    "componentes_permitidos": ["hero-cinematografico-com-video", "galeria-de-experiencias", "transformacoes-antes-depois-slider", "depoimentos-em-video-audio", "reserva-vip-whatsapp"],
+    "proibicoes": ["tabelas-de-preco-brutas-no-hero", "fundo-branco-hospitalar", "botoes-chatos-sem-hover", "excesso-de-texto-corrido"],
+    "prioridade_conversao": 2,
+    "ativo": true
+  },
+  {
+    "id": "cartaz-modular",
+    "nome": "Cartaz Modular",
+    "descricao": "Composição em blocos de cor harmônicos (color-block), pílulas flutuantes, tipografia calorosa e alta sensação de acolhimento.",
+    "origem": "https://curated-design.com/modular-poster",
+    "screenshot": "assets/presets/cartaz-modular.webp",
+    "tags": ["modular", "acolhedor", "color-block", "humanizado", "dinamico"],
+    "nichos_recomendados": ["Psicologia Clínica & TCC", "Nutrição", "Pediatria", "Odontopediatria", "Estúdios de Pilates & Yoga", "Terapia Ocupacional"],
+    "nichos_evitar": ["Direito Criminal", "Segurança Armada", "Fundos de Investimento"],
+    "composicao": "modular-color-blocks",
+    "navegacao": "floating-pill-menu",
+    "densidade": "media",
+    "tipografia": {
+      "display": "Outfit / DM Sans (Sans arredondada, amigável e confiável)",
+      "body": "Plus Jakarta Sans (Sans equilibrada e acolhedora)",
+      "labels": "JetBrains Mono (Pequenos badges em pílula)",
+      "escala": "moderada"
+    },
+    "imagem": {
+      "tratamento": "soft-rounded-cutouts (fotos humanizadas com cantos arredondados generosos e fundos em tons pastéis aquecidos)",
+      "proporcoes": ["1:1", "4:5", "3:2"]
+    },
+    "movimento": {
+      "estilo": ["soft-spring-hover", "card-stagger-fade", "pill-active-glow", "smooth-scroll"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "warm-organic-terracota-salvia-e-creme",
+      "sugestoes": {
+        "fundo": "#FAF8F5",
+        "superficie": "#FFFFFF",
+        "texto": "#2D2823",
+        "texto_secundario": "#6E6860",
+        "acento": "#8F9E8B",
+        "acento_secundario": "#D4A373",
+        "linha": "rgba(226, 219, 210, 0.7)"
+      }
+    },
+    "componentes_permitidos": ["apresentacao-humanizada", "cards-de-abordagens-e-especialidades", "faq-interativo-sanfonado", "depoimentos-em-cards-acolhedores", "agendamento-direto-whatsapp"],
+    "proibicoes": ["estetica-hospitalar-gelada", "cores-pesadas-de-cemiterio", "termos-tecnicos-sem-explicacao", "fotos-de-stock-americanas"],
+    "prioridade_conversao": 1,
+    "ativo": true
+  },
+  {
+    "id": "instrumento-digital",
+    "nome": "Instrumento Digital",
+    "descricao": "Precisão suíça (Swiss Design), alinhamento milimétrico, microinterações limpas e foco absoluto em confiabilidade técnica e clareza.",
+    "origem": "https://curated-design.com/digital-instrument",
+    "screenshot": "assets/presets/instrumento-digital.webp",
+    "tags": ["swiss-design", "precisao", "cirurgico", "tecnologico", "confianca"],
+    "nichos_recomendados": ["Odontologia Digital & Implantes", "Oftalmologia", "Ortodontia Invisível", "Diagnóstico por Imagem", "Tecnologia Médica"],
+    "nichos_evitar": ["Espaço Holístico / Místico", "Brechós / Moda Vintage", "Casas de Festas Infantis"],
+    "composicao": "precision-swiss-grid",
+    "navegacao": "topbar-with-stepper",
+    "densidade": "media",
+    "tipografia": {
+      "display": "Plus Jakarta Sans 800 (Sans geométrica de precisão técnica)",
+      "body": "Inter (Sans de leitura perfeita)",
+      "labels": "JetBrains Mono (Monospace para especificações e métricas)",
+      "escala": "moderada"
+    },
+    "imagem": {
+      "tratamento": "crisp-clinical-photography (fotos nítidas de consultório, tecnologia de escaneamento 3D e macro de tratamentos)",
+      "proporcoes": ["16:9", "1:1"]
+    },
+    "movimento": {
+      "estilo": ["interactive-tabs", "stepper-timeline", "comparison-slider", "micro-hover-card"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "azul-cirurgico-e-slate-puro",
+      "sugestoes": {
+        "fundo": "#F8FAFC",
+        "superficie": "#FFFFFF",
+        "texto": "#0F172A",
+        "texto_secundario": "#64748B",
+        "acento": "#0284C7",
+        "acento_secundario": "#0D9488",
+        "linha": "#E2E8F0"
+      }
+    },
+    "componentes_permitidos": ["passo-a-passo-do-tratamento", "comparador-tecnologico", "galeria-de-tecnologias-equipamentos", "calculadora-ou-simulador-de-etapas", "cta-whatsapp-com-mensagem-guiada"],
+    "proibicoes": ["fontes-manuscritas", "elementos-tortos-sem-grid", "decoracoes-desconexas-da-ciencia", "gradientes-arco-iris"],
+    "prioridade_conversao": 1,
+    "ativo": true
+  }
+]

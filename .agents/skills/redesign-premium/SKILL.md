@@ -9,21 +9,22 @@ Criar uma presença digital impecável para o cliente — seja **Redesenhando um
 
 ---
 
-## 🛑 Etapa 0: Briefing Interativo Obrigatório (Perguntas Antes de Codificar)
+## 🛑 Etapa 0: Briefing & Presets de Direção Visual (Anti-Slop)
 
-Antes de gerar qualquer linha de código HTML, a IA **DEVE perguntar ao usuário**:
+Antes de gerar qualquer linha de código HTML, a IA **DEVE verificar ou consultar a Direção Criativa**:
 
-1. 📸 **Instagram do Cliente:** Qual o `@perfil` do Instagram do cliente? (Para extrair fotos reais, stories/destaques, logo e tom de voz com `scripts/extrair-fotos-instagram.py` ou Google Maps).
-2. 🎨 **Estilo / Arquétipo Visual:** Qual o estilo desejado para este projeto?
-   - 🏛️ **Quiet Luxury / Editorial** (Linho off-white, serifa elegante, sofisticação — Estética/Dermato/Plástica).
-   - ⚡ **Swiss High-Tech** (Precisão, navy/slate, azul cirúrgico — Odonto/Tecnologia Médica).
-   - 🌿 **Warm Organic** (Creme suave, verde sálvia, acolhedor — Psicologia/Nutrição/Bem-estar).
-   - 📐 **Monografia Editorial** (Respiro amplo, stone/grafite — Arquitetura/Interiores).
-   - ⚖️ **Dark Authority** (Carvão profundo, dourado nobre — Advocacia/Finanças).
-   - 🔗 **Referência Customizada:** Enviar um link de site ou imagem para seguir de inspiração.
-3. 🎯 **Serviço Carro-Chefe:** Qual o procedimento ou serviço principal a ser destacado no Hero e no botão de WhatsApp?
-
-*(Se o usuário já tiver fornecido essas informações no prompt inicial, a IA pode confirmar e prosseguir diretamente).*
+1. 🎨 **Preset de Direção Visual (`referencias/presets-visuais.json`):**
+   - Verificar se o lead já possui um `creative_direction_card` gerado no dashboard.
+   - Caso não possua, selecionar ou sugerir o preset mais adequado entre os 6 disponíveis:
+     - 🏛️ **Editorial de Atelier** (Asymmetrical editorial, serifa nobre, respiro amplo — Arquitetura/Dermato/Luxo).
+     - ⚡ **Brutalismo Comercial** (Heavy grid, tipografia display pesada, alto contraste — Barbearias/Academias/Streetwear).
+     - 🗂️ **Arquivo Vivo** (Index matrix, monospace labels, dados técnicos — Advocacia/Consultoria/Perícias).
+     - 🎬 **Cinema Local** (Full-bleed dark luxury, vídeo/fotos imersivas — Rejuvenescimento/Spas/Alta Gastronomia).
+     - 🎨 **Cartaz Modular** (Color-blocks harmônicos, pílula flutuante, acolhedor — Psicologia/Nutrição/Bem-estar).
+     - 📐 **Instrumento Digital** (Swiss design, precisão cirúrgica, confiança — Odonto Digital/Tecnologia Médica).
+   - **Regra de Diversidade:** Nunca repetir a mesma receita nos últimos 3 sites do mesmo nicho sem autorização explícita.
+2. 📸 **Instagram / Google Maps do Cliente:** Extrair fotos reais, logo e tom de voz autêntico.
+3. 🎯 **Serviço Carro-Chefe:** Procedimento ou serviço principal a ser destacado no Hero e no botão de WhatsApp.
 
 ---
 

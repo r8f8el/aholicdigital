@@ -1063,6 +1063,242 @@ tr:hover td {
 }
 .modal .cancelar:hover { background: #E2E8F0; }
 
+/* Presets & Direção Criativa UI */
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 22px;
+}
+.preset-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.preset-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: #CBD5E1;
+}
+.preset-card.inativo {
+  opacity: 0.6;
+  filter: grayscale(0.8);
+}
+.preset-head {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.preset-head h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+}
+.preset-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: var(--mono);
+}
+.preset-badge.ativo {
+  background: var(--ok-soft);
+  color: var(--accent-dark);
+  border: 1px solid rgba(0, 208, 132, 0.3);
+}
+.preset-badge.inativo {
+  background: #F1F5F9;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.preset-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+.preset-desc {
+  font-size: 12.5px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+.preset-meta-box {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 11.5px;
+}
+.preset-meta-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.preset-meta-label {
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 85px;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+.preset-meta-val {
+  color: var(--ink);
+  font-weight: 600;
+  flex: 1;
+}
+.preset-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.preset-tag {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+.preset-swatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.preset-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-sm);
+}
+.preset-foot {
+  padding: 12px 20px;
+  background: #FFFFFF;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.preset-foot a, .preset-foot button {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: #F8FAFC;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.preset-foot a:hover, .preset-foot button:hover {
+  background: #FFFFFF;
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  box-shadow: var(--shadow-sm);
+}
+.preset-foot .btn-preview {
+  background: var(--dark-btn);
+  color: #FFFFFF;
+  border-color: var(--dark-btn);
+}
+.preset-foot .btn-preview:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* Direção Criativa Cards & Modal */
+.direcao-lead-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  margin-top: 6px;
+}
+.direcao-opcao-card {
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.direcao-opcao-card:hover {
+  border-color: #94A3B8;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.direcao-opcao-card.selected {
+  border-color: var(--accent);
+  background: rgba(0, 208, 132, 0.03);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.direcao-opcao-card .top-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.score-pill {
+  background: var(--dark-btn);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-family: var(--mono);
+}
+.score-pill.top {
+  background: linear-gradient(135deg, #00D084, #00A86B);
+  color: #000;
+}
+.penalidade-badge {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.justificativa-box {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+}
+
 /* Login Modal Fullscreen Overlay */
 #login-overlay {
   position: fixed;
@@ -1414,6 +1650,115 @@ tr:hover td {
   </div>
 </div>
 
+<!-- MODAL GERAR DIREÇÃO CRIATIVA (RECOMENDAÇÃO INTELIGENTE & ESCOLHA) -->
+<div id="m-direcao-bg" class="modal-bg" onclick="if(event.target===this)fecharModalDirecao()">
+  <div class="modal" style="width:780px;max-width:95vw">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <h2 id="md-titulo" style="margin:0">🎯 Direção Criativa — Recomendação IA</h2>
+        <p id="md-sub" style="font-size:12px;color:var(--muted);margin:4px 0 16px"></p>
+      </div>
+      <button class="cancelar" style="padding:4px 10px;font-size:12px" onclick="fecharModalDirecao()">✕</button>
+    </div>
+
+    <!-- Perfil do Lead Avaliado -->
+    <div id="md-perfil-lead" style="background:#F8FAFC;border:1px solid var(--line);border-radius:var(--radius-md);padding:14px 16px;margin-bottom:18px;font-size:12px;display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:10px">
+    </div>
+
+    <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+      <span>Opções Recomendadas com Justificativa</span>
+      <span style="font-size:11px;font-weight:600;color:var(--muted)">Clique para selecionar a direção oficial</span>
+    </div>
+
+    <!-- Cards de opções sugeridas -->
+    <div id="md-opcoes-grid" style="display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:18px">
+    </div>
+
+    <!-- Selecionar outro preset da biblioteca se quiser -->
+    <div style="border-top:1px solid var(--line);padding-top:14px;margin-top:14px">
+      <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase">Ou escolha manualmente outro preset da biblioteca:</label>
+      <select id="md-outro-preset" onchange="selecionarOutroPreset(this.value)" style="margin-top:6px">
+      </select>
+    </div>
+
+    <div class="mbot">
+      <button class="cancelar" onclick="fecharModalDirecao()">Cancelar</button>
+      <button id="btn-salvar-direcao" class="salvar" onclick="salvarDirecaoEscolhida()">✓ Definir Direção Criativa Oficial</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CADASTRAR / EDITAR PRESET VISUAL -->
+<div id="m-preset-bg" class="modal-bg" onclick="if(event.target===this)fecharModalPreset()">
+  <div class="modal" style="width:720px;max-width:95vw">
+    <h2 id="mp-titulo">Novo Preset de Direção Visual</h2>
+    <p style="font-size:12px;color:var(--muted);margin:0 0 14px">Configure as regras de restrição visual, composição e tipografia para este preset.</p>
+
+    <div class="mrow">
+      <div><label>ID / Slug *</label><input id="mp-id" placeholder="ex: editorial-atelier"></div>
+      <div><label>Nome do Preset *</label><input id="mp-nome" placeholder="Ex: Editorial de Atelier"></div>
+    </div>
+
+    <label>Descrição Concisa</label>
+    <textarea id="mp-desc" rows="2" placeholder="Resumo das características deste preset..."></textarea>
+
+    <div class="mrow">
+      <div><label>Composição</label><input id="mp-composicao" placeholder="ex: asymmetrical-editorial"></div>
+      <div><label>Navegação</label><input id="mp-navegacao" placeholder="ex: chapter-index"></div>
+    </div>
+
+    <div class="mrow">
+      <div><label>Densidade</label><select id="mp-densidade"><option value="baixa">Baixa (Muito respiro)</option><option value="media">Média</option><option value="alta">Alta (Denso/Compacto)</option></select></div>
+      <div><label>Prioridade de Conversão</label><select id="mp-conversao"><option value="1">1 - Máxima Urgência (CTA Direto)</option><option value="2">2 - Equilibrada</option><option value="3">3 - Foco em Marca/Branding</option></select></div>
+    </div>
+
+    <div class="mrow">
+      <div><label>Fonte Display (Títulos)</label><input id="mp-fonte-display" placeholder="ex: Playfair Display / Newsreader"></div>
+      <div><label>Fonte Body (Corpo)</label><input id="mp-fonte-body" placeholder="ex: Plus Jakarta Sans / Inter"></div>
+    </div>
+
+    <div class="mrow">
+      <div><label>Nichos Recomendados (separados por vírgula)</label><input id="mp-nichos" placeholder="Arquitetura, Estética Facial, Odontologia"></div>
+      <div><label>Nichos a Evitar (separados por vírgula)</label><input id="mp-nichos-evitar" placeholder="Comércio Popular, Emergências"></div>
+    </div>
+
+    <div class="mrow">
+      <div><label>Tags (separadas por vírgula)</label><input id="mp-tags" placeholder="editorial, luxo, minimalista"></div>
+      <div><label>Cor de Fundo / Cor de Acento (Hex)</label><div style="display:flex;gap:6px"><input id="mp-cor-fundo" placeholder="#FBFBFA"><input id="mp-cor-acento" placeholder="#C5A880"></div></div>
+    </div>
+
+    <label>Componentes Permitidos (separados por vírgula)</label>
+    <input id="mp-componentes" placeholder="manifesto, projetos, galeria, depoimentos, contato">
+
+    <label>Proibições / Anti-Slop (separadas por vírgula)</label>
+    <input id="mp-proibicoes" placeholder="bento-grid, gradiente-neon, hero-saas-falso">
+
+    <div class="mbot">
+      <button class="cancelar" onclick="fecharModalPreset()">Cancelar</button>
+      <button class="salvar" onclick="salvarPresetModal()">Salvar Preset</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PREVIEW DO PRESET -->
+<div id="m-preset-preview-bg" class="modal-bg" onclick="if(event.target===this)fecharPreviewPreset()">
+  <div class="modal" style="width:760px;max-width:95vw">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <h2 id="mpp-titulo" style="margin:0">Preview do Preset</h2>
+        <p id="mpp-sub" style="font-size:12px;color:var(--muted);margin:4px 0 16px"></p>
+      </div>
+      <button class="cancelar" style="padding:4px 10px;font-size:12px" onclick="fecharPreviewPreset()">✕</button>
+    </div>
+    
+    <div id="mpp-conteudo" style="max-height:65vh;overflow-y:auto"></div>
+
+    <div class="mbot">
+      <button class="cancelar" onclick="fecharPreviewPreset()">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <script id="dados" type="application/json">{"atualizado": "2026-08-27 23:30", "leads": [{"slug": "patricia-margotti-psi", "nome": "Patrícia Margotti | Psicóloga TCC", "nicho": "Psicologia & TCC", "cidade": "Florianópolis", "nota": 5.0, "avaliacoes": 30, "email": "psi.patricia.margotti", "telefone": "(48) 99999-9999", "whatsapp": "5548999999999", "siteAntigo": "", "motivo": "Criação do Primeiro Site Oficial (Design Softly Digital Wellness • Trindade / Floripa)", "status": "redesenhado", "urlNova": "sites/patricia-margotti-psi/patricia-margotti-psi.html", "dataProposta": "", "valor": 1800.0, "obs": "Atendimento presencial na Trindade e Online. Instagram @psi.patricia.margotti.", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 1, "nome_estilo": "Softly Digital Wellness", "descricao": "Digital Living Room com paleta pastel quente (#FDFCF8, coral, sage e lavanda), grão analógico e tipografia Outfit + Cursive", "arquivo": "sites/patricia-margotti-psi/patricia-margotti-psi.html", "criado_em": "2026-08-27 23:25", "ativo": 1}]}, {"slug": "clinica-anielly-vilela", "nome": "Clínica Anielly Vilela | Estética Avançada", "nicho": "Harmonização Facial", "cidade": "Caldas Novas", "nota": 4.9, "avaliacoes": 42, "email": "", "telefone": "(64) 99336-8698", "whatsapp": "5564993368698", "siteAntigo": "", "motivo": "Sem site próprio. Atendimento com Ultraformer III e harmonização facial ativo só no Instagram/Maps.", "status": "redesenhado", "urlNova": "sites/clinica-anielly-vilela/clinica-anielly-vilela.html", "dataProposta": "", "valor": 1500.0, "obs": "Tipo: Do Zero | Rua B28, Qd 36, Itanhangá I", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 1, "nome_estilo": "Quiet Luxury Editorial", "descricao": "Linho off-white, tipografia Newsreader serifada e foco em procedimentos faciais", "arquivo": "sites/clinica-anielly-vilela/clinica-anielly-vilela.html", "criado_em": "2026-08-25 22:22", "ativo": 1}]}, {"slug": "dra-rosana-vecchi", "nome": "Dra. Rosana Vecchi | Rejuvenescimento Facial", "nicho": "Harmonização Facial", "cidade": "Caldas Novas", "nota": 4.8, "avaliacoes": 38, "email": "", "telefone": "(62) 98515-0061", "whatsapp": "5562985150061", "siteAntigo": "", "motivo": "Sem site próprio. Clínica de alto padrão (Edifício Eleve, Setor Oeste) com procedimentos de alto valor.", "status": "novo", "urlNova": "", "dataProposta": "", "valor": 1800.0, "obs": "Tipo: Do Zero | Endolift, Ultraformer, Fios", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "dra-anna-clara-junqueira", "nome": "Dra. Anna Clara Junqueira", "nicho": "Harmonização Orofacial", "cidade": "Caldas Novas", "nota": 4.8, "avaliacoes": 31, "email": "", "telefone": "(64) 99314-7000", "whatsapp": "5564993147000", "siteAntigo": "", "motivo": "Sem site oficial. Presente apenas em diretórios de saúde; sem portal próprio de autoridade.", "status": "novo", "urlNova": "", "dataProposta": "", "valor": 1200.0, "obs": "Tipo: Do Zero | Clínica Mais Saúde, Jardim Roma", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "quality-odontologia-face", "nome": "Quality Odontologia e Face", "nicho": "Harmonização Orofacial", "cidade": "Caldas Novas", "nota": 4.9, "avaliacoes": 57, "email": "", "telefone": "(64) 99271-4048", "whatsapp": "5564992714048", "siteAntigo": "qualityodontologiaeface.com.br", "motivo": "Site atual com layout datado, não otimizado para mobile e sem foco nos procedimentos estéticos.", "status": "redesenhado", "urlNova": "sites/quality-odontologia-face/quality-odontologia-face.html", "dataProposta": "", "valor": 1500.0, "obs": "Tipo: Redesign | Dra. Silvania Rossi & Dr. Eduardo", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 1, "nome_estilo": "Swiss Precision & Fotos Reais", "descricao": "Identidade clínica com Plus Jakarta Sans, logo original, fotos do Maps e feed do Instagram", "arquivo": "sites/quality-odontologia-face/quality-odontologia-face.html", "criado_em": "2026-08-26 16:57", "ativo": 1}]}, {"slug": "top-saude-estetica", "nome": "Top Saúde Estética Facial", "nicho": "Harmonização Facial", "cidade": "Caldas Novas", "nota": 4.7, "avaliacoes": 45, "email": "", "telefone": "(64) 3012-4615", "whatsapp": "556430124615", "siteAntigo": "topsaudeclinicasmedicas.com", "motivo": "Site genérico de clínica médica, sem landing page dedicada de alta conversão para estética facial.", "status": "novo", "urlNova": "", "dataProposta": "", "valor": 1200.0, "obs": "Tipo: Redesign / Nova LP | Lipo de papada, bioestimuladores", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "laura-frares-arquitetura", "nome": "Laura Frares Arquitetura & Interiores", "nicho": "Arquitetura & Interiores", "cidade": "Rio Verde", "nota": 5.0, "avaliacoes": 28, "email": null, "telefone": null, "whatsapp": "5564999999999", "siteAntigo": null, "motivo": "Criação do Primeiro Site Oficial (Portfólio de Luxo)", "status": "redesenhado", "urlNova": "sites/laura-frares-arquitetura/laura-frares-arquitetura.html", "dataProposta": null, "valor": 1800.0, "obs": "Foco em condomínio fechado e sedes de fazendas no agro", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 1, "nome_estilo": "Monografia Contemporânea", "descricao": "Foco em sedes de fazendas e casas de condomínio em Rio Verde (Space Grotesk + JetBrains Mono)", "arquivo": "sites/laura-frares-arquitetura/laura-frares-arquitetura.html", "criado_em": "2026-08-25 21:12", "ativo": 1}]}, {"slug": "kessio-guerreiro-arquitetura", "nome": "Késsio Guerreiro Arquitetura & Urbanismo", "nicho": "Arquitetura & Urbanismo", "cidade": "Rio Verde", "nota": 4.9, "avaliacoes": 34, "email": null, "telefone": null, "whatsapp": "5564999999998", "siteAntigo": null, "motivo": "Sem site oficial estruturado no Google Maps", "status": "novo", "urlNova": null, "dataProposta": null, "valor": null, "obs": "Projetos residenciais contemporâneos", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "hi-arquitetura-interiores", "nome": "Hi! Arquitetura e Interiores", "nicho": "Arquitetura & Interiores", "cidade": "Rio Verde", "nota": 4.9, "avaliacoes": 19, "email": null, "telefone": null, "whatsapp": "5564999999997", "siteAntigo": null, "motivo": "Sem site (presença apenas em guia local e Instagram)", "status": "novo", "urlNova": null, "dataProposta": null, "valor": null, "obs": "Arquitetura jovem e espaços comerciais", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "casatri-arquitetura", "nome": "CasaTri Arquitetura & Interiores", "nicho": "Arquitetura & Interiores", "cidade": "Rio Verde", "nota": 4.8, "avaliacoes": 22, "email": null, "telefone": "(64) 3050-0612", "whatsapp": "556430500612", "siteAntigo": null, "motivo": "Sem site oficial para captação de clientes", "status": "novo", "urlNova": null, "dataProposta": null, "valor": null, "obs": "Projetos residenciais e corporativos", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "tres-mais-arquitetura", "nome": "3+ Arquitetura (Três Mais)", "nicho": "Arquitetura & Interiores", "cidade": "Rio Verde", "nota": 4.8, "avaliacoes": 15, "email": null, "telefone": "(64) 3621-1661", "whatsapp": "556436211661", "siteAntigo": "http://tresmaisarquitetura.com", "motivo": "Site institucional antigo sem conversão mobile", "status": "novo", "urlNova": null, "dataProposta": null, "valor": null, "obs": "Escritório tradicional de Rio Verde", "contratoStatus": "pendente", "contratoEm": null, "manutencao": null, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "karla-barros-arquitetura", "nome": "Karla Barros Arquitetura & Interiores", "nicho": "Arquitetura & Interiores", "cidade": "João Pessoa", "nota": 4.9, "avaliacoes": 26, "email": "contato@karlabarros.com.br", "telefone": "(83) 3021-6161", "whatsapp": "558330216161", "siteAntigo": null, "motivo": "Criação do Primeiro Site Oficial (Foco em orla e alto padrão)", "status": "redesenhado", "urlNova": "sites/karla-barros-arquitetura/karla-barros-arquitetura.html", "dataProposta": null, "valor": 1900.0, "obs": "Residencial de luxo em Jardim Oceania, Altiplano e Bessa", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 3, "nome_estilo": "Super Travel Luxury", "descricao": "Design System Superdesign com tipografia League Spartan, paleta rose/mauve dusty e grid desalinhado", "arquivo": "sites/karla-barros-arquitetura/karla-barros-arquitetura.html", "criado_em": "2026-08-26 18:46", "ativo": 1}, {"numero": 2, "nome_estilo": "Quiet Luxury & CASACOR", "descricao": "Alta-costura com fontes Italiana e Cormorant Garamond, paleta champanhe bronze e tela obsidiana", "arquivo": "sites/karla-barros-arquitetura/versoes/v2-quiet-luxury-italiana.html", "criado_em": "2026-08-26 17:17", "ativo": 0}, {"numero": 1, "nome_estilo": "Monografia Minimalista", "descricao": "Estilo Studio MK27 com tipografia técnica Space Grotesk e respiro cinza mineral", "arquivo": "sites/karla-barros-arquitetura/versoes/v1-monografia-editorial.html", "criado_em": "2026-08-26 17:12", "ativo": 0}]}, {"slug": "cactos-arquitetos", "nome": "Cactos Arquitetos", "nicho": "Arquitetura & Urbanismo", "cidade": "João Pessoa", "nota": 5.0, "avaliacoes": 18, "email": null, "telefone": null, "whatsapp": "5583999999991", "siteAntigo": "http://cactos.arq.br", "motivo": "Redesign — Foco em arquitetura bioclimática litorânea", "status": "novo", "urlNova": null, "dataProposta": null, "valor": 1800.0, "obs": "Projetos sustentáveis e casas de praia contemporâneas", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "ponto-arquitetura-pb", "nome": "Ponto Arquitetura", "nicho": "Arquitetura & Interiores", "cidade": "João Pessoa", "nota": 4.9, "avaliacoes": 15, "email": null, "telefone": null, "whatsapp": "5583999999992", "siteAntigo": null, "motivo": "Sem site oficial estruturado (apenas diretórios)", "status": "novo", "urlNova": null, "dataProposta": null, "valor": 1600.0, "obs": "Projetos residenciais e consultórios corporativos em Manaíra", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 120.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "suna-arquitetura", "nome": "Suna Arquitetura & Design", "nicho": "Arquitetura & Interiores", "cidade": "João Pessoa", "nota": 4.8, "avaliacoes": 21, "email": null, "telefone": null, "whatsapp": "5583999999993", "siteAntigo": "https://sunaarquitetura.com.br", "motivo": "Redesign — Site institucional lento sem conversão mobile", "status": "novo", "urlNova": null, "dataProposta": null, "valor": 1700.0, "obs": "Reformas de alto padrão, retrofit e casas em Cabo Branco", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "mais-arquitetura-pb", "nome": "Mais Arquitetura Paraíba", "nicho": "Arquitetura & Interiores", "cidade": "João Pessoa", "nota": 4.8, "avaliacoes": 14, "email": null, "telefone": null, "whatsapp": "5583999999994", "siteAntigo": null, "motivo": "Sem site próprio (apenas portfólio no Homify)", "status": "novo", "urlNova": null, "dataProposta": null, "valor": 1500.0, "obs": "Design de interiores e apartamentos em Manaíra e Altiplano", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 120.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": []}, {"slug": "atipicamente-psi", "nome": "Atipicamente Psi - Núcleo Clínico e Educacional", "nicho": "Psicologia & Neurodesenvolvimento", "cidade": "Caldas Novas", "nota": 5.0, "avaliacoes": 19, "email": "contato@atipicamentepsi.com.br", "telefone": null, "whatsapp": "5564999999999", "siteAntigo": null, "motivo": "Criação do Primeiro Site Oficial (Design Cream + Superdesign)", "status": "redesenhado", "urlNova": "sites/atipicamente-psi/atipicamente-psi.html", "dataProposta": "2026-08-26", "valor": 1900.0, "obs": "Clínica multidisciplinar com 5 psicólogos (CRP 09), método ABA, TEA e TDAH. Instagram @atipicamentepsi ativo.", "contratoStatus": "pendente", "contratoEm": null, "manutencao": 150.0, "pago": 0, "docCliente": null, "endCliente": null, "versoes": [{"numero": 4, "nome_estilo": "Editorial Industrial Cream", "descricao": "Estilo editorial de alto impacto com tipografia Anton (21vw) + Inter, ruído analógico 4%, seções empilhadas 5rem e botões blur-reveal", "arquivo": "sites/atipicamente-psi/atipicamente-psi.html", "criado_em": "2026-08-27 11:35", "ativo": 1}, {"numero": 3, "nome_estilo": "Fotos Reais Únicas do Google", "descricao": "Design Cream com 5 fotos 100% distintas oficiais do Google Maps (fachada, recepção, tenda infantil, consultório e salas)", "arquivo": "sites/atipicamente-psi/versoes/v3-galeria-fotos-reais-google.html", "criado_em": "2026-08-26 23:25", "ativo": 0}, {"numero": 2, "nome_estilo": "Galeria do Interior (Base)", "descricao": "Primeira versão com galeria de ambientes e estrutura da clínica", "arquivo": "sites/atipicamente-psi/versoes/v2-galeria-interior-completa.html", "criado_em": "2026-08-26 23:00", "ativo": 0}, {"numero": 1, "nome_estilo": "Design Cream & Superdesign", "descricao": "Conceito original cream minimalista com tipografia League Spartan e fotos dos 5 psicólogos", "arquivo": "sites/atipicamente-psi/versoes/v1-cream-superdesign.html", "criado_em": "2026-08-26 22:45", "ativo": 0}]}]}</script>
 
 <script>
@@ -1505,6 +1850,7 @@ function normalizarLeadSupabase(row) {
     contratoEm: row.contrato_em,
     docCliente: row.doc_cliente,
     endCliente: row.end_cliente,
+    direcaoCriativa: row.direcao_criativa || null,
     obs: row.obs,
     versoes: []
   };
@@ -1533,6 +1879,7 @@ function desnormalizarLeadSupabase(l) {
     contrato_em: l.contratoEm || null,
     doc_cliente: l.docCliente,
     end_cliente: l.endCliente,
+    direcao_criativa: l.direcaoCriativa || null,
     obs: l.obs
   };
 }
@@ -1601,6 +1948,280 @@ function atualizarModoUI() {
   }
 }
 
+// === PRESETS VISUAIS & BASE DE DESIGN ===
+var PRESETS_PADRAO = [
+  {
+    "id": "editorial-atelier",
+    "nome": "Editorial de Atelier",
+    "descricao": "Estética autoral de ateliê com foco em alta elegância, fotografia de grande porte e espaço negativo generoso.",
+    "origem": "https://curated-design.com/editorial-atelier",
+    "tags": ["editorial", "sofisticado", "cultural", "fotografico", "minimalista"],
+    "nichos_recomendados": ["Arquitetura", "Design de Interiores", "Estética Facial Avançada", "Dermatologia", "Restaurante Autoral", "Alta Joalheria"],
+    "nichos_evitar": ["Comércio Popular", "Serviços de Emergência 24h", "Desentupidoras / Chaveiros"],
+    "composicao": "asymmetrical-editorial",
+    "navegacao": "chapter-index",
+    "densidade": "baixa",
+    "tipografia": {
+      "display": "Newsreader / Playfair Display (Serifada elegante e editorial)",
+      "body": "Plus Jakarta Sans (Sans neutra, limpa e legível)",
+      "labels": "JetBrains Mono (Mono técnica discreta para metadados)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "large-crops-overlap (recortes verticais nobres, sobreposição e bordas finas)",
+      "proporcoes": ["3:4", "16:9", "1:1"]
+    },
+    "movimento": {
+      "estilo": ["mask-reveal", "slow-scroll", "image-hover-shift", "subtle-fade"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "neutros-nobres-com-acento-champagne",
+      "sugestoes": {
+        "fundo": "#FBFBFA",
+        "superficie": "#FFFFFF",
+        "texto": "#18181B",
+        "texto_secundario": "#71717A",
+        "acento": "#C5A880",
+        "linha": "rgba(226, 232, 240, 0.8)"
+      }
+    },
+    "componentes_permitidos": ["manifesto", "projetos-autorais", "galeria-editorial", "depoimentos-em-aspas", "contato-agendamento"],
+    "proibicoes": ["bento-grid-saturado", "gradiente-neon", "cards-flutuantes-com-sombra-pesada", "hero-saas-falso"],
+    "prioridade_conversao": 3,
+    "ativo": true
+  },
+  {
+    "id": "brutalismo-comercial",
+    "nome": "Brutalismo Comercial",
+    "descricao": "Grid geométrico marcado, tipografia display ultra-pesada, contraste preto/branco e alto impacto visual urbano.",
+    "origem": "https://curated-design.com/commercial-brutalism",
+    "tags": ["brutalista", "urbano", "alto-impacto", "tipografico", "direto"],
+    "nichos_recomendados": ["Barbearia Conceito", "Academia Boutique / Crossfit", "Estúdio de Tatuagem", "Gastronomia Urbana / Burger", "Marcas Jovens"],
+    "nichos_evitar": ["Clínica Pediátrica", "Consultório de Psicologia Sensível", "Escritório de Advocacia Conservador"],
+    "composicao": "heavy-grid-blocks",
+    "navegacao": "fixed-top-border-dock",
+    "densidade": "alta",
+    "tipografia": {
+      "display": "Space Grotesk / Syne 800 (Sans-serif display ultra-pesada e expansiva)",
+      "body": "Inter (Sans compacta e direta)",
+      "labels": "Space Mono (Mono crua em caixas com borda sólida)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "high-contrast-monochrome (alto contraste, filtros duotone ou preto e branco com acentos vibrantes)",
+      "proporcoes": ["1:1", "4:5"]
+    },
+    "movimento": {
+      "estilo": ["ticker-marquee", "instant-hover-invert", "snap-scroll", "border-glow"],
+      "intensidade_interacao": 3,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "alto-contraste-preto-e-branco-com-neon",
+      "sugestoes": {
+        "fundo": "#0C0D0E",
+        "superficie": "#16181A",
+        "texto": "#F8FAFC",
+        "texto_secundario": "#94A3B8",
+        "acento": "#00D084",
+        "linha": "#27272A"
+      }
+    },
+    "componentes_permitidos": ["marquee-infinito", "cardapio-tabela-bruta", "galeria-em-mural", "cta-bold-whatsapp", "localizacao-mapa-escuro"],
+    "proibicoes": ["sombras-difusas", "tons-pasteis-apagados", "fontes-cursivas-romanticas", "ilustracoes-fofas"],
+    "prioridade_conversao": 1,
+    "ativo": true
+  },
+  {
+    "id": "arquivo-vivo",
+    "nome": "Arquivo Vivo",
+    "descricao": "Organização inspirada em fichários, índices técnicos e catálogos de precisão, transmitindo autoridade analítica e profundidade.",
+    "origem": "https://curated-design.com/living-archive",
+    "tags": ["arquivo", "catalogo", "analitico", "tecnico", "autoridade"],
+    "nichos_recomendados": ["Advocacia Consultiva / Tributária", "Consultoria de Engenharia", "Perícias e Auditorias", "Institutos de Pesquisa", "Clínicas Especializadas"],
+    "nichos_evitar": ["Baladas / Eventos", "Restaurantes Fast-Food", "Pet Shops"],
+    "composicao": "structured-index-matrix",
+    "navegacao": "drawer-and-filter-bar",
+    "densidade": "alta",
+    "tipografia": {
+      "display": "Plus Jakarta Sans 700 / Syne (Sans estruturada e firme)",
+      "body": "Inter / Roboto (Sans neutra de alta densidade informativa)",
+      "labels": "JetBrains Mono (Monospace para números de processos, referências e datas)",
+      "escala": "moderada"
+    },
+    "imagem": {
+      "tratamento": "documentary-grayscale (fotos documentais, retratos institucionais sóbrios e esquemas explicativos)",
+      "proporcoes": ["16:9", "3:2"]
+    },
+    "movimento": {
+      "estilo": ["accordion-drawer", "smooth-tab-switch", "data-counter", "list-expand"],
+      "intensidade_interacao": 1,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "sobriedade-institucional-navy-e-slate",
+      "sugestoes": {
+        "fundo": "#F1F5F9",
+        "superficie": "#FFFFFF",
+        "texto": "#0F172A",
+        "texto_secundario": "#475569",
+        "acento": "#0369A1",
+        "linha": "#CBD5E1"
+      }
+    },
+    "componentes_permitidos": ["indice-de-atuacao", "acervo-de-artigos-e-casos", "tabela-comparativa-de-risco", "credenciais-e-titulos", "formulario-de-consulta"],
+    "proibicoes": ["animacoes-saltitantes", "cores-neon-gritantes", "cards-desalinhados", "copys-vendedoras-agressivas"],
+    "prioridade_conversao": 2,
+    "ativo": true
+  },
+  {
+    "id": "cinema-local",
+    "nome": "Cinema Local",
+    "descricao": "Atmosfera dark luxury imersiva com imagens full-bleed, transições cinematográficas e foco na experiência sensorial da marca.",
+    "origem": "https://curated-design.com/local-cinema",
+    "tags": ["cinematografico", "imersivo", "dark-luxury", "sensorial", "experiencia"],
+    "nichos_recomendados": ["Rejuvenescimento Facial & Harmonização", "Spas & Resorts", "Restaurantes de Alta Gastronomia", "Hotelaria Boutique", "Estética Premium"],
+    "nichos_evitar": ["Contabilidade", "Autoescolas", "Serviços Técnicos de Informática"],
+    "composicao": "fullbleed-cinematic-scroll",
+    "navegacao": "translucent-floating-header",
+    "densidade": "baixa",
+    "tipografia": {
+      "display": "Cinzel / Cormorant Garamond (Serifada cinematográfica refinada com tracking ampliado)",
+      "body": "Plus Jakarta Sans / Inter 300 (Sans leve e elegante)",
+      "labels": "Space Grotesk (Labels com espaçamento generoso)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "ambient-fullwidth (fotografia de ambiente em alta resolução, iluminação dramática e sobreposições sutis)",
+      "proporcoes": ["16:9", "21:9", "9:16"]
+    },
+    "movimento": {
+      "estilo": ["parallax-smooth", "curtain-reveal", "glow-pulse", "video-backdrop"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "dark-luxury-carvao-e-ouro-antigo",
+      "sugestoes": {
+        "fundo": "#0A0B0D",
+        "superficie": "#14161B",
+        "texto": "#F8FAFC",
+        "texto_secundario": "#A1A1AA",
+        "acento": "#D4AF37",
+        "linha": "rgba(255, 255, 255, 0.1)"
+      }
+    },
+    "componentes_permitidos": ["hero-cinematografico-com-video", "galeria-de-experiencias", "transformacoes-antes-depois-slider", "depoimentos-em-video-audio", "reserva-vip-whatsapp"],
+    "proibicoes": ["tabelas-de-preco-brutas-no-hero", "fundo-branco-hospitalar", "botoes-chatos-sem-hover", "excesso-de-texto-corrido"],
+    "prioridade_conversao": 2,
+    "ativo": true
+  },
+  {
+    "id": "cartaz-modular",
+    "nome": "Cartaz Modular",
+    "descricao": "Composição em blocos de cor harmônicos (color-block), pílulas flutuantes, tipografia calorosa e alta sensação de acolhimento.",
+    "origem": "https://curated-design.com/modular-poster",
+    "tags": ["modular", "acolhedor", "color-block", "humanizado", "dinamico"],
+    "nichos_recomendados": ["Psicologia Clínica & TCC", "Nutrição", "Pediatria", "Odontopediatria", "Estúdios de Pilates & Yoga", "Terapia Ocupacional"],
+    "nichos_evitar": ["Direito Criminal", "Segurança Armada", "Fundos de Investimento"],
+    "composicao": "modular-color-blocks",
+    "navegacao": "floating-pill-menu",
+    "densidade": "media",
+    "tipografia": {
+      "display": "Outfit / DM Sans (Sans arredondada, amigável e confiável)",
+      "body": "Plus Jakarta Sans (Sans equilibrada e acolhedora)",
+      "labels": "JetBrains Mono (Pequenos badges em pílula)",
+      "escala": "moderada"
+    },
+    "imagem": {
+      "tratamento": "soft-rounded-cutouts (fotos humanizadas com cantos arredondados generosos e fundos em tons pastéis aquecidos)",
+      "proporcoes": ["1:1", "4:5", "3:2"]
+    },
+    "movimento": {
+      "estilo": ["soft-spring-hover", "card-stagger-fade", "pill-active-glow", "smooth-scroll"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "warm-organic-terracota-salvia-e-creme",
+      "sugestoes": {
+        "fundo": "#FAF8F5",
+        "superficie": "#FFFFFF",
+        "texto": "#2D2823",
+        "texto_secundario": "#6E6860",
+        "acento": "#8F9E8B",
+        "acento_secundario": "#D4A373",
+        "linha": "rgba(226, 219, 210, 0.7)"
+      }
+    },
+    "componentes_permitidos": ["apresentacao-humanizada", "cards-de-abordagens-e-especialidades", "faq-interativo-sanfonado", "depoimentos-em-cards-acolhedores", "agendamento-direto-whatsapp"],
+    "proibicoes": ["estetica-hospitalar-gelada", "cores-pesadas-de-cemiterio", "termos-tecnicos-sem-explicacao", "fotos-de-stock-americanas"],
+    "prioridade_conversao": 1,
+    "ativo": true
+  },
+  {
+    "id": "instrumento-digital",
+    "nome": "Instrumento Digital",
+    "descricao": "Precisão suíça (Swiss Design), alinhamento milimétrico, microinterações limpas e foco absoluto em confiabilidade técnica e clareza.",
+    "origem": "https://curated-design.com/digital-instrument",
+    "tags": ["swiss-design", "precisao", "cirurgico", "tecnologico", "confianca"],
+    "nichos_recomendados": ["Odontologia Digital & Implantes", "Oftalmologia", "Ortodontia Invisível", "Diagnóstico por Imagem", "Tecnologia Médica"],
+    "nichos_evitar": ["Espaço Holístico / Místico", "Brechós / Moda Vintage", "Casas de Festas Infantis"],
+    "composicao": "precision-swiss-grid",
+    "navegacao": "topbar-with-stepper",
+    "densidade": "media",
+    "tipografia": {
+      "display": "Plus Jakarta Sans 800 (Sans geométrica de precisão técnica)",
+      "body": "Inter (Sans de leitura perfeita)",
+      "labels": "JetBrains Mono (Monospace para especificações e métricas)",
+      "escala": "moderada"
+    },
+    "imagem": {
+      "tratamento": "crisp-clinical-photography (fotos nítidas de consultório, tecnologia de escaneamento 3D e macro de tratamentos)",
+      "proporcoes": ["16:9", "1:1"]
+    },
+    "movimento": {
+      "estilo": ["interactive-tabs", "stepper-timeline", "comparison-slider", "micro-hover-card"],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "azul-cirurgico-e-slate-puro",
+      "sugestoes": {
+        "fundo": "#F8FAFC",
+        "superficie": "#FFFFFF",
+        "texto": "#0F172A",
+        "texto_secundario": "#64748B",
+        "acento": "#0284C7",
+        "acento_secundario": "#0D9488",
+        "linha": "#E2E8F0"
+      }
+    },
+    "componentes_permitidos": ["passo-a-passo-do-tratamento", "comparador-tecnologico", "galeria-de-tecnologias-equipamentos", "calculadora-ou-simulador-de-etapas", "cta-whatsapp-com-mensagem-guiada"],
+    "proibicoes": ["fontes-manuscritas", "elementos-tortos-sem-grid", "decoracoes-desconexas-da-ciencia", "gradientes-arco-iris"],
+    "prioridade_conversao": 1,
+    "ativo": true
+  }
+];
+
+var PRESETS = JSON.parse(localStorage.getItem('prospector_presets') || 'null') || PRESETS_PADRAO;
+
+function carregarPresetsRemoto() {
+  fetch('/api/presets', { cache: 'no-store' }).then(function(r) {
+    if (!r.ok) throw 0;
+    return r.json();
+  }).then(function(lista) {
+    if (Array.isArray(lista) && lista.length) {
+      PRESETS = lista;
+      localStorage.setItem('prospector_presets', JSON.stringify(PRESETS));
+      if (view === 'presets') render();
+    }
+  }).catch(function() {});
+}
+carregarPresetsRemoto();
+
 function aplicaOv(arr) {
   return arr.filter(function(l) { return !(OV[l.slug] && OV[l.slug]._del); })
             .map(function(l) { return Object.assign({}, l, OV[l.slug] || {}); });
@@ -1630,6 +2251,7 @@ if (!initSupabase()) {
 var CORES = {
   novo: 'var(--novo)',
   redesenhado: 'var(--rede)',
+  aprovado_contato: '#059669',
   publicado: 'var(--pub)',
   proposta: 'var(--prop)',
   respondeu: 'var(--resp)',
@@ -1638,14 +2260,15 @@ var CORES = {
 };
 var NOMES = {
   novo: 'Novo',
-  redesenhado: 'Redesenhado',
+  redesenhado: 'Prévia Gerada',
+  aprovado_contato: 'Aprovada p/ Contato',
   publicado: 'Publicado',
   proposta: 'Proposta Enviada',
   respondeu: 'Respondeu',
   fechado: 'Fechado',
   descartado: 'Descartado'
 };
-var ORDEM = ['novo', 'redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'];
+var ORDEM = ['novo', 'redesenhado', 'aprovado_contato', 'publicado', 'proposta', 'respondeu', 'fechado'];
 var view = 'geral', busca = '', sortCol = 'nome', sortAsc = true, pag = 1, porPag = 'auto';
 
 function pagSize() {
@@ -1853,6 +2476,395 @@ function copiarTextoZap() {
   setTimeout(function() { btn.textContent = '📋 Copiar Mensagem'; }, 2000);
 }
 
+// === MOTOR DE RECOMENDAÇÃO DE DIREÇÃO CRIATIVA ===
+function calcularDirecaoCriativa(lead) {
+  var nichoLead = (lead.nicho || '').toLowerCase();
+  var nomeLead = (lead.nome || '').toLowerCase();
+  var obsLead = (lead.obs || '').toLowerCase();
+  var motivoLead = (lead.motivo || '').toLowerCase();
+  var ticket = lead.valor || 1200;
+  var temSite = !!lead.siteAntigo;
+  var temFotos = obsLead.indexOf('foto') !== -1 || obsLead.indexOf('instagram') !== -1 || motivoLead.indexOf('instagram') !== -1 || obsLead.indexOf('@') !== -1;
+  var avaliacoes = lead.avaliacoes || 0;
+  var nota = lead.nota || 4.5;
+
+  // Penalidade de repetição nos últimos 3 sites criados do mesmo nicho
+  var ultimosDoNicho = leads.filter(function(l) {
+    return l.slug !== lead.slug && l.nicho && l.nicho.toLowerCase() === nichoLead && ['redesenhado', 'aprovado_contato', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0;
+  }).slice(0, 3);
+
+  var idsUsadosRecentemente = ultimosDoNicho.map(function(l) {
+    if (l.direcaoCriativa && l.direcaoCriativa.presetId) return l.direcaoCriativa.presetId;
+    if (l.versoes && l.versoes.length) {
+      var estilo = l.versoes[0].nome_estilo.toLowerCase();
+      if (estilo.indexOf('editorial') !== -1 || estilo.indexOf('luxury') !== -1) return 'editorial-atelier';
+      if (estilo.indexOf('cinema') !== -1) return 'cinema-local';
+      if (estilo.indexOf('swiss') !== -1 || estilo.indexOf('precision') !== -1) return 'instrumento-digital';
+      if (estilo.indexOf('cream') !== -1 || estilo.indexOf('wellness') !== -1 || estilo.indexOf('organic') !== -1) return 'cartaz-modular';
+      if (estilo.indexOf('brutal') !== -1) return 'brutalismo-comercial';
+      if (estilo.indexOf('arquivo') !== -1 || estilo.indexOf('mono') !== -1) return 'arquivo-vivo';
+    }
+    return null;
+  }).filter(Boolean);
+
+  var opcoes = PRESETS.filter(function(p) { return p.ativo !== false; }).map(function(p) {
+    var score = 50;
+    var justificativas = [];
+    var penalizadoRepeticao = false;
+
+    // 1. Compatibilidade de Nicho (30%)
+    var nichoMatch = (p.nichos_recomendados || []).some(function(nr) {
+      return nichoLead.indexOf(nr.toLowerCase()) !== -1 || nr.toLowerCase().indexOf(nichoLead) !== -1;
+    });
+    var nichoEvitar = (p.nichos_evitar || []).some(function(ne) {
+      return nichoLead.indexOf(ne.toLowerCase()) !== -1 || ne.toLowerCase().indexOf(nichoLead) !== -1;
+    });
+
+    if (nichoMatch) {
+      score += 26;
+      justificativas.push('Alta aderência ao nicho ' + (lead.nicho || 'Geral') + '.');
+    } else if (nichoEvitar) {
+      score -= 28;
+      justificativas.push('Pouco recomendado para este perfil de negócio.');
+    }
+
+    // 2. Personalidade & Ticket (25%)
+    if (ticket >= 1700 && (p.id === 'editorial-atelier' || p.id === 'cinema-local')) {
+      score += 16;
+      justificativas.push('Excelente para posicionamento de alto ticket (R$ ' + ticket.toLocaleString('pt-BR') + ') e público exigente.');
+    }
+    if (ticket < 1500 && (p.id === 'cartaz-modular' || p.id === 'instrumento-digital' || p.id === 'brutalismo-comercial')) {
+      score += 10;
+      justificativas.push('Foco em clareza imediata e geração de agendamentos rápidos via WhatsApp.');
+    }
+
+    // 3. Material Visual & Prova Social (15%)
+    if (temFotos && (p.id === 'editorial-atelier' || p.id === 'cinema-local')) {
+      score += 12;
+      justificativas.push('Aproveita o acervo fotográfico/Instagram para compor uma narrativa visual rica.');
+    }
+    if (avaliacoes >= 25 && nota >= 4.8) {
+      if (p.id === 'instrumento-digital' || p.id === 'cartaz-modular' || p.id === 'arquivo-vivo') {
+        score += 8;
+        justificativas.push('Destaca as ' + avaliacoes + ' avaliações reais 5★ com alta credibilidade.');
+      }
+    }
+
+    // 4. Diagnóstico do Site Atual (20%)
+    if (!temSite) {
+      if (p.id === 'cartaz-modular' || p.id === 'editorial-atelier' || p.id === 'instrumento-digital') {
+        score += 8;
+        justificativas.push('Perfeito para a 1ª página oficial da marca.');
+      }
+    } else {
+      if (p.id === 'instrumento-digital' || p.id === 'brutalismo-comercial') {
+        score += 6;
+        justificativas.push('Corrige a falta de hierarquia do site antigo com foco cirúrgico na conversão.');
+      }
+    }
+
+    // 5. Diversidade & Penalidade de Repetição (10%)
+    if (idsUsadosRecentemente.indexOf(p.id) !== -1) {
+      score -= 25;
+      penalizadoRepeticao = true;
+      justificativas.push('⚠️ Penalidade de repetição: receita já utilizada recentemente em outro site deste nicho.');
+    } else {
+      score += 5;
+    }
+
+    score = Math.max(15, Math.min(99, score));
+
+    return {
+      preset: p,
+      score: score,
+      penalizadoRepeticao: penalizadoRepeticao,
+      justificativa: justificativas.join(' ')
+    };
+  });
+
+  opcoes.sort(function(a, b) { return b.score - a.score; });
+  return opcoes;
+}
+
+var direcaoSlugAtual = null;
+var presetSelecionadoTemp = null;
+
+function abrirModalDirecao(slug) {
+  direcaoSlugAtual = slug;
+  var l = leads.find(function(x) { return x.slug === slug; });
+  if (!l) return;
+
+  document.getElementById('md-titulo').textContent = '🎯 Direção Criativa — ' + l.nome;
+  document.getElementById('md-sub').textContent = 'Análise do perfil do negócio, scoring ponderado e restrições visuais.';
+
+  var perfilDiv = document.getElementById('md-perfil-lead');
+  perfilDiv.innerHTML = '<div><b>📍 Cidade:</b> ' + (l.cidade || '—') + '</div>' +
+    '<div><b>🏷️ Nicho:</b> ' + (l.nicho || '—') + '</div>' +
+    '<div><b>⭐ Avaliações:</b> ' + (l.nota ? l.nota + ' ★ (' + l.avaliacoes + ')' : '—') + '</div>' +
+    '<div><b>💰 Ticket Estimado:</b> R$ ' + (l.valor ? l.valor.toLocaleString('pt-BR') : '1.200') + '</div>' +
+    '<div><b>🌐 Site Atual:</b> ' + (l.siteAntigo ? '<a href="' + l.siteAntigo + '" target="_blank" style="color:var(--info)">' + l.siteAntigo + '</a>' : 'Sem site (Criação do Zero)') + '</div>' +
+    '<div><b>📸 Acervo Visual:</b> ' + (l.obs && l.obs.indexOf('@') !== -1 ? 'Instagram detectado' : 'Google Maps') + '</div>';
+
+  var opcoes = calcularDirecaoCriativa(l);
+  var topOpcoes = opcoes.slice(0, 3);
+
+  var presetAtualId = (l.direcaoCriativa && l.direcaoCriativa.presetId) ? l.direcaoCriativa.presetId : (topOpcoes[0] ? topOpcoes[0].preset.id : null);
+  presetSelecionadoTemp = presetAtualId;
+
+  var grid = document.getElementById('md-opcoes-grid');
+  grid.innerHTML = topOpcoes.map(function(op, idx) {
+    var p = op.preset;
+    var isSel = p.id === presetSelecionadoTemp;
+    var isTop = idx === 0;
+
+    var swatches = '';
+    if (p.paleta && p.paleta.sugestoes) {
+      var s = p.paleta.sugestoes;
+      swatches = '<div class="preset-swatches" style="margin-top:6px">' +
+        ['fundo', 'superficie', 'texto', 'acento'].map(function(k) {
+          return s[k] ? '<div class="preset-swatch" style="background:' + s[k] + '" title="' + k + '"></div>' : '';
+        }).join('') +
+        '<span style="font-size:11px;color:var(--muted);margin-left:4px">' + (p.paleta.estilo || '') + '</span></div>';
+    }
+
+    var repeticaoAlert = op.penalizadoRepeticao ? '<div class="penalidade-badge" style="margin-top:6px">⚠️ Penalidade de repetição aplicada</div>' : '';
+
+    return '<div class="direcao-opcao-card ' + (isSel ? 'selected' : '') + '" id="d-card-' + p.id + '" onclick="selecionarDirecao(\'' + p.id + '\')">' +
+      '<div class="top-info">' +
+      '<div><b style="font-size:15px;color:var(--ink)">' + p.nome + '</b>' + (isTop ? ' <span style="background:var(--accent);color:#000;font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:6px">TOP RECOMENDADO</span>' : '') + '</div>' +
+      '<span class="score-pill ' + (isTop ? 'top' : '') + '">Score: ' + op.score + '/100</span>' +
+      '</div>' +
+      '<p style="margin:0;font-size:12px;color:var(--ink-secondary)">' + p.descricao + '</p>' +
+      '<div class="justificativa-box"><b>💡 Por que esta direção?</b><br>' + op.justificativa + '</div>' +
+      repeticaoAlert +
+      '<div style="font-size:11.5px;color:var(--muted);display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">' +
+      '<div><b>Tipografia:</b> ' + (p.tipografia ? p.tipografia.display : '—') + '</div>' +
+      '<div><b>Composição:</b> ' + (p.composicao || '—') + '</div>' +
+      '</div>' +
+      swatches +
+      '</div>';
+  }).join('');
+
+  var selectOutro = document.getElementById('md-outro-preset');
+  selectOutro.innerHTML = '<option value="">-- Escolher outro preset da biblioteca --</option>' +
+    PRESETS.map(function(p) {
+      return '<option value="' + p.id + '"' + (p.id === presetSelecionadoTemp ? ' selected' : '') + '>' + p.nome + ' (' + p.id + ')</option>';
+    }).join('');
+
+  document.getElementById('m-direcao-bg').classList.add('aberto');
+}
+
+function fecharModalDirecao() {
+  document.getElementById('m-direcao-bg').classList.remove('aberto');
+  direcaoSlugAtual = null;
+  presetSelecionadoTemp = null;
+}
+
+function selecionarDirecao(presetId) {
+  presetSelecionadoTemp = presetId;
+  document.querySelectorAll('.direcao-opcao-card').forEach(function(el) {
+    el.classList.remove('selected');
+  });
+  var c = document.getElementById('d-card-' + presetId);
+  if (c) c.classList.add('selected');
+  var sel = document.getElementById('md-outro-preset');
+  if (sel) sel.value = presetId;
+}
+
+function selecionarOutroPreset(presetId) {
+  if (!presetId) return;
+  selecionarDirecao(presetId);
+}
+
+function salvarDirecaoEscolhida() {
+  if (!direcaoSlugAtual || !presetSelecionadoTemp) return;
+  var p = PRESETS.find(function(x) { return x.id === presetSelecionadoTemp; });
+  if (!p) return;
+
+  var l = leads.find(function(x) { return x.slug === direcaoSlugAtual; });
+  var opc = calcularDirecaoCriativa(l || {}).find(function(x) { return x.preset.id === p.id; });
+  var just = opc ? opc.justificativa : 'Direção visual selecionada manualmente na biblioteca.';
+
+  var cardDirecao = {
+    presetId: p.id,
+    presetNome: p.nome,
+    composicao: p.composicao,
+    tipografia: p.tipografia,
+    paleta: p.paleta,
+    justificativa: just,
+    data: new Date().toISOString().slice(0, 10),
+    status: 'direcao_definida'
+  };
+
+  salvarOv(direcaoSlugAtual, { direcaoCriativa: cardDirecao });
+  fecharModalDirecao();
+  alert('✨ Direção Criativa definida com sucesso para ' + (l ? l.nome : 'o lead') + '!\nPreset: ' + p.nome);
+}
+
+function aprovarParaContato(slug) {
+  var l = leads.find(function(x) { return x.slug === slug; });
+  if (!l) return;
+  if (confirm('Aprovar a prévia de ' + l.nome + ' para contato comercial ativo?')) {
+    salvarOv(slug, { status: 'aprovado_contato' });
+  }
+}
+
+// === GESTÃO DE PRESETS (CRUD & PREVIEW) ===
+var presetEdicaoId = null;
+
+function abrirModalPreset(id) {
+  presetEdicaoId = id || null;
+  var p = id ? PRESETS.find(function(x) { return x.id === id; }) : null;
+  document.getElementById('mp-titulo').textContent = p ? 'Editar Preset — ' + p.nome : 'Novo Preset de Direção Visual';
+  document.getElementById('mp-id').value = p ? p.id : '';
+  document.getElementById('mp-id').disabled = !!p;
+  document.getElementById('mp-nome').value = p ? p.nome : '';
+  document.getElementById('mp-desc').value = p ? p.descricao : '';
+  document.getElementById('mp-composicao').value = p ? p.composicao : '';
+  document.getElementById('mp-navegacao').value = p ? p.navegacao : '';
+  document.getElementById('mp-densidade').value = p ? (p.densidade || 'media') : 'media';
+  document.getElementById('mp-conversao').value = p ? (p.prioridade_conversao || 1) : 1;
+  document.getElementById('mp-fonte-display').value = p && p.tipografia ? p.tipografia.display : '';
+  document.getElementById('mp-fonte-body').value = p && p.tipografia ? p.tipografia.body : '';
+  document.getElementById('mp-nichos').value = p && p.nichos_recomendados ? p.nichos_recomendados.join(', ') : '';
+  document.getElementById('mp-nichos-evitar').value = p && p.nichos_evitar ? p.nichos_evitar.join(', ') : '';
+  document.getElementById('mp-tags').value = p && p.tags ? p.tags.join(', ') : '';
+  document.getElementById('mp-cor-fundo').value = p && p.paleta && p.paleta.sugestoes ? p.paleta.sugestoes.fundo : '#FBFBFA';
+  document.getElementById('mp-cor-acento').value = p && p.paleta && p.paleta.sugestoes ? p.paleta.sugestoes.acento : '#00D084';
+  document.getElementById('mp-componentes').value = p && p.componentes_permitidos ? p.componentes_permitidos.join(', ') : '';
+  document.getElementById('mp-proibicoes').value = p && p.proibicoes ? p.proibicoes.join(', ') : '';
+
+  document.getElementById('m-preset-bg').classList.add('aberto');
+}
+
+function fecharModalPreset() {
+  document.getElementById('m-preset-bg').classList.remove('aberto');
+  presetEdicaoId = null;
+}
+
+function salvarPresetModal() {
+  var id = document.getElementById('mp-id').value.trim().toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+  var nome = document.getElementById('mp-nome').value.trim();
+  if (!id || !nome) { alert('Informe o ID e o Nome do preset.'); return; }
+
+  var desc = document.getElementById('mp-desc').value.trim();
+  var comp = document.getElementById('mp-composicao').value.trim();
+  var nav = document.getElementById('mp-navegacao').value.trim();
+  var dens = document.getElementById('mp-densidade').value;
+  var conv = parseInt(document.getElementById('mp-conversao').value);
+  var fDisplay = document.getElementById('mp-fonte-display').value.trim();
+  var fBody = document.getElementById('mp-fonte-body').value.trim();
+  var nichos = document.getElementById('mp-nichos').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  var nichosEvitar = document.getElementById('mp-nichos-evitar').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  var tags = document.getElementById('mp-tags').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  var cFundo = document.getElementById('mp-cor-fundo').value.trim() || '#FBFBFA';
+  var cAcento = document.getElementById('mp-cor-acento').value.trim() || '#00D084';
+  var comps = document.getElementById('mp-componentes').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  var proibs = document.getElementById('mp-proibicoes').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+
+  var idx = PRESETS.findIndex(function(x) { return x.id === id; });
+  var obj = {
+    id: id,
+    nome: nome,
+    descricao: desc,
+    origem: 'Criado no Aholic OS',
+    tags: tags,
+    nichos_recomendados: nichos,
+    nichos_evitar: nichosEvitar,
+    composicao: comp,
+    navegacao: nav,
+    densidade: dens,
+    tipografia: { display: fDisplay, body: fBody, labels: 'JetBrains Mono' },
+    imagem: { tratamento: 'custom', proporcoes: ['16:9', '1:1'] },
+    movimento: { estilo: ['smooth-scroll', 'hover-lift'], intensidade_interacao: 2, respeita_prefers_reduced_motion: true },
+    paleta: { estilo: 'custom', sugestoes: { fundo: cFundo, superficie: '#FFFFFF', texto: '#111315', acento: cAcento } },
+    componentes_permitidos: comps,
+    proibicoes: proibs,
+    prioridade_conversao: conv,
+    ativo: true
+  };
+
+  if (idx >= 0) {
+    PRESETS[idx] = Object.assign({}, PRESETS[idx], obj);
+  } else {
+    PRESETS.push(obj);
+  }
+
+  salvarPresetsLocal();
+  fecharModalPreset();
+  render();
+}
+
+function salvarPresetsLocal() {
+  localStorage.setItem('prospector_presets', JSON.stringify(PRESETS));
+  if (MODE === 'db') {
+    fetch('/api/presets', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(PRESETS)
+    }).catch(function(e) { console.error('Erro ao salvar presets via API:', e); });
+  }
+}
+
+function duplicarPreset(id) {
+  var p = PRESETS.find(function(x) { return x.id === id; });
+  if (!p) return;
+  var novoId = p.id + '-copia-' + Math.floor(Math.random() * 1000);
+  var clone = JSON.parse(JSON.stringify(p));
+  clone.id = novoId;
+  clone.nome = p.nome + ' (Cópia)';
+  PRESETS.push(clone);
+  salvarPresetsLocal();
+  render();
+}
+
+function toggleAtivoPreset(id) {
+  var p = PRESETS.find(function(x) { return x.id === id; });
+  if (!p) return;
+  p.ativo = !p.ativo;
+  salvarPresetsLocal();
+  render();
+}
+
+function abrirPreviewPreset(id) {
+  var p = PRESETS.find(function(x) { return x.id === id; });
+  if (!p) return;
+
+  document.getElementById('mpp-titulo').textContent = 'Preview do Preset — ' + p.nome;
+  document.getElementById('mpp-sub').textContent = 'Visualização de tokens, regras de composição e simulação de layout.';
+
+  var s = (p.paleta && p.paleta.sugestoes) || { fundo: '#FBFBFA', superficie: '#FFFFFF', texto: '#111315', acento: '#00D084' };
+  var fDisplay = (p.tipografia && p.tipografia.display) || 'Plus Jakarta Sans';
+  var fBody = (p.tipografia && p.tipografia.body) || 'Inter';
+
+  var html = '<div style="background:' + s.fundo + ';color:' + (s.texto || '#111315') + ';border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-md);margin-bottom:16px">' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid ' + (s.linha || 'rgba(0,0,0,0.08)') + ';padding-bottom:14px;margin-bottom:20px">' +
+    '<span style="font-weight:800;font-size:14px;letter-spacing:1px;text-transform:uppercase">ESTÚDIO DE DEMO &bull; ' + p.nome.toUpperCase() + '</span>' +
+    '<span style="background:' + s.acento + ';color:#000;font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px">' + (p.composicao || 'Editorial') + '</span>' +
+    '</div>' +
+    '<div style="margin-bottom:24px">' +
+    '<h1 style="font-size:26px;font-weight:800;line-height:1.2;margin:0 0 10px">' + p.nome + ': Arquitetura de Conversão Visual</h1>' +
+    '<p style="font-size:13.5px;line-height:1.6;opacity:0.85;margin:0">' + p.descricao + '</p>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:12px;margin-bottom:20px">' +
+    '<div style="background:' + s.superficie + ';border:1px solid var(--line);border-radius:12px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--muted)">Tipografia Display</div><div style="font-size:13.5px;font-weight:700;margin-top:4px">' + fDisplay + '</div></div>' +
+    '<div style="background:' + s.superficie + ';border:1px solid var(--line);border-radius:12px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--muted)">Tipografia Body</div><div style="font-size:13.5px;font-weight:700;margin-top:4px">' + fBody + '</div></div>' +
+    '<div style="background:' + s.superficie + ';border:1px solid var(--line);border-radius:12px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--muted)">Navegação</div><div style="font-size:13.5px;font-weight:700;margin-top:4px">' + (p.navegacao || 'chapter-index') + '</div></div>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' +
+    '<div style="background:' + s.superficie + ';border:1px solid #BBF7D0;border-radius:12px;padding:14px"><b style="color:#16A34A;font-size:11.5px;text-transform:uppercase">✓ Componentes Recomendados</b><ul style="margin:6px 0 0 16px;padding:0;font-size:12px;line-height:1.6">' + ((p.componentes_permitidos || []).map(function(c) { return '<li>' + c + '</li>'; }).join('') || '<li>Todos os componentes padrão</li>') + '</ul></div>' +
+    '<div style="background:' + s.superficie + ';border:1px solid #FECACA;border-radius:12px;padding:14px"><b style="color:#DC2626;font-size:11.5px;text-transform:uppercase">🚫 Proibições (Anti-Slop)</b><ul style="margin:6px 0 0 16px;padding:0;font-size:12px;line-height:1.6">' + ((p.proibicoes || []).map(function(c) { return '<li>' + c + '</li>'; }).join('') || '<li>Sem restrições extras</li>') + '</ul></div>' +
+    '</div>' +
+    '</div>';
+
+  document.getElementById('mpp-conteudo').innerHTML = html;
+  document.getElementById('m-preset-preview-bg').classList.add('aberto');
+}
+
+function fecharPreviewPreset() {
+  document.getElementById('m-preset-preview-bg').classList.remove('aberto');
+}
+
 function setView(v) { view = v; render(); }
 
 /* Nav icons SVG definition */
@@ -1862,6 +2874,7 @@ var ICONS = {
   clientes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
   sites: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>',
   comparador: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>',
+  presets: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
   followup: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
   contratos: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>',
   financeiro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>',
@@ -1871,12 +2884,14 @@ var ICONS = {
 function nav() {
   var fu = fil().filter(function(l) { return l.status === 'proposta' && dias(l.dataProposta) >= 4; });
   var fechadosN = fil().filter(function(l) { return l.status === 'fechado'; }).length;
+  var presetsN = PRESETS.filter(function(p) { return p.ativo !== false; }).length;
   var itens = [
     ['geral', 'Visão Geral', null],
     ['pipeline', 'Pipeline Kanban', ativos().length],
     ['clientes', 'Clientes & CRM', fil().length],
-    ['sites', 'Sites & Versões', fil().filter(function(l) { return ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length],
-    ['comparador', 'Comparador Split', fil().filter(function(l) { return l.slug && ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length],
+    ['sites', 'Sites & Versões', fil().filter(function(l) { return ['redesenhado', 'aprovado_contato', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length],
+    ['comparador', 'Comparador Split', fil().filter(function(l) { return l.slug && ['redesenhado', 'aprovado_contato', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length],
+    ['presets', 'Presets Visuais', presetsN],
     ['followup', 'Follow-ups', fu.length],
     ['contratos', 'Contratos', fechadosN],
     ['financeiro', 'Financeiro', null],
@@ -1891,18 +2906,24 @@ function nav() {
 }
 
 function pillStatus(s) {
-  return '<span class="pill" style="background:color-mix(in srgb,' + CORES[s] + ' 16%,transparent);color:' + CORES[s] + ';border:1px solid color-mix(in srgb,' + CORES[s] + ' 30%,transparent)">' + NOMES[s] + '</span>';
+  var cor = CORES[s] || 'var(--cinza)';
+  var nome = NOMES[s] || s;
+  return '<span class="pill" style="background:color-mix(in srgb,' + cor + ' 16%,transparent);color:' + cor + ';border:1px solid color-mix(in srgb,' + cor + ' 30%,transparent)">' + nome + '</span>';
 }
 
 function acoes(l) {
   var a = [];
   if (l.siteAntigo) a.push('<a href="' + l.siteAntigo + '" target="_blank" title="Ver site antigo">antigo ↗</a>');
-  if (l.slug && ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0) {
+  if (l.slug && ['redesenhado', 'aprovado_contato', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0) {
     a.push('<a href="sites/' + l.slug + '/' + l.slug + '.html" target="_blank" style="color:var(--info);font-weight:700">página ↗</a>');
     a.push('<a href="sites/' + l.slug + '/' + l.slug + '-editor.html" target="_blank">editor</a>');
     a.push('<a href="#" onclick="copiarLinkPublico(\'' + l.slug + '\');return false" title="Copiar link público para enviar ao cliente" style="color:var(--accent-dark);font-weight:700">🔗 link</a>');
   }
-  if (l.whatsapp) a.push('<a href="#" onclick="abrirZapModal(\'' + l.slug + '\');return false" style="color:var(--ok);font-weight:700">💬 whatsapp</a>');
+  a.push('<a href="#" onclick="abrirModalDirecao(\'' + l.slug + '\');return false" style="color:#2563EB;font-weight:700" title="Gerar / Consultar Direção Criativa">🎯 direção</a>');
+  if (l.status === 'redesenhado') {
+    a.push('<a href="#" onclick="aprovarParaContato(\'' + l.slug + '\');return false" style="color:#059669;font-weight:700" title="Aprovar prévia para contato comercial">✓ aprovar contato</a>');
+  }
+  if (l.whatsapp) a.push('<a href="#" onclick="abrirZapModal(\'' + l.slug + '\');return false" style="color:var(--ok);font-weight:700">💬 zap</a>');
   if (l.versoes && l.versoes.length) a.push('<a href="#" onclick="abrirModalVersoes(\'' + l.slug + '\');return false" style="color:var(--accent-dark);font-weight:700">📁 ' + l.versoes.length + ' vers.</a>');
   a.push('<a href="#" onclick="abrirEdit(\'' + l.slug + '\');return false">✎ dados</a>');
   a.push('<a href="#" class="del" onclick="deletar(\'' + l.slug + '\');return false">✕</a>');
@@ -1911,9 +2932,14 @@ function acoes(l) {
 
 function card(l) {
   var f = l.status === 'proposta' && dias(l.dataProposta) >= 4 ? '<span class="tag fup">f-up ' + dias(l.dataProposta) + 'd</span>' : '';
-  return '<div class="card" draggable="true" ondragstart="dragIni(event,\'' + l.slug + '\')" ondragend="dragFim(event)" style="--cor:' + CORES[l.status] + '">' +
+  var direcaoBadge = '';
+  if (l.direcaoCriativa && l.direcaoCriativa.presetNome) {
+    direcaoBadge = '<div class="direcao-lead-badge" title="' + (l.direcaoCriativa.justificativa || '') + '">🎯 ' + l.direcaoCriativa.presetNome + '</div>';
+  }
+  return '<div class="card" draggable="true" ondragstart="dragIni(event,\'' + l.slug + '\')" ondragend="dragFim(event)" style="--cor:' + (CORES[l.status] || 'var(--cinza)') + '">' +
     '<div class="nm">' + l.nome + f + '</div>' +
     '<div class="mt">' + (l.nota ? '★ ' + l.nota + ' (' + l.avaliacoes + ')' : '') + (l.cidade ? ' &bull; ' + l.cidade : '') + '</div>' +
+    direcaoBadge +
     (l.motivo ? '<div class="motivo">' + l.motivo + '</div>' : '') +
     (l.obs ? '<div class="mt" style="font-size:11px;color:var(--dim)">' + l.obs + '</div>' : '') +
     (l.valor ? '<div class="valor">R$ ' + l.valor.toLocaleString('pt-BR') + (l.manutencao ? ' <span style="color:var(--dim);font-weight:600;font-size:11px">+ R$ ' + l.manutencao.toLocaleString('pt-BR') + '/mês</span>' : '') + '</div>' : '') +
@@ -1930,7 +2956,8 @@ function vGeral() {
 
   var statsData = [
     ['Leads no Radar', at.length, ''],
-    ['Sites Prontos', ls.filter(function(l) { return ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length, 'azul'],
+    ['Prévias Geradas', ls.filter(function(l) { return ['redesenhado', 'aprovado_contato', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; }).length, 'azul'],
+    ['Aprovadas p/ Contato', ls.filter(function(l) { return l.status === 'aprovado_contato'; }).length, 'verde'],
     ['Propostas Enviadas', props.length, 'ambar'],
     ['Contratos Fechados', fech.length, 'verde'],
     ['Receita Fechada', 'R$ ' + receita.toLocaleString('pt-BR'), 'verde'],
@@ -1946,7 +2973,7 @@ function vGeral() {
   html += '<div style="display:grid;grid-template-columns:1.2fr 1fr;gap:18px">' +
     '<div class="painel funil"><h2>Funil de Conversão Comercial</h2>' + ORDEM.map(function(s) {
       var n = ls.filter(function(l) { return l.status === s; }).length;
-      return '<div class="linha"><span>' + NOMES[s] + '</span><div class="barra"><div class="fill" style="width:' + (n / max * 100) + '%;background:' + CORES[s] + '"></div></div><b style="font-family:var(--mono);color:var(--ink)">' + n + '</b></div>';
+      return '<div class="linha"><span>' + NOMES[s] + '</span><div class="barra"><div class="fill" style="width:' + (n / max * 100) + '%;background:' + (CORES[s] || '#64748B') + '"></div></div><b style="font-family:var(--mono);color:var(--ink)">' + n + '</b></div>';
     }).join('') + '</div>' +
     '<div class="painel"><h2>Follow-ups Prioritários (4+ dias)</h2>' + (fu.length ? fu.map(function(l) {
       return '<div class="fup-item">' +
@@ -1967,7 +2994,7 @@ function vPipeline() {
     '<div class="board">' + ORDEM.concat(['descartado']).map(function(s) {
       var arr = por[s] || [];
       return '<div class="col" data-st="' + s + '" ondragover="dragSobre(event)" ondragleave="dragSai(event)" ondrop="solta(event,\'' + s + '\')">' +
-        '<h3>' + NOMES[s] + '<span>' + arr.length + '</span></h3>' +
+        '<h3>' + (NOMES[s] || s) + '<span>' + arr.length + '</span></h3>' +
         '<div class="cards">' + (arr.length ? arr.map(card).join('') : '<div class="vazio">arraste para cá</div>') + '</div>' +
         '</div>';
     }).join('') + '</div>';
@@ -1986,16 +3013,20 @@ function vClientes() {
 
   return '<div class="painel" style="flex:1;display:flex;flex-direction:column;min-height:0">' +
     '<div style="flex:1;overflow:auto"><table><thead><tr>' + [
-      ['nome', 'Cliente / Empresa'], ['nota', 'Nota'], ['avaliacoes', 'Avaliações'], ['cidade', 'Cidade'], ['nicho', 'Nicho'], ['status', 'Status'], ['valor', 'Valor'], ['x', 'Ações']
+      ['nome', 'Cliente / Empresa'], ['nota', 'Nota'], ['cidade', 'Cidade'], ['nicho', 'Nicho'], ['direcaoCriativa', 'Direção Visual'], ['status', 'Status'], ['valor', 'Valor'], ['x', 'Ações']
     ].map(function(c) {
       return '<th onclick="ordenar(\'' + c[0] + '\')">' + c[1] + (sortCol === c[0] ? (sortAsc ? ' ↑' : ' ↓') : '') + '</th>';
     }).join('') + '</tr></thead><tbody>' + ls.map(function(l) {
+      var dirBadge = (l.direcaoCriativa && l.direcaoCriativa.presetNome)
+        ? '<span class="direcao-lead-badge" style="margin-top:0">🎯 ' + l.direcaoCriativa.presetNome + '</span>'
+        : '<a href="#" onclick="abrirModalDirecao(\'' + l.slug + '\');return false" style="font-size:11px;color:#2563EB;font-weight:700">+ Definir Direção</a>';
+
       return '<tr>' +
         '<td><b style="color:var(--ink);font-size:13.5px">' + l.nome + '</b><div style="color:var(--muted);font-size:11.5px">' + (l.email || 'sem e-mail') + '</div></td>' +
-        '<td>' + (l.nota ? '★ ' + l.nota : '—') + '</td>' +
-        '<td>' + (l.avaliacoes || '—') + '</td>' +
+        '<td>' + (l.nota ? '★ ' + l.nota + ' (' + l.avaliacoes + ')' : '—') + '</td>' +
         '<td>' + (l.cidade || '—') + '</td>' +
         '<td>' + (l.nicho || '—') + '</td>' +
+        '<td>' + dirBadge + '</td>' +
         '<td>' + pillStatus(l.status) + '</td>' +
         '<td style="font-family:var(--mono);color:var(--accent-dark);font-weight:700">' + (l.valor ? 'R$ ' + l.valor.toLocaleString('pt-BR') : '—') + '</td>' +
         '<td>' + acoes(l) + '</td>' +
@@ -2013,17 +3044,26 @@ function irPag(n) { pag = n; render(); }
 
 function vSites() {
   var ls = fil().filter(function(l) {
-    return ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0;
+    return ['redesenhado', 'aprovado_contato', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0;
   });
   return ls.length ? '<div class="sites-grid">' + ls.map(function(l) {
     var pg = 'sites/' + l.slug + '/' + l.slug + '.html';
     var prim = l.urlNova ? '<a class="prim" href="' + l.urlNova + '" target="_blank">Ver no ar ↗</a>' : '<a class="prim" href="' + pg + '" target="_blank">Abrir Site ↗</a>';
     var ic = [];
     if (l.siteAntigo) ic.push('<a href="' + l.siteAntigo + '" target="_blank" title="site antigo">antigo</a>');
-    ic.push('<a href="#" onclick="copiarLinkPublico(\'' + l.slug + '\');return false" style="color:var(--accent-dark);font-weight:700" title="Copiar Link Público da Vercel para enviar ao Cliente">🔗 copiar link</a>');
-    if (l.whatsapp) ic.push('<a href="#" onclick="abrirZapModal(\'' + l.slug + '\');return false" style="color:var(--ok);font-weight:700">whatsapp</a>');
+    ic.push('<a href="#" onclick="abrirModalDirecao(\'' + l.slug + '\');return false" style="color:#2563EB;font-weight:700" title="Direção Criativa">🎯 direção</a>');
+    if (l.status === 'redesenhado') {
+      ic.push('<a href="#" onclick="aprovarParaContato(\'' + l.slug + '\');return false" style="color:#059669;font-weight:700" title="Aprovar prévia para envio comercial">✓ aprovar contato</a>');
+    }
+    ic.push('<a href="#" onclick="copiarLinkPublico(\'' + l.slug + '\');return false" style="color:var(--accent-dark);font-weight:700" title="Copiar Link Público da Vercel para enviar ao Cliente">🔗 link</a>');
+    if (l.whatsapp) ic.push('<a href="#" onclick="abrirZapModal(\'' + l.slug + '\');return false" style="color:var(--ok);font-weight:700">zap</a>');
     ic.push('<a href="#" onclick="abrirEdit(\'' + l.slug + '\');return false">✎ dados</a>');
     ic.push('<a href="#" class="del" onclick="deletar(\'' + l.slug + '\');return false">✕</a>');
+
+    var dirHtml = '';
+    if (l.direcaoCriativa && l.direcaoCriativa.presetNome) {
+      dirHtml = '<div class="direcao-lead-badge" style="margin-bottom:8px">🎯 ' + l.direcaoCriativa.presetNome + '</div>';
+    }
 
     var vBox = '';
     if (l.versoes && l.versoes.length) {
@@ -2038,6 +3078,7 @@ function vSites() {
       '<div class="info">' +
       '<div class="s-head"><span class="s-nm">' + l.nome + '</span>' + pillStatus(l.status) + '</div>' +
       '<div class="s-sub">' + [l.nicho, l.cidade, (l.nota ? '★ ' + l.nota + ' (' + l.avaliacoes + ')' : null)].filter(Boolean).join(' &bull; ' + '') + '</div>' +
+      dirHtml +
       '<div class="s-main">' + prim + '<a class="sec" href="sites/' + l.slug + '/' + l.slug + '-editor.html" target="_blank">Editor Visual</a></div>' +
       '<div class="s-icons">' + ic.join('') + '</div>' +
       vBox +
@@ -2045,8 +3086,62 @@ function vSites() {
   }).join('') + '</div>' : '<div class="painel vazio">Nenhum site redesenhado ainda.</div>';
 }
 
+function vPresets() {
+  var html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">' +
+    '<div><p style="color:var(--muted);font-size:13px;margin:0;font-weight:600">Catálogo de regras visuais, composição, tipografia e diretrizes anti-slop para geração de sites:</p></div>' +
+    '<div style="display:flex;gap:8px">' +
+    '<button class="btn-cta" onclick="abrirModalPreset()">+ Novo Preset</button>' +
+    '</div></div>';
+
+  html += '<div class="preset-grid">' + PRESETS.map(function(p) {
+    var swatches = '';
+    if (p.paleta && p.paleta.sugestoes) {
+      var s = p.paleta.sugestoes;
+      swatches = '<div class="preset-swatches">' +
+        ['fundo', 'superficie', 'texto', 'acento'].map(function(k) {
+          return s[k] ? '<div class="preset-swatch" style="background:' + s[k] + '" title="' + k + ': ' + s[k] + '"></div>' : '';
+        }).join('') +
+        '<span style="font-size:11px;color:var(--muted);font-weight:600;margin-left:4px">' + (p.paleta.estilo || '') + '</span></div>';
+    }
+
+    var tagsHtml = (p.tags || []).map(function(t) {
+      return '<span class="preset-tag">#' + t + '</span>';
+    }).join('');
+
+    var nichosHtml = (p.nichos_recomendados || []).slice(0, 3).join(', ') + ((p.nichos_recomendados && p.nichos_recomendados.length > 3) ? '...' : '');
+
+    return '<div class="preset-card ' + (p.ativo !== false ? '' : 'inativo') + '">' +
+      '<div class="preset-head">' +
+      '<div><h3>' + p.nome + '</h3><div style="font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:2px">' + p.id + '</div></div>' +
+      '<span class="preset-badge ' + (p.ativo !== false ? 'ativo' : 'inativo') + '">' + (p.ativo !== false ? 'Ativo' : 'Arquivado') + '</span>' +
+      '</div>' +
+      '<div class="preset-body">' +
+      '<p class="preset-desc">' + p.descricao + '</p>' +
+      '<div class="preset-tags">' + tagsHtml + '</div>' +
+      '<div class="preset-meta-box">' +
+      '<div class="preset-meta-row"><span class="preset-meta-label">Composição:</span><span class="preset-meta-val">' + (p.composicao || '—') + ' &bull; ' + (p.densidade || 'média') + '</span></div>' +
+      '<div class="preset-meta-row"><span class="preset-meta-label">Navegação:</span><span class="preset-meta-val">' + (p.navegacao || '—') + '</span></div>' +
+      '<div class="preset-meta-row"><span class="preset-meta-label">Tipografia:</span><span class="preset-meta-val">' + (p.tipografia ? p.tipografia.display : '—') + '</span></div>' +
+      '<div class="preset-meta-row"><span class="preset-meta-label">Nichos:</span><span class="preset-meta-val">' + (nichosHtml || 'Geral') + '</span></div>' +
+      '</div>' +
+      swatches +
+      '</div>' +
+      '<div class="preset-foot">' +
+      '<button class="btn-preview" onclick="abrirPreviewPreset(\'' + p.id + '\')">👁️ Preview</button>' +
+      '<div style="display:flex;gap:4px">' +
+      '<button onclick="duplicarPreset(\'' + p.id + '\')" title="Duplicar este preset">📋 Duplicar</button>' +
+      '<button onclick="abrirModalPreset(\'' + p.id + '\')" title="Editar configurações">✎ Editar</button>' +
+      '<button onclick="toggleAtivoPreset(\'' + p.id + '\')">' + (p.ativo !== false ? 'Arquivar' : 'Ativar') + '</button>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
+  }).join('') + '</div>';
+
+  return html;
+}
+
 function vComparador() {
-  var ls = fil().filter(function(l) { return l.slug && ['redesenhado', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; });
+  var ls = fil().filter(function(l) { return l.slug && ['redesenhado', 'aprovado_contato', 'publicado', 'proposta', 'respondeu', 'fechado'].indexOf(l.status) >= 0; });
   if (!ls.length) return '<div class="painel"><div class="vazio">Sem sites redesenhados ainda para comparar.</div></div>';
   if (!cmpSel || !ls.some(function(l) { return l.slug === cmpSel; })) cmpSel = ls[0].slug;
   var l = ls.filter(function(x) { return x.slug === cmpSel; })[0];
@@ -2188,6 +3283,7 @@ function render() {
     clientes: vClientes,
     sites: vSites,
     comparador: vComparador,
+    presets: vPresets,
     followup: vFollowup,
     contratos: vContratos,
     financeiro: vFinanceiro,

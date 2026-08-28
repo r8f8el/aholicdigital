@@ -17,7 +17,7 @@ def ler_config():
 PORTA = 8765
 CAMPOS = ['slug','nome','nicho','cidade','nota','avaliacoes','email','telefone','whatsapp',
           'siteAntigo','motivo','status','urlNova','dataProposta','valor','obs',
-          'contratoStatus','contratoEm','manutencao','pago','docCliente','endCliente']
+          'contratoStatus','contratoEm','manutencao','pago','docCliente','endCliente','direcaoCriativa']
 
 def conexao():
     c = sqlite3.connect(DB)
@@ -27,7 +27,7 @@ def conexao():
         status TEXT DEFAULT 'novo', urlNova TEXT, dataProposta TEXT, valor REAL, obs TEXT,
         contratoStatus TEXT DEFAULT 'pendente', contratoEm TEXT, manutencao REAL, pago INTEGER DEFAULT 0,
         atualizado TEXT DEFAULT (datetime('now','localtime')))''')
-    for col, tipo in [('contratoStatus',"TEXT DEFAULT 'pendente'"),('contratoEm','TEXT'),('manutencao','REAL'),('pago','INTEGER DEFAULT 0'),('docCliente','TEXT'),('endCliente','TEXT')]:
+    for col, tipo in [('contratoStatus',"TEXT DEFAULT 'pendente'"),('contratoEm','TEXT'),('manutencao','REAL'),('pago','INTEGER DEFAULT 0'),('docCliente','TEXT'),('endCliente','TEXT'),('direcaoCriativa','TEXT')]:
         try: c.execute('ALTER TABLE leads ADD COLUMN %s %s' % (col, tipo))
         except sqlite3.OperationalError: pass
     return c
@@ -60,6 +60,13 @@ class App(SimpleHTTPRequestHandler):
         n = int(self.headers.get('Content-Length', 0))
         return json.loads(self.rfile.read(n).decode('utf-8')) if n else {}
     def do_GET(self):
+        if self.path.split('?')[0] == '/api/presets':
+            caminho_presets = os.path.join(PASTA, 'referencias', 'presets-visuais.json')
+            try:
+                data = json.load(open(caminho_presets, encoding='utf-8'))
+            except Exception:
+                data = []
+            return self._json(200, data)
         if self.path.split('?')[0] == '/api/config':
             cfg = ler_config()
             hg = dict(cfg.get('hostgator', {}))
@@ -81,6 +88,14 @@ class App(SimpleHTTPRequestHandler):
             self.path = '/dashboard.html'
         return SimpleHTTPRequestHandler.do_GET(self)
     def do_POST(self):
+        if self.path.split('?')[0] == '/api/presets':
+            corpo = self._corpo()
+            caminho_presets = os.path.join(PASTA, 'referencias', 'presets-visuais.json')
+            try:
+                json.dump(corpo, open(caminho_presets, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+                return self._json(200, {'ok': True})
+            except Exception as e:
+                return self._json(500, {'erro': str(e)})
         if self.path.split('?')[0] == '/api/leads':
             l = self._corpo(); c = conexao()
             c.execute('INSERT OR REPLACE INTO leads (%s) VALUES (%s)' % (','.join(CAMPOS), ','.join('?'*len(CAMPOS))),
@@ -88,6 +103,14 @@ class App(SimpleHTTPRequestHandler):
             c.commit(); c.close(); return self._json(200, {'ok': True})
         return self._json(404, {'erro': 'rota'})
     def do_PUT(self):
+        if self.path.split('?')[0] == '/api/presets':
+            corpo = self._corpo()
+            caminho_presets = os.path.join(PASTA, 'referencias', 'presets-visuais.json')
+            try:
+                json.dump(corpo, open(caminho_presets, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+                return self._json(200, {'ok': True})
+            except Exception as e:
+                return self._json(500, {'erro': str(e)})
         if self.path.split('?')[0] == '/api/config':
             cfg = ler_config(); corpo = self._corpo()
             if 'contratante' in corpo or 'hostgator' in corpo:

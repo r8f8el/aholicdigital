@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS public.leads (
     contrato_em DATE,
     doc_cliente TEXT,
     end_cliente TEXT,
+    direcao_criativa JSONB,
     obs TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
@@ -42,10 +43,35 @@ CREATE TABLE IF NOT EXISTS public.versoes_site (
     arquivo TEXT NOT NULL,
     criado_em TEXT,
     ativo INTEGER DEFAULT 0,
+    direcao_criativa JSONB,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- 3. TABELA DE CONFIGURAÇÕES DA AGÊNCIA (AHOLIC)
+-- 3. TABELA DE PRESETS VISUAIS (DIREÇÃO CRIATIVA)
+CREATE TABLE IF NOT EXISTS public.presets_visuais (
+    id TEXT PRIMARY KEY,
+    nome TEXT NOT NULL,
+    descricao TEXT,
+    origem TEXT,
+    screenshot TEXT,
+    tags JSONB DEFAULT '[]'::jsonb,
+    nichos_recomendados JSONB DEFAULT '[]'::jsonb,
+    nichos_evitar JSONB DEFAULT '[]'::jsonb,
+    composicao TEXT,
+    navegacao TEXT,
+    densidade TEXT DEFAULT 'media',
+    tipografia JSONB DEFAULT '{}'::jsonb,
+    imagem JSONB DEFAULT '{}'::jsonb,
+    movimento JSONB DEFAULT '{}'::jsonb,
+    paleta JSONB DEFAULT '{}'::jsonb,
+    componentes_permitidos JSONB DEFAULT '[]'::jsonb,
+    proibicoes JSONB DEFAULT '[]'::jsonb,
+    prioridade_conversao INTEGER DEFAULT 1,
+    ativo BOOLEAN DEFAULT true,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 4. TABELA DE CONFIGURAÇÕES DA AGÊNCIA (AHOLIC)
 CREATE TABLE IF NOT EXISTS public.agencia_config (
     id TEXT PRIMARY KEY DEFAULT 'principal',
     razao_social TEXT,
@@ -61,10 +87,22 @@ CREATE TABLE IF NOT EXISTS public.agencia_config (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- 4. HABILITAR ROW LEVEL SECURITY (RLS)
+-- 5. HABILITAR ROW LEVEL SECURITY (RLS)
 ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.versoes_site ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.presets_visuais ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.agencia_config ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Acesso total para autenticados em presets_visuais"
+ON public.presets_visuais FOR ALL
+TO authenticated
+USING (true)
+WITH CHECK (true);
+
+CREATE POLICY "Leitura publica de presets_visuais"
+ON public.presets_visuais FOR SELECT
+TO anon
+USING (true);
 
 -- POLÍTICAS: Apenas usuários autenticados (você) podem visualizar e gerenciar os dados
 CREATE POLICY "Acesso total para usuários autenticados em leads"
