@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dra. Ana Carolina Machado | Psicologia Clínica em Campinas - TCC & Saúde Emocional</title>
+  <meta name="description" content="Psicoterapia individual para jovens e adultos em Campinas e Online. Terapia Cognitivo-Comportamental (TCC) para ansiedade, autoestima e desenvolvimento pessoal. CRP 06/140553.">
+
+  <!-- Google Fonts: Outfit + Playfair Display + Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            linen: '#FDFCF8',
+            sand: '#F7F3EB',
+            sage: {
+              50: '#F2F7F4',
+              100: '#E4EFE8',
+              500: '#5B8266',
+              600: '#466750',
+              700: '#344E3C',
+            },
+            terracotta: {
+              50: '#FDF5F2',
+              100: '#F9E7E1',
+              500: '#E07A5F',
+              600: '#C86247',
+            },
+            charcoal: {
+              800: '#2D3748',
+              900: '#1A202C',
+            }
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+            cursive: ['Caveat', 'cursive'],
+          },
+          borderRadius: {
+            '4xl': '2rem',
+            '5xl': '2.5rem',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FDFCF8;
+      color: #2D3748;
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Ruído orgânico de fundo suave */
+    .bg-noise {
+      background-image: radial-gradient(rgba(91, 130, 102, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .glass-nav {
+      background: rgba(253, 252, 248, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(228, 239, 232, 0.8);
+    }
+
+    .soft-shadow {
+      box-shadow: 0 10px 30px -5px rgba(91, 130, 102, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+    }
+    
+    .soft-shadow-hover:hover {
+      box-shadow: 0 20px 40px -10px rgba(91, 130, 102, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+      transform: translateY(-4px);
+    }
+
+    /* Animação suave para botão WhatsApp */
+    @keyframes pulse-subtle {
+      0%, 100% { transform: scale(1); box-shadow: 0 8px 25px rgba(91, 130, 102, 0.35); }
+      50% { transform: scale(1.04); box-shadow: 0 12px 32px rgba(91, 130, 102, 0.5); }
+    }
+    .btn-pulse {
+      animation: pulse-subtle 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-linen bg-noise antialiased">
+
+  <!-- BARRA SUPERIOR DE AVISO & CRP -->
+  <div class="bg-sage-600 text-white text-xs py-2 px-4 text-center font-medium tracking-wide">
+    <span>🌿 Atendimento Psicológico Presencial em <strong>Campinas (Jd. Proença / Cambuí)</strong> e <strong>Online para todo o Brasil</strong> &bull; CRP 06/140553</span>
+  </div>
+
+  <!-- NAVBAR FLUTUANTE -->
+  <nav class="sticky top-0 z-50 glass-nav border-b border-sage-100 transition-all">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-600 font-serif italic text-xl border border-sage-500/20 group-hover:scale-105 transition-transform">
+          ψ
+        </div>
+        <div>
+          <div class="font-serif font-bold text-lg text-charcoal-900 tracking-tight leading-none group-hover:text-sage-600 transition-colors">
+            Ana Carolina Machado
+          </div>
+          <div class="text-[11px] text-sage-600 font-semibold tracking-wider uppercase mt-1">
+            Psicologia Clínica &bull; TCC
+          </div>
+        </div>
+      </a>
+
+      <!-- LINKS DESKTOP -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal-800">
+        <a href="#sobre" class="hover:text-sage-600 transition-colors">Sobre Mim</a>
+        <a href="#especialidades" class="hover:text-sage-600 transition-colors">Especialidades</a>
+        <a href="#como-funciona" class="hover:text-sage-600 transition-colors">Como Funciona</a>
+        <a href="#duvidas" class="hover:text-sage-600 transition-colors">Dúvidas Frequentes</a>
+      </div>
+
+      <!-- CTA ZAP -->
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/5519996630338?text=Ol%C3%A1%2C%20Dra.%20Ana%20Carolina!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20agendamento%20de%20psicoterapia." target="_blank" class="bg-sage-600 hover:bg-sage-700 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full shadow-sm hover:shadow transition-all flex items-center gap-2">
+          <span>Agendar Conversa</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION: LIVING ROOM DIGITAL -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- TEXTO HERO -->
+        <div class="lg:col-span-7 space-y-6 text-left">
+          
+          <div class="inline-flex items-center gap-2 bg-terracotta-50 border border-terracotta-100 px-3.5 py-1.5 rounded-full text-terracotta-600 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-terracotta-500 animate-pulse"></span>
+            <span>Espaço de Escuta Atenta e Sem Julgamentos</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif text-charcoal-900 font-bold leading-[1.15]">
+            Um lugar seguro para <span class="italic font-normal text-sage-600">desacelerar</span>, compreender suas emoções e viver com mais leveza.
+          </h1>
+
+          <p class="text-base sm:text-lg text-charcoal-800 font-light leading-relaxed max-w-xl">
+            Psicoterapia baseada na <strong>Terapia Cognitivo-Comportamental (TCC)</strong> para quem busca lidar com a ansiedade, fortalecer a autoestima e construir relações mais saudáveis.
+          </p>
+
+          <!-- BADGES DE VALIDAÇÃO -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <div class="flex items-center gap-2 bg-white border border-sage-100 px-3.5 py-2 rounded-xl text-xs font-medium text-charcoal-800 soft-shadow">
+              <span class="text-sage-600">✓</span>
+              <span>CRP 06/140553 Ativo</span>
+            </div>
+            <div class="flex items-center gap-2 bg-white border border-sage-100 px-3.5 py-2 rounded-xl text-xs font-medium text-charcoal-800 soft-shadow">
+              <span class="text-sage-600">✓</span>
+              <span>Campinas & Online</span>
+            </div>
+            <div class="flex items-center gap-2 bg-white border border-sage-100 px-3.5 py-2 rounded-xl text-xs font-medium text-charcoal-800 soft-shadow">
+              <span class="text-sage-600">✓</span>
+              <span>Sigilo Ético Absoluto</span>
+            </div>
+          </div>
+
+          <!-- BOTÕES DE AÇÃO HERO -->
+          <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <a href="https://wa.me/5519996630338?text=Ol%C3%A1%2C%20Ana%20Carolina!%20Gostaria%20de%20saber%20como%20funciona%20para%20iniciar%20a%20psicoterapia." target="_blank" class="bg-sage-600 hover:bg-sage-700 text-white font-semibold text-base px-8 py-4 rounded-full text-center transition-all btn-pulse flex items-center justify-center gap-2">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              <span>Conversar no WhatsApp</span>
+            </a>
+            <a href="#sobre" class="text-charcoal-800 hover:text-sage-600 font-medium text-sm px-6 py-4 rounded-full border border-sage-100 hover:bg-white text-center transition-all">
+              Conhecer a Abordagem
+            </a>
+          </div>
+
+          <div class="pt-2 text-xs text-charcoal-800/70 italic font-cursive text-base">
+            * Respondo pessoalmente no WhatsApp para acolher suas dúvidas antes de agendar.
+          </div>
+        </div>
+
+        <!-- FOTO PROFISSIONAL / CARD AMBIENTE -->
+        <div class="lg:col-span-5 relative">
+          
+          <!-- Elemento decorativo de fundo -->
+          <div class="absolute -inset-4 bg-gradient-to-tr from-sage-100 to-terracotta-100 rounded-5xl -rotate-2 -z-10 opacity-70"></div>
+          
+          <div class="relative bg-white p-4 rounded-4xl border border-sage-100 soft-shadow overflow-hidden">
+            <div class="relative h-[420px] rounded-3xl overflow-hidden bg-sand">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Dra. Ana Carolina Machado - Psicóloga Clínica" class="w-full h-full object-cover object-top">
+              
+              <!-- Gradiente sutil inferior -->
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900/60 via-transparent to-transparent"></div>
+              
+              <div class="absolute bottom-4 left-4 right-4 text-white">
+                <div class="font-serif font-bold text-lg">Dra. Ana Carolina Machado</div>
+                <div class="text-xs text-white/90 font-light flex items-center justify-between mt-0.5">
+                  <span>Psicóloga Clínica &bull; CRP 06/140553</span>
+                  <span class="bg-sage-600/90 text-[10px] font-semibold px-2 py-0.5 rounded-full">TCC & Mindfulness</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card flutuante de acolhimento -->
+            <div class="mt-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-sage-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
+                💬
+              </div>
+              <div class="text-xs text-charcoal-800 leading-tight">
+                <strong class="text-sage-700 block mb-0.5">Você não precisa dar conta de tudo sozinho(a).</strong>
+                O primeiro passo é ter um espaço para ser ouvido com respeito e método.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO INTERATIVA: VOCÊ SE IDENTIFICA COM ALGUM DESTES MOMENTOS? -->
+  <section class="py-16 bg-white border-y border-sage-100">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold tracking-widest text-terracotta-500 uppercase">Identificação & Cuidado</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif text-charcoal-900 font-bold mt-2">
+          Quando é o momento de buscar terapia?
+        </h2>
+        <p class="text-sm sm:text-base text-charcoal-800/80 mt-3 font-light">
+          A psicoterapia não é apenas para momentos de crise extrema — ela é uma ferramenta de clareza, autoconhecimento e equilíbrio para os desafios do cotidiano.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1: Ansiedade -->
+        <div class="p-6 rounded-3xl bg-linen border border-sage-100 soft-shadow soft-shadow-hover transition-all space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-terracotta-50 text-terracotta-600 flex items-center justify-center text-xl font-bold">
+            🌪️
+          </div>
+          <h3 class="font-serif font-bold text-lg text-charcoal-900">Mente que não desliga</h3>
+          <p class="text-xs text-charcoal-800/80 leading-relaxed">
+            Preocupações excessivas com o futuro, sensação de estar sempre sob pressão e dificuldade para relaxar no fim do dia.
+          </p>
+        </div>
+
+        <!-- Card 2: Autoestima -->
+        <div class="p-6 rounded-3xl bg-linen border border-sage-100 soft-shadow soft-shadow-hover transition-all space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-sage-50 text-sage-600 flex items-center justify-center text-xl font-bold">
+            🪞
+          </div>
+          <h3 class="font-serif font-bold text-lg text-charcoal-900">Autocrítica e Insegurança</h3>
+          <p class="text-xs text-charcoal-800/80 leading-relaxed">
+            Sentimento constante de não ser bom o suficiente, medo de decepcionar os outros e dificuldade em reconhecer suas conquistas.
+          </p>
+        </div>
+
+        <!-- Card 3: Relações & Limites -->
+        <div class="p-6 rounded-3xl bg-linen border border-sage-100 soft-shadow soft-shadow-hover transition-all space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-sand text-charcoal-800 flex items-center justify-center text-xl font-bold">
+            🤝
+          </div>
+          <h3 class="font-serif font-bold text-lg text-charcoal-900">Dificuldade em Dizer Não</h3>
+          <p class="text-xs text-charcoal-800/80 leading-relaxed">
+            Sobrecarga por colocar a necessidade de todos antes da sua, desgaste emocional em relacionamentos e falta de limites claros.
+          </p>
+        </div>
+
+        <!-- Card 4: Transições & Burnout -->
+        <div class="p-6 rounded-3xl bg-linen border border-sage-100 soft-shadow soft-shadow-hover transition-all space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl font-bold">
+            🌱
+          </div>
+          <h3 class="font-serif font-bold text-lg text-charcoal-900">Transições & Esgotamento</h3>
+          <p class="text-xs text-charcoal-800/80 leading-relaxed">
+            Mudanças de carreira, luto, término de ciclos ou a sensação de exaustão emocional profunda diante da rotina.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="mt-10 text-center">
+        <p class="text-sm text-charcoal-800 font-medium">
+          Se você se reconheceu em algum desses pontos, podemos conversar sobre como a TCC pode te ajudar.
+        </p>
+        <a href="https://wa.me/5519996630338?text=Ol%C3%A1%2C%20Ana%20Carolina!%20Li%20os%20pontos%20no%20site%20e%20me%20identifiquei.%20Podemos%20conversar%3F" target="_blank" class="inline-flex items-center gap-2 mt-4 text-sage-700 hover:text-sage-800 font-bold text-sm underline decoration-sage-500 decoration-2 underline-offset-4">
+          <span>Tirar dúvidas pelo WhatsApp</span>
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO SOBRE MIM (ANA CAROLINA MACHADO) -->
+  <section id="sobre" class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- IMAGEM / AMBIENTE -->
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="relative">
+            <div class="p-3 bg-white rounded-4xl border border-sage-100 soft-shadow">
+              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=700&q=80" alt="Consultório de Psicologia em Campinas" class="w-full h-96 object-cover rounded-3xl">
+            </div>
+            
+            <div class="absolute -bottom-6 -right-4 sm:-right-6 bg-sage-600 text-white p-5 rounded-3xl shadow-xl max-w-[240px]">
+              <div class="font-serif font-bold text-2xl">CRP 06/140553</div>
+              <div class="text-xs text-white/80 mt-1 font-light">Psicóloga inscrita no Conselho Regional de Psicologia de SP</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TEXTO SOBRE -->
+        <div class="lg:col-span-7 order-1 lg:order-2 space-y-5">
+          <span class="text-xs font-bold tracking-widest text-sage-600 uppercase">Acolhimento & Abordagem</span>
+          <h2 class="text-3xl sm:text-4xl font-serif text-charcoal-900 font-bold leading-tight">
+            Olá, sou a <span class="italic text-sage-600">Ana Carolina Machado</span>.
+          </h2>
+
+          <div class="space-y-4 text-sm sm:text-base text-charcoal-800 font-light leading-relaxed">
+            <p>
+              Sou psicóloga clínica com atuação em <strong>Campinas - SP</strong> e atendimento online para pacientes em todo o Brasil e exterior.
+            </p>
+            <p>
+              Minha prática clínica é fundamentada na <strong>Terapia Cognitivo-Comportamental (TCC)</strong> — uma abordagem estruturada, humana e amplamente comprovada pela ciência para o tratamento de ansiedade, estresse e questões emocionais.
+            </p>
+            <p>
+              Acredito que a terapia não deve ser um processo frio ou distante. No meu consultório, o foco é construir uma <strong>aliança terapêutica verdadeira</strong>, onde você se sinta seguro(a) para ser quem você é, enquanto desenvolvemos juntos estratégias práticas para o seu dia a dia.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-sage-100">
+            <div>
+              <div class="text-2xl font-serif font-bold text-sage-600">+100%</div>
+              <div class="text-xs text-charcoal-800/80 font-medium mt-0.5">Escuta Humanizada</div>
+            </div>
+            <div>
+              <div class="text-2xl font-serif font-bold text-sage-600">TCC</div>
+              <div class="text-xs text-charcoal-800/80 font-medium mt-0.5">Base Científica</div>
+            </div>
+            <div>
+              <div class="text-2xl font-serif font-bold text-sage-600">Híbrido</div>
+              <div class="text-xs text-charcoal-800/80 font-medium mt-0.5">Presencial & Online</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO ESPECIALIDADES & PILARES CLÍNICOS -->
+  <section id="especialidades" class="py-20 bg-sand/60 border-t border-sage-100">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="max-w-2xl mx-auto text-center mb-16">
+        <span class="text-xs font-bold tracking-widest text-terracotta-500 uppercase">Áreas de Atuação</span>
+        <h2 class="text-3xl sm:text-4xl font-serif text-charcoal-900 font-bold mt-2">
+          Como podemos trabalhar juntos
+        </h2>
+        <p class="text-sm text-charcoal-800/80 mt-3 font-light">
+          Intervenções personalizadas com base na Terapia Cognitivo-Comportamental para as suas necessidades reais.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Pilar 1 -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow soft-shadow-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-3xl">🌿</span>
+            <h3 class="font-serif font-bold text-xl text-charcoal-900">Tratamento de Ansiedade</h3>
+            <p class="text-xs sm:text-sm text-charcoal-800/80 leading-relaxed font-light">
+              Identificação dos gatilhos de preocupação e treino de regulação emocional e fisiológica para recuperar o controle da sua rotina.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-sage-50 text-xs text-sage-600 font-semibold">
+            Técnicas de Respiração & Reestruturação Cognitiva
+          </div>
+        </div>
+
+        <!-- Pilar 2 -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow soft-shadow-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-3xl">🪷</span>
+            <h3 class="font-serif font-bold text-xl text-charcoal-900">Autoestima e Autocuidado</h3>
+            <p class="text-xs sm:text-sm text-charcoal-800/80 leading-relaxed font-light">
+              Desconstrução de crenças de desvalor e autocrítica severa, fortalecendo a segurança pessoal nas tomadas de decisão.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-sage-50 text-xs text-sage-600 font-semibold">
+            Fortalecimento da Autoconfiança
+          </div>
+        </div>
+
+        <!-- Pilar 3 -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow soft-shadow-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-3xl">💬</span>
+            <h3 class="font-serif font-bold text-xl text-charcoal-900">Relações & Assertividade</h3>
+            <p class="text-xs sm:text-sm text-charcoal-800/80 leading-relaxed font-light">
+              Desenvolvimento de comunicação clara, aprendizado de como estabelecer limites saudáveis e resolução de conflitos interpessoais.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-sage-50 text-xs text-sage-600 font-semibold">
+            Limites Saudáveis & Relações Prósperas
+          </div>
+        </div>
+
+        <!-- Pilar 4 -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow soft-shadow-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-3xl">💼</span>
+            <h3 class="font-serif font-bold text-xl text-charcoal-900">Gestão de Estresse & Burnout</h3>
+            <p class="text-xs sm:text-sm text-charcoal-800/80 leading-relaxed font-light">
+              Prevenção e manejo do esgotamento profissional, equilíbrio entre demandas de trabalho e vida pessoal com foco em saúde mental.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-sage-50 text-xs text-sage-600 font-semibold">
+            Equilíbrio Vida-Trabalho
+          </div>
+        </div>
+
+        <!-- Pilar 5 -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow soft-shadow-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-3xl">🧭</span>
+            <h3 class="font-serif font-bold text-xl text-charcoal-900">Transições de Vida</h3>
+            <p class="text-xs sm:text-sm text-charcoal-800/80 leading-relaxed font-light">
+              Apoio psicológico durante mudanças importantes, novos ciclos profissionais, separações ou momentos de reorganização de vida.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-sage-50 text-xs text-sage-600 font-semibold">
+            Adaptação & Novos Caminhos
+          </div>
+        </div>
+
+        <!-- Pilar 6 (Card CTA) -->
+        <div class="p-8 rounded-4xl bg-sage-600 text-white flex flex-col justify-between shadow-lg">
+          <div class="space-y-3">
+            <span class="text-3xl">✨</span>
+            <h3 class="font-serif font-bold text-xl text-white">Pronto(a) para começar?</h3>
+            <p class="text-xs sm:text-sm text-white/90 leading-relaxed font-light">
+              Dê o primeiro passo com tranquilidade. Estou à disposição para tirar suas dúvidas e encontrar o melhor horário para você.
+            </p>
+          </div>
+          <div class="mt-6">
+            <a href="https://wa.me/5519996630338?text=Ol%C3%A1%2C%20Ana%20Carolina!%20Gostaria%20de%20conversar%20sobre%20as%20especialidades%20e%20agendar%20minha%20sess%C3%A3o." target="_blank" class="block w-full text-center bg-white text-sage-700 hover:bg-sand font-bold text-xs py-3 rounded-full transition-colors">
+              Agendar no WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO PASSO A PASSO (COMO FUNCIONA) -->
+  <section id="como-funciona" class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="max-w-2xl mx-auto text-center mb-16">
+        <span class="text-xs font-bold tracking-widest text-sage-600 uppercase">Processo Sem Complicação</span>
+        <h2 class="text-3xl sm:text-4xl font-serif text-charcoal-900 font-bold mt-2">
+          Como iniciar sua psicoterapia
+        </h2>
+        <p class="text-sm text-charcoal-800/80 mt-3 font-light">
+          Um caminho claro e acolhedor desde o primeiro contato até o acompanhamento contínuo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        
+        <!-- Passo 1 -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow relative">
+          <div class="w-10 h-10 rounded-full bg-sage-100 text-sage-600 font-bold flex items-center justify-center text-sm mb-5">
+            01
+          </div>
+          <h3 class="font-serif font-bold text-xl text-charcoal-900 mb-2">Primeiro Contato</h3>
+          <p class="text-xs sm:text-sm text-charcoal-800/80 font-light leading-relaxed">
+            Você me envia uma mensagem no WhatsApp. Tiramos suas dúvidas sobre valores, horários e alinhamos a modalidade (presencial ou online).
+          </p>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow relative">
+          <div class="w-10 h-10 rounded-full bg-terracotta-100 text-terracotta-600 font-bold flex items-center justify-center text-sm mb-5">
+            02
+          </div>
+          <h3 class="font-serif font-bold text-xl text-charcoal-900 mb-2">Sessão Inicial</h3>
+          <p class="text-xs sm:text-sm text-charcoal-800/80 font-light leading-relaxed">
+            Nosso primeiro encontro de 50 minutos. É o momento de você contar sua história, suas queixas principais e definirmos as metas da terapia.
+          </p>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow relative">
+          <div class="w-10 h-10 rounded-full bg-sand text-charcoal-900 font-bold flex items-center justify-center text-sm mb-5">
+            03
+          </div>
+          <h3 class="font-serif font-bold text-xl text-charcoal-900 mb-2">Plano Terapêutico</h3>
+          <p class="text-xs sm:text-sm text-charcoal-800/80 font-light leading-relaxed">
+            Sessões semanais estruturadas com a TCC, onde você adquire ferramentas práticas para lidar com seus desafios com autonomia.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODALIDADE: PRESENCIAL EM CAMPINAS OU ONLINE -->
+  <section class="py-16 bg-sage-50/70 border-y border-sage-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        
+        <!-- CARD PRESENCIAL -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-100 text-sage-700 text-xs font-bold">
+            📍 Atendimento Presencial
+          </div>
+          <h3 class="font-serif font-bold text-2xl text-charcoal-900">Consultório em Campinas - SP</h3>
+          <p class="text-xs sm:text-sm text-charcoal-800 font-light leading-relaxed">
+            Espaço silencioso, acolhedor e climatizado no bairro <strong>Jardim Proença / Cambuí</strong>. Fácil acesso, estacionamento nas proximidades e total privacidade.
+          </p>
+          <ul class="space-y-2 text-xs text-charcoal-800/90 pt-2 font-medium">
+            <li class="flex items-center gap-2">✓ Ambiente preparado para conforto e sigilo</li>
+            <li class="flex items-center gap-2">✓ Fácil localização em Campinas</li>
+            <li class="flex items-center gap-2">✓ Horários flexíveis durante a semana</li>
+          </ul>
+        </div>
+
+        <!-- CARD ONLINE -->
+        <div class="p-8 rounded-4xl bg-white border border-sage-100 soft-shadow space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-terracotta-100 text-terracotta-700 text-xs font-bold">
+            💻 Atendimento Online
+          </div>
+          <h3 class="font-serif font-bold text-2xl text-charcoal-900">Terapia no Conforto da Sua Casa</h3>
+          <p class="text-xs sm:text-sm text-charcoal-800 font-light leading-relaxed">
+            Sessões seguras por videochamada criptografada. Mesma eficácia comprovada do presencial, com a praticidade de não precisar se deslocar.
+          </p>
+          <ul class="space-y-2 text-xs text-charcoal-800/90 pt-2 font-medium">
+            <li class="flex items-center gap-2">✓ Plataforma segura e confidencial</li>
+            <li class="flex items-center gap-2">✓ Atendimento para todo o Brasil e exterior</li>
+            <li class="flex items-center gap-2">✓ Economia de tempo no trânsito</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PERGUNTAS FREQUENTES (FAQ) -->
+  <section id="duvidas" class="py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold tracking-widest text-sage-600 uppercase">Esclarecimentos</span>
+        <h2 class="text-3xl font-serif text-charcoal-900 font-bold mt-2">Dúvidas Frequentes</h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="group p-6 rounded-3xl bg-white border border-sage-100 soft-shadow [&_summary::-webkit-details-marker]:hidden cursor-pointer" open>
+          <summary class="flex items-center justify-between font-serif font-bold text-base sm:text-lg text-charcoal-900">
+            <span>Quanto tempo dura cada sessão?</span>
+            <span class="transition duration-300 group-open:-rotate-180 text-sage-600">▼</span>
+          </summary>
+          <p class="mt-4 text-xs sm:text-sm text-charcoal-800/80 font-light leading-relaxed">
+            Cada sessão de psicoterapia tem duração de 50 minutos e ocorre com frequência semanal, permitindo um acompanhamento consistente e a evolução gradual dos seus objetivos.
+          </p>
+        </details>
+
+        <details class="group p-6 rounded-3xl bg-white border border-sage-100 soft-shadow [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-serif font-bold text-base sm:text-lg text-charcoal-900">
+            <span>Você atende por convênio médico?</span>
+            <span class="transition duration-300 group-open:-rotate-180 text-sage-600">▼</span>
+          </summary>
+          <p class="mt-4 text-xs sm:text-sm text-charcoal-800/80 font-light leading-relaxed">
+            Os atendimentos são particulares, garantindo total liberdade e tempo dedicado a cada paciente. No entanto, forneço recibo e relatório com CRP para você solicitar o <strong>reembolso junto ao seu plano de saúde</strong> (a maioria dos convênios cobre consultas de psicologia).
+          </p>
+        </details>
+
+        <details class="group p-6 rounded-3xl bg-white border border-sage-100 soft-shadow [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-serif font-bold text-base sm:text-lg text-charcoal-900">
+            <span>Como funciona a Terapia Cognitivo-Comportamental (TCC)?</span>
+            <span class="transition duration-300 group-open:-rotate-180 text-sage-600">▼</span>
+          </summary>
+          <p class="mt-4 text-xs sm:text-sm text-charcoal-800/80 font-light leading-relaxed">
+            A TCC foca na relação entre o que pensamos, o que sentimos e como agimos. Identificamos padrões de pensamentos automáticos que geram sofrimento e aprendemos maneiras mais funcionais e equilibradas de lidar com os acontecimentos.
+          </p>
+        </details>
+
+        <details class="group p-6 rounded-3xl bg-white border border-sage-100 soft-shadow [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-serif font-bold text-base sm:text-lg text-charcoal-900">
+            <span>Tudo o que eu falar na sessão é sigiloso?</span>
+            <span class="transition duration-300 group-open:-rotate-180 text-sage-600">▼</span>
+          </summary>
+          <p class="mt-4 text-xs sm:text-sm text-charcoal-800/80 font-light leading-relaxed">
+            Sim! O sigilo profissional é rigorosamente protegido pelo Código de Ética Profissional do Psicólogo (CFP). Nada do que é conversado em sessão é compartilhado com terceiros.
+          </p>
+        </details>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO BANNER FINAL DE CONVERSÃO -->
+  <section class="py-20 bg-gradient-to-b from-linen to-sand">
+    <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
+      
+      <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-600 font-serif italic text-2xl flex items-center justify-center mx-auto border border-sage-200">
+        ψ
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl font-serif text-charcoal-900 font-bold">
+        Comece a cuidar de você hoje mesmo.
+      </h2>
+
+      <p class="text-sm sm:text-base text-charcoal-800 font-light max-w-xl mx-auto leading-relaxed">
+        Não adie sua paz e seu bem-estar emocional. Envie uma mensagem e vamos agendar seu primeiro atendimento.
+      </p>
+
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://wa.me/5519996630338?text=Ol%C3%A1%2C%20Dra.%20Ana%20Carolina!%20Gostaria%20de%20agendar%20minha%20sess%C3%A3o%20de%20psicoterapia." target="_blank" class="w-full sm:w-auto bg-sage-600 hover:bg-sage-700 text-white font-bold text-sm sm:text-base px-9 py-4 rounded-full transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+          <span>Agendar no WhatsApp</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+
+      <div class="text-xs text-charcoal-800/70 pt-2">
+        Atendimento Presencial em Campinas e Online em todo o Brasil &bull; CRP 06/140553
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-sage-100 py-12 text-xs text-charcoal-800/80">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <div class="md:col-span-2 space-y-3">
+        <div class="font-serif font-bold text-base text-charcoal-900">
+          Dra. Ana Carolina Machado
+        </div>
+        <p class="text-xs font-light text-charcoal-800/70 max-w-sm">
+          Psicóloga Clínica (CRP 06/140553). Atendimentos individuais com base na Terapia Cognitivo-Comportamental em Campinas - SP e modalidade online.
+        </p>
+        <div class="flex items-center gap-4 pt-2">
+          <a href="https://instagram.com/psi.anacarolinamachado" target="_blank" class="text-sage-600 hover:text-sage-800 font-semibold flex items-center gap-1">
+            <span>📷 Instagram:</span>
+            <span class="underline">@psi.anacarolinamachado</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="font-bold text-charcoal-900 mb-3 uppercase tracking-wider text-[11px]">Localização</div>
+        <p class="font-light text-charcoal-800/80 leading-relaxed">
+          Campinas - SP<br>
+          Unidade Jardim Proença / Cambuí<br>
+          Atendimento com hora marcada
+        </p>
+      </div>
+
+      <div>
+        <div class="font-bold text-charcoal-900 mb-3 uppercase tracking-wider text-[11px]">Contato Direto</div>
+        <p class="font-light text-charcoal-800/80 leading-relaxed">
+          WhatsApp: (19) 99663-0338<br>
+          E-mail: contato@anacarolinamachadopsi.com.br<br>
+          Segunda a Sexta: 08h às 20h
+        </p>
+      </div>
+
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 mt-8 pt-6 border-t border-sage-50 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-charcoal-800/60">
+      <div>
+        &copy; 2026 Dra. Ana Carolina Machado &bull; Todos os direitos reservados.
+      </div>
+      <div>
+        Desenvolvido por <strong class="text-sage-600">Aholic Sites</strong> &bull; Alta Performance
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTÃO FLUTUANTE DE WHATSAPP -->
+  <a href="https://wa.me/5519996630338?text=Ol%C3%A1%2C%20Dra.%20Ana%20Carolina!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20psicoterapia." target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20ba59] text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center justify-center btn-pulse group" title="Conversar no WhatsApp">
+    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>
+
+</body>
+</html>
