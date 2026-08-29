@@ -1835,17 +1835,10 @@ function initSupabase() {
   if (cfg.url && cfg.key && window.supabase) {
     try {
       sb = window.supabase.createClient(cfg.url, cfg.key);
-      sb.auth.getSession().then(function(res) {
-        if (res.data && res.data.session) {
-          MODE = 'supabase';
-          document.getElementById('login-overlay').classList.remove('aberto');
-          atualizarModoUI();
-          carregarDadosSupabase();
-          configurarRealtime();
-        } else {
-          document.getElementById('login-overlay').classList.add('aberto');
-        }
-      });
+      MODE = 'supabase';
+      atualizarModoUI();
+      carregarDadosSupabase();
+      configurarRealtime();
       return true;
     } catch(e) {
       console.error('Erro ao conectar Supabase:', e);
@@ -3553,6 +3546,15 @@ function copiarPromptPresetAtual() {
     (p.componentes_permitidos || []).map(function(c) { return '- ' + c; }).join('\n') + '\n\n' +
     '## Restrições Anti-Slop (Proibições)\n' +
     (p.proibicoes || []).map(function(c) { return '- PROIBIDO: ' + c; }).join('\n');
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function() {
+      alert('Prompt do preset copiado com sucesso!');
+    });
+  } else {
+    prompt('Copie o prompt abaixo:', txt);
+  }
+}
 
 function renderMiniPreviewBanner(p) {
   var s = (p.paleta && p.paleta.sugestoes) || { fundo: '#FBFBFA', superficie: '#FFFFFF', texto: '#111315', acento: '#00D084', linha: 'rgba(0,0,0,0.1)' };
