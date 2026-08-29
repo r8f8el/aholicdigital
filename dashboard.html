@@ -3524,32 +3524,60 @@ function copiarPromptPresetAtual() {
   if (!presetPreviewAtualObj) return;
   var p = presetPreviewAtualObj;
   var s = (p.paleta && p.paleta.sugestoes) || {};
-  var txt = '# Especificação Visual & Design System — ' + p.nome + '\n\n' +
-    '## Resumo\n' + p.descricao + '\n\n' +
-    '## Estilo & Identidade\n' +
+  var mov = p.movimento || {};
+  var img = p.imagem || {};
+
+  var txt = '# ESPECIFICAÇÃO DE DESIGN & PROMPT MESTRE (ANTI-SLOP) — ' + p.nome.toUpperCase() + '\n\n' +
+    'Você é um designer web de alta-costura e desenvolvedor frontend de elite. Crie a landing page oficial para o cliente com 100% de fidelidade visual e rigor técnico à estética "' + p.nome + '". NÃO gere um layout genérico de inteligência artificial (Anti-AI Slop).\n\n' +
+    '---\n\n' +
+    '## 1. IDENTIDADE & CONCEITO\n' +
     '- ID do Preset: ' + p.id + '\n' +
-    '- Composição: ' + (p.composicao || 'Editorial') + '\n' +
-    '- Navegação: ' + (p.navegacao || 'Fixed Header') + '\n' +
-    '- Densidade: ' + (p.densidade || 'Média') + '\n\n' +
-    '## Tipografia\n' +
-    '- Display / Títulos: ' + (p.tipografia ? p.tipografia.display : '—') + '\n' +
-    '- Body / Textos: ' + (p.tipografia ? p.tipografia.body : '—') + '\n' +
-    '- Labels / Metadados: ' + (p.tipografia ? p.tipografia.labels : 'JetBrains Mono') + '\n\n' +
-    '## Paleta Sugerida (Adaptável à marca do cliente)\n' +
-    '- Fundo: ' + (s.fundo || '#FBFBFA') + '\n' +
-    '- Superfície: ' + (s.superficie || '#FFFFFF') + '\n' +
-    '- Texto: ' + (s.texto || '#111315') + '\n' +
-    '- Acento Principal: ' + (s.acento || '#00D084') + '\n' +
+    '- Arquétipo: ' + (p.composicao || 'Editorial de Luxo') + '\n' +
+    '- Navegação: ' + (p.navegacao || 'Fixed Header 80px Glassmorphism') + '\n' +
+    '- Densidade & Espaçamento: ' + (p.densidade || 'Média') + ' (respiro generoso, seções respiradas)\n' +
+    '- Resumo Conceitual: ' + p.descricao + '\n\n' +
+    '## 2. TIPOGRAFIA PURA (100% FIDELIDADE)\n' +
+    '- Display / Títulos: ' + (p.tipografia ? p.tipografia.display : '—') + ' (usar pesos 700-900, tracking compacto e quebras expressivas)\n' +
+    '- Body / Textos: ' + (p.tipografia ? p.tipografia.body : '—') + ' (leitura limpa, natural e humana)\n' +
+    '- Labels / Metadados: ' + (p.tipografia ? p.tipografia.labels : 'JetBrains Mono') + ' (uppercase, tracking 0.2em a 0.4em)\n' +
+    '- Escala Tipográfica: ' + (p.tipografia ? p.tipografia.escala : 'extrema') + ' (títulos monumentais de alto impacto)\n\n' +
+    '## 3. MICRO-INTERAÇÕES & ASSINATURA DE MOVIMENTO\n' +
+    '- Curva de Easing Obrigatória: cubic-bezier(0.16, 1, 0.3, 1) com transições de 0.7s a 1.0s\n' +
+    '- Estilos de Movimento: ' + ((mov.estilo && mov.estilo.length) ? mov.estilo.join(', ') : 'Transições suaves, hover reveal e revelação de fotos') + '\n' +
+    '- Tratamento Fotográfico: ' + (img.tratamento || 'Inicia em grayscale(100%) e revela cor com scale(1.08) no hover em 1.0s') + '\n' +
+    '- Proporções de Imagem: ' + ((img.proporcoes && img.proporcoes.length) ? img.proporcoes.join(', ') : '3:4, 16:9, 1:1') + '\n\n' +
+    '## 4. PALETA DE CORES (ADAPTÁVEL À MARCA DO CLIENTE)\n' +
+    '- Fundo Principal: ' + (s.fundo || '#FBFBFA') + '\n' +
+    '- Superfície / Cards: ' + (s.superficie || '#FFFFFF') + '\n' +
+    '- Texto Principal: ' + (s.texto || '#111315') + '\n' +
+    (s.texto_secundario ? '- Texto Secundário: ' + s.texto_secundario + '\n' : '') +
+    '- Acento Primário: ' + (s.acento || '#00D084') + '\n' +
     (s.acento_secundario ? '- Acento Secundário: ' + s.acento_secundario + '\n' : '') +
-    '- Linhas / Bordas: ' + (s.linha || 'rgba(0,0,0,0.1)') + '\n\n' +
-    '## Componentes Permitidos\n' +
+    '- Linhas & Bordas Sutis: ' + (s.linha || 'rgba(0,0,0,0.1)') + '\n\n' +
+    '## 5. COMPONENTES DE ASSINATURA OBRIGATÓRIOS\n' +
     (p.componentes_permitidos || []).map(function(c) { return '- ' + c; }).join('\n') + '\n\n' +
-    '## Restrições Anti-Slop (Proibições)\n' +
-    (p.proibicoes || []).map(function(c) { return '- PROIBIDO: ' + c; }).join('\n');
+    '## 6. DIRETRIZES RÍGIDAS ANTI-AI SLOP (PROIBIÇÕES)\n' +
+    '- PROIBIDO: Usar cards flutuantes genéricos sem estrutura de grid intencional.\n' +
+    '- PROIBIDO: Usar gradientes neon aleatórios ou clichês de SaaS roxo/azul.\n' +
+    '- PROIBIDO: Usar textos artificiais de IA ("Embarque em uma jornada...", "Excelência e inovação..."). Usar copy humanizada, direta e real.\n' +
+    (p.proibicoes || []).map(function(c) { return '- PROIBIDO: ' + c; }).join('\n') + '\n\n' +
+    '## 7. CÓDIGO CSS CHAVE & KEYFRAMES DE REFERÊNCIA\n' +
+    '```css\n' +
+    '/* Curva de transição de alta-costura */\n' +
+    '.luxury-transition { transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }\n' +
+    '/* Tratamento de imagem: Grayscale para Cor + Zoom suave */\n' +
+    '.luxury-img-card img { filter: grayscale(100%); transition: filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }\n' +
+    '.luxury-img-card:hover img { filter: grayscale(0%); transform: scale(1.08); }\n' +
+    '/* Grid Stagger Offset para quebra de ritmo nos itens pares */\n' +
+    '@media(min-width: 768px) { .stagger-grid .stagger-item:nth-child(even) { margin-top: 100px; } }\n' +
+    '/* Selo de autoridade com animação contínua */\n' +
+    '@keyframes bounce-slow { 0%, 100% { transform: translateY(-5%); } 50% { transform: translateY(5%); } }\n' +
+    '.animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }\n' +
+    '```\n';
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(txt).then(function() {
-      alert('Prompt do preset copiado com sucesso!');
+      alert('Prompt mestre e blueprint técnico copiados com sucesso!');
     });
   } else {
     prompt('Copie o prompt abaixo:', txt);
