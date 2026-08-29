@@ -832,5 +832,74 @@
     ],
     "prioridade_conversao": 1,
     "ativo": true
+  },
+  {
+    "id": "softly-wellness",
+    "nome": "Softly Digital Wellness & Living Room",
+    "descricao": "Estética acolhedora de sala de estar digital (Digital Living Room) com foco em psicologia de elite, terapia e bem-estar: linho natural, ruído sutil de 3%, tipografia Outfit com acentos em itálico manuscrito, cards de toque suave e zero frieza clínica.",
+    "origem": "https://superdesign.dev/softly-wellness",
+    "screenshot": "assets/presets/softly-wellness.webp",
+    "tags": ["wellness", "psicologia", "acolhedor", "living-room", "outfit", "cursive", "linho", "anti-clinico"],
+    "nichos_recomendados": [
+      "Psicologia & Psicanálise de Alto Padrão",
+      "Terapia Holística & Mindfulness",
+      "Nutrição Integrativa & Medicina do Estilo de Vida",
+      "Estúdios de Yoga, Pilates & Respiração",
+      "Desenvolvimento Pessoal & Mentorias Humanas"
+    ],
+    "nichos_evitar": [
+      "Oficinas Mecânicas / Desentupidoras",
+      "Lojas de Departamento / Varejo Agressivo",
+      "Direito Criminal"
+    ],
+    "composicao": "warm-living-room-bento",
+    "navegacao": "soft-floating-glass-pill",
+    "densidade": "baixa",
+    "tipografia": {
+      "display": "Outfit (Bold 700, tracking -0.03em, com palavras de destaque em Playfair Cursive itálico)",
+      "body": "Outfit / Inter (Regular 400, leitura suave e humana)",
+      "labels": "Outfit Medium (12px, tracking 0.15em)",
+      "escala": "moderada"
+    },
+    "imagem": {
+      "tratamento": "warm-natural-light (Fotos com luz natural, tons terrosos, bordas arredondadas de 24px e leve sombra quente)",
+      "proporcoes": ["4:5", "1:1", "16:9"]
+    },
+    "movimento": {
+      "estilo": [
+        "soft-card-float-hover",
+        "gentle-pill-fade",
+        "breathe-pulse-indicator"
+      ],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "warm-linen-terracotta-e-sage",
+      "sugestoes": {
+        "fundo": "#FDFCF8",
+        "superficie": "#FFFFFF",
+        "texto": "#2D3748",
+        "texto_secundario": "#718096",
+        "acento": "#E07A5F",
+        "acento_secundario": "#81B29A",
+        "linha": "rgba(224, 122, 95, 0.15)"
+      }
+    },
+    "componentes_permitidos": [
+      "living-room-welcome-hero",
+      "gentle-service-cards",
+      "breathe-quote-manifesto",
+      "human-faq-accordion",
+      "warm-whatsapp-concierge"
+    ],
+    "proibicoes": [
+      "fundo-branco-hospitalar-frio",
+      "sombras-pretas-pesadas",
+      "gradientes-neon-cripto",
+      "termos-tecnicos-sem-acolhimento"
+    ],
+    "prioridade_conversao": 1,
+    "ativo": true
   }
 ]

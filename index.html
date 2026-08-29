@@ -2859,6 +2859,75 @@ var PRESETS_PADRAO = [
     ],
     "prioridade_conversao": 1,
     "ativo": true
+  },
+  {
+    "id": "softly-wellness",
+    "nome": "Softly Digital Wellness & Living Room",
+    "descricao": "Estética acolhedora de sala de estar digital (Digital Living Room) com foco em psicologia de elite, terapia e bem-estar: linho natural, ruído sutil de 3%, tipografia Outfit com acentos em itálico manuscrito, cards de toque suave e zero frieza clínica.",
+    "origem": "https://superdesign.dev/softly-wellness",
+    "screenshot": "assets/presets/softly-wellness.webp",
+    "tags": ["wellness", "psicologia", "acolhedor", "living-room", "outfit", "cursive", "linho", "anti-clinico"],
+    "nichos_recomendados": [
+      "Psicologia & Psicanálise de Alto Padrão",
+      "Terapia Holística & Mindfulness",
+      "Nutrição Integrativa & Medicina do Estilo de Vida",
+      "Estúdios de Yoga, Pilates & Respiração",
+      "Desenvolvimento Pessoal & Mentorias Humanas"
+    ],
+    "nichos_evitar": [
+      "Oficinas Mecânicas / Desentupidoras",
+      "Lojas de Departamento / Varejo Agressivo",
+      "Direito Criminal"
+    ],
+    "composicao": "warm-living-room-bento",
+    "navegacao": "soft-floating-glass-pill",
+    "densidade": "baixa",
+    "tipografia": {
+      "display": "Outfit (Bold 700, tracking -0.03em, com palavras de destaque em Playfair Cursive itálico)",
+      "body": "Outfit / Inter (Regular 400, leitura suave e humana)",
+      "labels": "Outfit Medium (12px, tracking 0.15em)",
+      "escala": "moderada"
+    },
+    "imagem": {
+      "tratamento": "warm-natural-light (Fotos com luz natural, tons terrosos, bordas arredondadas de 24px e leve sombra quente)",
+      "proporcoes": ["4:5", "1:1", "16:9"]
+    },
+    "movimento": {
+      "estilo": [
+        "soft-card-float-hover",
+        "gentle-pill-fade",
+        "breathe-pulse-indicator"
+      ],
+      "intensidade_interacao": 2,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "warm-linen-terracotta-e-sage",
+      "sugestoes": {
+        "fundo": "#FDFCF8",
+        "superficie": "#FFFFFF",
+        "texto": "#2D3748",
+        "texto_secundario": "#718096",
+        "acento": "#E07A5F",
+        "acento_secundario": "#81B29A",
+        "linha": "rgba(224, 122, 95, 0.15)"
+      }
+    },
+    "componentes_permitidos": [
+      "living-room-welcome-hero",
+      "gentle-service-cards",
+      "breathe-quote-manifesto",
+      "human-faq-accordion",
+      "warm-whatsapp-concierge"
+    ],
+    "proibicoes": [
+      "fundo-branco-hospitalar-frio",
+      "sombras-pretas-pesadas",
+      "gradientes-neon-cripto",
+      "termos-tecnicos-sem-acolhimento"
+    ],
+    "prioridade_conversao": 1,
+    "ativo": true
   }
 ];
 
@@ -3520,6 +3589,113 @@ function setPresetPreviewMode(mode) {
   }
 }
 
+function getCssSnippetForPreset(id) {
+  switch(id) {
+    case 'super-travel-luxury':
+      return '/* Curva de transição de alta-costura */\n' +
+        '.luxury-transition { transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }\n' +
+        '/* Tratamento de imagem: Grayscale para Cor + Zoom suave */\n' +
+        '.luxury-img-card img { filter: grayscale(100%); transition: filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }\n' +
+        '.luxury-img-card:hover img { filter: grayscale(0%); transform: scale(1.08); }\n' +
+        '/* Grid Stagger Offset para quebra de ritmo nos itens pares */\n' +
+        '@media(min-width: 768px) { .stagger-grid .stagger-item:nth-child(even) { margin-top: 100px; } }\n' +
+        '/* Selo de autoridade com animação contínua */\n' +
+        '@keyframes bounce-slow { 0%, 100% { transform: translateY(-5%); } 50% { transform: translateY(5%); } }\n' +
+        '.animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }\n' +
+        '/* Card de serviço com preenchimento gradual em 0.7s */\n' +
+        '.service-card { transition: background-color 0.7s cubic-bezier(0.16, 1, 0.3, 1); }\n' +
+        '.service-card:hover { background-color: var(--accent); }\n' +
+        '/* Círculo de ação no hover */\n' +
+        '.overlay-circle { transform: translate(-50%, -50%) scale(0.8); opacity: 0; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }\n' +
+        '.portfolio-card:hover .overlay-circle { transform: translate(-50%, -50%) scale(1); opacity: 1; }\n';
+
+    case 'raw-form-brutalist-blobs':
+      return '/* Tipografia Monumental Clash Display */\n' +
+        '.hero-title { font-family: "Clash Display", sans-serif; font-size: clamp(3.5rem, 16vw, 12rem); line-height: 0.78; letter-spacing: -0.05em; font-weight: 700; }\n' +
+        '/* Manchas gradientes orgânicas em multiply */\n' +
+        '@keyframes floatBlob { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.15); } }\n' +
+        '.gradient-blob { position: absolute; filter: blur(80px); mix-blend-mode: multiply; opacity: 0.55; animation: floatBlob 14s ease-in-out infinite; pointer-events: none; }\n' +
+        '/* Ticker Marquee contínuo */\n' +
+        '@keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }\n' +
+        '.marquee-track { display: flex; width: max-content; animation: marqueeScroll 22s linear infinite; }\n' +
+        '.marquee-track:hover { animation-play-state: paused; }\n';
+
+    case 'cinematic-3d-spatial':
+      return '/* Perspectiva 3D Espacial */\n' +
+        '.perspective-spatial { perspective: 2000px; transform-style: preserve-3d; }\n' +
+        '@keyframes rotate3dCube { 0% { transform: rotateX(0deg) rotateY(15deg); } 100% { transform: rotateX(360deg) rotateY(15deg); } }\n' +
+        '.cube-wrapper { transform-style: preserve-3d; animation: rotate3dCube 24s linear infinite; }\n' +
+        '/* Janelas macOS com semáforo */\n' +
+        '.macos-window { background: #111111; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; overflow: hidden; backdrop-filter: blur(20px); }\n' +
+        '.traffic-lights { display: flex; gap: 6px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }\n' +
+        '.traffic-dot { width: 10px; height: 10px; border-radius: 50%; }\n';
+
+    case 'high-contrast-saas-golden':
+      return '/* Grid pattern de fundo 40px */\n' +
+        '.bg-grid-saas { background-color: #ffffff; background-image: linear-gradient(to right, rgba(183, 198, 194, 0.25) 1px, transparent 1px), linear-gradient(to bottom, rgba(183, 198, 194, 0.25) 1px, transparent 1px); background-size: 40px 40px; }\n' +
+        '/* Tipografia Anton Display */\n' +
+        '.font-anton { font-family: "Anton", sans-serif; text-transform: uppercase; letter-spacing: -0.02em; }\n' +
+        '/* Destaque rotacionado -2deg */\n' +
+        '.rotate-highlight { background: #FFE17C; color: #171E19; padding: 0 8px; transform: rotate(-2deg); display: inline-block; box-shadow: 0 4px 12px rgba(255, 225, 124, 0.4); }\n' +
+        '/* Card lift transition */\n' +
+        '.card-saas { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; }\n' +
+        '.card-saas:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); }\n';
+
+    case 'technical-blueprint-wireframe':
+      return '/* Fundo papel técnico e grid de linhas 1px */\n' +
+        '.bg-blueprint { background-color: #F7F7F5; background-image: linear-gradient(to right, rgba(58, 58, 56, 0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(58, 58, 56, 0.15) 1px, transparent 1px); background-size: 24px 24px; }\n' +
+        '/* Marcadores de canto em L */\n' +
+        '.corner-marker { position: relative; border: 1px solid rgba(58, 58, 56, 0.2); }\n' +
+        '.corner-marker::before { content: ""; position: absolute; top: -1px; left: -1px; width: 8px; height: 8px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }\n' +
+        '.corner-marker::after { content: ""; position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }\n' +
+        '/* Mix-blend luminosity nas fotos */\n' +
+        '.blueprint-img { mix-blend-mode: luminosity; opacity: 0.88; transition: all 0.5s ease; }\n' +
+        '.blueprint-img:hover { mix-blend-mode: normal; opacity: 1; }\n';
+
+    case 'kinetic-electric-orange':
+      return '/* Seções inclinadas em -2deg */\n' +
+        '.skew-section { transform: skewY(-2deg); transform-origin: top left; margin: 40px 0; }\n' +
+        '.skew-inner { transform: skewY(2deg); }\n' +
+        '/* Indicador circular rotativo contínuo */\n' +
+        '@keyframes rotateBadge { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }\n' +
+        '.rotate-scroll-indicator { animation: rotateBadge 12s linear infinite; }\n' +
+        '/* Ticker marquee duplo de alto impacto */\n' +
+        '@keyframes marqueeFast { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }\n' +
+        '.kinetic-marquee { animation: marqueeFast 14s linear infinite; font-family: "Archivo Black", sans-serif; text-transform: uppercase; }\n';
+
+    case 'season-04-high-fashion-brutalist':
+      return '/* Ruído analógico fractal permanente */\n' +
+        '.noise-overlay { position: fixed; inset: 0; pointer-events: none; opacity: 0.045; background-image: url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E"); z-index: 999; }\n' +
+        '/* Título com recuo editorial 20vw na segunda linha */\n' +
+        '.split-indent-title { font-family: "Clash Grotesk", sans-serif; font-size: clamp(3rem, 13vw, 10rem); font-weight: 700; line-height: 0.85; }\n' +
+        '.split-indent-title span.indent { margin-left: clamp(2rem, 18vw, 14rem); display: block; }\n';
+
+    case 'editorial-atelier':
+      return '/* Tipografia Newsreader Serifada Editorial */\n' +
+        '.font-display-atelier { font-family: "Newsreader", "Playfair Display", serif; font-weight: 400; font-style: italic; letter-spacing: -0.02em; }\n' +
+        '/* Recortes verticais assimétricos com sobreposição */\n' +
+        '.editorial-crop { aspect-ratio: 3/4; border-radius: 4px; overflow: hidden; position: relative; }\n' +
+        '.editorial-crop img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease; filter: brightness(0.96); }\n' +
+        '.editorial-crop:hover img { transform: scale(1.06); filter: brightness(1); }\n';
+
+    case 'softly-wellness':
+      return '/* Textura de linho e ruído suave de bem-estar */\n' +
+        'body { background-color: #FDFCF8; color: #2D3748; font-family: "Outfit", sans-serif; }\n' +
+        '.font-cursive { font-family: "Playfair Display", cursive, serif; font-style: italic; font-weight: 400; }\n' +
+        '.soft-wellness-card { background: #FFFFFF; border: 1px solid rgba(224, 122, 95, 0.15); border-radius: 24px; box-shadow: 0 10px 30px -5px rgba(224, 122, 95, 0.06); transition: transform 0.4s ease, box-shadow 0.4s ease; }\n' +
+        '.soft-wellness-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -8px rgba(224, 122, 95, 0.12); }\n';
+
+    default:
+      return '/* Curva de transição de alta-costura */\n' +
+        '.luxury-transition { transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }\n' +
+        '/* Tratamento de imagem: Grayscale para Cor + Zoom suave */\n' +
+        '.luxury-img-card img { filter: grayscale(100%); transition: filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }\n' +
+        '.luxury-img-card:hover img { filter: grayscale(0%); transform: scale(1.08); }\n' +
+        '/* Grid Stagger Offset para quebra de ritmo nos itens pares */\n' +
+        '@media(min-width: 768px) { .stagger-grid .stagger-item:nth-child(even) { margin-top: 100px; } }\n';
+  }
+}
+
 function copiarPromptPresetAtual() {
   if (!presetPreviewAtualObj) return;
   var p = presetPreviewAtualObj;
@@ -3561,18 +3737,9 @@ function copiarPromptPresetAtual() {
     '- PROIBIDO: Usar gradientes neon aleatórios ou clichês de SaaS roxo/azul.\n' +
     '- PROIBIDO: Usar textos artificiais de IA ("Embarque em uma jornada...", "Excelência e inovação..."). Usar copy humanizada, direta e real.\n' +
     (p.proibicoes || []).map(function(c) { return '- PROIBIDO: ' + c; }).join('\n') + '\n\n' +
-    '## 7. CÓDIGO CSS CHAVE & KEYFRAMES DE REFERÊNCIA\n' +
+    '## 7. CÓDIGO CSS CHAVE & KEYFRAMES DE REFERÊNCIA (' + p.nome + ')\n' +
     '```css\n' +
-    '/* Curva de transição de alta-costura */\n' +
-    '.luxury-transition { transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }\n' +
-    '/* Tratamento de imagem: Grayscale para Cor + Zoom suave */\n' +
-    '.luxury-img-card img { filter: grayscale(100%); transition: filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }\n' +
-    '.luxury-img-card:hover img { filter: grayscale(0%); transform: scale(1.08); }\n' +
-    '/* Grid Stagger Offset para quebra de ritmo nos itens pares */\n' +
-    '@media(min-width: 768px) { .stagger-grid .stagger-item:nth-child(even) { margin-top: 100px; } }\n' +
-    '/* Selo de autoridade com animação contínua */\n' +
-    '@keyframes bounce-slow { 0%, 100% { transform: translateY(-5%); } 50% { transform: translateY(5%); } }\n' +
-    '.animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }\n' +
+    getCssSnippetForPreset(p.id) +
     '```\n';
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
