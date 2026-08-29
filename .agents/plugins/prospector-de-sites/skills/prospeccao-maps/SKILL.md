@@ -5,24 +5,17 @@ description: Esta skill deve ser usada ao prospectar clientes no Google Maps —
 
 # Prospecção no Google Maps
 
-Encontrar o cliente ouro: negócio que JÁ fatura bem (nota alta, muitas avaliações) mas perde clientes por causa de um site fraco. Não se cria demanda — conserta-se onde o dinheiro está escapando.
+Encontrar o cliente ouro: profissional ou negócio ativo que **NÃO POSSUI NENHUM SITE OFICIAL PRÓPRIO** (usa apenas Instagram, Linktree ou perfil no Maps).
 
-## Fluxo — busca via Google Maps Platform, avaliação via navegador
+## Premissa Fundamental: Foco Exclusivo em Leads Sem Site (Modo Do Zero)
+- **Critério Central**: O negócio **NÃO TEM SITE PRÓPRIO** (campo website vazio, Linktree ou rede social).
+- **Sem critério de nota mínima**: Aceitamos profissionais novos, recém-inaugurados ou em expansão. Não há barreira de estrelas ou número mínimo de avaliações.
 
-A busca dos negócios usa o **plugin Google Maps Platform** (Places), que já vem no Antigravity (Customizations → Build with Google) e é a fonte oficial — mais confiável que raspar a tela. O navegador (MCP Playwright ou plugin Chrome DevTools) entra só na etapa de avaliar o site e caçar o e-mail.
-
-1. **Buscar os negócios (Google Maps Platform / Places ou Navegador):** faça a busca por `[nicho] em [cidade]`. Para cada resultado, obtenha `name`, `rating`, `user_ratings_total`, `website`, `formatted_phone_number`, endereço, e avaliações recentes.
-   - **Filtro 1 — potencial financeiro**: `rating` ≥ 4.7 E `user_ratings_total` ≥ 30 (negócio bem avaliado e com clientes ativos).
-   - **Filtro 2 — Identificação do Tipo de Oportunidade**:
-     * **Modo A (Redesign)**: Possui `website` próprio ativo que não seja rede social, mas com design datado, sem CTA de WhatsApp, não-responsivo ou confuso.
-     * **Modo B (Criação do Zero / Sem Site)**: `website` está **vazio**, inexistente ou aponta exclusivamente para **Instagram, Facebook, Linktree ou diretório genérico**. O negócio fatura e tem ótimas avaliações, mas zero presença oficial no Google.
-2. **Avaliar e Coletar Dados Ricos:**
-   - Para **Modo A (Redesign)**: avalie o site antigo, capture logo, textos, paleta de cores e fotos.
-   - Para **Modo B (Do Zero)**: capture do Google Maps e Instagram:
-     * **Depoimentos Reais 5★**: 2 a 4 avaliações reais de clientes com texto elogioso.
-     * **Fotos Reais**: fotos do local/serviço no perfil do Maps e feed do Instagram.
-     * **Bio / Posicionamento**: especialidades e diferenciais citados no Instagram.
-     * **Contato**: telefone/celular (WhatsApp), endereço completo e horário.
+## Fluxo de Mineração
+1. **Buscar os negócios**: faça a busca por `[nicho] em [cidade]`. Para cada resultado, obtenha `name`, `formatted_phone_number`, endereço, Instagram e especialidade.
+   - **Filtro Zero Site**: Descarte qualquer empresa que já possua site próprio ativo.
+2. **Coleta de Ativos**:
+   - Capture fotos do local/serviço no Maps/Instagram, especialidades da bio e WhatsApp formatado internacional `55DDDNUMERO`.
    - Capture o WhatsApp (`55DDDNUMERO`) e e-mail (se disponível). Se for Modo B (Do Zero) e não tiver e-mail, o **WhatsApp é o canal principal de abordagem**.
 3. Parar ao atingir a meta de leads qualificados (config, padrão 10).
 4. Pular estabelecimentos que já estão em `leads.md` ou no banco `prospector.db`.
