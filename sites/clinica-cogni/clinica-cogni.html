@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLÍNICA COGNI &bull; Neurodesenvolvimento & Saúde Multidisciplinar | Goiânia</title>
+    <meta name="description" content="Clínica Cogni em Goiânia (Av. T-9). Referência em Neuropsicologia, Fonoaudiologia, Fisioterapia Integrada, Terapia Ocupacional e Psicopedagogia. Avaliação 5.0 estrelas.">
+    
+    <!-- Google Fonts: League Spartan (100% Fidelidade ao Preset) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#FBF9F5',
+                            surface: '#F2ECE4',
+                            card: '#FFFFFF',
+                            text: '#191C1E',
+                            sub: '#5E656B',
+                            accent: '#1B4D3E',       /* Verde Floresta / Botânico Nobre */
+                            accentLight: '#2A6F5A',
+                            gold: '#C59B6D',         /* Dourado Ocre Suave */
+                            line: 'rgba(25, 28, 30, 0.09)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"League Spartan"', 'sans-serif'],
+                        serif: ['"Newsreader"', 'serif'],
+                    },
+                    transitionTimingFunction: {
+                        'luxury': 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'League Spartan', sans-serif; }
+        .font-editorial { font-family: 'Newsreader', serif; font-style: italic; }
+        ::selection { background: #1B4D3E; color: #FFFFFF; }
+        
+        /* Floating Badge Bounce Lento 4s */
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(-6%); }
+            50% { transform: translateY(6%); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 4s ease-in-out infinite;
+        }
+
+        /* Stagger Grid Offset para quebra intencional de ritmo (100px nos pares em Desktop) */
+        @media (min-width: 768px) {
+            .stagger-grid .stagger-item:nth-child(even) {
+                margin-top: 100px;
+            }
+        }
+
+        /* Scroll-Triggered Reveal */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grayscale to Color Image Zoom Hover (1s Luxury Curve) */
+        .luxury-img-card {
+            overflow: hidden;
+            border-radius: 24px;
+            position: relative;
+        }
+        .luxury-img-card img {
+            filter: grayscale(100%);
+            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .luxury-img-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+
+        /* Portfolio / Specialty Stagger Card Hover Circle */
+        .specialty-item-card {
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+        }
+        .specialty-item-card img {
+            filter: grayscale(100%);
+            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .specialty-item-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+        .overlay-circle {
+            width: 96px;
+            height: 96px;
+            background: #1B4D3E;
+            color: #FFFFFF;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.75);
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            box-shadow: 0 10px 25px rgba(27, 77, 62, 0.35);
+        }
+        .specialty-item-card:hover .overlay-circle {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Service Cards Smooth 0.7s Fill Hover */
+        .service-card {
+            background-color: #FFFFFF;
+            border: 1px solid rgba(25, 28, 30, 0.08);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover {
+            background-color: #1B4D3E;
+            border-color: #1B4D3E;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(27, 77, 62, 0.25);
+        }
+        .service-card:hover .service-title {
+            color: #FFFFFF;
+        }
+        .service-card:hover .service-desc {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .service-card:hover .service-tag {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #FFFFFF;
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+        .service-card:hover .service-icon {
+            color: #FFFFFF;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-[#FBF9F5] text-[#191C1E] antialiased selection:bg-[#1B4D3E] selection:text-white">
+
+    <!-- 1️⃣ NAVEGAÇÃO (Fixed Top 80px, Glassmorphism de Alta-Costura) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 h-[80px] px-6 sm:px-12 flex items-center justify-between border-b border-[#191C1E]/10"
+         style="background: rgba(251, 249, 245, 0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);">
+        
+        <!-- Logo / Marca -->
+        <a href="#" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 rounded-full bg-[#1B4D3E] text-white font-[900] text-xl flex items-center justify-center tracking-tighter shadow-sm group-hover:scale-105 transition-transform duration-300">
+                C
+            </div>
+            <div class="flex flex-col">
+                <span class="text-2xl sm:text-[26px] font-[900] tracking-tighter uppercase text-[#191C1E] leading-none">
+                    CLÍNICA COGNI
+                </span>
+                <span class="text-[10px] uppercase font-[700] tracking-[0.25em] text-[#5E656B] mt-0.5">
+                    Goiânia &bull; Setor Bueno
+                </span>
+            </div>
+        </a>
+
+        <!-- Links Centrais (Desktop) -->
+        <div class="hidden md:flex items-center gap-8 text-[12px] font-[800] uppercase tracking-[0.2em] text-[#191C1E]/80">
+            <a href="#especialidades" class="hover:text-[#1B4D3E] transition-colors py-1">Especialidades</a>
+            <a href="#metodologia" class="hover:text-[#1B4D3E] transition-colors py-1">Metodologia</a>
+            <a href="#depoimentos" class="hover:text-[#1B4D3E] transition-colors py-1">Avaliações 5.0</a>
+            <a href="#contato" class="hover:text-[#1B4D3E] transition-colors py-1">Localização</a>
+        </div>
+
+        <!-- Botão CTA Direto WhatsApp -->
+        <a href="https://wa.me/5562999999999?text=Olá! Vim pelo site da Clínica Cogni e gostaria de agendar uma avaliação multidisciplinar." 
+           target="_blank"
+           class="h-[46px] px-6 rounded-full bg-[#1B4D3E] text-white font-[800] text-[12px] uppercase tracking-[0.18em] flex items-center gap-2 hover:bg-[#2A6F5A] transition-all duration-300 shadow-sm hover:scale-[1.03]">
+            <span>Agendar Avaliação</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+    </nav>
+
+    <!-- 2️⃣ HERO SECTION (Tipografia Monumental League Spartan + Contraste Itálico + Floating Badge) -->
+    <section class="relative pt-[140px] pb-16 sm:pb-24 px-6 sm:px-12 max-w-7xl mx-auto overflow-hidden">
+        
+        <!-- Header Badges -->
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1B4D3E]/10 text-[#1B4D3E] text-[11px] font-[900] tracking-[0.2em] uppercase">
+                <span class="w-2 h-2 rounded-full bg-[#1B4D3E] animate-ping"></span>
+                Referência em Goiânia
+            </span>
+            <span class="text-[11px] font-[700] uppercase tracking-[0.15em] text-[#5E656B]">
+                Av. T-9 &bull; Atendimento Multidisciplinar Integrado
+            </span>
+        </div>
+
+        <!-- Headline Monumental com Quebra Editorial -->
+        <h1 class="text-[44px] sm:text-[76px] lg:text-[98px] font-[900] uppercase tracking-[-0.04em] leading-[0.88] text-[#191C1E] mb-8">
+            Cuidado <span class="font-editorial normal-case font-[400] text-[#1B4D3E] tracking-normal">humano</span> & desenvolvimento de alta precisão.
+        </h1>
+
+        <!-- Grid Hero: Descrição + Card Fotográfico + Floating Badge -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mt-12">
+            
+            <div class="lg:col-span-5 space-y-6">
+                <p class="text-lg sm:text-xl font-[500] text-[#5E656B] leading-relaxed">
+                    A <strong class="text-[#191C1E] font-[700]">Clínica Cogni</strong> integra neuropsicologia, fonoaudiologia, fisioterapia, terapia ocupacional e psicopedagogia em um ambiente acolhedor projetado para impulsionar a autonomia de crianças, jovens e adultos.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="https://wa.me/5562999999999?text=Olá! Gostaria de informações sobre atendimento na Clínica Cogni." 
+                       target="_blank"
+                       class="h-[54px] px-8 rounded-full bg-[#191C1E] text-white font-[800] text-[13px] uppercase tracking-[0.2em] flex items-center justify-center hover:bg-[#1B4D3E] transition-all duration-300 shadow-lg">
+                        Falar com a Recepção
+                    </a>
+                    <a href="#especialidades" 
+                       class="h-[54px] px-8 rounded-full border border-[#191C1E]/20 text-[#191C1E] font-[800] text-[13px] uppercase tracking-[0.2em] flex items-center justify-center hover:bg-[#191C1E] hover:text-white transition-all duration-300">
+                        Ver Áreas Clínicas
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card Visual com Selo Flutuante de Concierge (Bounce 4s) -->
+            <div class="lg:col-span-7 relative">
+                <div class="luxury-img-card aspect-[16/10] bg-[#F2ECE4] border border-[#191C1E]/10 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80" 
+                         alt="Ambiente Terapêutico Clínica Cogni" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#191C1E]/60 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
+                        <div>
+                            <span class="text-[10px] uppercase font-[800] tracking-[0.3em] text-[#C59B6D] block">Espaço Clínico</span>
+                            <h3 class="text-xl font-[900] uppercase tracking-tight">Ambiente Seguro & Estímulo Neurofuncional</h3>
+                        </div>
+                        <span class="text-[11px] font-[800] uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-white/20 backdrop-blur-md">Setor Bueno</span>
+                    </div>
+                </div>
+
+                <!-- Floating Concierge Badge (Selo com Bounce Lento 4s) -->
+                <div class="absolute -top-6 -right-4 sm:-top-8 sm:-right-8 animate-bounce-slow">
+                    <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#1B4D3E] text-white p-3 shadow-2xl flex flex-col items-center justify-center text-center border-4 border-[#FBF9F5]">
+                        <span class="text-[#C59B6D] text-sm">★★★★★</span>
+                        <span class="text-xl font-[900] leading-none mt-0.5">5.0</span>
+                        <span class="text-[8px] uppercase font-[800] tracking-[0.2em] opacity-80 mt-1">28 Avaliações</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- 3️⃣ NÚMEROS & CREDENCIAIS (Faixa Editorial com Linhas de 1px) -->
+    <section class="border-y border-[#191C1E]/10 bg-[#F2ECE4]/60 py-12 px-6 sm:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="space-y-1">
+                <span class="text-3xl sm:text-4xl font-[900] text-[#1B4D3E] tracking-tight block">100%</span>
+                <span class="text-xs uppercase font-[800] tracking-[0.2em] text-[#5E656B] block">Avaliações 5 Estrelas</span>
+            </div>
+            <div class="space-y-1">
+                <span class="text-3xl sm:text-4xl font-[900] text-[#1B4D3E] tracking-tight block">6+</span>
+                <span class="text-xs uppercase font-[800] tracking-[0.2em] text-[#5E656B] block">Especialidades Integradas</span>
+            </div>
+            <div class="space-y-1">
+                <span class="text-3xl sm:text-4xl font-[900] text-[#1B4D3E] tracking-tight block">T-9</span>
+                <span class="text-xs uppercase font-[800] tracking-[0.2em] text-[#5E656B] block">Localização Nobre Goiânia</span>
+            </div>
+            <div class="space-y-1">
+                <span class="text-3xl sm:text-4xl font-[900] text-[#1B4D3E] tracking-tight block">Equipe</span>
+                <span class="text-xs uppercase font-[800] tracking-[0.2em] text-[#5E656B] block">Especialistas Titulados</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4️⃣ STAGGER ASYMMETRIC GALLERY (Especialidades com Offset de 100px & Circle Hover) -->
+    <section id="especialidades" class="py-24 px-6 sm:px-12 max-w-7xl mx-auto">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#1B4D3E] block mb-2">Especialidades Clínicas</span>
+                <h2 class="text-4xl sm:text-6xl font-[900] uppercase tracking-tight text-[#191C1E] leading-[0.95]">
+                    Atendimento <span class="font-editorial normal-case font-[400] text-[#1B4D3E]">integrado</span> sob o mesmo teto.
+                </h2>
+            </div>
+            <p class="max-w-md text-sm font-[500] text-[#5E656B] leading-relaxed">
+                Cada paciente é único. Nossos especialistas trabalham em conjunto para cruzar diagnósticos e acelerar ganhos neurofuncionais.
+            </p>
+        </div>
+
+        <!-- Grid Assimétrico com 100px de Desalinhamento (Stagger Offset) -->
+        <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            
+            <!-- Item 1: Neuropsicologia & Avaliação -->
+            <div class="stagger-item specialty-item-card group cursor-pointer">
+                <div class="aspect-[4/5] bg-[#F2ECE4] relative rounded-[20px] overflow-hidden border border-[#191C1E]/10">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" 
+                         alt="Neuropsicologia Cogni" 
+                         class="w-full h-full object-cover">
+                    <div class="overlay-circle">
+                        <span class="text-[10px] font-[900] tracking-[0.2em] uppercase">Avaliar ↗</span>
+                    </div>
+                </div>
+                <div class="mt-5 space-y-1.5">
+                    <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#1B4D3E] block">Diagnóstico & Cognição</span>
+                    <h3 class="text-2xl font-[900] uppercase tracking-tight text-[#191C1E] group-hover:text-[#1B4D3E] transition-colors">
+                        Avaliação Neuropsicológica
+                    </h3>
+                    <p class="text-sm font-[500] text-[#5E656B] leading-relaxed">
+                        Mapeamento detalhado de funções executivas, atenção, memória, TEA e TDAH com instrumentos padronizados e laudo conclusivo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 2: Fonoaudiologia & Terapia da Fala (Com offset desktop de 100px) -->
+            <div class="stagger-item specialty-item-card group cursor-pointer">
+                <div class="aspect-[4/5] bg-[#F2ECE4] relative rounded-[20px] overflow-hidden border border-[#191C1E]/10">
+                    <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80" 
+                         alt="Fonoaudiologia Infantil Cogni" 
+                         class="w-full h-full object-cover">
+                    <div class="overlay-circle">
+                        <span class="text-[10px] font-[900] tracking-[0.2em] uppercase">Conhecer ↗</span>
+                    </div>
+                </div>
+                <div class="mt-5 space-y-1.5">
+                    <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#1B4D3E] block">Dra. Jéssica Luana & Equipe</span>
+                    <h3 class="text-2xl font-[900] uppercase tracking-tight text-[#191C1E] group-hover:text-[#1B4D3E] transition-colors">
+                        Fonoaudiologia & Linguagem
+                    </h3>
+                    <p class="text-sm font-[500] text-[#5E656B] leading-relaxed">
+                        Desenvolvimento da fala, deglutição, motricidade orofacial e processamento auditivo com carinho e paciência lúdica.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 3: Fisioterapia Pediátrica & Reabilitação -->
+            <div class="stagger-item specialty-item-card group cursor-pointer">
+                <div class="aspect-[4/5] bg-[#F2ECE4] relative rounded-[20px] overflow-hidden border border-[#191C1E]/10">
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80" 
+                         alt="Fisioterapia Integrada Cogni" 
+                         class="w-full h-full object-cover">
+                    <div class="overlay-circle">
+                        <span class="text-[10px] font-[900] tracking-[0.2em] uppercase">Agendar ↗</span>
+                    </div>
+                </div>
+                <div class="mt-5 space-y-1.5">
+                    <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#1B4D3E] block">Dr. Frederico & Dra. Gabriela</span>
+                    <h3 class="text-2xl font-[900] uppercase tracking-tight text-[#191C1E] group-hover:text-[#1B4D3E] transition-colors">
+                        Fisioterapia Neurofuncional
+                    </h3>
+                    <p class="text-sm font-[500] text-[#5E656B] leading-relaxed">
+                        Reabilitação motora, controle postural e estímulo neuromotor para potencializar a coordenação e independência física.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 4: Psicologia Clínica & TCC (Com offset desktop de 100px) -->
+            <div class="stagger-item specialty-item-card group cursor-pointer">
+                <div class="aspect-[4/5] bg-[#F2ECE4] relative rounded-[20px] overflow-hidden border border-[#191C1E]/10">
+                    <img src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=800&q=80" 
+                         alt="Psicologia Clínica Cogni" 
+                         class="w-full h-full object-cover">
+                    <div class="overlay-circle">
+                        <span class="text-[10px] font-[900] tracking-[0.2em] uppercase">Conversar ↗</span>
+                    </div>
+                </div>
+                <div class="mt-5 space-y-1.5">
+                    <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#1B4D3E] block">Dra. Nayara & Equipe</span>
+                    <h3 class="text-2xl font-[900] uppercase tracking-tight text-[#191C1E] group-hover:text-[#1B4D3E] transition-colors">
+                        Psicologia & Terapia TCC
+                    </h3>
+                    <p class="text-sm font-[500] text-[#5E656B] leading-relaxed">
+                        Manejo de ansiedade, regulação emocional, comportamento infantil e apoio psicológico contínuo para a família.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- 5️⃣ CARDS DE SERVIÇOS (Preenchimento Gradual em 0.7s no Hover) -->
+    <section id="metodologia" class="py-20 bg-[#F2ECE4] border-y border-[#191C1E]/10 px-6 sm:px-12">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#1B4D3E] block">Abordagem Multidisciplinar</span>
+                <h2 class="text-3xl sm:text-5xl font-[900] uppercase tracking-tight text-[#191C1E]">
+                    Planos terapêuticos <span class="font-editorial normal-case font-[400] text-[#1B4D3E]">personalizados</span>
+                </h2>
+                <p class="text-sm font-[500] text-[#5E656B]">Passe o cursor sobre os módulos para explorar a metodologia da Clínica Cogni.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="service-card p-8 rounded-[24px]">
+                    <div class="w-12 h-12 rounded-xl bg-[#1B4D3E]/10 text-[#1B4D3E] service-icon flex items-center justify-center mb-6 text-xl font-[900] transition-colors duration-500">
+                        01
+                    </div>
+                    <span class="service-tag text-[10px] font-[800] uppercase tracking-[0.2em] px-2.5 py-1 rounded-md bg-[#1B4D3E]/10 text-[#1B4D3E] border border-transparent inline-block mb-3 transition-colors duration-500">
+                        Triagem Inicial
+                    </span>
+                    <h3 class="service-title text-2xl font-[900] uppercase tracking-tight text-[#191C1E] mb-3 transition-colors duration-500">
+                        Acolhimento & Escuta
+                    </h3>
+                    <p class="service-desc text-sm font-[500] text-[#5E656B] leading-relaxed transition-colors duration-500">
+                        Entrevista clínica detalhada para mapear a queixa principal, histórico escolar e marcos de desenvolvimento da criança ou paciente.
+                    </p>
+                </div>
+
+                <div class="service-card p-8 rounded-[24px]">
+                    <div class="w-12 h-12 rounded-xl bg-[#1B4D3E]/10 text-[#1B4D3E] service-icon flex items-center justify-center mb-6 text-xl font-[900] transition-colors duration-500">
+                        02
+                    </div>
+                    <span class="service-tag text-[10px] font-[800] uppercase tracking-[0.2em] px-2.5 py-1 rounded-md bg-[#1B4D3E]/10 text-[#1B4D3E] border border-transparent inline-block mb-3 transition-colors duration-500">
+                        Diagnóstico Cruzado
+                    </span>
+                    <h3 class="service-title text-2xl font-[900] uppercase tracking-tight text-[#191C1E] mb-3 transition-colors duration-500">
+                        Mesa Multidisciplinar
+                    </h3>
+                    <p class="service-desc text-sm font-[500] text-[#5E656B] leading-relaxed transition-colors duration-500">
+                        Nossos psicólogos, fonoaudiólogos e fisioterapeutas debatem o caso conjuntamente para traçar metas terapêuticas unificadas.
+                    </p>
+                </div>
+
+                <div class="service-card p-8 rounded-[24px]">
+                    <div class="w-12 h-12 rounded-xl bg-[#1B4D3E]/10 text-[#1B4D3E] service-icon flex items-center justify-center mb-6 text-xl font-[900] transition-colors duration-500">
+                        03
+                    </div>
+                    <span class="service-tag text-[10px] font-[800] uppercase tracking-[0.2em] px-2.5 py-1 rounded-md bg-[#1B4D3E]/10 text-[#1B4D3E] border border-transparent inline-block mb-3 transition-colors duration-500">
+                        Evolução Contínua
+                    </span>
+                    <h3 class="service-title text-2xl font-[900] uppercase tracking-tight text-[#191C1E] mb-3 transition-colors duration-500">
+                        Feedback à Família
+                    </h3>
+                    <p class="service-desc text-sm font-[500] text-[#5E656B] leading-relaxed transition-colors duration-500">
+                        Relatórios periódicos de evolução, orientação aos pais e alinhamento com a escola para generalização dos ganhos no dia a dia.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6️⃣ DEPOIMENTOS REAIS (Google Reviews 5.0 Estrelas com Nomes e Citações Reais) -->
+    <section id="depoimentos" class="py-24 px-6 sm:px-12 max-w-7xl mx-auto">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#1B4D3E] block mb-2">Depoimentos Verificados</span>
+                <h2 class="text-4xl sm:text-6xl font-[900] uppercase tracking-tight text-[#191C1E] leading-[0.95]">
+                    A voz de quem <span class="font-editorial normal-case font-[400] text-[#1B4D3E]">confia</span> em nosso cuidado.
+                </h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-right">
+                    <span class="text-lg font-[900] text-[#191C1E] block leading-none">Nota 5.0 / 5.0</span>
+                    <span class="text-[11px] uppercase font-[700] text-[#5E656B] tracking-[0.15em]">Google Maps Oficial</span>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-[#1B4D3E] text-white flex items-center justify-center font-[900]">★</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Depoimento 1: Jois Sousa Alves -->
+            <div class="bg-white p-8 rounded-[24px] border border-[#191C1E]/10 shadow-sm flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="text-[#C59B6D] text-base">★★★★★</div>
+                    <p class="text-base font-[500] text-[#191C1E] leading-relaxed italic">
+                        "Ótimo atendimento, a clínica conta com excelentes profissionais. Minha filha é atendida pela Fonoaudióloga Jéssica Luana, atenciosa, cuidadosa tem muita paciência com as crianças. Super recomendo."
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-[#191C1E]/10 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-[900] text-sm uppercase tracking-tight text-[#191C1E]">Jois Sousa Alves</h4>
+                        <span class="text-[10px] uppercase font-[700] text-[#5E656B] tracking-[0.15em]">Mãe de Paciente &bull; Google Review</span>
+                    </div>
+                    <span class="text-[11px] font-[800] text-[#1B4D3E]">Goiânia</span>
+                </div>
+            </div>
+
+            <!-- Depoimento 2: Johnny Fonseca -->
+            <div class="bg-white p-8 rounded-[24px] border border-[#191C1E]/10 shadow-sm flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="text-[#C59B6D] text-base">★★★★★</div>
+                    <p class="text-base font-[500] text-[#191C1E] leading-relaxed italic">
+                        "Melhor clínica, e melhores fisioterapeutas. Dr. Frederico e Drª. Gabriela meus parabéns pelo profissionalismo e dedicação vcs são exemplos de profissionais, fico muito feliz em contar com profissionais como vcs."
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-[#191C1E]/10 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-[900] text-sm uppercase tracking-tight text-[#191C1E]">Johnny Fonseca</h4>
+                        <span class="text-[10px] uppercase font-[700] text-[#5E656B] tracking-[0.15em]">Paciente &bull; Google Review</span>
+                    </div>
+                    <span class="text-[11px] font-[800] text-[#1B4D3E]">Goiânia</span>
+                </div>
+            </div>
+
+            <!-- Depoimento 3: Dais Rocha -->
+            <div class="bg-white p-8 rounded-[24px] border border-[#191C1E]/10 shadow-sm flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="text-[#C59B6D] text-base">★★★★★</div>
+                    <p class="text-base font-[500] text-[#191C1E] leading-relaxed italic">
+                        "Ótimo, excelentes profissionais. Com auxílio da equipe em especial a psicóloga Nayara que meu filho está tendo um excelente desenvolvimento para a melhoria de qualidade de sua vida."
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-[#191C1E]/10 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-[900] text-sm uppercase tracking-tight text-[#191C1E]">Dais Rocha</h4>
+                        <span class="text-[10px] uppercase font-[700] text-[#5E656B] tracking-[0.15em]">Mãe de Paciente &bull; Google Review</span>
+                    </div>
+                    <span class="text-[11px] font-[800] text-[#1B4D3E]">Goiânia</span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- 7️⃣ LOCALIZAÇÃO & CONTATO (Av. T-9 Goiânia + CTA Whatsapp) -->
+    <section id="contato" class="py-20 bg-[#1B4D3E] text-white px-6 sm:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-6">
+                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#C59B6D] block">Atendimento Presencial em Goiânia</span>
+                <h2 class="text-4xl sm:text-6xl font-[900] uppercase tracking-tight leading-[0.95]">
+                    Pronto para dar o próximo passo no <span class="font-editorial normal-case font-[400] text-[#C59B6D]">desenvolvimento</span>?
+                </h2>
+                <p class="text-base font-[400] text-white/80 max-w-lg leading-relaxed">
+                    Estamos localizados na Avenida T-9 em Goiânia. Entre em contato direto com a nossa recepção pelo WhatsApp para esclarecer dúvidas sobre convênios, avaliações e horários.
+                </p>
+                
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center gap-3 text-sm font-[600]">
+                        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#C59B6D]">📍</span>
+                        <span>Avenida T-9 &bull; Setor Bueno / Jardim América &bull; Goiânia - GO</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm font-[600]">
+                        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#C59B6D]">📱</span>
+                        <span>Instagram Oficial: <a href="https://www.instagram.com/clinica_cogni/" target="_blank" class="underline hover:text-[#C59B6D]">@clinica_cogni</a></span>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <a href="https://wa.me/5562999999999?text=Olá! Vim pelo site da Clínica Cogni e gostaria de agendar uma consulta." 
+                       target="_blank"
+                       class="inline-flex items-center gap-3 h-[60px] px-10 rounded-full bg-white text-[#1B4D3E] font-[900] text-sm uppercase tracking-[0.2em] hover:bg-[#F2ECE4] transition-all duration-300 shadow-2xl hover:scale-105">
+                        <span>Iniciar Conversa no WhatsApp</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-white/10 backdrop-blur-md p-8 rounded-[28px] border border-white/15 space-y-6">
+                <h3 class="text-xl font-[900] uppercase tracking-tight text-white border-b border-white/10 pb-4">
+                    Horário & Modalidades
+                </h3>
+                <ul class="space-y-3.5 text-sm font-[500] text-white/90">
+                    <li class="flex items-center justify-between">
+                        <span class="opacity-75">Segunda a Sexta:</span>
+                        <span class="font-[800]">Atendimento Programado</span>
+                    </li>
+                    <li class="flex items-center justify-between">
+                        <span class="opacity-75">Sábado e Domingo:</span>
+                        <span class="font-[800] text-[#C59B6D]">Plantão / Fechado</span>
+                    </li>
+                    <li class="flex items-center justify-between">
+                        <span class="opacity-75">Público-Alvo:</span>
+                        <span class="font-[800]">Infantil, Juvenil & Adulto</span>
+                    </li>
+                    <li class="flex items-center justify-between">
+                        <span class="opacity-75">Ambiente:</span>
+                        <span class="font-[800]">Salas Temáticas & Acessíveis</span>
+                    </li>
+                </ul>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-white/70 text-center">
+                    Goiânia / GO &bull; Atendimento com horário marcado
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8️⃣ FOOTER MONUMENTAL (12 Colunas & Copyright) -->
+    <footer class="bg-[#121415] text-white py-16 px-6 sm:px-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#1B4D3E] text-white font-[900] text-sm flex items-center justify-center">
+                    C
+                </div>
+                <span class="text-xl font-[900] tracking-tighter uppercase text-white">
+                    CLÍNICA COGNI
+                </span>
+            </div>
+            <p class="text-xs uppercase font-[700] tracking-[0.2em] text-white/50 text-center md:text-left">
+                &copy; 2026 Clínica Cogni. Todos os direitos reservados. Goiânia - GO.
+            </p>
+            <div class="flex items-center gap-6 text-xs uppercase font-[800] tracking-[0.2em] text-white/70">
+                <a href="https://www.instagram.com/clinica_cogni/" target="_blank" class="hover:text-[#C59B6D] transition-colors">Instagram</a>
+                <a href="#especialidades" class="hover:text-[#C59B6D] transition-colors">Especialidades</a>
+                <a href="#contato" class="hover:text-[#C59B6D] transition-colors">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5562999999999?text=Olá! Vim pelo site da Clínica Cogni e gostaria de agendar uma consulta." 
+       target="_blank"
+       aria-label="WhatsApp"
+       class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.551 4.095 1.517 5.82l-1.517 5.592 5.733-1.503c1.663.908 3.567 1.42 5.589 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Scroll reveal animation observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-up').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
