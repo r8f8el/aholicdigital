@@ -66,15 +66,14 @@
             will-change: opacity, transform;
         }
 
-        /* Latent Image Grayscale Transition */
+        /* Image Natural Colors & Smooth Hover Zoom */
         .latent-image-container img {
-            filter: grayscale(100%);
+            filter: grayscale(0%);
             transform: scale(1);
-            transition: filter 2000ms ease-out, transform 2000ms ease-out;
+            transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1), filter 700ms ease;
         }
         .latent-image-container:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
 
         /* Philosophy Card Hover Inversion */
