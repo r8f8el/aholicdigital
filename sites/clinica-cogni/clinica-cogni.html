@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COGNI &bull; Clínica de Neurodesenvolvimento & Psicologia | Goiânia</title>
-    <meta name="description" content="Clínica Cogni em Goiânia no Edifício Inove Intelligent Place (Av. T-9, Sala 1506). Avaliação Neuropsicológica, Psicologia, Fonoaudiologia e Fisioterapia. Avaliação 5.0 estrelas.">
+    <title>COGNI &bull; Clínica de Psicologia | Caldas Novas - GO</title>
+    <meta name="description" content="Cogni Clínica de Psicologia em Caldas Novas - GO. Atendimento psicológico presencial e online, TCC (Terapia Cognitivo-Comportamental), acolhimento e desenvolvimento humano com a Psicóloga Izabel Rezende (CRP 09/015392).">
     
-    <!-- Google Fonts: League Spartan (100% Fidelidade ao Preset) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Newsreader:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,246 +19,208 @@
                 extend: {
                     colors: {
                         cogni: {
-                            bg: '#FAF8F5',            /* Linho Areia Quente */
-                            surface: '#F2ECE4',       /* Superfície Suave */
+                            bg: '#FAF8F5',
+                            surface: '#F3EFEA',
+                            surfaceLight: '#FBF9F7',
                             card: '#FFFFFF',
-                            text: '#111827',          /* Dark Charcoal */
-                            sub: '#4B5563',           /* Cinza Neutro */
-                            blue: '#16385C',          /* Azul Petróleo da Logo */
-                            blueLight: '#245285',
-                            sage: '#2C5E4C',          /* Verde Sálvia do Instagram */
-                            gold: '#D49B44',          /* Amarelo Ouro Radiante da Logo */
-                            goldLight: '#E8B65E',
-                            line: 'rgba(22, 56, 92, 0.08)'
+                            text: '#1C2621',
+                            sub: '#536359',
+                            muted: '#7A8C82',
+                            green: '#254A3A',
+                            greenDark: '#1A362A',
+                            greenLight: '#386953',
+                            sage: '#E3EBE6',
+                            wood: '#C2783F',
+                            woodLight: '#DE965F',
+                            sand: '#EADBCC',
+                            border: 'rgba(37, 74, 58, 0.12)'
                         }
                     },
                     fontFamily: {
-                        sans: ['"League Spartan"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                         serif: ['"Newsreader"', 'serif'],
-                    },
-                    transitionTimingFunction: {
-                        'luxury': 'cubic-bezier(0.16, 1, 0.3, 1)',
                     }
                 }
             }
         }
     </script>
     <style>
-        * { font-family: 'League Spartan', sans-serif; }
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-editorial { font-family: 'Newsreader', serif; font-style: italic; }
-        ::selection { background: #16385C; color: #FFFFFF; }
+        ::selection { background: #254A3A; color: #FFFFFF; }
         
-        /* Floating Badge Bounce Lento 4s */
-        @keyframes bounce-slow {
-            0%, 100% { transform: translateY(-6%); }
-            50% { transform: translateY(6%); }
+        /* Floating Badge Bounce Lento */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
         }
-        .animate-bounce-slow {
-            animation: bounce-slow 4s ease-in-out infinite;
-        }
-
-        /* Stagger Grid Offset para quebra intencional de ritmo (100px nos pares em Desktop) */
-        @media (min-width: 768px) {
-            .stagger-grid .stagger-item:nth-child(even) {
-                margin-top: 100px;
-            }
+        .animate-float-slow {
+            animation: float-slow 5s ease-in-out infinite;
         }
 
-        /* Scroll-Triggered Reveal */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-up.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Grayscale to Color Image Zoom Hover (1s Luxury Curve) */
-        .luxury-img-card {
+        /* Luxury Image Hover */
+        .photo-card {
             overflow: hidden;
             border-radius: 24px;
             position: relative;
+            background: #F3EFEA;
         }
-        .luxury-img-card img {
-            filter: grayscale(100%);
-            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        .photo-card img {
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
         }
-        .luxury-img-card:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.08);
-        }
-
-        /* Specialty & Space Stagger Card Hover Circle */
-        .space-item-card {
-            overflow: hidden;
-            border-radius: 22px;
-            position: relative;
-        }
-        .space-item-card img {
-            filter: grayscale(100%);
-            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .space-item-card:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.08);
-        }
-        .overlay-circle {
-            width: 100px;
-            height: 100px;
-            background: #16385C;
-            color: #FFFFFF;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.75);
-            opacity: 0;
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            box-shadow: 0 12px 28px rgba(22, 56, 92, 0.4);
-            border: 2px solid rgba(212, 155, 68, 0.4);
-        }
-        .space-item-card:hover .overlay-circle {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
+        .photo-card:hover img {
+            transform: scale(1.05);
         }
 
-        /* Service Cards Smooth 0.7s Fill Hover */
+        /* Stagger Grid Offset */
+        @media (min-width: 768px) {
+            .stagger-grid .stagger-item:nth-child(even) {
+                margin-top: 60px;
+            }
+        }
+
+        /* Service Cards Hover */
         .service-card {
             background-color: #FFFFFF;
-            border: 1px solid rgba(22, 56, 92, 0.08);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(37, 74, 58, 0.1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .service-card:hover {
-            background-color: #16385C;
-            border-color: #16385C;
-            transform: translateY(-4px);
-            box-shadow: 0 20px 45px -15px rgba(22, 56, 92, 0.3);
+            transform: translateY(-6px);
+            border-color: #254A3A;
+            box-shadow: 0 20px 40px -15px rgba(37, 74, 58, 0.12);
         }
-        .service-card:hover .service-title {
-            color: #FFFFFF;
-        }
-        .service-card:hover .service-desc {
-            color: rgba(255, 255, 255, 0.85);
-        }
-        .service-card:hover .service-tag {
-            background-color: rgba(212, 155, 68, 0.25);
-            color: #E8B65E;
-            border-color: rgba(212, 155, 68, 0.4);
-        }
-        .service-card:hover .service-icon {
-            color: #E8B65E;
-            background-color: rgba(255, 255, 255, 0.12);
+
+        /* Logo Emblem Glow */
+        .logo-glow {
+            filter: drop-shadow(0 4px 14px rgba(37, 74, 58, 0.15));
         }
     </style>
 </head>
-<body class="bg-[#FAF8F5] text-[#111827] antialiased selection:bg-[#16385C] selection:text-white">
+<body class="bg-[#FAF8F5] text-[#1C2621] antialiased selection:bg-[#254A3A] selection:text-white">
 
-    <!-- 1️⃣ NAVEGAÇÃO (Fixed Top 80px, Glassmorphism & Logo Oficial) -->
-    <nav class="fixed top-0 left-0 right-0 z-50 h-[80px] px-6 sm:px-12 flex items-center justify-between border-b border-[#16385C]/10"
-         style="background: rgba(250, 248, 245, 0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);">
+    <!-- 1️⃣ NAVEGAÇÃO PREMIUM COM LOGO EM EVIDÊNCIA -->
+    <nav class="fixed top-0 left-0 right-0 z-50 h-[88px] px-6 sm:px-12 flex items-center justify-between border-b border-[#254A3A]/10 transition-all duration-300"
+         style="background: rgba(250, 248, 245, 0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
         
-        <!-- Logo / Marca -->
+        <!-- Logo Oficial Cogni em Destaque -->
         <a href="#" class="flex items-center gap-3.5 group">
-            <!-- Emblema estilizado com cérebro e lâmpada dourada -->
-            <div class="w-10 h-10 rounded-full bg-[#16385C] text-white flex items-center justify-center relative shadow-sm group-hover:scale-105 transition-transform duration-300">
-                <span class="text-base font-[900] tracking-tighter">C</span>
-                <span class="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#D49B44] border-2 border-[#FAF8F5]"></span>
+            <!-- Emblema Vetorial Oficial Cogni -->
+            <div class="w-12 h-12 rounded-full bg-[#254A3A] text-white flex items-center justify-center relative shadow-md group-hover:scale-105 transition-all duration-300 border border-[#FAF8F5]/40">
+                <svg class="w-7 h-7 text-[#FAF8F5]" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="21" stroke="#FAF8F5" stroke-width="1.8" stroke-dasharray="3 3" opacity="0.4"/>
+                    <path d="M16 28C16 20 22 15 32 15C32 23 27 31 19 32C17.5 32 16 30 16 28Z" fill="#FAF8F5" fill-opacity="0.9"/>
+                    <circle cx="28" cy="21" r="3" fill="#DE965F"/>
+                </svg>
             </div>
             <div class="flex flex-col">
-                <span class="text-2xl sm:text-[27px] font-[900] tracking-tighter uppercase text-[#16385C] leading-none">
-                    COGNI
-                </span>
-                <span class="text-[9.5px] uppercase font-[800] tracking-[0.28em] text-[#4B5563] mt-0.5">
-                    Inove Intelligent Place &bull; Goiânia
+                <div class="flex items-center gap-1.5">
+                    <span class="text-2xl sm:text-[28px] font-[900] tracking-tight lowercase text-[#254A3A] leading-none">
+                        cogni
+                    </span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#C2783F]"></span>
+                </div>
+                <span class="text-[9.5px] uppercase font-[800] tracking-[0.26em] text-[#536359] mt-0.5">
+                    Clínica de Psicologia &bull; Caldas Novas
                 </span>
             </div>
         </a>
 
-        <!-- Links Centrais (Desktop) -->
-        <div class="hidden md:flex items-center gap-8 text-[12px] font-[800] uppercase tracking-[0.2em] text-[#111827]/80">
-            <a href="#espaco" class="hover:text-[#16385C] transition-colors py-1">Estrutura & Salas</a>
-            <a href="#especialidades" class="hover:text-[#16385C] transition-colors py-1">Especialidades</a>
-            <a href="#depoimentos" class="hover:text-[#16385C] transition-colors py-1">Avaliações 5.0</a>
-            <a href="#localizacao" class="hover:text-[#16385C] transition-colors py-1">Inove T-9</a>
+        <!-- Links de Navegação (Desktop) -->
+        <div class="hidden md:flex items-center gap-8 text-[12px] font-[800] uppercase tracking-[0.2em] text-[#1C2621]/80">
+            <a href="#espaco" class="hover:text-[#254A3A] transition-colors py-1">Estrutura & Fotos</a>
+            <a href="#sobre" class="hover:text-[#254A3A] transition-colors py-1">A Clínica</a>
+            <a href="#atuacao" class="hover:text-[#254A3A] transition-colors py-1">TCC & Especialidades</a>
+            <a href="#localizacao" class="hover:text-[#254A3A] transition-colors py-1">Privê das Caldas</a>
         </div>
 
-        <!-- Botão CTA Direto WhatsApp (62) 99808-1611 -->
-        <a href="https://wa.me/5562998081611?text=Olá! Vim pelo site da Cogni e gostaria de agendar uma avaliação multidisciplinar." 
+        <!-- Botão WhatsApp Direto -->
+        <a href="https://wa.me/5564999478269?text=Olá! Vim pelo site da Cogni e gostaria de agendar uma consulta com a Psicóloga Izabel Rezende." 
            target="_blank"
-           class="h-[46px] px-6 rounded-full bg-[#16385C] text-white font-[800] text-[12px] uppercase tracking-[0.18em] flex items-center gap-2 hover:bg-[#245285] transition-all duration-300 shadow-sm hover:scale-[1.03]">
+           class="h-[48px] px-6 rounded-full bg-[#254A3A] text-white font-[800] text-[12px] uppercase tracking-[0.18em] flex items-center gap-2 hover:bg-[#1A362A] transition-all duration-300 shadow-md hover:scale-[1.03]">
             <span>Agendar Consulta</span>
-            <svg class="w-3.5 h-3.5 text-[#D49B44]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            <svg class="w-3.5 h-3.5 text-[#DE965F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
     </nav>
 
-    <!-- 2️⃣ HERO SECTION (Tipografia Monumental League Spartan + Contraste Itálico + Foto Real da Sala Panorâmica + Floating Badge) -->
+    <!-- 2️⃣ HERO SECTION (Logo em Grande Evidência + Foto Real da Fachada com Deck e Rede) -->
     <section class="relative pt-[140px] pb-16 sm:pb-24 px-6 sm:px-12 max-w-7xl mx-auto overflow-hidden">
         
-        <!-- Header Badges -->
+        <!-- Header Badges de Localização e Autoridade -->
         <div class="flex flex-wrap items-center gap-3 mb-6">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#16385C]/10 text-[#16385C] text-[11px] font-[900] tracking-[0.2em] uppercase">
-                <span class="w-2 h-2 rounded-full bg-[#D49B44] animate-ping"></span>
-                Inove Intelligent Place &bull; Sala 1506
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#254A3A]/10 text-[#254A3A] text-[11px] font-[900] tracking-[0.2em] uppercase border border-[#254A3A]/15">
+                <span class="w-2 h-2 rounded-full bg-[#C2783F] animate-pulse"></span>
+                Privê das Caldas &bull; Caldas Novas - GO
             </span>
-            <span class="text-[11px] font-[700] uppercase tracking-[0.15em] text-[#4B5563]">
-                Av. T-9, 2310 &bull; Jardim América / Setor Bueno
+            <span class="text-[11px] font-[700] uppercase tracking-[0.16em] text-[#536359] bg-[#E3EBE6]/60 px-3.5 py-1.5 rounded-full">
+                Atendimento Presencial & On-line
             </span>
         </div>
 
-        <!-- Headline Monumental com Quebra Editorial -->
-        <h1 class="text-[44px] sm:text-[76px] lg:text-[96px] font-[900] uppercase tracking-[-0.04em] leading-[0.88] text-[#111827] mb-8">
-            Desenvolvimento <span class="font-editorial normal-case font-[400] text-[#16385C] tracking-normal">humano</span> & acolhimento de excelência.
+        <!-- Headline Principal -->
+        <h1 class="text-[42px] sm:text-[68px] lg:text-[86px] font-[900] tracking-[-0.04em] leading-[0.92] text-[#1C2621] mb-8">
+            Acolhimento autêntico para o seu <span class="font-editorial font-[400] text-[#254A3A] tracking-normal">desenvolvimento</span> e equilíbrio.
         </h1>
 
-        <!-- Grid Hero: Descrição + Foto Real da Sala Panorâmica + Floating Badge 4s -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mt-12">
+        <!-- Grid Hero: Texto + Destaque da Marca + Fotos Reais -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mt-10">
             
             <div class="lg:col-span-5 space-y-6">
-                <p class="text-lg sm:text-xl font-[500] text-[#4B5563] leading-relaxed">
-                    A <strong class="text-[#16385C] font-[700]">Cogni</strong> é um centro multidisciplinar de referência em Goiânia dedicado à neuropsicologia, psicologia, fonoaudiologia e fisioterapia, com salas temáticas planejadas para potencializar o bem-estar e o neurodesenvolvimento de crianças, jovens e adultos.
+                <p class="text-lg sm:text-xl font-[500] text-[#536359] leading-relaxed">
+                    A <strong class="text-[#254A3A] font-[800]">Cogni Clínica de Psicologia</strong> oferece um espaço pensado para que você se sinta acolhido desde o primeiro instante. Sob a condução da psicóloga <strong class="text-[#1C2621] font-[700]">Izabel Rezende (CRP 09/015392)</strong>, nosso trabalho é guiado pela Terapia Cognitivo-Comportamental (TCC) com respeito à sua singularidade.
                 </p>
                 
                 <div class="flex flex-wrap items-center gap-4 pt-2">
-                    <a href="https://wa.me/5562998081611?text=Olá! Gostaria de agendar uma consulta na Cogni (Edifício Inove T-9)." 
+                    <a href="https://wa.me/5564999478269?text=Olá! Gostaria de informações sobre atendimento psicológico na Cogni em Caldas Novas." 
                        target="_blank"
-                       class="h-[54px] px-8 rounded-full bg-[#16385C] text-white font-[800] text-[13px] uppercase tracking-[0.2em] flex items-center justify-center hover:bg-[#245285] transition-all duration-300 shadow-lg">
-                        Falar no WhatsApp
+                       class="h-[54px] px-8 rounded-full bg-[#254A3A] text-white font-[800] text-[13px] uppercase tracking-[0.18em] flex items-center justify-center hover:bg-[#1A362A] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                        Falar no WhatsApp &bull; (64) 99947-8269
                     </a>
                     <a href="#espaco" 
-                       class="h-[54px] px-8 rounded-full border border-[#16385C]/20 text-[#16385C] font-[800] text-[13px] uppercase tracking-[0.2em] flex items-center justify-center hover:bg-[#16385C] hover:text-white transition-all duration-300">
-                        Ver Fotos do Espaço
+                       class="h-[54px] px-7 rounded-full border border-[#254A3A]/25 text-[#254A3A] font-[800] text-[13px] uppercase tracking-[0.18em] flex items-center justify-center hover:bg-[#254A3A] hover:text-white transition-all duration-300">
+                        Ver Fotos Reais
                     </a>
                 </div>
+
+                <!-- Selo de Destaque da Responsável Técnica -->
+                <div class="p-5 rounded-2xl bg-[#F3EFEA] border border-[#254A3A]/10 flex items-center gap-4 mt-6">
+                    <div class="w-12 h-12 rounded-full bg-[#254A3A] text-[#FAF8F5] flex items-center justify-center font-[900] text-lg shrink-0">
+                        IR
+                    </div>
+                    <div>
+                        <h4 class="font-[900] text-sm uppercase tracking-tight text-[#1C2621]">Izabel Rezende</h4>
+                        <p class="text-xs font-[600] text-[#536359]">Psicóloga Clínica &bull; CRP 09/015392 &bull; Terapia TCC</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Card Visual com Foto Real da Sala com Vista Panorâmica de Goiânia -->
+            <!-- Card Visual com Foto Real da Fachada / Entrada com Deck e Rede -->
             <div class="lg:col-span-7 relative">
-                <div class="luxury-img-card aspect-[16/10] bg-[#F2ECE4] border border-[#16385C]/15 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1400&q=80" 
-                         alt="Consultório Panorâmico Cogni no Inove Intelligent Place" 
+                <div class="photo-card aspect-[16/11] border border-[#254A3A]/15 shadow-2xl">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlpnMBu47UTKFXtpw5mLvRmwEV8slNuU-Zt77ACb1mRkQy4yDGAgILiCtEdCWj-1TyevjvMelI6vGwMwtlj-wDHWYIPXGRBJ-7HMEqI3rfxpqiiJgz2hKyOAHhQCrdvg7X5bcv1wSL22sna=s0" 
+                         alt="Fachada e Deck Acolhedor da Cogni Clínica de Psicologia em Caldas Novas" 
                          class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#111827]/75 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1C2621]/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
                         <div>
-                            <span class="text-[10px] uppercase font-[800] tracking-[0.3em] text-[#D49B44] block">Consultório Panorâmico &bull; 15º Andar</span>
-                            <h3 class="text-xl font-[900] uppercase tracking-tight">Vista Panorâmica & Acolhimento Terapêutico</h3>
+                            <span class="text-[10px] uppercase font-[800] tracking-[0.25em] text-[#DE965F] block">Espaço Físico Próprio</span>
+                            <h3 class="text-xl sm:text-2xl font-[900] tracking-tight">Fachada e Deck em Madeira &bull; Privê das Caldas</h3>
                         </div>
-                        <span class="text-[11px] font-[800] uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-white/20 backdrop-blur-md">Inove T-9</span>
+                        <span class="text-[11px] font-[800] uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md shrink-0">
+                            Caldas Novas
+                        </span>
                     </div>
                 </div>
 
-                <!-- Floating Concierge Badge (Selo com Bounce Lento 4s e Avaliação 5.0 Google) -->
-                <div class="absolute -top-6 -right-4 sm:-top-8 sm:-right-8 animate-bounce-slow">
-                    <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#16385C] text-white p-3 shadow-2xl flex flex-col items-center justify-center text-center border-4 border-[#FAF8F5]">
-                        <span class="text-[#D49B44] text-sm">★★★★★</span>
-                        <span class="text-xl font-[900] leading-none mt-0.5">5.0</span>
-                        <span class="text-[8px] uppercase font-[800] tracking-[0.2em] opacity-80 mt-1">Google Maps</span>
+                <!-- Selo Flutuante com a Logo Oficial Cogni em Evidência -->
+                <div class="absolute -top-6 -right-4 sm:-top-8 sm:-right-8 animate-float-slow">
+                    <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-[#254A3A] text-white p-3 shadow-2xl flex flex-col items-center justify-center text-center border-4 border-[#FAF8F5]">
+                        <svg class="w-8 h-8 text-[#DE965F] mb-1" viewBox="0 0 48 48" fill="none">
+                            <path d="M16 28C16 20 22 15 32 15C32 23 27 31 19 32C17.5 32 16 30 16 28Z" fill="currentColor"/>
+                            <circle cx="28" cy="21" r="3" fill="#FAF8F5"/>
+                        </svg>
+                        <span class="text-sm font-[900] lowercase tracking-tight">cogni</span>
+                        <span class="text-[8px] uppercase font-[800] tracking-[0.2em] text-[#DE965F]">Psicologia</span>
                     </div>
                 </div>
             </div>
@@ -267,126 +229,137 @@
 
     </section>
 
-    <!-- 3️⃣ CREDENCIAIS E LOCALIZAÇÃO OFICIAL (Faixa com Linhas de 1px) -->
-    <section class="border-y border-[#16385C]/10 bg-[#F2ECE4]/70 py-12 px-6 sm:px-12">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="space-y-1">
-                <span class="text-3xl sm:text-4xl font-[900] text-[#16385C] tracking-tight block">5.0 ★</span>
-                <span class="text-xs uppercase font-[800] tracking-[0.2em] text-[#4B5563] block">28 Avaliações no Google</span>
+    <!-- 3️⃣ SEÇÃO EM EVIDÊNCIA: A IDENTIDADE E A MARCA COGNI -->
+    <section id="sobre" class="py-16 bg-[#254A3A] text-white px-6 sm:px-12 border-y border-[#254A3A]/20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Logo em Destaque Monumental com Tipografia Oficial -->
+            <div class="lg:col-span-5 bg-white/5 border border-white/15 p-8 sm:p-10 rounded-[32px] backdrop-blur-md relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-[#C2783F]/10 blur-2xl pointer-events-none"></div>
+                
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-[#FAF8F5] text-[#254A3A] flex items-center justify-center shadow-lg">
+                        <svg class="w-10 h-10" viewBox="0 0 48 48" fill="none">
+                            <path d="M16 28C16 20 22 15 32 15C32 23 27 31 19 32C17.5 32 16 30 16 28Z" fill="#254A3A"/>
+                            <circle cx="28" cy="21" r="3" fill="#C2783F"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-[900] lowercase tracking-tight text-white leading-none">cogni</h2>
+                        <span class="text-[11px] uppercase font-[800] tracking-[0.25em] text-[#DE965F] block mt-1">Clínica de Psicologia</span>
+                    </div>
+                </div>
+
+                <blockquote class="text-base font-[400] text-white/90 leading-relaxed italic border-l-2 border-[#DE965F] pl-4 my-6">
+                    "Quando não podemos mudar uma situação, somos desafiados a mudar a nós mesmos."
+                    <footer class="text-xs uppercase font-[700] tracking-[0.18em] text-[#DE965F] not-italic mt-2">&bull; Frase inscrita na recepção da clínica (Viktor Frankl)</footer>
+                </blockquote>
+
+                <div class="pt-2 flex items-center justify-between text-xs uppercase font-[800] tracking-[0.2em] text-white/70 border-t border-white/10">
+                    <span>Caldas Novas &bull; GO</span>
+                    <span class="text-[#DE965F]">Desde 2021</span>
+                </div>
             </div>
-            <div class="space-y-1">
-                <span class="text-3xl sm:text-4xl font-[900] text-[#16385C] tracking-tight block">Sala 1506</span>
-                <span class="text-xs uppercase font-[800] tracking-[0.2em] text-[#4B5563] block">Edifício Inove T-9</span>
+
+            <!-- Descrição e Filosofia -->
+            <div class="lg:col-span-7 space-y-6">
+                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#DE965F] block">Filosofia Clínica</span>
+                <h3 class="text-3xl sm:text-5xl font-[900] tracking-tight leading-[1.05]">
+                    Um espaço criado para que a sua mente encontre <span class="font-editorial font-[400] text-[#DE965F]">clareza</span> e acolhimento.
+                </h3>
+                <p class="text-base font-[400] text-white/85 leading-relaxed">
+                    A palavra <strong>Cogni</strong> remete aos processos cognitivos, à tomada de consciência e ao autoconhecimento. Na clínica, unimos a fundamentação científica da <strong>Terapia Cognitivo-Comportamental</strong> a uma atmosfera intimista, humana e acolhedora, proporcionando um ambiente seguro para tratar ansiedade, depressão, transições de vida e relações interpessoais.
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <span class="text-2xl font-[900] text-[#DE965F] block">TCC</span>
+                        <span class="text-xs font-[600] text-white/70">Comprovada Cientificamente</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <span class="text-2xl font-[900] text-[#DE965F] block">100%</span>
+                        <span class="text-xs font-[600] text-white/70">Sigilo & Ética Profissional</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 col-span-2 sm:col-span-1">
+                        <span class="text-2xl font-[900] text-[#DE965F] block">Online</span>
+                        <span class="text-xs font-[600] text-white/70">& Presencial em Caldas Novas</span>
+                    </div>
+                </div>
             </div>
-            <div class="space-y-1">
-                <span class="text-3xl sm:text-4xl font-[900] text-[#16385C] tracking-tight block">Multidisciplinar</span>
-                <span class="text-xs uppercase font-[800] tracking-[0.2em] text-[#4B5563] block">Infantil, Jovem & Adulto</span>
-            </div>
-            <div class="space-y-1">
-                <span class="text-3xl sm:text-4xl font-[900] text-[#16385C] tracking-tight block">(62) 99808-1611</span>
-                <span class="text-xs uppercase font-[800] tracking-[0.2em] text-[#4B5563] block">WhatsApp Direto</span>
-            </div>
+
         </div>
     </section>
 
-    <!-- 4️⃣ STAGGER ASYMMETRIC GALLERY: FOTOS REAIS DA CLÍNICA (Offset 100px & Circle Hover) -->
+    <!-- 4️⃣ GALERIA DE FOTOS REAIS DO GOOGLE MAPS E INSTAGRAM -->
     <section id="espaco" class="py-24 px-6 sm:px-12 max-w-7xl mx-auto">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#16385C] block mb-2">Estrutura Física &bull; Fotos Reais</span>
-                <h2 class="text-4xl sm:text-6xl font-[900] uppercase tracking-tight text-[#111827] leading-[0.95]">
-                    Ambientes projetados para o <span class="font-editorial normal-case font-[400] text-[#16385C]">conforto</span> e o estímulo.
+                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#254A3A] block mb-2">Estrutura Física &bull; Fotos Reais</span>
+                <h2 class="text-4xl sm:text-6xl font-[900] tracking-tight text-[#1C2621] leading-[0.95]">
+                    Ambientes pensados para o seu <span class="font-editorial font-[400] text-[#254A3A]">bem-estar</span>.
                 </h2>
             </div>
-            <p class="max-w-md text-sm font-[500] text-[#4B5563] leading-relaxed">
-                Salas temáticas, climatizadas e estruturadas especificamente para cada faixa etária no Edifício Inove Intelligent Place.
+            <p class="max-w-md text-sm font-[500] text-[#536359] leading-relaxed">
+                Conheça os espaços reais da Cogni no Privê das Caldas: arquitetura em madeira, luz aconchegante e privacidade total para as suas sessões.
             </p>
         </div>
 
-        <!-- Grid Assimétrico com 100px de Desalinhamento (Stagger Offset) -->
-        <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Grid de Fotos Reais -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <!-- Foto 1: Consultório Panorâmico Adulto / Terapia e Acolhimento -->
-            <div class="stagger-item space-item-card group cursor-pointer">
-                <div class="aspect-[4/5] bg-[#F2ECE4] relative rounded-[22px] overflow-hidden border border-[#16385C]/10">
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80" 
-                         alt="Consultório Adulto e Psicoterapia Cogni" 
+            <!-- Foto 1: Fachada e Deck de Madeira -->
+            <div class="photo-card group cursor-pointer">
+                <div class="aspect-[4/5] relative rounded-[24px] overflow-hidden border border-[#254A3A]/10">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlpnMBu47UTKFXtpw5mLvRmwEV8slNuU-Zt77ACb1mRkQy4yDGAgILiCtEdCWj-1TyevjvMelI6vGwMwtlj-wDHWYIPXGRBJ-7HMEqI3rfxpqiiJgz2hKyOAHhQCrdvg7X5bcv1wSL22sna=s0" 
+                         alt="Entrada e Deck da Clínica Cogni em Caldas Novas" 
                          class="w-full h-full object-cover">
-                    <div class="overlay-circle">
-                        <span class="text-[10px] font-[900] tracking-[0.2em] uppercase">Conhecer ↗</span>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1C2621]/80 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                    <div class="absolute bottom-6 left-6 right-6 text-white">
+                        <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#DE965F] block">Espaço Externo</span>
+                        <h4 class="text-xl font-[900] tracking-tight mt-1">Entrada Aconchegante com Deck & Rede</h4>
                     </div>
                 </div>
-                <div class="mt-5 space-y-1.5">
-                    <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#D49B44] block">Sala 01 &bull; Psicoterapia & Avaliação Adulto</span>
-                    <h3 class="text-2xl font-[900] uppercase tracking-tight text-[#111827] group-hover:text-[#16385C] transition-colors">
-                        Consultório com Vista Panorâmica de Goiânia
-                    </h3>
-                    <p class="text-sm font-[500] text-[#4B5563] leading-relaxed">
-                        Ambiente acolhedor com sofá e poltronas confortáveis, iluminação natural ampla e persianas rolo, projetado para proporcionar serenidade e foco.
+                <div class="mt-4">
+                    <p class="text-sm font-[500] text-[#536359] leading-relaxed">
+                        Acesso privativo com ambiente arborizado e acolhedor, projetado para proporcionar serenidade antes mesmo do início da sua sessão.
                     </p>
                 </div>
             </div>
 
-            <!-- Foto 2: Sala de Avaliação Infantil & Neuropsicologia Kids (Com offset desktop de 100px) -->
-            <div class="stagger-item space-item-card group cursor-pointer">
-                <div class="aspect-[4/5] bg-[#F2ECE4] relative rounded-[22px] overflow-hidden border border-[#16385C]/10">
-                    <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=900&q=80" 
-                         alt="Sala Infantil de Terapia e Psicopedagogia Cogni" 
+            <!-- Foto 2: Sala de Espera e Acolhimento -->
+            <div class="photo-card group cursor-pointer">
+                <div class="aspect-[4/5] relative rounded-[24px] overflow-hidden border border-[#254A3A]/10">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl1bpht2fasHTnz2oQinjiA9g-ykHGrHe8AVoVvNbTBwKmnJKsYsjnvkq0Ct41Ob0VhQ7tWwamuJRk33nNtlGKZxIcZuUTPSdut0_V7XWaU8zFbdRgHg7vFjEryDnoI4fZzQYrX_mUXtwL_=s0" 
+                         alt="Sala de Espera e Poltronas da Clínica Cogni" 
                          class="w-full h-full object-cover">
-                    <div class="overlay-circle">
-                        <span class="text-[10px] font-[900] tracking-[0.2em] uppercase">Explorar ↗</span>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1C2621]/80 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                    <div class="absolute bottom-6 left-6 right-6 text-white">
+                        <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#DE965F] block">Ambiente Interno</span>
+                        <h4 class="text-xl font-[900] tracking-tight mt-1">Sala de Espera & Poltronas de Madeira</h4>
                     </div>
                 </div>
-                <div class="mt-5 space-y-1.5">
-                    <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#2C5E4C] block">Sala 02 &bull; Neurodesenvolvimento Infantil</span>
-                    <h3 class="text-2xl font-[900] uppercase tracking-tight text-[#111827] group-hover:text-[#16385C] transition-colors">
-                        Espaço Lúdico de Estimulação & Terapia Kids
-                    </h3>
-                    <p class="text-sm font-[500] text-[#4B5563] leading-relaxed">
-                        Parede com nichos circulares de brinquedos educativos, mesinhas de atividade e banquetas coloridas para sessões interativas e avaliações com leveza.
+                <div class="mt-4">
+                    <p class="text-sm font-[500] text-[#536359] leading-relaxed">
+                        Mobiliário em madeira natural, almofadas confortáveis, iluminação suave e obras de arte para momentos de tranquilidade.
                     </p>
                 </div>
             </div>
 
-            <!-- Foto 3: Escritório de Entrevistas, Devolutivas e Anamnese -->
-            <div class="stagger-item space-item-card group cursor-pointer">
-                <div class="aspect-[4/5] bg-[#F2ECE4] relative rounded-[22px] overflow-hidden border border-[#16385C]/10">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80" 
-                         alt="Escritório Clínico e Devolutivas Cogni" 
+            <!-- Foto 3: Balcão e Logo da Recepção -->
+            <div class="photo-card group cursor-pointer">
+                <div class="aspect-[4/5] relative rounded-[24px] overflow-hidden border border-[#254A3A]/10">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkF31orY_9P3zjDgY4Mq71bWW3OTH6D1J9yHZAwqHaMAKDR8l_87TAf0sq6ncFyWCvWEE4ehsiTVDAlsjDStEVUmUncPTVkCBRUNxRuZconDRnpDSNq_S0wDnR27x9AwvNlZUdqn0wi1-CH=s0" 
+                         alt="Balcão de Recepção e Logo da Clínica Cogni" 
                          class="w-full h-full object-cover">
-                    <div class="overlay-circle">
-                        <span class="text-[10px] font-[900] tracking-[0.2em] uppercase">Agendar ↗</span>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1C2621]/80 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                    <div class="absolute bottom-6 left-6 right-6 text-white">
+                        <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#DE965F] block">Recepção Oficial</span>
+                        <h4 class="text-xl font-[900] tracking-tight mt-1">Balcão com a Logo Cogni & Frase Frankl</h4>
                     </div>
                 </div>
-                <div class="mt-5 space-y-1.5">
-                    <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#D49B44] block">Sala 03 &bull; Devolutivas & Orientação Familiar</span>
-                    <h3 class="text-2xl font-[900] uppercase tracking-tight text-[#111827] group-hover:text-[#16385C] transition-colors">
-                        Mesa de Devolutiva Diagnóstica & Anamnese
-                    </h3>
-                    <p class="text-sm font-[500] text-[#4B5563] leading-relaxed">
-                        Espaço técnico e reservado para apresentação de laudos neuropsicológicos, alinhamento com os pais e plano de intervenção personalizada.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Foto 4: Fisioterapia Neurofuncional e Reabilitação (Com offset desktop de 100px) -->
-            <div class="stagger-item space-item-card group cursor-pointer">
-                <div class="aspect-[4/5] bg-[#F2ECE4] relative rounded-[22px] overflow-hidden border border-[#16385C]/10">
-                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=900&q=80" 
-                         alt="Fisioterapia e Reabilitação Cogni" 
-                         class="w-full h-full object-cover">
-                    <div class="overlay-circle">
-                        <span class="text-[10px] font-[900] tracking-[0.2em] uppercase">Consultar ↗</span>
-                    </div>
-                </div>
-                <div class="mt-5 space-y-1.5">
-                    <span class="text-[10px] font-[800] uppercase tracking-[0.25em] text-[#2C5E4C] block">Sala 04 &bull; Fisioterapia Integrada</span>
-                    <h3 class="text-2xl font-[900] uppercase tracking-tight text-[#111827] group-hover:text-[#16385C] transition-colors">
-                        Reabilitação Motora & Fisioterapia
-                    </h3>
-                    <p class="text-sm font-[500] text-[#4B5563] leading-relaxed">
-                        Acompanhamento postural, reabilitação física e estímulo motor com profissionais altamente elogiados em Goiânia.
+                <div class="mt-4">
+                    <p class="text-sm font-[500] text-[#536359] leading-relaxed">
+                        Recepção com a marca Cogni em relevo e frase inspiradora na parede, refletindo o compromisso com o crescimento de cada paciente.
                     </p>
                 </div>
             </div>
@@ -395,63 +368,84 @@
 
     </section>
 
-    <!-- 5️⃣ CARDS DE ESPECIALIDADES (Preenchimento em 0.7s no Hover) -->
-    <section id="especialidades" class="py-20 bg-[#F2ECE4] border-y border-[#16385C]/10 px-6 sm:px-12">
+    <!-- 5️⃣ ESPECIALIDADES & MODALIDADES DE ATENDIMENTO -->
+    <section id="atuacao" class="py-20 bg-[#F3EFEA] border-y border-[#254A3A]/10 px-6 sm:px-12">
         <div class="max-w-7xl mx-auto">
             
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#16385C] block">Áreas de Atuação</span>
-                <h2 class="text-3xl sm:text-5xl font-[900] uppercase tracking-tight text-[#111827]">
-                    Cuidado multidisciplinar <span class="font-editorial normal-case font-[400] text-[#16385C]">integrado</span>
+                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#254A3A] block">Áreas de Atuação</span>
+                <h2 class="text-3xl sm:text-5xl font-[900] tracking-tight text-[#1C2621]">
+                    Como podemos <span class="font-editorial font-[400] text-[#254A3A]">ajudar</span> você hoje?
                 </h2>
-                <p class="text-sm font-[500] text-[#4B5563]">Passe o cursor sobre os cards para ver detalhes de cada especialidade da Cogni.</p>
+                <p class="text-sm font-[500] text-[#536359]">Atendimentos estruturados sob a Terapia Cognitivo-Comportamental (TCC).</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="service-card p-8 rounded-[24px]">
-                    <div class="w-12 h-12 rounded-xl bg-[#16385C]/10 text-[#16385C] service-icon flex items-center justify-center mb-6 text-xl font-[900] transition-colors duration-500">
+                <!-- Card 1: Psicoterapia Adulto (TCC) -->
+                <div class="service-card p-8 rounded-[28px]">
+                    <div class="w-12 h-12 rounded-2xl bg-[#254A3A]/10 text-[#254A3A] flex items-center justify-center mb-6 text-xl font-[900]">
                         01
                     </div>
-                    <span class="service-tag text-[10px] font-[800] uppercase tracking-[0.2em] px-2.5 py-1 rounded-md bg-[#16385C]/10 text-[#16385C] border border-transparent inline-block mb-3 transition-colors duration-500">
-                        Diagnóstico
+                    <span class="text-[10px] font-[800] uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-[#254A3A]/10 text-[#254A3A] inline-block mb-3">
+                        Individual
                     </span>
-                    <h3 class="service-title text-2xl font-[900] uppercase tracking-tight text-[#111827] mb-3 transition-colors duration-500">
-                        Avaliação Neuropsicológica
+                    <h3 class="text-2xl font-[900] tracking-tight text-[#1C2621] mb-3">
+                        Psicoterapia Adulto (TCC)
                     </h3>
-                    <p class="service-desc text-sm font-[500] text-[#4B5563] leading-relaxed transition-colors duration-500">
-                        Mapeamento de funções cognitivas, atenção, memória, raciocínio, TEA e TDAH com aplicação de baterias de testes padronizados e laudo técnico detalhado.
+                    <p class="text-sm font-[500] text-[#536359] leading-relaxed">
+                        Foco no manejo de ansiedade, estresse, depressão, autossabotagem e desenvolvimento de ferramentas práticas para o dia a dia.
                     </p>
+                    <div class="mt-6 pt-4 border-t border-[#254A3A]/10">
+                        <a href="https://wa.me/5564999478269?text=Olá! Gostaria de agendar Psicoterapia Adulto na Cogni." 
+                           target="_blank" class="text-xs font-[800] uppercase tracking-[0.15em] text-[#254A3A] hover:text-[#C2783F] transition-colors inline-flex items-center gap-1">
+                            Agendar Sessão ↗
+                        </a>
+                    </div>
                 </div>
 
-                <div class="service-card p-8 rounded-[24px]">
-                    <div class="w-12 h-12 rounded-xl bg-[#16385C]/10 text-[#16385C] service-icon flex items-center justify-center mb-6 text-xl font-[900] transition-colors duration-500">
+                <!-- Card 2: Atendimento Online -->
+                <div class="service-card p-8 rounded-[28px]">
+                    <div class="w-12 h-12 rounded-2xl bg-[#254A3A]/10 text-[#254A3A] flex items-center justify-center mb-6 text-xl font-[900]">
                         02
                     </div>
-                    <span class="service-tag text-[10px] font-[800] uppercase tracking-[0.2em] px-2.5 py-1 rounded-md bg-[#16385C]/10 text-[#16385C] border border-transparent inline-block mb-3 transition-colors duration-500">
-                        Linguagem & Fala
+                    <span class="text-[10px] font-[800] uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-[#254A3A]/10 text-[#254A3A] inline-block mb-3">
+                        Flexibilidade
                     </span>
-                    <h3 class="service-title text-2xl font-[900] uppercase tracking-tight text-[#111827] mb-3 transition-colors duration-500">
-                        Fonoaudiologia Clínica
+                    <h3 class="text-2xl font-[900] tracking-tight text-[#1C2621] mb-3">
+                        Atendimento Online
                     </h3>
-                    <p class="service-desc text-sm font-[500] text-[#4B5563] leading-relaxed transition-colors duration-500">
-                        Estímulo do desenvolvimento da linguagem, trocas na fala, motricidade orofacial e processamento auditivo com carinho, paciência e metodologia lúdica.
+                    <p class="text-sm font-[500] text-[#536359] leading-relaxed">
+                        Sessões por videochamada com o mesmo sigilo, acolhimento e eficácia do atendimento presencial, no conforto da sua casa.
                     </p>
+                    <div class="mt-6 pt-4 border-t border-[#254A3A]/10">
+                        <a href="https://wa.me/5564999478269?text=Olá! Gostaria de agendar Atendimento Online na Cogni." 
+                           target="_blank" class="text-xs font-[800] uppercase tracking-[0.15em] text-[#254A3A] hover:text-[#C2783F] transition-colors inline-flex items-center gap-1">
+                            Consultar Horários ↗
+                        </a>
+                    </div>
                 </div>
 
-                <div class="service-card p-8 rounded-[24px]">
-                    <div class="w-12 h-12 rounded-xl bg-[#16385C]/10 text-[#16385C] service-icon flex items-center justify-center mb-6 text-xl font-[900] transition-colors duration-500">
+                <!-- Card 3: Desenvolvimento & Autoconhecimento -->
+                <div class="service-card p-8 rounded-[28px]">
+                    <div class="w-12 h-12 rounded-2xl bg-[#254A3A]/10 text-[#254A3A] flex items-center justify-center mb-6 text-xl font-[900]">
                         03
                     </div>
-                    <span class="service-tag text-[10px] font-[800] uppercase tracking-[0.2em] px-2.5 py-1 rounded-md bg-[#16385C]/10 text-[#16385C] border border-transparent inline-block mb-3 transition-colors duration-500">
-                        Psicologia & Fisioterapia
+                    <span class="text-[10px] font-[800] uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-[#254A3A]/10 text-[#254A3A] inline-block mb-3">
+                        Evolução
                     </span>
-                    <h3 class="service-title text-2xl font-[900] uppercase tracking-tight text-[#111827] mb-3 transition-colors duration-500">
-                        TCC & Reabilitação Motora
+                    <h3 class="text-2xl font-[900] tracking-tight text-[#1C2621] mb-3">
+                        Autoconhecimento & Carreira
                     </h3>
-                    <p class="service-desc text-sm font-[500] text-[#4B5563] leading-relaxed transition-colors duration-500">
-                        Apoio emocional, terapia cognitivo-comportamental para ansiedade e comportamento, somados à fisioterapia neurofuncional para ganho de autonomia.
+                    <p class="text-sm font-[500] text-[#536359] leading-relaxed">
+                        Apoio especializado para momentos de transição de vida, tomada de decisões, fortalecimento de autoestima e inteligência emocional.
                     </p>
+                    <div class="mt-6 pt-4 border-t border-[#254A3A]/10">
+                        <a href="https://wa.me/5564999478269?text=Olá! Gostaria de saber mais sobre acompanhamento na Cogni." 
+                           target="_blank" class="text-xs font-[800] uppercase tracking-[0.15em] text-[#254A3A] hover:text-[#C2783F] transition-colors inline-flex items-center gap-1">
+                            Saber Mais ↗
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -459,176 +453,113 @@
         </div>
     </section>
 
-    <!-- 6️⃣ DEPOIMENTOS REAIS (Google Reviews 5.0 com Nomes Verificados) -->
-    <section id="depoimentos" class="py-24 px-6 sm:px-12 max-w-7xl mx-auto">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#16385C] block mb-2">Avaliações 100% Verificadas</span>
-                <h2 class="text-4xl sm:text-6xl font-[900] uppercase tracking-tight text-[#111827] leading-[0.95]">
-                    O que dizem os <span class="font-editorial normal-case font-[400] text-[#16385C]">pacientes e famílias</span> sobre a Cogni.
-                </h2>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="text-right">
-                    <span class="text-lg font-[900] text-[#111827] block leading-none">Nota 5.0 / 5.0</span>
-                    <span class="text-[11px] uppercase font-[700] text-[#4B5563] tracking-[0.15em]">28 Avaliações no Google Maps</span>
-                </div>
-                <div class="w-10 h-10 rounded-full bg-[#16385C] text-[#D49B44] flex items-center justify-center font-[900] text-lg shadow-sm">★</div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <!-- Depoimento 1: Jois Sousa Alves -->
-            <div class="bg-white p-8 rounded-[24px] border border-[#16385C]/10 shadow-sm flex flex-col justify-between space-y-6">
-                <div class="space-y-4">
-                    <div class="text-[#D49B44] text-base">★★★★★</div>
-                    <p class="text-base font-[500] text-[#111827] leading-relaxed italic">
-                        "Ótimo atendimento, a clínica conta com excelentes profissionais. Minha filha é atendida pela Fonoaudióloga Jéssica Luana, atenciosa, cuidadosa tem muita paciência com as crianças. Super recomendo."
-                    </p>
-                </div>
-                <div class="pt-4 border-t border-[#16385C]/10 flex items-center justify-between">
-                    <div>
-                        <h4 class="font-[900] text-sm uppercase tracking-tight text-[#111827]">Jois Sousa Alves</h4>
-                        <span class="text-[10px] uppercase font-[700] text-[#4B5563] tracking-[0.15em]">Mãe de Paciente &bull; Google Maps</span>
-                    </div>
-                    <span class="text-[11px] font-[800] text-[#16385C]">Goiânia</span>
-                </div>
-            </div>
-
-            <!-- Depoimento 2: Johnny Fonseca -->
-            <div class="bg-white p-8 rounded-[24px] border border-[#16385C]/10 shadow-sm flex flex-col justify-between space-y-6">
-                <div class="space-y-4">
-                    <div class="text-[#D49B44] text-base">★★★★★</div>
-                    <p class="text-base font-[500] text-[#111827] leading-relaxed italic">
-                        "Melhor clínica, e melhores fisioterapeutas. Dr. Frederico e Drª. Gabriela meus parabéns pelo profissionalismo e dedicação vcs são exemplos de profissionais, fico muito feliz em contar com profissionais como vcs."
-                    </p>
-                </div>
-                <div class="pt-4 border-t border-[#16385C]/10 flex items-center justify-between">
-                    <div>
-                        <h4 class="font-[900] text-sm uppercase tracking-tight text-[#111827]">Johnny Fonseca</h4>
-                        <span class="text-[10px] uppercase font-[700] text-[#4B5563] tracking-[0.15em]">Paciente &bull; Google Maps</span>
-                    </div>
-                    <span class="text-[11px] font-[800] text-[#16385C]">Goiânia</span>
-                </div>
-            </div>
-
-            <!-- Depoimento 3: Cinthia Lopes Theo -->
-            <div class="bg-white p-8 rounded-[24px] border border-[#16385C]/10 shadow-sm flex flex-col justify-between space-y-6">
-                <div class="space-y-4">
-                    <div class="text-[#D49B44] text-base">★★★★★</div>
-                    <p class="text-base font-[500] text-[#111827] leading-relaxed italic">
-                        "Meu filho é atendido por esses profissionais excelentes, um carinho e dedicação ímpar, ele está obtendo um ganho incrível com as terapias e fonoaudióloga. Que amamos esses profissionais."
-                    </p>
-                </div>
-                <div class="pt-4 border-t border-[#16385C]/10 flex items-center justify-between">
-                    <div>
-                        <h4 class="font-[900] text-sm uppercase tracking-tight text-[#111827]">Cinthia Lopes Theo</h4>
-                        <span class="text-[10px] uppercase font-[700] text-[#4B5563] tracking-[0.15em]">Mãe de Paciente &bull; Google Maps</span>
-                    </div>
-                    <span class="text-[11px] font-[800] text-[#16385C]">Goiânia</span>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- 7️⃣ LOCALIZAÇÃO & CONTATO OFICIAL (Inove Intelligent Place, Sala 1506 + WhatsApp) -->
-    <section id="localizacao" class="py-20 bg-[#16385C] text-white px-6 sm:px-12">
+    <!-- 6️⃣ LOCALIZAÇÃO, CONTATO E PRIVÊ DAS CALDAS -->
+    <section id="localizacao" class="py-20 bg-[#254A3A] text-white px-6 sm:px-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div class="lg:col-span-7 space-y-6">
-                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#D49B44] block">Atendimento Presencial em Goiânia</span>
-                <h2 class="text-4xl sm:text-6xl font-[900] uppercase tracking-tight leading-[0.95]">
-                    Agende uma avaliação com a equipe da <span class="font-editorial normal-case font-[400] text-[#D49B44]">Cogni</span>.
+                <span class="text-[11px] font-[900] tracking-[0.3em] uppercase text-[#DE965F] block">Localização em Caldas Novas</span>
+                <h2 class="text-4xl sm:text-6xl font-[900] tracking-tight leading-[0.95]">
+                    Agende sua sessão na <span class="font-editorial font-[400] text-[#DE965F]">Cogni</span>.
                 </h2>
-                <p class="text-base font-[400] text-white/80 max-w-lg leading-relaxed">
-                    Estamos no 15º andar do Condomínio Inove Intelligent Place na Avenida T-9. Fale diretamente com a nossa recepção no WhatsApp para tirar dúvidas e agendar seu horário.
+                <p class="text-base font-[400] text-white/85 max-w-lg leading-relaxed">
+                    Estamos localizados no Privê das Caldas, em uma rua tranquila e com fácil estacionamento. Fale conosco pelo WhatsApp para tirar dúvidas e agendar seu atendimento.
                 </p>
                 
-                <div class="space-y-3.5 pt-2">
+                <div class="space-y-4 pt-2">
                     <div class="flex items-start gap-3.5 text-sm font-[600]">
-                        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#D49B44] flex-shrink-0 mt-0.5">📍</span>
-                        <span>Av. T-9, 2310, Sala 1506 - Condomínio Inove Intelligent Place - Jardim América, Goiânia - GO, 74255-220</span>
+                        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#DE965F] shrink-0 mt-0.5">📍</span>
+                        <span>Rua São José, Qd. 09, Lt. 05, nº 205 &bull; Privê das Caldas, Caldas Novas - GO, 75680-104</span>
                     </div>
                     <div class="flex items-center gap-3.5 text-sm font-[600]">
-                        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#D49B44] flex-shrink-0">📱</span>
-                        <span>WhatsApp Oficial: <strong>(62) 99808-1611</strong></span>
+                        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#DE965F] shrink-0">📱</span>
+                        <span>WhatsApp: <strong>(64) 99947-8269</strong></span>
                     </div>
                     <div class="flex items-center gap-3.5 text-sm font-[600]">
-                        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#D49B44] flex-shrink-0">📸</span>
-                        <span>Instagram: <a href="https://www.instagram.com/clinica_cogni/" target="_blank" class="underline hover:text-[#D49B44]">@clinica_cogni</a></span>
+                        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#DE965F] shrink-0">📸</span>
+                        <span>Instagram Oficial: <a href="https://www.instagram.com/clinica_cogni/" target="_blank" class="underline hover:text-[#DE965F]">@clinica_cogni</a></span>
                     </div>
                 </div>
 
                 <div class="pt-4">
-                    <a href="https://wa.me/5562998081611?text=Olá! Vim pelo site da Cogni e gostaria de agendar uma consulta na Sala 1506 do Inove T-9." 
+                    <a href="https://wa.me/5564999478269?text=Olá! Vim pelo site da Cogni e gostaria de agendar uma consulta em Caldas Novas." 
                        target="_blank"
-                       class="inline-flex items-center gap-3 h-[60px] px-10 rounded-full bg-[#D49B44] text-[#111827] font-[900] text-sm uppercase tracking-[0.2em] hover:bg-[#E8B65E] transition-all duration-300 shadow-2xl hover:scale-105">
+                       class="inline-flex items-center gap-3 h-[58px] px-9 rounded-full bg-[#DE965F] text-[#1C2621] font-[900] text-sm uppercase tracking-[0.18em] hover:bg-[#FAF8F5] transition-all duration-300 shadow-2xl hover:scale-105">
                         <span>Iniciar Conversa no WhatsApp</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </a>
                 </div>
             </div>
 
-            <div class="lg:col-span-5 bg-white/10 backdrop-blur-md p-8 rounded-[28px] border border-white/15 space-y-6">
-                <h3 class="text-xl font-[900] uppercase tracking-tight text-white border-b border-white/10 pb-4 flex items-center justify-between">
-                    <span>Informações do Espaço</span>
-                    <span class="text-xs font-[700] text-[#D49B44] uppercase tracking-widest">Goiânia</span>
-                </h3>
+            <!-- Card de Resumo de Atendimento -->
+            <div class="lg:col-span-5 bg-white/10 backdrop-blur-md p-8 rounded-[32px] border border-white/15 space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/10 text-[#DE965F] flex items-center justify-center font-[900]">
+                            c
+                        </div>
+                        <div>
+                            <h3 class="text-base font-[900] lowercase text-white">cogni</h3>
+                            <span class="text-[10px] uppercase font-[700] text-[#DE965F] tracking-wider">Clínica de Psicologia</span>
+                        </div>
+                    </div>
+                    <span class="text-xs font-[800] text-[#DE965F] uppercase tracking-widest">Caldas Novas</span>
+                </div>
+                
                 <ul class="space-y-3.5 text-sm font-[500] text-white/90">
                     <li class="flex items-center justify-between">
-                        <span class="opacity-75">Edifício:</span>
-                        <span class="font-[800]">Inove Intelligent Place</span>
+                        <span class="opacity-75">Responsável Técnica:</span>
+                        <span class="font-[700] text-[#DE965F]">Izabel Rezende</span>
                     </li>
                     <li class="flex items-center justify-between">
-                        <span class="opacity-75">Andar / Unidade:</span>
-                        <span class="font-[800] text-[#D49B44]">15º Andar &bull; Sala 1506</span>
+                        <span class="opacity-75">Registro CRP:</span>
+                        <span class="font-[700]">CRP 09/015392</span>
                     </li>
                     <li class="flex items-center justify-between">
-                        <span class="opacity-75">Estacionamento:</span>
-                        <span class="font-[800]">Rotativo no Edifício</span>
+                        <span class="opacity-75">Abordagem:</span>
+                        <span class="font-[700]">TCC (Cognitivo-Comportamental)</span>
                     </li>
                     <li class="flex items-center justify-between">
-                        <span class="opacity-75">Acessibilidade:</span>
-                        <span class="font-[800]">100% Adaptado &bull; Elevadores</span>
+                        <span class="opacity-75">Modalidades:</span>
+                        <span class="font-[700]">Presencial & On-line</span>
                     </li>
                 </ul>
-                <div class="p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-white/75 text-center">
-                    Atendimento exclusivamente com agendamento prévio.
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-white/80 text-center">
+                    Atendimentos realizados com horário previamente agendado.
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- 8️⃣ FOOTER MONUMENTAL (12 Colunas & Copyright) -->
-    <footer class="bg-[#0B1D30] text-white py-16 px-6 sm:px-12 border-t border-white/10">
+    <!-- 7️⃣ FOOTER OFICIAL -->
+    <footer class="bg-[#1A362A] text-white py-14 px-6 sm:px-12 border-t border-white/10">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-[#16385C] border border-[#D49B44] text-[#D49B44] font-[900] text-sm flex items-center justify-center">
-                    C
+                <div class="w-9 h-9 rounded-full bg-[#254A3A] border border-[#DE965F] text-[#DE965F] font-[900] text-sm flex items-center justify-center">
+                    c
                 </div>
-                <span class="text-xl font-[900] tracking-tighter uppercase text-white">
-                    COGNI
+                <span class="text-2xl font-[900] tracking-tight lowercase text-white">
+                    cogni
+                </span>
+                <span class="text-xs uppercase font-[700] tracking-[0.2em] text-white/60 ml-2">
+                    &bull; Clínica de Psicologia
                 </span>
             </div>
-            <p class="text-xs uppercase font-[700] tracking-[0.2em] text-white/50 text-center md:text-left">
-                &copy; 2026 Cogni. Edifício Inove Intelligent Place, Sala 1506, Goiânia - GO.
+            <p class="text-xs uppercase font-[700] tracking-[0.18em] text-white/50 text-center md:text-left">
+                &copy; 2026 COGNI &bull; Caldas Novas - GO &bull; Izabel Rezende CRP 09/015392
             </p>
-            <div class="flex items-center gap-6 text-xs uppercase font-[800] tracking-[0.2em] text-white/70">
-                <a href="https://www.instagram.com/clinica_cogni/" target="_blank" class="hover:text-[#D49B44] transition-colors">Instagram</a>
-                <a href="#espaco" class="hover:text-[#D49B44] transition-colors">Estrutura</a>
-                <a href="#especialidades" class="hover:text-[#D49B44] transition-colors">Especialidades</a>
-                <a href="#localizacao" class="hover:text-[#D49B44] transition-colors">Contato</a>
+            <div class="flex items-center gap-6 text-xs uppercase font-[800] tracking-[0.18em] text-white/70">
+                <a href="https://www.instagram.com/clinica_cogni/" target="_blank" class="hover:text-[#DE965F] transition-colors">Instagram</a>
+                <a href="#espaco" class="hover:text-[#DE965F] transition-colors">Fotos</a>
+                <a href="#atuacao" class="hover:text-[#DE965F] transition-colors">Especialidades</a>
+                <a href="#localizacao" class="hover:text-[#DE965F] transition-colors">Contato</a>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Button com o número real (62) 99808-1611 -->
-    <a href="https://wa.me/5562998081611?text=Olá! Vim pelo site da Cogni e gostaria de agendar uma consulta." 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5564999478269?text=Olá! Vim pelo site da Cogni e gostaria de agendar uma consulta." 
        target="_blank"
        aria-label="WhatsApp"
        class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300">
@@ -637,17 +568,5 @@
         </svg>
     </a>
 
-    <script>
-        // Scroll reveal animation observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal-up').forEach((el) => observer.observe(el));
-    </script>
 </body>
 </html>

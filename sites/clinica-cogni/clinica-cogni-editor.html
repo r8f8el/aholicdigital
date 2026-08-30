@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLÍNICA COGNI &bull; Modo Editor Visual</title>
-    <meta name="description" content="Modo de edição visual e copy para Clínica Cogni.">
+    <title>COGNI &bull; Modo Editor Visual</title>
+    <meta name="description" content="Modo de edição visual para a Clínica Cogni em Caldas Novas.">
     
-    <!-- Google Fonts: League Spartan -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Newsreader:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,20 +18,18 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            bg: '#FBF9F5',
-                            surface: '#F2ECE4',
-                            card: '#FFFFFF',
-                            text: '#191C1E',
-                            sub: '#5E656B',
-                            accent: '#1B4D3E',
-                            accentLight: '#2A6F5A',
-                            gold: '#C59B6D',
-                            line: 'rgba(25, 28, 30, 0.09)'
+                        cogni: {
+                            bg: '#FAF8F5',
+                            surface: '#F3EFEA',
+                            text: '#1C2621',
+                            sub: '#536359',
+                            green: '#254A3A',
+                            wood: '#C2783F',
+                            woodLight: '#DE965F',
                         }
                     },
                     fontFamily: {
-                        sans: ['"League Spartan"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                         serif: ['"Newsreader"', 'serif'],
                     }
                 }
@@ -39,7 +37,7 @@
         }
     </script>
     <style>
-        * { font-family: 'League Spartan', sans-serif; }
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-editorial { font-family: 'Newsreader', serif; font-style: italic; }
         [contenteditable="true"] {
             outline: 2px dashed transparent;
@@ -47,137 +45,99 @@
             border-radius: 4px;
         }
         [contenteditable="true"]:hover {
-            outline-color: #1B4D3E;
-            background-color: rgba(27, 77, 62, 0.04);
+            outline-color: #254A3A;
+            background-color: rgba(37, 74, 58, 0.05);
             cursor: text;
         }
         [contenteditable="true"]:focus {
-            outline-color: #C59B6D;
-            background-color: rgba(197, 155, 109, 0.08);
+            outline-color: #DE965F;
+            background-color: rgba(222, 150, 95, 0.08);
             outline-style: solid;
         }
     </style>
 </head>
-<body class="bg-[#FBF9F5] text-[#191C1E] antialiased pb-24">
+<body class="bg-[#FAF8F5] text-[#1C2621] antialiased pb-24">
 
     <!-- BARRA DE FERRAMENTAS DO EDITOR (Flutuante Inferior) -->
-    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#191C1E] text-white px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-4 border border-white/20 backdrop-blur-md">
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#1C2621] text-white px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-4 border border-white/20 backdrop-blur-md">
         <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse"></span>
-            <span class="text-xs font-[800] uppercase tracking-[0.15em] text-white/90">Modo Edição Ativo</span>
+            <span class="text-xs font-[800] uppercase tracking-[0.15em] text-white/90">Modo Edição Cogni</span>
         </div>
         <div class="h-4 w-px bg-white/20"></div>
-        <button onclick="salvarEdicao()" class="px-4 py-1.5 rounded-full bg-[#1B4D3E] hover:bg-[#2A6F5A] text-white text-xs font-[800] uppercase tracking-[0.15em] transition-colors flex items-center gap-1.5">
+        <button onclick="salvarEdicao()" class="px-4 py-1.5 rounded-full bg-[#254A3A] hover:bg-[#386953] text-white text-xs font-[800] uppercase tracking-[0.15em] transition-colors flex items-center gap-1.5">
             💾 Salvar
         </button>
         <button onclick="baixarHTML()" class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-[800] uppercase tracking-[0.15em] transition-colors">
             📥 Baixar HTML
         </button>
-        <a href="clinica-cogni.html" class="text-xs font-[700] uppercase tracking-[0.15em] text-white/70 hover:text-white underline">
-            Ver Site Final ↗
+        <a href="clinica-cogni.html" class="text-xs font-[700] uppercase tracking-[0.15em] text-[#DE965F] hover:underline">
+            Ver Site Oficial ↗
         </a>
     </div>
 
     <!-- 1️⃣ NAVEGAÇÃO -->
-    <nav class="h-[80px] px-6 sm:px-12 flex items-center justify-between border-b border-[#191C1E]/10 bg-[#FBF9F5]">
+    <nav class="h-[88px] px-6 sm:px-12 flex items-center justify-between border-b border-[#254A3A]/10 bg-[#FAF8F5]">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-[#1B4D3E] text-white font-[900] text-xl flex items-center justify-center">
-                C
+            <div class="w-11 h-11 rounded-full bg-[#254A3A] text-white flex items-center justify-center">
+                <span class="text-lg font-[900] lowercase">c</span>
             </div>
             <div class="flex flex-col">
-                <span contenteditable="true" class="text-2xl sm:text-[26px] font-[900] tracking-tighter uppercase text-[#191C1E] leading-none">
-                    CLÍNICA COGNI
+                <span contenteditable="true" class="text-2xl sm:text-[26px] font-[900] tracking-tight lowercase text-[#254A3A] leading-none">
+                    cogni
                 </span>
-                <span contenteditable="true" class="text-[10px] uppercase font-[700] tracking-[0.25em] text-[#5E656B] mt-0.5">
-                    Goiânia &bull; Setor Bueno
+                <span contenteditable="true" class="text-[9.5px] uppercase font-[800] tracking-[0.25em] text-[#536359] mt-0.5">
+                    Clínica de Psicologia &bull; Caldas Novas
                 </span>
             </div>
         </div>
-        <span class="text-xs uppercase font-[800] tracking-[0.2em] px-3.5 py-1 rounded-full bg-[#1B4D3E]/10 text-[#1B4D3E]">
+        <span class="text-xs uppercase font-[800] tracking-[0.2em] px-3.5 py-1 rounded-full bg-[#254A3A]/10 text-[#254A3A]">
             Editor Interativo
         </span>
     </nav>
 
-    <!-- 2️⃣ HERO SECTION -->
-    <section class="pt-12 pb-16 px-6 sm:px-12 max-w-7xl mx-auto">
-        <div class="flex flex-wrap items-center gap-3 mb-6">
-            <span contenteditable="true" class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1B4D3E]/10 text-[#1B4D3E] text-[11px] font-[900] tracking-[0.2em] uppercase">
-                Referência em Goiânia
-            </span>
-            <span contenteditable="true" class="text-[11px] font-[700] uppercase tracking-[0.15em] text-[#5E656B]">
-                Av. T-9 &bull; Atendimento Multidisciplinar Integrado
-            </span>
+    <!-- CONTEÚDO EDITÁVEL PRINCIPAL -->
+    <div class="max-w-7xl mx-auto px-6 sm:px-12 py-12 space-y-12">
+        
+        <!-- Bloco Hero Editável -->
+        <div class="p-8 rounded-[32px] bg-white border border-[#254A3A]/10 shadow-sm space-y-6">
+            <span class="text-[10px] font-[900] tracking-[0.25em] uppercase text-[#DE965F]">Seção Hero &bull; Clique nos textos para editar</span>
+            <h1 contenteditable="true" class="text-3xl sm:text-5xl font-[900] tracking-tight text-[#1C2621] leading-tight">
+                Acolhimento autêntico para o seu <span class="font-editorial text-[#254A3A]">desenvolvimento</span> e equilíbrio.
+            </h1>
+            <p contenteditable="true" class="text-base font-[500] text-[#536359] leading-relaxed">
+                A Cogni Clínica de Psicologia oferece um espaço pensado para que você se sinta acolhido desde o primeiro instante. Sob a condução da psicóloga Izabel Rezende (CRP 09/015392), nosso trabalho é guiado pela Terapia Cognitivo-Comportamental (TCC).
+            </p>
         </div>
 
-        <h1 contenteditable="true" class="text-[40px] sm:text-[68px] lg:text-[88px] font-[900] uppercase tracking-[-0.04em] leading-[0.9] text-[#191C1E] mb-8">
-            Cuidado <span class="font-editorial normal-case font-[400] text-[#1B4D3E]">humano</span> & desenvolvimento de alta precisão.
-        </h1>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-8">
-            <div class="lg:col-span-6 space-y-6">
-                <p contenteditable="true" class="text-lg sm:text-xl font-[500] text-[#5E656B] leading-relaxed">
-                    A <strong class="text-[#191C1E] font-[700]">Clínica Cogni</strong> integra neuropsicologia, fonoaudiologia, fisioterapia, terapia ocupacional e psicopedagogia em um ambiente acolhedor projetado para impulsionar a autonomia de crianças, jovens e adultos.
-                </p>
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <span class="h-[50px] px-8 rounded-full bg-[#191C1E] text-white font-[800] text-[12px] uppercase tracking-[0.2em] flex items-center justify-center">
-                        Botão WhatsApp
-                    </span>
+        <!-- Bloco de Contatos e Endereço -->
+        <div class="p-8 rounded-[32px] bg-[#254A3A] text-white space-y-6">
+            <span class="text-[10px] font-[900] tracking-[0.25em] uppercase text-[#DE965F]">Informações de Contato</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="text-[10px] uppercase font-[800] tracking-wider text-[#DE965F] block mb-1">Endereço Oficial</label>
+                    <p contenteditable="true" class="text-sm font-[600] text-white">
+                        Rua São José, Qd. 09, Lt. 05, nº 205 - Privê das Caldas, Caldas Novas - GO, 75680-104
+                    </p>
                 </div>
-            </div>
-
-            <div class="lg:col-span-6">
-                <div class="aspect-[16/10] bg-[#F2ECE4] rounded-[24px] overflow-hidden border border-[#191C1E]/10 shadow-lg relative">
-                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80" 
-                         alt="Ambiente Terapêutico" 
-                         class="w-full h-full object-cover">
-                    <div class="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md p-4 rounded-xl text-white">
-                        <span contenteditable="true" class="text-xs uppercase font-[800] text-[#C59B6D] block">Ambiente Clínico</span>
-                        <h3 contenteditable="true" class="text-lg font-[900] uppercase">Salas Temáticas e Equipadas</h3>
-                    </div>
+                <div>
+                    <label class="text-[10px] uppercase font-[800] tracking-wider text-[#DE965F] block mb-1">WhatsApp de Atendimento</label>
+                    <p contenteditable="true" class="text-sm font-[600] text-white">
+                        (64) 99947-8269
+                    </p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- 3️⃣ ESPECIALIDADES -->
-    <section class="py-16 px-6 sm:px-12 max-w-7xl mx-auto border-t border-[#191C1E]/10">
-        <h2 contenteditable="true" class="text-3xl sm:text-5xl font-[900] uppercase tracking-tight text-[#191C1E] mb-12">
-            Especialidades <span class="font-editorial normal-case font-[400] text-[#1B4D3E]">Cogni</span>
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-[20px] border border-[#191C1E]/10 shadow-sm space-y-2">
-                <span contenteditable="true" class="text-[10px] font-[800] uppercase tracking-[0.2em] text-[#1B4D3E]">Área 01</span>
-                <h3 contenteditable="true" class="text-2xl font-[900] uppercase text-[#191C1E]">Avaliação Neuropsicológica</h3>
-                <p contenteditable="true" class="text-sm font-[500] text-[#5E656B]">Mapeamento detalhado de funções executivas, atenção, memória, TEA e TDAH.</p>
-            </div>
-            <div class="bg-white p-6 rounded-[20px] border border-[#191C1E]/10 shadow-sm space-y-2">
-                <span contenteditable="true" class="text-[10px] font-[800] uppercase tracking-[0.2em] text-[#1B4D3E]">Área 02</span>
-                <h3 contenteditable="true" class="text-2xl font-[900] uppercase text-[#191C1E]">Fonoaudiologia & Linguagem</h3>
-                <p contenteditable="true" class="text-sm font-[500] text-[#5E656B]">Desenvolvimento da fala, deglutição e processamento auditivo com carinho lúdico.</p>
-            </div>
-            <div class="bg-white p-6 rounded-[20px] border border-[#191C1E]/10 shadow-sm space-y-2">
-                <span contenteditable="true" class="text-[10px] font-[800] uppercase tracking-[0.2em] text-[#1B4D3E]">Área 03</span>
-                <h3 contenteditable="true" class="text-2xl font-[900] uppercase text-[#191C1E]">Fisioterapia Neurofuncional</h3>
-                <p contenteditable="true" class="text-sm font-[500] text-[#5E656B]">Reabilitação motora, controle postural e estímulo neuromotor integrado.</p>
-            </div>
-            <div class="bg-white p-6 rounded-[20px] border border-[#191C1E]/10 shadow-sm space-y-2">
-                <span contenteditable="true" class="text-[10px] font-[800] uppercase tracking-[0.2em] text-[#1B4D3E]">Área 04</span>
-                <h3 contenteditable="true" class="text-2xl font-[900] uppercase text-[#191C1E]">Psicologia Clínica & TCC</h3>
-                <p contenteditable="true" class="text-sm font-[500] text-[#5E656B]">Manejo de ansiedade, regulação emocional e suporte parental contínuo.</p>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <script>
         function salvarEdicao() {
-            localStorage.setItem('clinica_cogni_draft', document.body.innerHTML);
-            alert('Alterações salvas localmente no navegador com sucesso!');
+            localStorage.setItem('cogni_custom_html', document.body.innerHTML);
+            alert('Alterações salvas no seu navegador!');
         }
-
         function baixarHTML() {
-            const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html;charset=utf-8' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = 'clinica-cogni-editado.html';
