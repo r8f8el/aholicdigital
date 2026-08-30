@@ -50,8 +50,8 @@
 
         /* Transições de Reveal Suave */
         .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(32px);
+            opacity: 1;
+            transform: translateY(0);
             transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
@@ -207,8 +207,8 @@
                 <div class="lg:col-span-5 reveal-on-scroll">
                     <div class="relative group">
                         <div class="aspect-[3/4] overflow-hidden bg-arch-stone border border-arch shadow-2xl">
-                            <img src="assets/fachada-principal.jpg" alt="Fachada Atipicamente Psi Caldas Novas" 
-                                 class="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out">
+                            <img src="../assets/fachada-principal.jpg" alt="Fachada Atipicamente Psi Caldas Novas" 
+                                 class="w-full h-full object-cover  group-hover:scale-105 transition-all duration-1000 ease-out">
                         </div>
                         <!-- Rótulo Arquitetônico -->
                         <div class="mt-3 flex justify-between items-center text-[10px] font-mono uppercase tracking-widest text-arch-muted">
@@ -334,7 +334,7 @@
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 reveal-on-scroll">
                 <!-- Foto 1: Grande Destaque -->
                 <div class="md:col-span-7 aspect-[16/10] overflow-hidden bg-arch-stone border border-arch group cursor-pointer relative">
-                    <img src="assets/interior-maps-1.jpg" alt="Ambiente Clínico Atipicamente" 
+                    <img src="../assets/interior-maps-1.jpg" alt="Ambiente Clínico Atipicamente" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     <div class="absolute bottom-4 left-4 bg-white/95 px-3 py-1 text-[10px] font-mono uppercase tracking-widest border border-arch">
                         [ SALA DE INTERVENÇÃO SENSORIAL ]
@@ -343,7 +343,7 @@
 
                 <!-- Foto 2: Vertical nobre -->
                 <div class="md:col-span-5 aspect-[4/5] overflow-hidden bg-arch-stone border border-arch group cursor-pointer relative">
-                    <img src="assets/interior-maps-2.jpg" alt="Consultório Terapêutico" 
+                    <img src="../assets/interior-maps-2.jpg" alt="Consultório Terapêutico" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     <div class="absolute bottom-4 left-4 bg-white/95 px-3 py-1 text-[10px] font-mono uppercase tracking-widest border border-arch">
                         [ CONSULTÓRIO NEUROPSICOLÓGICO ]
@@ -352,7 +352,7 @@
 
                 <!-- Foto 3: Detalhe Recepção -->
                 <div class="md:col-span-4 aspect-[4/3] overflow-hidden bg-arch-stone border border-arch group cursor-pointer relative">
-                    <img src="assets/interior-post-1.jpg" alt="Espaço Acolhedor" 
+                    <img src="../assets/interior-post-1.jpg" alt="Espaço Acolhedor" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     <div class="absolute bottom-4 left-4 bg-white/95 px-3 py-1 text-[10px] font-mono uppercase tracking-widest border border-arch">
                         [ RECEPÇÃO & ACOLHIMENTO ]
@@ -361,7 +361,7 @@
 
                 <!-- Foto 4: Recursos Pedagógicos -->
                 <div class="md:col-span-4 aspect-[4/3] overflow-hidden bg-arch-stone border border-arch group cursor-pointer relative">
-                    <img src="assets/interior-post-3.jpg" alt="Materiais de Desenvolvimento" 
+                    <img src="../assets/interior-post-3.jpg" alt="Materiais de Desenvolvimento" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     <div class="absolute bottom-4 left-4 bg-white/95 px-3 py-1 text-[10px] font-mono uppercase tracking-widest border border-arch">
                         [ MATERIAIS DE ESTIMULAÇÃO ABA ]
@@ -370,7 +370,7 @@
 
                 <!-- Foto 5: Fachada / Entrada -->
                 <div class="md:col-span-4 aspect-[4/3] overflow-hidden bg-arch-stone border border-arch group cursor-pointer relative">
-                    <img src="assets/fachada-principal.jpg" alt="Fachada e Acesso" 
+                    <img src="../assets/fachada-principal.jpg" alt="Fachada e Acesso" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     <div class="absolute bottom-4 left-4 bg-white/95 px-3 py-1 text-[10px] font-mono uppercase tracking-widest border border-arch">
                         [ ACESSIBILIDADE E PRIVACIDADE ]
@@ -396,7 +396,7 @@
                 <!-- Profissional 1 -->
                 <div class="bg-white border border-arch p-6 space-y-4 group hover:-translate-y-1.5 transition-transform duration-300">
                     <div class="aspect-[3/4] overflow-hidden bg-arch-stone">
-                        <img src="assets/felipe-rezende.png" alt="Dr. Felipe Rezende" 
+                        <img src="../assets/felipe-rezende.png" alt="Dr. Felipe Rezende" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div>
@@ -409,7 +409,7 @@
                 <!-- Profissional 2 -->
                 <div class="bg-white border border-arch p-6 space-y-4 group hover:-translate-y-1.5 transition-transform duration-300">
                     <div class="aspect-[3/4] overflow-hidden bg-arch-stone">
-                        <img src="assets/gracielly-albuquerque.png" alt="Dra. Gracielly Albuquerque" 
+                        <img src="../assets/gracielly-albuquerque.png" alt="Dra. Gracielly Albuquerque" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div>
@@ -422,7 +422,7 @@
                 <!-- Profissional 3 -->
                 <div class="bg-white border border-arch p-6 space-y-4 group hover:-translate-y-1.5 transition-transform duration-300">
                     <div class="aspect-[3/4] overflow-hidden bg-arch-stone">
-                        <img src="assets/gabriela-fernandes.png" alt="Dra. Gabriela Fernandes" 
+                        <img src="../assets/gabriela-fernandes.png" alt="Dra. Gabriela Fernandes" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div>
@@ -435,7 +435,7 @@
                 <!-- Profissional 4 -->
                 <div class="bg-white border border-arch p-6 space-y-4 group hover:-translate-y-1.5 transition-transform duration-300">
                     <div class="aspect-[3/4] overflow-hidden bg-arch-stone">
-                        <img src="assets/laura-rosa.png" alt="Dra. Laura Rosa" 
+                        <img src="../assets/laura-rosa.png" alt="Dra. Laura Rosa" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div>
