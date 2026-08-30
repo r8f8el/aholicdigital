@@ -7,6 +7,12 @@ description: Esta skill deve ser usada ao prospectar clientes no Google Maps —
 
 Encontrar o cliente ouro: profissional ou negócio ativo que **NÃO POSSUI NENHUM SITE OFICIAL PRÓPRIO** (usa apenas Instagram, Linktree ou perfil no Maps).
 
+## Execução Automatizada (Recomendado)
+Para minerar leads sem site e baixar automaticamente as fotos e assets do Instagram:
+- **Via Terminal/Script**: `python scripts/minerar-leads.py --nicho "estetica" --cidade "Caldas Novas" --limite 5`
+- **Via Windows**: Duplo clique em `minerar-leads.bat`
+- O script varre o Google Maps, filtra quem não tem site próprio, conecta ao Instagram via Playwright com a sessão salva (`config/instagram_session.json`), baixa as fotos reais para `sites/[slug]/assets/` e cadastra o lead no `prospector.db` e `leads.md`.
+
 ## Premissa Fundamental: Foco Exclusivo em Leads Sem Site (Modo Do Zero)
 - **Critério Central**: O negócio **NÃO TEM SITE PRÓPRIO** (campo website vazio, Linktree ou rede social).
 - **Sem critério de nota mínima**: Aceitamos profissionais novos, recém-inaugurados ou em expansão. Não há barreira de estrelas ou número mínimo de avaliações.

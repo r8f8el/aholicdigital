@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra. Rosana Vecchi | Rejuvenescimento Facial | Harmonização Facial — Caldas Novas</title>
+    <meta name="description" content="Dra. Rosana Vecchi | Rejuvenescimento Facial — Atendimento exclusivo de Harmonização Facial em Caldas Novas. Agendamento com hora marcada e tecnologia de alta performance.">
+    
+    <!-- Google Fonts: Newsreader (Editorial Serif) + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nude: {
+                            50: '#FDFBF9', 100: '#F9F5F1', 200: '#EFE8E1', 300: '#E2D6CA',
+                            400: '#CDBBB0', 500: '#B29B8E', 600: '#947D70', 700: '#756054',
+                            800: '#57463D', 900: '#382D27'
+                        },
+                        rosewood: { 500: '#9D6E5F', 600: '#845749' }
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        serif: ['"Newsreader"', 'Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background: #EFE8E1; color: #1F1D1B; }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .wa-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 50;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .wa-float:hover {
+            transform: translateY(-4px) scale(1.04);
+        }
+    </style>
+</head>
+<body class="bg-[#FDFBF9] text-[#1F1D1B] font-sans antialiased">
+
+    <!-- Top Utility Bar -->
+    <div class="border-b border-nude-200 bg-nude-100/70 text-xs text-nude-700 py-2.5 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                <span>Atendimento Exclusivo &bull; Caldas Novas &bull; Protocolos Personalizados</span>
+            </div>
+            <div class="flex items-center gap-4 text-nude-800 text-xs">
+                <span>Caldas Novas — Atendimento com hora marcada</span>
+                <span class="text-nude-300">|</span>
+                <a href="https://wa.me/5562985150061?text=Ol%C3%A1%21%20Conheci%20a%20Dra.%20Rosana%20Vecchi%20%7C%20Rejuvenescimento%20Facial%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="font-medium hover:text-black transition-colors">(62) 98515-0061</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-[#FDFBF9]/90 backdrop-blur-md border-b border-nude-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3.5 group">
+                <div class="w-11 h-11 rounded-full bg-[#EFE8E1] border border-[#E2D6CA] flex items-center justify-center text-[#845749] font-serif font-semibold text-base shadow-sm">RV</div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl font-medium tracking-tight text-neutral-950">Dra. Rosana Vecchi | Rejuvenescimento Facial</span>
+                    <span class="text-[10px] tracking-[0.2em] uppercase text-nude-600 font-medium">Harmonização Facial</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-medium text-neutral-600">
+                <a href="#procedimentos" class="hover:text-black transition-colors">Tratamentos</a>
+                <a href="#galeria" class="hover:text-black transition-colors">Galeria Real</a>
+                <a href="#sobre" class="hover:text-black transition-colors">A Clínica</a>
+                <a href="#depoimentos" class="hover:text-black transition-colors">Avaliações</a>
+                <a href="#localizacao" class="hover:text-black transition-colors">Localização</a>
+            </nav>
+
+            <a href="https://wa.me/5562985150061?text=Ol%C3%A1%21%20Conheci%20a%20Dra.%20Rosana%20Vecchi%20%7C%20Rejuvenescimento%20Facial%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" 
+               class="inline-flex items-center gap-2 bg-[#1F1D1B] hover:bg-neutral-800 text-white text-xs font-medium px-5 py-2.5 rounded-sm tracking-wide transition-all shadow-sm hover:shadow-md">
+                <span>Agendar Consulta</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-nude-300"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 border-b border-nude-200 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 reveal-on-scroll">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-nude-200/80 border border-nude-300 text-xs text-rosewood-600 font-medium">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                        <span>Medicina Estética & Tecnologia Avançada</span>
+                    </div>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-950 font-normal leading-[1.1] tracking-tight">
+                        Realce sua beleza natural com <span class="italic font-normal text-rosewood-600">precisão e sofisticação</span>.
+                    </h1>
+                    <p class="text-base text-neutral-600 font-light max-w-xl leading-relaxed">
+                        Procedimentos autorais com foco em harmonia, rejuvenescimento e bem-estar. Planos de tratamento personalizados em um ambiente privativo e acolhedor em Caldas Novas.
+                    </p>
+                    <div class="pt-2 flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/5562985150061?text=Ol%C3%A1%21%20Conheci%20a%20Dra.%20Rosana%20Vecchi%20%7C%20Rejuvenescimento%20Facial%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" 
+                           class="inline-flex items-center justify-center gap-2.5 bg-[#1F1D1B] hover:bg-neutral-800 text-white text-sm font-medium px-7 py-3.5 rounded-sm tracking-wide transition-all shadow-md hover:shadow-lg">
+                            <span>Agendar Avaliação Privativa</span>
+                            <i data-lucide="calendar" class="w-4 h-4 text-nude-300"></i>
+                        </a>
+                        <a href="#procedimentos" 
+                           class="inline-flex items-center justify-center gap-2 border border-nude-300 hover:bg-nude-200/50 text-neutral-800 text-sm font-medium px-6 py-3.5 rounded-sm transition-colors">
+                            <span>Conhecer Tratamentos</span>
+                        </a>
+                    </div>
+                    <div class="pt-6 flex items-center gap-8 border-t border-nude-200 text-xs text-neutral-600">
+                        <div>
+                            <span class="block font-serif text-2xl font-semibold text-neutral-900">4.8 ★</span>
+                            <span class="text-neutral-500">Google Avaliações (38 opiniões)</span>
+                        </div>
+                        <div class="w-px h-8 bg-nude-300"></div>
+                        <div>
+                            <span class="block font-serif text-2xl font-semibold text-neutral-900">100%</span>
+                            <span class="text-neutral-500">Atendimento Individualizado</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 reveal-on-scroll">
+                    <div class="relative">
+                        <div class="aspect-[3/4] rounded-md overflow-hidden shadow-2xl bg-nude-200 border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80" alt="Dra. Rosana Vecchi | Rejuvenescimento Facial" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out">
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md p-5 rounded-md border border-nude-200 shadow-xl max-w-xs">
+                            <p class="text-xs font-serif italic text-neutral-900">"Cada traço é único. Nossa missão é valorizar a sua essência com elegância."</p>
+                            <span class="block mt-2 text-[10px] tracking-wider uppercase text-rosewood-600 font-semibold">Dra. Rosana Vecchi | Rejuvenescimento Facial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria com Fotos Reais do Feed -->
+    <section id="galeria" class="py-20 bg-nude-100/50 border-b border-nude-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4 reveal-on-scroll">
+                <div>
+                    <span class="text-xs uppercase tracking-widest font-semibold text-rosewood-600">Resultados & Atmosfera</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-neutral-950 font-normal mt-1">Galeria de Atendimentos Reais</h2>
+                </div>
+                <a href="https://wa.me/5562985150061?text=Ol%C3%A1%21%20Conheci%20a%20Dra.%20Rosana%20Vecchi%20%7C%20Rejuvenescimento%20Facial%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-neutral-900 hover:text-rosewood-600 transition-colors">
+                    <span>Falar no WhatsApp</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 reveal-on-scroll">
+                
+        <div class="group relative overflow-hidden rounded-md bg-[#EFE8E1] shadow-sm aspect-[4/5] cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80" alt="Procedimento e Ambiente" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1F1D1B]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <span class="text-xs font-serif text-white tracking-wider">Acabamento Natural & Exclusivo</span>
+            </div>
+        </div>
+        
+            </div>
+        </div>
+    </section>
+
+    <!-- Procedimentos Exclusivos -->
+    <section id="procedimentos" class="py-20 border-b border-nude-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal-on-scroll">
+                <span class="text-xs uppercase tracking-widest font-semibold text-rosewood-600">Especialidades</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-neutral-950 font-normal mt-1">Protocolos de Alta Performance</h2>
+                <p class="text-sm text-neutral-600 font-light mt-3">Tecnologias consagradas mundialmente para estimular colágeno, reposicionar tecidos e revitalizar a derme.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 bg-white border border-nude-200 rounded-sm hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 reveal-on-scroll">
+                    <span class="text-xs font-serif italic text-rosewood-600">01 / Rejuvenescimento</span>
+                    <h3 class="font-serif text-2xl text-neutral-950 mt-2 mb-3">Ultraformer III & Efeito Lifting</h3>
+                    <p class="text-xs text-neutral-600 leading-relaxed font-light mb-6">Ultrassom micro e macrofocado que combate flacidez facial e corporal sem cirurgia, estimulando colágeno profundo.</p>
+                    <a href="https://wa.me/5562985150061?text=Ol%C3%A1%21%20Conheci%20a%20Dra.%20Rosana%20Vecchi%20%7C%20Rejuvenescimento%20Facial%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="text-xs font-medium text-neutral-950 inline-flex items-center gap-1 hover:text-rosewood-600 transition-colors">
+                        <span>Consultar Disponibilidade</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+                <div class="p-8 bg-white border border-nude-200 rounded-sm hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 reveal-on-scroll">
+                    <span class="text-xs font-serif italic text-rosewood-600">02 / Estruturação</span>
+                    <h3 class="font-serif text-2xl text-neutral-950 mt-2 mb-3">Harmonização Facial Natural</h3>
+                    <p class="text-xs text-neutral-600 leading-relaxed font-light mb-6">Preenchimento com ácido hialurônico focado em pontos de sustentação, contorno mandibular e labial equilibrado.</p>
+                    <a href="https://wa.me/5562985150061?text=Ol%C3%A1%21%20Conheci%20a%20Dra.%20Rosana%20Vecchi%20%7C%20Rejuvenescimento%20Facial%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="text-xs font-medium text-neutral-950 inline-flex items-center gap-1 hover:text-rosewood-600 transition-colors">
+                        <span>Consultar Disponibilidade</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+                <div class="p-8 bg-white border border-nude-200 rounded-sm hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 reveal-on-scroll">
+                    <span class="text-xs font-serif italic text-rosewood-600">03 / Estímulo</span>
+                    <h3 class="font-serif text-2xl text-neutral-950 mt-2 mb-3">Bioestimuladores de Colágeno</h3>
+                    <p class="text-xs text-neutral-600 leading-relaxed font-light mb-6">Restauração da firmeza e densidade cutânea com produtos biocompatíveis de longa duração e viço imediato.</p>
+                    <a href="https://wa.me/5562985150061?text=Ol%C3%A1%21%20Conheci%20a%20Dra.%20Rosana%20Vecchi%20%7C%20Rejuvenescimento%20Facial%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="text-xs font-medium text-neutral-950 inline-flex items-center gap-1 hover:text-rosewood-600 transition-colors">
+                        <span>Consultar Disponibilidade</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp CTA -->
+    <div class="wa-float">
+        <a href="https://wa.me/5562985150061?text=Ol%C3%A1%21%20Conheci%20a%20Dra.%20Rosana%20Vecchi%20%7C%20Rejuvenescimento%20Facial%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" 
+           class="flex items-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-3.5 rounded-full shadow-2xl transition-all">
+            <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i>
+            <span class="text-xs font-semibold tracking-wide">Agendar no WhatsApp</span>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer id="localizacao" class="bg-[#1F1D1B] text-white py-16 text-xs">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-[#EFE8E1] border border-[#E2D6CA] flex items-center justify-center text-[#845749] font-serif font-semibold text-base shadow-sm">RV</div>
+                    <span class="font-serif text-xl font-medium tracking-tight text-white">Dra. Rosana Vecchi | Rejuvenescimento Facial</span>
+                </div>
+                <p class="text-neutral-400 font-light leading-relaxed">
+                    Compromisso com o requinte, segurança médica e naturalidade estética em Caldas Novas.
+                </p>
+            </div>
+            <div class="space-y-2">
+                <span class="text-[10px] tracking-widest uppercase text-nude-400 font-semibold block mb-2">Localização & Contato</span>
+                <p class="text-neutral-300 font-light">Caldas Novas — Atendimento com hora marcada</p>
+                <p class="text-neutral-300 font-light">WhatsApp: (62) 98515-0061</p>
+            </div>
+            <div class="space-y-2">
+                <span class="text-[10px] tracking-widest uppercase text-nude-400 font-semibold block mb-2">Horário de Funcionamento</span>
+                <p class="text-neutral-300 font-light">Segunda a Sexta: 08h às 19h</p>
+                <p class="text-neutral-300 font-light">Sábados: Atendimento agendado</p>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 mt-12 border-t border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-neutral-500">
+            <span>&copy; 2026 Dra. Rosana Vecchi | Rejuvenescimento Facial. Todos os direitos reservados.</span>
+            <span>Design por <strong class="text-neutral-400">AHOLIC STUDIO</strong></span>
+        </div>
+    </footer>
+
+    
+<script>
+// Transições e animações fluidas de scroll (IntersectionObserver)
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+    if (window.lucide) { lucide.createIcons(); }
+});
+</script>
+
+
+<!-- PROSPECTOR-EDITOR-START -->
+<style id="pe-style">
+#pe-bar{position:fixed;top:0;left:0;right:0;height:44px;background:#0f172a;color:#f8fafc;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-family:system-ui,-apple-system,sans-serif;font-size:13px;z-index:999999;box-shadow:0 2px 10px rgba(0,0,0,0.3);border-bottom:1px solid #334155}
+#pe-bar strong{color:#38bdf8;font-weight:600}
+#pe-bar button{background:#22c55e;color:#fff;border:0;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s}
+#pe-bar button:hover{background:#16a34a}
+body{margin-top:44px !important}
+.pe-hover{outline:2px dashed #22c55e !important;outline-offset:2px;cursor:pointer}
+[contenteditable="true"]:focus{outline:2px solid #38bdf8 !important;outline-offset:2px}
+</style>
+<div id="pe-bar">
+  <div><strong>✨ Modo Edição Aholic</strong> · Clique em textos para alterar · clique em imagens para trocar</div>
+  <button id="pe-export" type="button">Salvar e Exportar Site</button>
+</div>
+<input type="file" id="pe-file" accept="image/*" style="display:none">
+<script id="pe-script">
+(function(){
+  var TEXT='h1,h2,h3,h4,h5,h6,p,li,a,span,button,td,th,figcaption,blockquote,strong,em';
+  document.querySelectorAll(TEXT).forEach(function(el){
+    if(el.closest('#pe-bar'))return;
+    if(el.children.length===0||el.childElementCount<=1){
+      el.addEventListener('click',function(e){
+        if(el.tagName==='A'||el.tagName==='BUTTON')e.preventDefault();
+        el.setAttribute('contenteditable','true');el.focus();
+      });
+      el.addEventListener('mouseenter',function(){el.classList.add('pe-hover')});
+      el.addEventListener('mouseleave',function(){el.classList.remove('pe-hover')});
+      el.addEventListener('blur',function(){el.removeAttribute('contenteditable')});
+    }
+  });
+  var fileInput=document.getElementById('pe-file'),currentImg=null;
+  document.querySelectorAll('img').forEach(function(img){
+    img.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();currentImg=img;fileInput.click()});
+    img.addEventListener('mouseenter',function(){img.classList.add('pe-hover')});
+    img.addEventListener('mouseleave',function(){img.classList.remove('pe-hover')});
+  });
+  fileInput.addEventListener('change',function(){
+    var f=fileInput.files[0];if(!f||!currentImg)return;
+    var r=new FileReader();
+    r.onload=function(){currentImg.src=r.result;if(currentImg.srcset)currentImg.removeAttribute('srcset')};
+    r.readAsDataURL(f);fileInput.value='';
+  });
+  document.getElementById('pe-export').addEventListener('click',function(){
+    var doc=document.documentElement.cloneNode(true);
+    ['#pe-bar','#pe-style','#pe-script','#pe-file'].forEach(function(s){var n=doc.querySelector(s);if(n)n.remove()});
+    doc.querySelectorAll('[contenteditable]').forEach(function(n){n.removeAttribute('contenteditable')});
+    doc.querySelectorAll('.pe-hover').forEach(function(n){n.classList.remove('pe-hover')});
+    var html='<!DOCTYPE html>\n'+doc.outerHTML;
+    var blob=new Blob([html],{type:'text/html'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';a.click();
+  });
+})();
+</script>
+<!-- PROSPECTOR-EDITOR-END -->
+
+</body>
+</html>

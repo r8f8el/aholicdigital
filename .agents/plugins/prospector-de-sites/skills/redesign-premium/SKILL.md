@@ -7,6 +7,12 @@ description: Esta skill deve ser usada ao redesenhar o site de um cliente prospe
 
 Criar uma presença digital impecável para o cliente — seja **Redesenhando um site fraco** ou **Criando o Primeiro Site Oficial do Zero** (para quem só tem Instagram/Google Maps). O cliente precisa ver a página e sentir que o negócio dele foi elevado ao padrão de estúdio de design de elite.
 
+## ⚡ Geração Automatizada em 1 Clique (Recomendado)
+Para compilar um site completo com design anti-slop, logo coletada, fotos reais e transições fluidas:
+- **Via Terminal/Script**: `python scripts/gerar-site-lead.py --slug "<slug-do-lead>" --preset auto`
+- **Via Windows**: Duplo clique em `gerar-site.bat` (lista leads disponíveis e compila instantaneamente)
+- **Presets Suportados**: `quiet-luxury` (estética/luxo), `swiss-precision` (odonto/saúde tech), `warm-organic` (psico/bem-estar), `monografia-editorial` (arquitetura/decor), `cinema-3d-spatial` (dark/impacto) ou templates personalizados na pasta `referencias/templates/`.
+
 ---
 
 ## 🛑 Etapa 0: Briefing & Presets de Direção Visual (Anti-Slop)
