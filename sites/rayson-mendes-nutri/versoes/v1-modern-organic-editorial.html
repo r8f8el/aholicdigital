@@ -3,6 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            if (window.location.protocol.startsWith('http') && !window.location.pathname.endsWith('/')) {
+                const base = document.createElement('base');
+                base.href = window.location.pathname.endsWith('.html') 
+                    ? window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)
+                    : window.location.pathname + '/';
+                document.head.prepend(base);
+            }
+        })();
+        window.addEventListener('error', function(e) {
+            if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fixed) {
+                e.target.dataset.fixed = 'true';
+                const file = e.target.getAttribute('src');
+                if (file && !file.startsWith('http') && !file.startsWith('data:')) {
+                    const cleanName = file.split('/').pop();
+                    e.target.src = '/sites/rayson-mendes-nutri/assets/' + cleanName;
+                }
+            }
+        }, true);
+    </script>
     <title>Rayson Mendes | Nutrição Esportiva & Performance Humana</title>
     <meta name="description" content="Nutricionista Rayson Mendes em Catalão - GO. Nutrição Esportiva Personalizada, Emagrecimento, Hipertrofia, BJJ e Performance. Não é dieta, é estilo de vida.">
 
