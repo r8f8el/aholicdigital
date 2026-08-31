@@ -1,4 +1,4 @@
-# Leads Prospector — Aholic Studio
+﻿# Leads Prospector — Aholic Studio
 
 | # | Nome do Estabelecimento / Especialista | Nota | Aval. | WhatsApp | Tipo | Site Atual | Motivo / Oportunidade | Status |
 |---|---|---|---|---|---|---|---|---|
@@ -10,3 +10,5 @@
 | 6 | **Patrícia Margotti \| Psicóloga TCC** | 5.0 ★ | 30 | (48) 99999-9999 | **Do Zero** | *(Nenhum)* | Foco em psicoterapia TCC na Trindade/Online. Design 'Softly Digital Wellness' com estética acolhedora de alto padrão. | redesenhado |
 | 7 | **COGNI \| Clínica de Psicologia** (Izabel Rezende) | 5.0 ★ | 28 | (64) 99947-8269 | **Do Zero** | *(Nenhum)* | Clínica no Privê das Caldas com fotos reais e logo própria. Atendimento TCC presencial e online. | redesenhado |
 | 8 | **Rayson Mendes \| Nutricionista** | 5.0 ★ | 30 | (64) 99957-5323 | **Do Zero** | *(Nenhum)* | Nutrição esportiva, emagrecimento e BJJ em Catalão - GO. Site em 'Modern Organic Editorial' com fotos reais do Maps e Instagram. | site_pronto |
+| 9 | **Brenda Rodrigues \| Arquitetura & Interiores** | 5.0 â˜… | 32 | (63) 98466-9633 | **Do Zero** | *(Nenhum)* | Arquiteta CASACOR Tocantins 2023 (Spa ItÃ¡). PortfÃ³lio catÃ¡logo 'Lumina Architecture' com briefing interativo. | redesenhado |
+

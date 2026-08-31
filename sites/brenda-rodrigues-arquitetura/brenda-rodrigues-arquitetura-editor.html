@@ -1,0 +1,1031 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            if (window.location.protocol.startsWith('http') && !window.location.pathname.endsWith('/')) {
+                const base = document.createElement('base');
+                base.href = window.location.pathname.endsWith('.html') 
+                    ? window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)
+                    : window.location.pathname + '/';
+                document.head.prepend(base);
+            }
+        })();
+        window.addEventListener('error', function(e) {
+            if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fixed) {
+                e.target.dataset.fixed = 'true';
+                const file = e.target.getAttribute('src');
+                if (file && !file.startsWith('http') && !file.startsWith('data:')) {
+                    const cleanName = file.split('/').pop();
+                    e.target.src = '/sites/brenda-rodrigues-arquitetura/assets/' + cleanName;
+                }
+            }
+        }, true);
+    </script>
+    <title>Brenda Rodrigues Arquitetura & Interiores | Palmas - TO</title>
+    <meta name="description" content="Escritório de arquitetura autoral e interiores de alto padrão em Palmas - TO. Autora do ambiente Spa Itá CASACOR Tocantins 2023. Projetos residenciais, livings e comerciais.">
+
+    <!-- Google Fonts: Cinzel + Plus Jakarta Sans + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0B0C0E',
+                        obsidianCard: '#131518',
+                        obsidianElevated: '#1A1D22',
+                        obsidianBorder: 'rgba(255, 255, 255, 0.08)',
+                        travertine: '#F5F2EB',
+                        travertineMuted: '#E5DFD3',
+                        champagne: '#C5A880',
+                        champagneLight: '#E5D0B5',
+                        champagneGlow: 'rgba(197, 168, 128, 0.25)'
+                    },
+                    fontFamily: {
+                        serif: ['"Cinzel"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background: #C5A880; color: #0B0C0E; }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Subtle ambient glow */
+        .ambient-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Project Card Hover Transitions */
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(197, 168, 128, 0.4);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7), 0 0 24px -4px rgba(197, 168, 128, 0.15);
+        }
+
+        .project-card img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modal Transitions */
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: scale(0.96) translateY(12px);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Floating Pill WhatsApp */
+        .wa-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 90;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .wa-float:hover {
+            transform: translateY(-4px) scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased overflow-x-hidden relative selection:bg-champagne selection:text-obsidian">
+
+    <!-- Noise Texture Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-obsidianElevated border-b border-obsidianBorder text-[11px] py-2 px-6 text-center text-champagne font-mono tracking-widest uppercase flex items-center justify-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>CASACOR Tocantins 2023 &bull; Spa Itá Refúgio das Pedras</span>
+        <span class="opacity-40 hidden sm:inline">|</span>
+        <span class="text-travertine/70 hidden sm:inline">Projetos em Palmas & Brasil</span>
+    </div>
+
+    <!-- Navigation Header (Sticky Blur) -->
+    <header class="sticky top-0 z-50 bg-obsidian/85 backdrop-blur-xl border-b border-obsidianBorder h-20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 sm:px-12 h-full flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-full border border-champagne/40 bg-obsidianElevated flex items-center justify-center font-serif text-lg text-champagne group-hover:border-champagne group-hover:bg-champagne group-hover:text-obsidian transition-all duration-300">
+                    B
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-lg tracking-[0.18em] font-bold text-travertine group-hover:text-champagne transition-colors">
+                        BRENDA RODRIGUES
+                    </span>
+                    <span class="text-[9px] uppercase font-mono tracking-[0.3em] text-champagne/80 mt-0.5">
+                        Arquitetura &bull; Interiores
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-[0.22em] font-medium text-travertine/70">
+                <a href="#catalogo" class="hover:text-champagne transition-colors">Catálogo de Obras</a>
+                <a href="#casacor" class="hover:text-champagne transition-colors">CASACOR 2023</a>
+                <a href="#filosofia" class="hover:text-champagne transition-colors">Filosofia</a>
+                <a href="#simulador" class="hover:text-champagne transition-colors">Briefing Interativo</a>
+                <a href="#sobre" class="hover:text-champagne transition-colors">Sobre</a>
+                <a href="#contato" class="hover:text-champagne transition-colors">Contato</a>
+            </nav>
+
+            <!-- Pill Button CTA -->
+            <a href="https://wa.me/5563984669633?text=Ol%C3%A1%20Brenda!%20Gostaria%20de%20conversar%20sobre%20um%20novo%20projeto%20de%20arquitetura." target="_blank" 
+               class="inline-flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-full border border-champagne/50 bg-champagne/10 hover:bg-champagne text-champagne hover:text-obsidian text-[11px] uppercase tracking-[0.2em] font-semibold transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-champagne/20">
+                <span>Iniciar Projeto</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="space-y-36 sm:space-y-48 pt-12 sm:pt-20">
+
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-6 sm:px-12 relative">
+            <!-- Background Ambient Glow -->
+            <div class="ambient-glow w-[500px] h-[500px] bg-champagne/10 top-0 left-1/4"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start relative z-10">
+                <div class="lg:col-span-8 space-y-8">
+                    <!-- Location & Award Tag -->
+                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-obsidianElevated border border-champagne/30 text-[10px] uppercase font-mono tracking-[0.25em] text-champagne">
+                        <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                        <span>PALMAS — TOCANTINS &bull; CASACOR 2023</span>
+                    </div>
+
+                    <!-- Monumental Heading -->
+                    <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-travertine">
+                        Arquitetura autoral moldada pela 
+                        <span class="text-champagne italic font-normal">luz, forma</span> e pela 
+                        <span class="text-champagne italic font-normal">matéria natural.</span>
+                    </h1>
+
+                    <!-- Editorial Subtitle -->
+                    <p class="text-base sm:text-xl text-travertine/80 font-light max-w-2xl leading-relaxed pt-2">
+                        Criamos residências de alto padrão, livings esculturais e espaços comerciais que dialogam com a alma do cerrado, materiais nobres e a sofisticação atemporal.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-5">
+                        <a href="#catalogo" 
+                           class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-champagne text-obsidian hover:bg-champagneLight font-medium text-xs uppercase tracking-[0.25em] transition-all duration-300 shadow-xl hover:shadow-champagne/30 group">
+                            <span>Explorar Catálogo de Obras</span>
+                            <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
+                        </a>
+
+                        <a href="#simulador" 
+                           class="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full border border-obsidianBorder hover:border-champagne bg-obsidianCard/50 text-travertine hover:text-champagne font-medium text-xs uppercase tracking-[0.25em] transition-all duration-300">
+                            <i data-lucide="sliders" class="w-4 h-4 text-champagne"></i>
+                            <span>Simular Briefing</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side Fast Facts -->
+                <div class="lg:col-span-4 bg-obsidianCard border border-obsidianBorder rounded-3xl p-8 space-y-6 lg:mt-6 backdrop-blur-md">
+                    <span class="text-[10px] uppercase font-mono tracking-[0.3em] text-champagne block">
+                        // CREDENCIAIS DE ALTO PADRÃO
+                    </span>
+                    
+                    <div class="space-y-4 divide-y divide-obsidianBorder text-sm">
+                        <div class="pt-3 first:pt-0">
+                            <strong class="text-travertine block font-serif text-base">CASACOR Tocantins 2023</strong>
+                            <span class="text-travertine/60 text-xs">Ambiente Spa Itá – Refúgio das Pedras</span>
+                        </div>
+                        <div class="pt-3">
+                            <strong class="text-travertine block font-serif text-base">Foco em Condomínios Fechados</strong>
+                            <span class="text-travertine/60 text-xs">Aldeia do Sol, Mirante do Lago, Polinésia & Orla</span>
+                        </div>
+                        <div class="pt-3">
+                            <strong class="text-travertine block font-serif text-base">Acervo Archtrends Portobello</strong>
+                            <span class="text-travertine/60 text-xs">Reconhecimento nacional em biofilia e pedras nobres</span>
+                        </div>
+                        <div class="pt-3">
+                            <strong class="text-travertine block font-serif text-base">Atendimento Exclusivo</strong>
+                            <span class="text-travertine/60 text-xs">Número limitado de obras por ano com acompanhamento presencial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Project: CASACOR 2023 (Spa Itá) -->
+        <section id="casacor" class="max-w-7xl mx-auto px-6 sm:px-12">
+            <div class="bg-obsidianCard border border-obsidianBorder rounded-3xl overflow-hidden shadow-2xl relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12">
+                    <!-- Project Hero Visual -->
+                    <div class="lg:col-span-7 relative min-h-[420px] lg:min-h-[580px] overflow-hidden group">
+                        <img src="assets/casacor-spa-ita-1.jpg" alt="Spa Itá CASACOR Tocantins 2023 - Brenda Rodrigues Arquitetura" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent lg:hidden"></div>
+                        <div class="absolute top-6 left-6 px-3.5 py-1.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-champagne/40 text-[10px] uppercase font-mono tracking-[0.25em] text-champagne">
+                            ★ DESTAQUE NACIONAL CASACOR
+                        </div>
+                    </div>
+
+                    <!-- Project Details & Concept -->
+                    <div class="lg:col-span-5 p-8 sm:p-14 flex flex-col justify-between space-y-8 bg-gradient-to-b from-obsidianCard to-obsidianElevated">
+                        <div class="space-y-5">
+                            <div class="text-[10px] uppercase font-mono tracking-[0.3em] text-champagne">
+                                CASACOR TOCANTINS // MOSTRA OFICIAL
+                            </div>
+                            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-travertine leading-tight">
+                                Spa Itá &bull; Refúgio das Pedras
+                            </h2>
+                            <p class="text-sm text-travertine/75 font-light leading-relaxed">
+                                Inspirado na palavra <em>"Itá"</em> (pedra, em tupi-guarani), o projeto celebra a autenticidade das rochas naturais brutas e a iluminação intimista de 2700K. Um santuário de bem-estar projetado para reconectar o ser humano com o essencial.
+                            </p>
+
+                            <!-- Material Tags -->
+                            <div class="pt-2">
+                                <span class="text-[10px] uppercase font-mono tracking-[0.25em] text-travertine/50 block mb-2.5">
+                                    PALETA & MATERIAIS
+                                </span>
+                                <div class="flex flex-wrap gap-2 text-xs font-mono">
+                                    <span class="px-3 py-1 rounded-lg bg-obsidian border border-obsidianBorder text-champagne">#MármoreTravertino</span>
+                                    <span class="px-3 py-1 rounded-lg bg-obsidian border border-obsidianBorder text-champagne">#PedraBrutaItá</span>
+                                    <span class="px-3 py-1 rounded-lg bg-obsidian border border-obsidianBorder text-champagne">#LuzCênica2700K</span>
+                                    <span class="px-3 py-1 rounded-lg bg-obsidian border border-obsidianBorder text-champagne">#BiofiliaTropical</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA to Consult -->
+                        <div class="pt-6 border-t border-obsidianBorder flex items-center justify-between gap-4">
+                            <div>
+                                <span class="text-[10px] uppercase font-mono text-travertine/50 block">LOCALIZAÇÃO</span>
+                                <span class="text-xs font-serif font-bold text-travertine">Palmas - Tocantins</span>
+                            </div>
+                            <button onclick="abrirModalProjeto('spa-ita')" 
+                                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-champagne/15 hover:bg-champagne border border-champagne/40 text-champagne hover:text-obsidian text-xs font-mono font-medium transition-all">
+                                <span>Ver Ficha Técnica</span>
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Catalog & Portfolio -->
+        <section id="catalogo" class="max-w-7xl mx-auto px-6 sm:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6 pb-8 border-b border-obsidianBorder">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.3em] text-champagne font-semibold mb-2">
+                        <i data-lucide="grid" class="w-3.5 h-3.5"></i>
+                        <span>[ CATÁLOGO DE OBRAS & PORTFÓLIO ]</span>
+                    </div>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-travertine">
+                        Projetos Selecionados
+                    </h2>
+                </div>
+
+                <!-- Category Filter Pills -->
+                <div class="flex flex-wrap gap-2 text-xs font-mono" id="filter-buttons">
+                    <button onclick="filtrarProjetos('todos', this)" class="filter-btn active px-4 py-2 rounded-full bg-champagne text-obsidian font-bold transition-colors">
+                        Todos (6)
+                    </button>
+                    <button onclick="filtrarProjetos('residencial', this)" class="filter-btn px-4 py-2 rounded-full bg-obsidianCard border border-obsidianBorder hover:border-champagne text-travertine/80 hover:text-champagne transition-colors">
+                        Residencial
+                    </button>
+                    <button onclick="filtrarProjetos('interiores', this)" class="filter-btn px-4 py-2 rounded-full bg-obsidianCard border border-obsidianBorder hover:border-champagne text-travertine/80 hover:text-champagne transition-colors">
+                        Interiores & Livings
+                    </button>
+                    <button onclick="filtrarProjetos('comercial', this)" class="filter-btn px-4 py-2 rounded-full bg-obsidianCard border border-obsidianBorder hover:border-champagne text-travertine/80 hover:text-champagne transition-colors">
+                        Comercial & Clínicas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Projects Grid (6 Curated Works) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+
+                <!-- Project 01: CASACOR Spa Itá -->
+                <div class="project-card bg-obsidianCard border border-obsidianBorder rounded-3xl overflow-hidden flex flex-col justify-between" data-category="casacor interiores">
+                    <div class="relative aspect-[16/10] overflow-hidden cursor-pointer" onclick="abrirModalProjeto('spa-ita')">
+                        <img src="assets/casacor-spa-ita-1.jpg" alt="Spa Itá CASACOR Tocantins" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-champagne/40 text-[9px] uppercase font-mono tracking-widest text-champagne">
+                            CASACOR 2023
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-champagne block">OBRA // 01</span>
+                                <h3 class="font-serif text-xl font-bold text-travertine mt-1">Spa Itá &bull; Refúgio das Pedras</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Mostra CASACOR Tocantins. Tina esculpida em rocha bruta, iluminação cenográfica e vegetação biofílica.
+                        </p>
+                        <div class="pt-3 border-t border-obsidianBorder flex items-center justify-between text-[11px] font-mono text-travertine/60">
+                            <span>Palmas - TO</span>
+                            <button onclick="abrirModalProjeto('spa-ita')" class="text-champagne hover:underline font-bold flex items-center gap-1">
+                                Detalhes ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 02: Villa Aldeia do Sol -->
+                <div class="project-card bg-obsidianCard border border-obsidianBorder rounded-3xl overflow-hidden flex flex-col justify-between" data-category="residencial">
+                    <div class="relative aspect-[16/10] overflow-hidden cursor-pointer" onclick="abrirModalProjeto('villa-aldeia')">
+                        <img src="assets/residencial-palmas-1.jpg" alt="Villa Aldeia do Sol - Residência de Alto Padrão" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-champagne/40 text-[9px] uppercase font-mono tracking-widest text-champagne">
+                            RESIDENCIAL
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-champagne block">OBRA // 02</span>
+                                <h3 class="font-serif text-xl font-bold text-travertine mt-1">Villa Aldeia do Sol</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Residência contemporânea com balanço estrutural, brises de madeira ripada e espelho d'água com passarela de pedras.
+                        </p>
+                        <div class="pt-3 border-t border-obsidianBorder flex items-center justify-between text-[11px] font-mono text-travertine/60">
+                            <span>Aldeia do Sol &bull; 620m²</span>
+                            <button onclick="abrirModalProjeto('villa-aldeia')" class="text-champagne hover:underline font-bold flex items-center gap-1">
+                                Detalhes ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 03: Living Travertino Escultural -->
+                <div class="project-card bg-obsidianCard border border-obsidianBorder rounded-3xl overflow-hidden flex flex-col justify-between" data-category="interiores">
+                    <div class="relative aspect-[16/10] overflow-hidden cursor-pointer" onclick="abrirModalProjeto('living-travertino')">
+                        <img src="assets/interiores-living-1.jpg" alt="Living Travertino Escultural" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-champagne/40 text-[9px] uppercase font-mono tracking-widest text-champagne">
+                            INTERIORES
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-champagne block">OBRA // 03</span>
+                                <h3 class="font-serif text-xl font-bold text-travertine mt-1">Living Travertino & Lareira</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Pé-direito duplo com painel monumental em travertino rústico, sofá bouclé curvo e esquadrias minimalistas.
+                        </p>
+                        <div class="pt-3 border-t border-obsidianBorder flex items-center justify-between text-[11px] font-mono text-travertine/60">
+                            <span>Mirante do Lago &bull; 140m²</span>
+                            <button onclick="abrirModalProjeto('living-travertino')" class="text-champagne hover:underline font-bold flex items-center gap-1">
+                                Detalhes ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 04: Gourmet Wine Lounge -->
+                <div class="project-card bg-obsidianCard border border-obsidianBorder rounded-3xl overflow-hidden flex flex-col justify-between" data-category="interiores">
+                    <div class="relative aspect-[16/10] overflow-hidden cursor-pointer" onclick="abrirModalProjeto('gourmet-wine')">
+                        <img src="assets/interiores-gourmet-1.jpg" alt="Espaço Gourmet & Wine Bar" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-champagne/40 text-[9px] uppercase font-mono tracking-widest text-champagne">
+                            INTERIORES
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-champagne block">OBRA // 04</span>
+                                <h3 class="font-serif text-xl font-bold text-travertine mt-1">Gourmet & Wine Cellar</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Ilha monolítica em mármore nero com veios dourados, marcenaria em carvalho escuro e adega climatizada em vidro.
+                        </p>
+                        <div class="pt-3 border-t border-obsidianBorder flex items-center justify-between text-[11px] font-mono text-travertine/60">
+                            <span>Polinésia &bull; 85m²</span>
+                            <button onclick="abrirModalProjeto('gourmet-wine')" class="text-champagne hover:underline font-bold flex items-center gap-1">
+                                Detalhes ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 05: Master Suite Jardim Íntimo -->
+                <div class="project-card bg-obsidianCard border border-obsidianBorder rounded-3xl overflow-hidden flex flex-col justify-between" data-category="interiores residencial">
+                    <div class="relative aspect-[16/10] overflow-hidden cursor-pointer" onclick="abrirModalProjeto('master-suite')">
+                        <img src="assets/interiores-suite-1.jpg" alt="Suíte Master com Jardim Íntimo" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-champagne/40 text-[9px] uppercase font-mono tracking-widest text-champagne">
+                            SUÍTE MASTER
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-champagne block">OBRA // 05</span>
+                                <h3 class="font-serif text-xl font-bold text-travertine mt-1">Suíte Master & Terraço</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Painel ripado com fita LED embutida, parede em pedra calcária e portas de correr com abertura total para o deque privativo.
+                        </p>
+                        <div class="pt-3 border-t border-obsidianBorder flex items-center justify-between text-[11px] font-mono text-travertine/60">
+                            <span>Plano Diretor Sul &bull; 65m²</span>
+                            <button onclick="abrirModalProjeto('master-suite')" class="text-champagne hover:underline font-bold flex items-center gap-1">
+                                Detalhes ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 06: Recepção & Clínica Conceito -->
+                <div class="project-card bg-obsidianCard border border-obsidianBorder rounded-3xl overflow-hidden flex flex-col justify-between" data-category="comercial">
+                    <div class="relative aspect-[16/10] overflow-hidden cursor-pointer" onclick="abrirModalProjeto('arco-corporate')">
+                        <img src="assets/comercial-conceito-1.jpg" alt="Recepção Corporativa de Alto Padrão" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-champagne/40 text-[9px] uppercase font-mono tracking-widest text-champagne">
+                            COMERCIAL
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-champagne block">OBRA // 06</span>
+                                <h3 class="font-serif text-xl font-bold text-travertine mt-1">Sede Corporativa & Clínica</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Balcão curvo em travertino canelado, painel em latão escovado retroiluminado e divisórias acústicas em vidro fumê.
+                        </p>
+                        <div class="pt-3 border-t border-obsidianBorder flex items-center justify-between text-[11px] font-mono text-travertine/60">
+                            <span>Edifício Executive &bull; 210m²</span>
+                            <button onclick="abrirModalProjeto('arco-corporate')" class="text-champagne hover:underline font-bold flex items-center gap-1">
+                                Detalhes ↗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Project Modal / Lightbox -->
+        <div id="project-modal" class="modal-overlay fixed inset-0 z-50 bg-obsidian/90 backdrop-blur-xl flex items-center justify-center p-4 sm:p-8">
+            <div class="modal-content bg-obsidianElevated border border-champagne/40 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-10 relative">
+                <button onclick="fecharModalProjeto()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-obsidian border border-obsidianBorder hover:border-champagne text-travertine flex items-center justify-center transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-obsidianBorder">
+                        <img id="m-img" src="" alt="Projeto Brenda Rodrigues" class="w-full h-auto object-cover">
+                    </div>
+
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <span id="m-tag" class="text-[10px] font-mono uppercase tracking-widest text-champagne block mb-1">PROJETO</span>
+                            <h3 id="m-title" class="font-serif text-2xl sm:text-3xl font-bold text-travertine">Nome do Projeto</h3>
+                            <p id="m-loc" class="text-xs font-mono text-travertine/60 mt-1">Palmas - TO</p>
+                        </div>
+
+                        <p id="m-desc" class="text-xs sm:text-sm text-travertine/80 font-light leading-relaxed">
+                            Memorial descritivo do projeto.
+                        </p>
+
+                        <div class="space-y-3 pt-4 border-t border-obsidianBorder text-xs font-mono">
+                            <div><strong class="text-champagne">Área Construída:</strong> <span id="m-area" class="text-travertine">000 m²</span></div>
+                            <div><strong class="text-champagne">Materiais Principais:</strong> <span id="m-mat" class="text-travertine">Travertino, Madeira e Aço</span></div>
+                            <div><strong class="text-champagne">Ano de Execução:</strong> <span id="m-ano" class="text-travertine">2023 - 2026</span></div>
+                        </div>
+
+                        <div class="pt-4">
+                            <a id="m-zap-btn" href="#" target="_blank" 
+                               class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-champagne text-obsidian hover:bg-champagneLight font-semibold text-xs uppercase tracking-widest transition-all shadow-lg">
+                                <span>Solicitar Projeto Semelhante</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manifesto & Design Pillars -->
+        <section id="filosofia" class="max-w-7xl mx-auto px-6 sm:px-12 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.3em] text-champagne font-semibold">
+                        <span>[ MANIFESTO AUTORAL ]</span>
+                    </div>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-travertine leading-tight">
+                        A beleza que reside no que é <span class="italic font-normal text-champagne">verdadeiro.</span>
+                    </h2>
+                    <p class="text-sm text-travertine/75 font-light leading-relaxed">
+                        Acreditamos que a arquitetura não deve ser apenas uma casca estética, mas um refúgio que acalma, acolhe e potencializa o viver diário. Em Palmas, onde a luz do sol é protagonista, projetamos com precisão térmica, brises, ventilação cruzada e texturas que respiram.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div class="bg-obsidianCard border border-obsidianBorder rounded-3xl p-6 space-y-4 hover:border-champagne/40 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-champagne/10 text-champagne flex items-center justify-center font-mono text-sm font-bold">
+                            01
+                        </div>
+                        <h4 class="font-serif text-lg font-bold text-travertine">Biofilia & Matéria</h4>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Pedras rústicas, madeira nobre certificada e vegetação integrada para conectar o morador à natureza.
+                        </p>
+                    </div>
+
+                    <div class="bg-obsidianCard border border-obsidianBorder rounded-3xl p-6 space-y-4 hover:border-champagne/40 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-champagne/10 text-champagne flex items-center justify-center font-mono text-sm font-bold">
+                            02
+                        </div>
+                        <h4 class="font-serif text-lg font-bold text-travertine">Luz & Conforto</h4>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Iluminação cênica de 2700K e estratégias bioclimáticas desenhadas especificamente para o clima de Tocantins.
+                        </p>
+                    </div>
+
+                    <div class="bg-obsidianCard border border-obsidianBorder rounded-3xl p-6 space-y-4 hover:border-champagne/40 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-champagne/10 text-champagne flex items-center justify-center font-mono text-sm font-bold">
+                            03
+                        </div>
+                        <h4 class="font-serif text-lg font-bold text-travertine">Alta-Costura</h4>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed">
+                            Marcenaria sob medida, detalhamento milimétrico e curadoria de mobiliário assinado brasileiro.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Project Briefing Calculator -->
+        <section id="simulador" class="max-w-7xl mx-auto px-6 sm:px-12">
+            <div class="bg-gradient-to-br from-obsidianCard to-obsidianElevated border border-champagne/30 rounded-3xl p-8 sm:p-16 shadow-2xl relative overflow-hidden">
+                <!-- Ambient glow -->
+                <div class="ambient-glow w-[350px] h-[350px] bg-champagne/15 -top-20 -right-20"></div>
+
+                <div class="relative z-10 max-w-3xl mx-auto text-center space-y-6 mb-12">
+                    <span class="text-[10px] uppercase font-mono tracking-[0.3em] text-champagne block">
+                        // SIMULADOR & BRIEFING ONLINE
+                    </span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-travertine">
+                        Planeje seu Projeto de Arquitetura
+                    </h2>
+                    <p class="text-sm text-travertine/75 font-light">
+                        Selecione as características do seu espaço e receba um direcionamento personalizado com estimativa de etapas e contato direto com a arquiteta Brenda Rodrigues.
+                    </p>
+                </div>
+
+                <!-- Calculator Form Steps -->
+                <div class="relative z-10 max-w-4xl mx-auto space-y-8 bg-obsidian/70 backdrop-blur-xl border border-obsidianBorder rounded-2xl p-6 sm:p-10">
+                    
+                    <!-- Step 1: Typology -->
+                    <div class="space-y-3">
+                        <label class="text-xs font-mono uppercase tracking-widest text-champagne block">
+                            1. Qual é o tipo de projeto desejado?
+                        </label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono" id="b-tipo">
+                            <button type="button" onclick="selectOption('tipo', this, 'Casa do Zero em Condomínio')" class="calc-btn active p-3 rounded-xl border border-champagne bg-champagne/10 text-champagne text-center font-medium transition-all">
+                                Casa em Condomínio
+                            </button>
+                            <button type="button" onclick="selectOption('tipo', this, 'Design de Interiores & Decoração')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                Interiores Completo
+                            </button>
+                            <button type="button" onclick="selectOption('tipo', this, 'Reforma Residencial de Luxo')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                Reforma de Luxo
+                            </button>
+                            <button type="button" onclick="selectOption('tipo', this, 'Comercial / Clínica / Escritório')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                Clínica / Comercial
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Location -->
+                    <div class="space-y-3">
+                        <label class="text-xs font-mono uppercase tracking-widest text-champagne block">
+                            2. Onde será executada a obra?
+                        </label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono" id="b-loc">
+                            <button type="button" onclick="selectOption('loc', this, 'Condomínio Aldeia do Sol / Mirante do Lago')" class="calc-btn active p-3 rounded-xl border border-champagne bg-champagne/10 text-champagne text-center font-medium transition-all">
+                                Aldeia do Sol / Mirante
+                            </button>
+                            <button type="button" onclick="selectOption('loc', this, 'Condomínio Polinésia / Orla de Palmas')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                Polinésia / Orla
+                            </button>
+                            <button type="button" onclick="selectOption('loc', this, 'Plano Diretor Sul / Central (Palmas)')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                Plano Diretor Sul
+                            </button>
+                            <button type="button" onclick="selectOption('loc', this, 'Outra Cidade / Interior do Tocantins')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                Outra Localidade
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Area Size -->
+                    <div class="space-y-3">
+                        <label class="text-xs font-mono uppercase tracking-widest text-champagne block">
+                            3. Qual é a metragem aproximada?
+                        </label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono" id="b-area">
+                            <button type="button" onclick="selectOption('area', this, 'Até 250 m²')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                Até 250 m²
+                            </button>
+                            <button type="button" onclick="selectOption('area', this, '250 a 450 m²')" class="calc-btn active p-3 rounded-xl border border-champagne bg-champagne/10 text-champagne text-center font-medium transition-all">
+                                250 a 450 m²
+                            </button>
+                            <button type="button" onclick="selectOption('area', this, '450 a 700 m²')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                450 a 700 m²
+                            </button>
+                            <button type="button" onclick="selectOption('area', this, 'Mais de 700 m² (Mansão/Giga)')" class="calc-btn p-3 rounded-xl border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:border-champagne/50 text-center font-medium transition-all">
+                                +700 m² (Mansão)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Result Summary & WhatsApp Direct Send -->
+                    <div class="pt-6 border-t border-obsidianBorder flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div class="text-left space-y-1">
+                            <span class="text-[10px] font-mono uppercase text-champagne tracking-widest block">RESUMO DO BRIEFING</span>
+                            <div id="briefing-summary" class="text-xs font-mono text-travertine/80">
+                                Casa em Condomínio &bull; Aldeia do Sol / Mirante &bull; 250 a 450 m²
+                            </div>
+                        </div>
+
+                        <a id="briefing-whatsapp-btn" href="#" target="_blank" 
+                           class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-champagne text-obsidian hover:bg-champagneLight font-semibold text-xs uppercase tracking-[0.2em] transition-all shadow-xl hover:scale-105">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            <span>Enviar Briefing via WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Brenda Rodrigues -->
+        <section id="sobre" class="max-w-7xl mx-auto px-6 sm:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 relative">
+                    <div class="relative aspect-[3/4] rounded-3xl overflow-hidden border border-champagne/30 shadow-2xl">
+                        <img src="assets/brenda-rodrigues-perfil.jpg" alt="Brenda Rodrigues Arquiteta Palmas TO" class="w-full h-full object-cover">
+                        <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-obsidian/85 backdrop-blur-md border border-obsidianBorder text-center">
+                            <span class="font-serif text-lg font-bold text-travertine block">Brenda Rodrigues</span>
+                            <span class="text-[10px] font-mono text-champagne uppercase tracking-widest">Arquiteta & Designer de Interiores</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.3em] text-champagne font-semibold">
+                        <span>[ A PROFISSIONAL ]</span>
+                    </div>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-travertine leading-tight">
+                        Sensibilidade estética aliada ao rigor técnico.
+                    </h2>
+                    <p class="text-sm sm:text-base text-travertine/80 font-light leading-relaxed">
+                        Com sólida atuação em Palmas e em todo o Tocantins, Brenda Rodrigues consolidou seu escritório como referência em projetos de alta sofisticação, assinando residências em condomínios fechados renomados e marcando presença na primeira edição da <strong>CASACOR Tocantins</strong>.
+                    </p>
+                    <p class="text-sm sm:text-base text-travertine/80 font-light leading-relaxed">
+                        Sua abordagem integra arquitetura, design de interiores e paisagismo em um único fluxo harmonioso, garantindo que cada metro quadrado expresse a identidade e o estilo de vida de seus clientes.
+                    </p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-4 border-t border-obsidianBorder">
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-champagne block">+50</span>
+                            <span class="text-xs font-mono text-travertine/60">Projetos Desenvolvidos</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-champagne block">CASACOR</span>
+                            <span class="text-xs font-mono text-travertine/60">Tocantins 2023</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-champagne block">5.0 ★</span>
+                            <span class="text-xs font-mono text-travertine/60">Avaliação Máxima</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA & Office Contact -->
+        <section id="contato" class="max-w-7xl mx-auto px-6 sm:px-12">
+            <div class="bg-obsidianElevated border border-obsidianBorder rounded-3xl p-8 sm:p-16 text-center space-y-8 relative overflow-hidden">
+                <div class="max-w-2xl mx-auto space-y-4">
+                    <span class="text-[10px] uppercase font-mono tracking-[0.3em] text-champagne block">
+                        ATENDIMENTO PRESENCIAL & ONLINE
+                    </span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-travertine">
+                        Pronto para dar vida ao seu novo espaço?
+                    </h2>
+                    <p class="text-sm text-travertine/70 font-light">
+                        Agende uma reunião preliminar no escritório em Palmas ou online para alinharmos seu programa de necessidades.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
+                    <a href="https://wa.me/5563984669633?text=Ol%C3%A1%20Brenda!%20Gostaria%20de%20agendar%20uma%20reuni%C3%A3o%20para%20meu%20projeto." target="_blank" 
+                       class="inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-champagne text-obsidian hover:bg-champagneLight font-semibold text-xs uppercase tracking-[0.25em] transition-all duration-300 shadow-xl hover:scale-105">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span>Falar no WhatsApp: (63) 98466-9633</span>
+                    </a>
+                </div>
+
+                <div class="pt-6 text-xs font-mono text-travertine/50 flex flex-wrap justify-center items-center gap-6">
+                    <span>📍 Palmas - Tocantins</span>
+                    <span>✉️ arqbrendarodrigues@gmail.com</span>
+                    <span>📷 @arq.brendarodrigues</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating WhatsApp Concierge Button -->
+    <div class="wa-float">
+        <a href="https://wa.me/5563984669633?text=Ol%C3%A1%20Brenda!%20Gostaria%20de%20saber%20mais%20sobre%20seus%20projetos." target="_blank" 
+           class="flex items-center gap-3 bg-obsidianElevated hover:bg-champagne text-champagne hover:text-obsidian px-5 py-3.5 rounded-full border border-champagne/50 shadow-2xl transition-all duration-300 group">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-[11px] uppercase font-mono tracking-widest font-bold">Atendimento VIP</span>
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+        </a>
+    </div>
+
+    <!-- Editorial Footer -->
+    <footer class="bg-obsidian border-t border-obsidianBorder mt-36 pt-16 pb-12 text-travertine">
+        <div class="max-w-7xl mx-auto px-6 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-8 text-xs font-mono text-travertine/50">
+            <div class="flex flex-col items-center md:items-start gap-1">
+                <span class="font-serif font-bold text-travertine text-sm tracking-widest">BRENDA RODRIGUES</span>
+                <span>Arquitetura & Interiores &bull; Palmas - TO</span>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <a href="#catalogo" class="hover:text-champagne transition-colors">Obras</a>
+                <a href="#casacor" class="hover:text-champagne transition-colors">CASACOR</a>
+                <a href="#simulador" class="hover:text-champagne transition-colors">Briefing</a>
+                <a href="https://instagram.com" target="_blank" class="hover:text-champagne transition-colors">Instagram</a>
+            </div>
+
+            <div>
+                <span>© 2026 Brenda Rodrigues. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts for Catalog, Lightbox and Briefing -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Project database for Lightbox Modal
+        const PROJETOS = {
+            'spa-ita': {
+                tag: 'CASACOR TOCANTINS 2023 // OFICIAL',
+                title: 'Spa Itá &bull; Refúgio das Pedras',
+                loc: 'CASACOR Tocantins (Palmas - TO)',
+                img: 'assets/casacor-spa-ita-1.jpg',
+                desc: 'Ambiente comemorativo oficial na CASACOR Tocantins. A proposta explorou a pureza das pedras naturais rústicas, tina esculpida em rocha sólida, deck em madeira nobre e iluminação cênica indireta em 2700K.',
+                area: '480 m²',
+                mat: 'Mármore Travertino Bruto, Rocha Itá e Carvalho',
+                ano: '2023 (Destaque da Mostra)',
+                zapText: 'Ol%C3%A1%20Brenda!%20Gostei%20muito%20do%20projeto%20Spa%20It%C3%A1%20da%20CASACOR%20e%20gostaria%20de%20um%20conceito%20semelhante.'
+            },
+            'villa-aldeia': {
+                tag: 'RESIDENCIAL DE LUXO',
+                title: 'Villa Aldeia do Sol',
+                loc: 'Condomínio Aldeia do Sol (Palmas - TO)',
+                img: 'assets/residencial-palmas-1.jpg',
+                desc: 'Mansão contemporânea com balanço estrutural imponente, brises verticais de madeira natural, esquadrias do piso ao teto e espelho d\'água integrando o living à área gourmet.',
+                area: '620 m²',
+                mat: 'Concreto Aparente, Brises de Madeira e Vidro Bronze',
+                ano: '2024',
+                zapText: 'Ol%C3%A1%20Brenda!%20Gostaria%20de%20desenvolver%20uma%20casa%20em%20condom%C3%ADnio%20fechado%20estilo%20Villa%20Aldeia%20do%20Sol.'
+            },
+            'living-travertino': {
+                tag: 'INTERIORES & LIVING',
+                title: 'Living Travertino & Lareira',
+                loc: 'Mirante do Lago (Palmas - TO)',
+                img: 'assets/interiores-living-1.jpg',
+                desc: 'Living integrado com pé-direito duplo de 6.5m, parede monumental em blocos de travertino bruto com lareira embutida em aço corten, sofá curvo orgânico e iluminação cênica.',
+                area: '140 m²',
+                mat: 'Travertino Navona Rústico, Linho Cru e Carvalho',
+                ano: '2025',
+                zapText: 'Ol%C3%A1%20Brenda!%20Me%20encantei%20pelo%20Living%20Travertino%20e%20gostaria%20de%20um%20projeto%20de%20interiores%20para%20minha%20casa.'
+            },
+            'gourmet-wine': {
+                tag: 'INTERIORES GOURMET',
+                title: 'Gourmet & Wine Cellar',
+                loc: 'Condomínio Polinésia (Palmas - TO)',
+                img: 'assets/interiores-gourmet-1.jpg',
+                desc: 'Espaço gourmet de alta gastronomia com ilha monolítica em mármore nero com veios ouro, adega climatizada em vidro piso-teto e banquetas em latão escovado.',
+                area: '85 m²',
+                mat: 'Mármore Nero Ouro, Carvalho Escuro e Vidro Fumé',
+                ano: '2024',
+                zapText: 'Ol%C3%A1%20Brenda!%20Gostaria%20de%20projetar%20um%20espa%C3%A7o%20gourmet%20com%20adega%20integrada.'
+            },
+            'master-suite': {
+                tag: 'SUÍTE MASTER',
+                title: 'Suíte Master & Terraço',
+                loc: 'Plano Diretor Sul (Palmas - TO)',
+                img: 'assets/interiores-suite-1.jpg',
+                desc: 'Refúgio íntimo com cabeceira em marcenaria ripada retroiluminada, parede em pedra calcária e abertura generosa para deque de estar e jardim privativo.',
+                area: '65 m²',
+                mat: 'Madeira Freijó, Linho Italiano e Limestone',
+                ano: '2025',
+                zapText: 'Ol%C3%A1%20Brenda!%20Gostaria%20de%20renovar%20a%20su%C3%ADte%20master%20com%20o%20seu%20estilo%20de%20interiores.'
+            },
+            'arco-corporate': {
+                tag: 'COMERCIAL & CLÍNICAS',
+                title: 'Sede Corporativa & Clínica',
+                loc: 'Edifício Executive (Palmas - TO)',
+                img: 'assets/comercial-conceito-1.jpg',
+                desc: 'Recepção de alto luxo com balcão curvo canelado em travertino, painel dourado em latão escovado e divisórias de vidro com isolamento acústico superior.',
+                area: '210 m²',
+                mat: 'Travertino Canelado, Latão Dourado e Granilite',
+                ano: '2025',
+                zapText: 'Ol%C3%A1%20Brenda!%20Gostaria%20de%20um%20projeto%20comercial%20de%20alto%20luxo%20para%20minha%20empresa/cl%C3%ADnica.'
+            }
+        };
+
+        // Modal Handlers
+        function abrirModalProjeto(id) {
+            const p = PROJETOS[id];
+            if (!p) return;
+
+            document.getElementById('m-img').src = p.img;
+            document.getElementById('m-tag').textContent = p.tag;
+            document.getElementById('m-title').innerHTML = p.title;
+            document.getElementById('m-loc').textContent = p.loc;
+            document.getElementById('m-desc').textContent = p.desc;
+            document.getElementById('m-area').textContent = p.area;
+            document.getElementById('m-mat').textContent = p.mat;
+            document.getElementById('m-ano').textContent = p.ano;
+            document.getElementById('m-zap-btn').href = 'https://wa.me/5563984669633?text=' + p.zapText;
+
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharModalProjeto() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') fecharModalProjeto();
+        });
+
+        // Filter projects by category
+        function filtrarProjetos(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-champagne', 'text-obsidian', 'font-bold');
+                b.classList.add('bg-obsidianCard', 'border', 'border-obsidianBorder', 'text-travertine/80');
+            });
+            btn.classList.add('bg-champagne', 'text-obsidian', 'font-bold');
+            btn.classList.remove('bg-obsidianCard', 'border-obsidianBorder', 'text-travertine/80');
+
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                const categories = card.getAttribute('data-category') || '';
+                if (cat === 'todos' || categories.includes(cat)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Briefing Calculator state
+        const briefing = {
+            tipo: 'Casa do Zero em Condomínio',
+            loc: 'Condomínio Aldeia do Sol / Mirante do Lago',
+            area: '250 a 450 m²'
+        };
+
+        function selectOption(group, btn, value) {
+            briefing[group] = value;
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.calc-btn').forEach(b => {
+                b.classList.remove('border-champagne', 'bg-champagne/10', 'text-champagne');
+                b.classList.add('border-obsidianBorder', 'bg-obsidianElevated', 'text-travertine/80');
+            });
+            btn.classList.add('border-champagne', 'bg-champagne/10', 'text-champagne');
+            btn.classList.remove('border-obsidianBorder', 'bg-obsidianElevated', 'text-travertine/80');
+
+            updateBriefingSummary();
+        }
+
+        function updateBriefingSummary() {
+            const summary = `${briefing.tipo} • ${briefing.loc} • ${briefing.area}`;
+            document.getElementById('briefing-summary').textContent = summary;
+
+            const msg = `Ol%C3%A1%20Brenda!%20Fiz%20a%20simula%C3%A7%C3%A3o%20de%20briefing%20no%20seu%20site:%0A%0A*Tipo%20de%20Projeto:*%20${encodeURIComponent(briefing.tipo)}%0A*Localiza%C3%A7%C3%A3o:*%20${encodeURIComponent(briefing.loc)}%0A*Metragem%20Estimada:*%20${encodeURIComponent(briefing.area)}%0A%0AGostaria%20de%20agendar%20uma%20reuni%C3%A3o%20para%20conversarmos!`;
+            document.getElementById('briefing-whatsapp-btn').href = `https://wa.me/5563984669633?text=${msg}`;
+        }
+
+        // Initialize briefing link
+        updateBriefingSummary();
+    </script>
+<!-- PROSPECTOR-EDITOR-START -->
+<style id="pe-style">
+#pe-bar{position:fixed;top:0;left:0;right:0;height:44px;background:#0f172a;color:#f8fafc;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-family:system-ui,-apple-system,sans-serif;font-size:13px;z-index:999999;box-shadow:0 2px 10px rgba(0,0,0,0.3);border-bottom:1px solid #334155}
+#pe-bar strong{color:#C5A880;font-weight:600}
+#pe-bar button{background:#C5A880;color:#0B0C0E;border:0;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;transition:background .2s}
+#pe-bar button:hover{background:#E5D0B5}
+body{margin-top:44px !important}
+.pe-hover{outline:2px dashed #C5A880 !important;outline-offset:2px;cursor:pointer}
+[contenteditable="true"]:focus{outline:2px solid #C5A880 !important;outline-offset:2px}
+</style>
+<div id="pe-bar">
+  <div><strong>âœ¨ Modo EdiÃ§Ã£o Aholic &bull; Lumina Architecture</strong> Â· Clique em textos para alterar Â· clique em imagens para trocar</div>
+  <button id="pe-export" type="button">Salvar e Exportar Site</button>
+</div>
+<input type="file" id="pe-file" accept="image/*" style="display:none">
+<script id="pe-script">
+(function(){
+  var TEXT='h1,h2,h3,h4,h5,h6,p,li,a,span,button,td,th,figcaption,blockquote,strong,em';
+  document.querySelectorAll(TEXT).forEach(function(el){
+    if(el.closest('#pe-bar')||el.closest('#project-modal'))return;
+    if(el.children.length===0||el.childElementCount<=1){
+      el.addEventListener('click',function(e){
+        if(el.tagName==='A'||el.tagName==='BUTTON')e.preventDefault();
+        el.setAttribute('contenteditable','true');el.focus();
+      });
+      el.addEventListener('mouseenter',function(){el.classList.add('pe-hover')});
+      el.addEventListener('mouseleave',function(){el.classList.remove('pe-hover')});
+      el.addEventListener('blur',function(){el.removeAttribute('contenteditable')});
+    }
+  });
+  var fileInput=document.getElementById('pe-file'),currentImg=null;
+  document.querySelectorAll('img').forEach(function(img){
+    img.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();currentImg=img;fileInput.click()});
+    img.addEventListener('mouseenter',function(){img.classList.add('pe-hover')});
+    img.addEventListener('mouseleave',function(){img.classList.remove('pe-hover')});
+  });
+  fileInput.addEventListener('change',function(){
+    var f=fileInput.files[0];if(!f||!currentImg)return;
+    var r=new FileReader();
+    r.onload=function(e){currentImg.src=e.target.result;};
+    r.readAsDataURL(f);
+  });
+  document.getElementById('pe-export').addEventListener('click',function(){
+    var clone=document.documentElement.cloneNode(true);
+    var bar=clone.querySelector('#pe-bar');if(bar)bar.remove();
+    var sty=clone.querySelector('#pe-style');if(sty)sty.remove();
+    var scr=clone.querySelector('#pe-script');if(scr)scr.remove();
+    var inp=clone.querySelector('#pe-file');if(inp)inp.remove();
+    clone.querySelectorAll('[contenteditable]').forEach(function(el){el.removeAttribute('contenteditable')});
+    clone.querySelectorAll('.pe-hover').forEach(function(el){el.classList.remove('pe-hover')});
+    var b=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='index.html';a.click();
+  });
+})();
+</script>
+<!-- PROSPECTOR-EDITOR-END -->
+</body>
+</html>
+
