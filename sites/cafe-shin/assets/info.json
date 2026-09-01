@@ -1,20 +1,22 @@
 {
-  "nome": "Apocalypse Coffee Roasters (Café Shin)",
-  "segmento": "Cafeteria & Torrefação Especial",
-  "estilo": "Superdesign Dark Minimalist Roastery",
-  "origem": "Superdesign Draft 5b241203-69b7-47f1-9fb2-c073f47850bf",
-  "projectId": "8edb8180-00de-4884-820d-55d6cc772b18",
-  "draftId": "5b241203-69b7-47f1-9fb2-c073f47850bf",
-  "features": [
-    "Organic Coffee Beans Online",
-    "Subscription Builder",
-    "Tasting Notes Matrix",
-    "Traceability Green to Roast",
-    "Customer Reviews Integration"
+  "nome": "CAFÉ SHIN • Café Franco-Coréen & Pâtisserie",
+  "cheffe": "Shin Eun-jeong & Julien Pham",
+  "endereco": "47 Rue des Petites-Écuries, 75010 Paris (France)",
+  "nota": 4.8,
+  "avaliacoes": 280,
+  "instagram": "@cafeshinparis",
+  "especialidades": [
+    "Goguma Latte (Patate douce violette)",
+    "Heukimja Latte (Sésame noir toasté)",
+    "Croffles artisanaux caramélisés minute avec glace artisanale",
+    "Kimbap gourmets (Thon épicé Gochujang, Poulet miso, Végétarien)",
+    "Matcha Latte Cérémonial & Dirty Matcha",
+    "Café de spécialité torréfié"
   ],
+  "horarios": "Mardi-Vendredi 08h30-18h00 | Samedi-Dimanche 11h00-19h00 (Fermé Lundi)",
   "links": {
     "producao": "https://aholicdigital.vercel.app/sites/cafe-shin/index.html",
     "editor": "https://aholicdigital.vercel.app/sites/cafe-shin/cafe-shin-editor.html",
-    "superdesign_preview": "https://p.superdesign.dev/draft/5b241203-69b7-47f1-9fb2-c073f47850bf"
+    "maps": "https://maps.google.com/?q=47+Rue+des+Petites-Ecuries+75010+Paris"
   }
 }
