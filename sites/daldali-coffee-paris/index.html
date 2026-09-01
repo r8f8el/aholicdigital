@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            if (window.location.protocol.startsWith('http') && !window.location.pathname.endsWith('/')) {
+                const base = document.createElement('base');
+                base.href = window.location.pathname.endsWith('.html') 
+                    ? window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)
+                    : window.location.pathname + '/';
+                document.head.prepend(base);
+            }
+        })();
+        window.addEventListener('error', function(e) {
+            if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fixed) {
+                e.target.dataset.fixed = 'true';
+                const file = e.target.getAttribute('src');
+                if (file && !file.startsWith('http') && !file.startsWith('data:')) {
+                    const cleanName = file.split('/').pop();
+                    e.target.src = '/sites/daldali-coffee-paris/assets/' + cleanName;
+                }
+            }
+        }, true);
+    </script>
+    <title>DALDALI • Café & Pâtisserie Coréenne | Paris 9e (Pigalle)</title>
+    <meta name="description" content="Coffee shop et salon de thé coréen à Paris (23 Rue Marguerite de Rochechouart). Yakgwa artisanal au miel, Matcha Latte, Banana Latte et café de spécialité.">
+
+    <!-- Google Fonts: League Spartan (100% Fidelity) + Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        st: {
+                            bg: '#fdf8f3',
+                            surface: '#f5f0eb',
+                            card: '#ffffff',
+                            accent: '#e4a4bd',
+                            accentDark: '#c8809c',
+                            text: '#262626',
+                            muted: '#737373',
+                            border: 'rgba(38, 38, 38, 0.08)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"League Spartan"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'Georgia', 'serif']
+                    },
+                    transitionTimingFunction: {
+                        'luxury': 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { font-family: 'League Spartan', sans-serif; }
+        .font-editorial { font-family: 'Playfair Display', Georgia, serif; }
+        ::selection { background: #e4a4bd; color: #262626; }
+
+        /* Slow Bounce for Floating Badge */
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(-5%); }
+            50% { transform: translateY(5%); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 4s ease-in-out infinite;
+        }
+
+        /* Stagger Grid Offset for Even Items on Desktop */
+        @media (min-width: 768px) {
+            .stagger-grid .stagger-item:nth-child(even) {
+                margin-top: 100px;
+            }
+        }
+
+        /* Scroll-Triggered Reveal */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grayscale to Color Image Zoom Hover */
+        .luxury-img-card {
+            overflow: hidden;
+            border-radius: 24px;
+            position: relative;
+        }
+        .luxury-img-card img {
+            filter: grayscale(100%);
+            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .luxury-img-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+
+        /* Portfolio Stagger Item Hover */
+        .portfolio-item-card {
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+        }
+        .portfolio-item-card img {
+            filter: grayscale(100%);
+            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portfolio-item-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+        .portfolio-overlay-circle {
+            width: 88px;
+            height: 88px;
+            background: #262626;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .portfolio-item-card:hover .portfolio-overlay-circle {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Service Card 0.7s Hover */
+        .service-card {
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            background: #ffffff;
+            box-shadow: 0 24px 48px -12px rgba(38, 38, 38, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-st-bg text-st-text font-sans antialiased overflow-x-hidden relative selection:bg-st-accent selection:text-st-text">
+
+    <!-- Top Luxury Header Bar -->
+    <header class="sticky top-0 z-50 bg-st-bg/90 backdrop-blur-md border-b border-st-border h-20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 sm:px-12 h-full flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-st-text text-st-bg flex items-center justify-center font-bold text-sm tracking-wider">
+                    달
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl tracking-[0.2em] font-black uppercase text-st-text group-hover:text-st-accentDark transition-colors">
+                        DALDALI
+                    </span>
+                    <span class="text-[9px] tracking-[0.28em] font-semibold text-st-muted uppercase">
+                        Café &bull; Pâtisserie &bull; Paris 9e
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.2em] font-bold text-st-text/80">
+                <a href="#univers" class="hover:text-st-accentDark transition-colors">L'Univers</a>
+                <a href="#specialites" class="hover:text-st-accentDark transition-colors">La Carte</a>
+                <a href="#galerie" class="hover:text-st-accentDark transition-colors">Galerie</a>
+                <a href="#avis" class="hover:text-st-accentDark transition-colors">Avis & Éloges</a>
+                <a href="#visite" class="hover:text-st-accentDark transition-colors">Venir au Café</a>
+            </nav>
+
+            <!-- Instagram DM Action Button -->
+            <a href="https://instagram.com/daldali_paris" 
+               target="_blank" 
+               class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-st-text text-st-bg hover:bg-st-accentDark text-xs uppercase tracking-[0.18em] font-bold transition-all duration-300 shadow-sm">
+                <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+                <span class="hidden sm:inline">@daldali_paris</span>
+                <span class="sm:hidden">Instagram</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section: Super Travel Luxury Architecture -->
+    <section class="relative min-h-[85vh] flex items-center justify-center py-16 px-6 sm:px-12 overflow-hidden border-b border-st-border">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            <!-- Left Editorial Text -->
+            <div class="lg:col-span-7 flex flex-col items-start text-left">
+                <!-- Location & Heritage Pill -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-st-surface border border-st-border text-st-text text-xs uppercase tracking-[0.2em] font-bold mb-6">
+                    <span class="w-2 h-2 rounded-full bg-st-accent animate-pulse"></span>
+                    <span>Pigalle &bull; 23 Rue Marguerite de Rochechouart</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95] text-st-text mb-6">
+                    L'âme de Séoul <br>
+                    <span class="font-editorial lowercase italic font-normal text-st-accentDark text-3xl sm:text-5xl lg:text-6xl tracking-normal">rencontre le cœur de Paris.</span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-st-muted font-normal leading-relaxed mb-8 max-w-xl">
+                    Un coffee shop intimiste et chaleureux au cœur du 9e arrondissement. Dégustez nos fameux <strong>Yakgwa au miel</strong> faits maison, nos <strong>Matcha Lattes</strong> de cérémonie et nos cafés de spécialité torréfiés avec soin.
+                </p>
+
+                <!-- Key Metrics Bar -->
+                <div class="grid grid-cols-3 gap-6 py-6 border-y border-st-border w-full mb-8">
+                    <div>
+                        <span class="text-3xl sm:text-4xl font-black text-st-text block">4.9 ★</span>
+                        <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Excellence Google Maps</span>
+                    </div>
+                    <div>
+                        <span class="text-3xl sm:text-4xl font-black text-st-text block">100%</span>
+                        <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Pâtisseries Maison</span>
+                    </div>
+                    <div>
+                        <span class="text-3xl sm:text-4xl font-black text-st-accentDark block">Pigalle</span>
+                        <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Paris 9e Arrondissement</span>
+                    </div>
+                </div>
+
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+                    <a href="#specialites" 
+                       class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-st-text text-st-bg text-xs uppercase tracking-[0.2em] font-bold hover:bg-st-accentDark transition-all duration-300 shadow-lg">
+                        <span>Découvrir la Carte</span>
+                        <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+
+                    <a href="https://maps.google.com/?q=23+Rue+Marguerite+de+Rochechouart+75009+Paris" 
+                       target="_blank"
+                       class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-st-text/20 bg-st-surface text-st-text hover:bg-st-card text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-st-accentDark"></i>
+                        <span>Itinéraire Métro</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual Image Card with Floating Concierge Badge -->
+            <div class="lg:col-span-5 relative">
+                <div class="luxury-img-card shadow-2xl border border-st-border bg-st-surface">
+                    <img src="assets/hero-cafe.jpg" 
+                         alt="Daldali Café Paris" 
+                         class="w-full h-[520px] object-cover">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-st-text/40 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+
+                <!-- Floating Luxury Badge (Karla Barros Style) -->
+                <div class="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 p-5 rounded-2xl bg-st-card border border-st-border shadow-2xl animate-bounce-slow flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-st-accent/30 text-st-accentDark flex items-center justify-center font-bold text-xl">
+                        ★
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.2em] font-black text-st-text block">Note 4.9 sur 5</span>
+                        <span class="text-[11px] text-st-muted font-medium">Recommandé par les guides parisiens</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- L'Univers & Le Concept: Seul & Paris -->
+    <section id="univers" class="py-24 px-6 sm:px-12 border-b border-st-border bg-st-surface/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 flex flex-col items-start">
+                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-accentDark mb-3">L'Art de la Pause Café</span>
+                    <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-st-text mb-6 leading-tight">
+                        Une escale gourmande & poétique à Rochechouart.
+                    </h2>
+                    <p class="text-base text-st-muted font-normal leading-relaxed mb-6">
+                        Fondé en 2023, <strong>DALDALI</strong> est né du désir d'apporter à Paris l'élégance minimaliste et la chaleur des salons de thé de Séoul. Ici, chaque détail est pensé pour créer une parenthèse de sérénité au milieu de l'effervescence parisienne.
+                    </p>
+                    <p class="text-base text-st-muted font-normal leading-relaxed mb-8">
+                        Nos <em>Yakgwa</em> sont confectionnés selon la recette traditionnelle à base de farine de blé, d'huile de sésame, de gingembre et de miel précieux, offrant une texture fondante et croustillante incomparable.
+                    </p>
+
+                    <div class="flex items-center gap-6">
+                        <div class="p-4 rounded-2xl bg-st-card border border-st-border">
+                            <span class="text-xs uppercase tracking-[0.18em] font-bold text-st-text block mb-1">Céramiques Uniques</span>
+                            <span class="text-xs text-st-muted">Art de la table coréen raffiné</span>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-st-card border border-st-border">
+                            <span class="text-xs uppercase tracking-[0.18em] font-bold text-st-text block mb-1">Option Végane</span>
+                            <span class="text-xs text-st-muted">Laits végétaux d'avoine & soja</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <div class="luxury-img-card h-80">
+                        <img src="assets/interior-cozy.jpg" alt="Intérieur Daldali" class="w-full h-full object-cover">
+                    </div>
+                    <div class="luxury-img-card h-80 mt-8">
+                        <img src="assets/ceramics.jpg" alt="Art de la table" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- La Carte & Les Spécialités -->
+    <section id="specialites" class="py-24 px-6 sm:px-12 border-b border-st-border">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-accentDark block mb-3">Saveurs Signatures</span>
+                    <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-st-text">
+                        La Carte des Douceurs
+                    </h2>
+                </div>
+                <p class="text-sm uppercase tracking-[0.18em] font-bold text-st-muted max-w-sm">
+                    Recettes artisanales préparées chaque matin au café avec des ingrédients nobles.
+                </p>
+            </div>
+
+            <!-- Service Cards with 0.7s Hover -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Spécialité 1 -->
+                <div class="service-card p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-st-accent/20 text-st-accentDark flex items-center justify-center font-bold mb-6">
+                            01
+                        </div>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-accentDark block mb-1">Pâtisserie Signature</span>
+                        <h3 class="text-xl font-black uppercase text-st-text mb-3">Yakgwa au Miel</h3>
+                        <p class="text-xs text-st-muted leading-relaxed font-normal mb-6">
+                            Le biscuit impérial coréen par excellence. Frit lentement et confit dans un sirop de miel et gingembre frais.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-text">
+                        Fait Maison &bull; Incontournable
+                    </div>
+                </div>
+
+                <!-- Spécialité 2 -->
+                <div class="service-card p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-st-accent/20 text-st-accentDark flex items-center justify-center font-bold mb-6">
+                            02
+                        </div>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-accentDark block mb-1">Cérémonial Japon/Corée</span>
+                        <h3 class="text-xl font-black uppercase text-st-text mb-3">Matcha Latte</h3>
+                        <p class="text-xs text-st-muted leading-relaxed font-normal mb-6">
+                            Poudre de thé vert pure d'ombrage, fouettée au chasen et accompagnée de lait onctueux chaud ou glacé.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-text">
+                        Chaud &bull; Iced Latte
+                    </div>
+                </div>
+
+                <!-- Spécialité 3 -->
+                <div class="service-card p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-st-accent/20 text-st-accentDark flex items-center justify-center font-bold mb-6">
+                            03
+                        </div>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-accentDark block mb-1">Création Maison</span>
+                        <h3 class="text-xl font-black uppercase text-st-text mb-3">Banana Latte</h3>
+                        <p class="text-xs text-st-muted leading-relaxed font-normal mb-6">
+                            Une douceur régressive culte en Corée, revisitée avec un purée de banane maison et shot d'espresso intense.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-text">
+                        Signature Gourmande
+                    </div>
+                </div>
+
+                <!-- Spécialité 4 -->
+                <div class="service-card p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-st-accent/20 text-st-accentDark flex items-center justify-center font-bold mb-6">
+                            04
+                        </div>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-accentDark block mb-1">Origines Sélectionnées</span>
+                        <h3 class="text-xl font-black uppercase text-st-text mb-3">Café de Spécialité</h3>
+                        <p class="text-xs text-st-muted leading-relaxed font-normal mb-6">
+                            Espresso calibré, Flat White velouté et extractions filtres douces mettant en valeur les notes florales et chocolatées.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-text">
+                        Micro-Lots &bull; Éthique
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie Stagger Grid 100px (Signature Super Travel Luxury) -->
+    <section id="galerie" class="py-24 px-6 sm:px-12 border-b border-st-border bg-st-surface/40">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-accentDark block mb-2">Moments & Textures</span>
+                <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-st-text">
+                    La Galerie Daldali
+                </h2>
+                <div class="w-16 h-1 bg-st-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Staggered Offset Grid -->
+            <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                
+                <!-- Item 1 (Col 1) -->
+                <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-st-border bg-st-card">
+                    <img src="assets/yakgwa-pastry.jpg" alt="Yakgwa Coréen" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay-circle">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-st-bg">YAKGWA</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 (Col 2 - Offset +100px) -->
+                <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-st-border bg-st-card">
+                    <img src="assets/matcha-latte.jpg" alt="Matcha Latte Cérémonial" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay-circle">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-st-bg">MATCHA</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 (Col 1) -->
+                <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-st-border bg-st-card">
+                    <img src="assets/barista-pour.jpg" alt="Extraction Barista" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay-circle">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-st-bg">CAFÉ</span>
+                    </div>
+                </div>
+
+                <!-- Item 4 (Col 2 - Offset +100px) -->
+                <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-st-border bg-st-card">
+                    <img src="assets/specialty-coffee.jpg" alt="Art du Café" class="w-full h-full object-cover">
+                    <div class="portfolio-overlay-circle">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-st-bg">PIGALLE</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Avis & Éloges 4.9 ★ -->
+    <section id="avis" class="py-24 px-6 sm:px-12 border-b border-st-border">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-st-accent/20 text-st-accentDark text-xs uppercase tracking-widest font-bold mb-4">
+                    <span>Avis Google Maps Vérifiés</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-st-text">
+                    Ce que disent nos visiteurs
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Review 1 -->
+                <div class="p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
+                    <div>
+                        <div class="text-st-accentDark text-lg mb-4">★★★★★</div>
+                        <p class="text-sm text-st-text/80 font-normal leading-relaxed italic mb-6">
+                            "Un véritable coup de cœur ! Le lieu est cosy et apaisant. Les Yakgwa sont incroyablement bons, fondants et pas trop sucrés. Le matcha latte est dosé à la perfection. Une adresse incontournable dans le 9e."
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-st-border flex items-center justify-between">
+                        <span class="text-xs uppercase tracking-wider font-bold text-st-text">Camille L.</span>
+                        <span class="text-[10px] text-st-muted font-semibold">Habituée du quartier</span>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
+                    <div>
+                        <div class="text-st-accentDark text-lg mb-4">★★★★★</div>
+                        <p class="text-sm text-st-text/80 font-normal leading-relaxed italic mb-6">
+                            "L'accueil est d'une gentillesse rare. On voyage directement à Séoul grâce aux pâtisseries traditionnelles et au design soigné. Bravo pour la qualité du café de spécialité !"
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-st-border flex items-center justify-between">
+                        <span class="text-xs uppercase tracking-wider font-bold text-st-text">Maxime D.</span>
+                        <span class="text-[10px] text-st-muted font-semibold">Guide Café Paris</span>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
+                    <div>
+                        <div class="text-st-accentDark text-lg mb-4">★★★★★</div>
+                        <p class="text-sm text-st-text/80 font-normal leading-relaxed italic mb-6">
+                            "Le banana latte glacé est addictif et les douceurs au sésame et miel sont un régal absolu. Superbe atmosphère pour lire ou se poser tranquillement près de Pigalle."
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-st-border flex items-center justify-between">
+                        <span class="text-xs uppercase tracking-wider font-bold text-st-text">Soo-Jin K.</span>
+                        <span class="text-[10px] text-st-muted font-semibold">Visiteuse</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Informations Pratiques & Itinéraire -->
+    <section id="visite" class="py-24 px-6 sm:px-12 border-b border-st-border bg-st-surface">
+        <div class="max-w-7xl mx-auto rounded-3xl bg-st-card border border-st-border p-8 sm:p-14 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7">
+                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-accentDark block mb-2">Nous Rendre Visite</span>
+                    <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-st-text mb-6">
+                        Venez savourer l'instant au café.
+                    </h2>
+                    
+                    <div class="space-y-4 mb-8 text-sm text-st-muted font-normal">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-st-accentDark shrink-0 mt-0.5"></i>
+                            <div>
+                                <strong class="text-st-text font-bold block">Adresse :</strong>
+                                23 Rue Marguerite de Rochechouart, 75009 Paris (France)
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="train" class="w-5 h-5 text-st-accentDark shrink-0 mt-0.5"></i>
+                            <div>
+                                <strong class="text-st-text font-bold block">Métro à proximité :</strong>
+                                Cadet (Ligne 7) &bull; Notre-Dame-de-Lorette (Ligne 12) &bull; Anvers (Ligne 2)
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="instagram" class="w-5 h-5 text-st-accentDark shrink-0 mt-0.5"></i>
+                            <div>
+                                <strong class="text-st-text font-bold block">Actualités & Horaires en direct :</strong>
+                                Suivez nos ouvertures et créations sur <a href="https://instagram.com/daldali_paris" target="_blank" class="text-st-accentDark font-bold underline">@daldali_paris</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://maps.google.com/?q=23+Rue+Marguerite+de+Rochechouart+75009+Paris" 
+                           target="_blank"
+                           class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-st-text text-st-bg text-xs uppercase tracking-[0.18em] font-bold hover:bg-st-accentDark transition-all duration-300">
+                            <i data-lucide="navigation" class="w-4 h-4"></i>
+                            <span>Ouvrir dans Google Maps</span>
+                        </a>
+
+                        <a href="https://instagram.com/daldali_paris" 
+                           target="_blank"
+                           class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-st-border bg-st-surface text-st-text text-xs uppercase tracking-[0.18em] font-bold hover:bg-st-bg transition-all duration-300">
+                            <i data-lucide="send" class="w-4 h-4 text-st-accentDark"></i>
+                            <span>Écrire sur Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 rounded-2xl overflow-hidden border border-st-border h-72 lg:h-80 shadow-inner bg-st-surface">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.0898555627254!2d2.344485576882064!3d48.87556097133441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e3fa2996d93%3A0x6b4859fbb7cbe9a9!2s23%20Rue%20Marguerite%20de%20Rochechouart%2C%2075009%20Paris%2C%20Fran%C3%A7a!5e0!3m2!1spt-BR!2sbr!4v1725200000000!5m2!1spt-BR!2sbr" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Footer -->
+    <footer class="py-16 px-6 sm:px-12 bg-st-text text-st-bg text-xs tracking-widest uppercase font-bold">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-st-accent text-st-text flex items-center justify-center font-bold text-sm">
+                    달
+                </div>
+                <div>
+                    <span class="text-base font-black block text-st-bg">DALDALI</span>
+                    <span class="text-[10px] text-st-bg/60">Café & Pâtisserie Coréenne &bull; Paris 9e</span>
+                </div>
+            </div>
+
+            <div class="text-[11px] text-st-bg/70">
+                23 Rue Marguerite de Rochechouart, 75009 Paris
+            </div>
+
+            <div class="text-[10px] text-st-bg/40 font-normal">
+                &copy; 2026 DALDALI Paris. Direction créative par Aholic Studio.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

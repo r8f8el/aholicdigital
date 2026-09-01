@@ -12,4 +12,5 @@
 | 8 | **Rayson Mendes \| Nutricionista** | 5.0 ★ | 30 | (64) 99957-5323 | **Do Zero** | *(Nenhum)* | Nutrição esportiva, emagrecimento e BJJ em Catalão - GO. Site em 'Modern Organic Editorial' com fotos reais do Maps e Instagram. | proposta |
 | 9 | **Brenda Rodrigues \| Arquitetura & Interiores** | 5.0 ★ | 32 | (63) 98466-9633 | **Do Zero** | *(Nenhum)* | Arquiteta CASACOR Tocantins 2023 (Spa Itá). Portfólio catálogo 'Lumina Architecture' com briefing interativo. | proposta |
 | 10 | **Lucas Aguiar \| Nutrição Clínica & Comportamental** | 5.0 ★ | 56 | (85) 98211-9199 | **Do Zero** | *(Nenhum)* | Mestre UNIFOR, Einstein & AMBULIM/USP em Fortaleza - CE. Site 'Lumina Luxury Editorial' com fotos reais. | site_pronto |
+| 11 | **DALDALI \| Café & Pâtisserie Coréenne** | 4.9 ★ | 48 | *(Instagram DM)* | **Do Zero** | *(Nenhum)* | Café de especialidade e doces tradicionais coreanos (Yakgwa/Matcha) em Pigalle, Paris 9e. Sem site oficial. Estilo 'Super Travel Luxury'. | site_pronto |
 
