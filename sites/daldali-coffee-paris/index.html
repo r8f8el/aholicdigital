@@ -27,7 +27,7 @@
     <title>DALDALI • Café & Pâtisserie Coréenne | Paris 9e (Pigalle)</title>
     <meta name="description" content="Coffee shop et salon de thé coréen à Paris (23 Rue Marguerite de Rochechouart). Yakgwa artisanal au miel, Matcha Latte, Banana Latte et café de spécialité.">
 
-    <!-- Google Fonts: League Spartan (100% Fidelity) + Playfair Display -->
+    <!-- Google Fonts: League Spartan + Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
@@ -42,14 +42,16 @@
                 extend: {
                     colors: {
                         st: {
-                            bg: '#fdf8f3',
-                            surface: '#f5f0eb',
-                            card: '#ffffff',
-                            accent: '#e4a4bd',
-                            accentDark: '#c8809c',
-                            text: '#262626',
-                            muted: '#737373',
-                            border: 'rgba(38, 38, 38, 0.08)'
+                            bg: '#FAF8F4',
+                            surface: '#F2EFEB',
+                            card: '#FFFFFF',
+                            green: '#263B2F',
+                            greenDark: '#1A2920',
+                            greenLight: '#8EA68B',
+                            greenMuted: '#3A5442',
+                            text: '#1F2421',
+                            muted: '#5C635E',
+                            border: 'rgba(38, 59, 47, 0.12)'
                         }
                     },
                     fontFamily: {
@@ -67,7 +69,7 @@
     <style>
         * { font-family: 'League Spartan', sans-serif; }
         .font-editorial { font-family: 'Playfair Display', Georgia, serif; }
-        ::selection { background: #e4a4bd; color: #262626; }
+        ::selection { background: #263B2F; color: #FAF8F4; }
 
         /* Slow Bounce for Floating Badge */
         @keyframes bounce-slow {
@@ -128,7 +130,7 @@
         .portfolio-overlay-circle {
             width: 88px;
             height: 88px;
-            background: #262626;
+            background: #263B2F;
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -153,25 +155,26 @@
         .service-card:hover {
             transform: translateY(-8px);
             background: #ffffff;
-            box-shadow: 0 24px 48px -12px rgba(38, 38, 38, 0.08);
+            border-color: #263B2F;
+            box-shadow: 0 24px 48px -12px rgba(38, 59, 47, 0.15);
         }
     </style>
 </head>
-<body class="bg-st-bg text-st-text font-sans antialiased overflow-x-hidden relative selection:bg-st-accent selection:text-st-text">
+<body class="bg-st-bg text-st-text font-sans antialiased overflow-x-hidden relative selection:bg-st-green selection:text-st-bg">
 
     <!-- Top Luxury Header Bar -->
-    <header class="sticky top-0 z-50 bg-st-bg/90 backdrop-blur-md border-b border-st-border h-20 transition-all duration-300">
+    <header class="sticky top-0 z-50 bg-st-bg/95 backdrop-blur-md border-b border-st-border h-20 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 sm:px-12 h-full flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full bg-st-text text-st-bg flex items-center justify-center font-bold text-sm tracking-wider">
-                    달
+            <!-- Brand Logo with Official Daldali Bunny -->
+            <a href="#" class="flex items-center gap-3.5 group">
+                <div class="w-12 h-12 rounded-full bg-st-card border border-st-border p-1 shadow-sm flex items-center justify-center overflow-hidden group-hover:border-st-green transition-colors">
+                    <img src="assets/logo-daldali.png" alt="Daldali Logo" class="w-full h-full object-contain">
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xl tracking-[0.2em] font-black uppercase text-st-text group-hover:text-st-accentDark transition-colors">
+                    <span class="text-xl tracking-[0.2em] font-black uppercase text-st-text group-hover:text-st-green transition-colors">
                         DALDALI
                     </span>
-                    <span class="text-[9px] tracking-[0.28em] font-semibold text-st-muted uppercase">
+                    <span class="text-[9px] tracking-[0.28em] font-semibold text-st-greenMuted uppercase">
                         Café &bull; Pâtisserie &bull; Paris 9e
                     </span>
                 </div>
@@ -179,17 +182,17 @@
 
             <!-- Navigation Links -->
             <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.2em] font-bold text-st-text/80">
-                <a href="#univers" class="hover:text-st-accentDark transition-colors">L'Univers</a>
-                <a href="#specialites" class="hover:text-st-accentDark transition-colors">La Carte</a>
-                <a href="#galerie" class="hover:text-st-accentDark transition-colors">Galerie</a>
-                <a href="#avis" class="hover:text-st-accentDark transition-colors">Avis & Éloges</a>
-                <a href="#visite" class="hover:text-st-accentDark transition-colors">Venir au Café</a>
+                <a href="#univers" class="hover:text-st-green transition-colors">L'Univers</a>
+                <a href="#specialites" class="hover:text-st-green transition-colors">La Carte</a>
+                <a href="#galerie" class="hover:text-st-green transition-colors">Galerie</a>
+                <a href="#avis" class="hover:text-st-green transition-colors">Avis & Éloges</a>
+                <a href="#visite" class="hover:text-st-green transition-colors">Venir au Café</a>
             </nav>
 
-            <!-- Instagram DM Action Button -->
+            <!-- Instagram DM Action Button in Signature Green -->
             <a href="https://instagram.com/daldali_paris" 
                target="_blank" 
-               class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-st-text text-st-bg hover:bg-st-accentDark text-xs uppercase tracking-[0.18em] font-bold transition-all duration-300 shadow-sm">
+               class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-st-green text-st-bg hover:bg-st-greenDark text-xs uppercase tracking-[0.18em] font-bold transition-all duration-300 shadow-md shadow-st-green/10">
                 <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
                 <span class="hidden sm:inline">@daldali_paris</span>
                 <span class="sm:hidden">Instagram</span>
@@ -197,21 +200,21 @@
         </div>
     </header>
 
-    <!-- Hero Section: Super Travel Luxury Architecture -->
+    <!-- Hero Section: Super Travel Luxury with Vert Daldali -->
     <section class="relative min-h-[85vh] flex items-center justify-center py-16 px-6 sm:px-12 overflow-hidden border-b border-st-border">
         <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             <!-- Left Editorial Text -->
             <div class="lg:col-span-7 flex flex-col items-start text-left">
                 <!-- Location & Heritage Pill -->
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-st-surface border border-st-border text-st-text text-xs uppercase tracking-[0.2em] font-bold mb-6">
-                    <span class="w-2 h-2 rounded-full bg-st-accent animate-pulse"></span>
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-st-surface border border-st-border text-st-green text-xs uppercase tracking-[0.2em] font-bold mb-6">
+                    <span class="w-2.5 h-2.5 rounded-full bg-st-green animate-pulse"></span>
                     <span>Pigalle &bull; 23 Rue Marguerite de Rochechouart</span>
                 </div>
 
                 <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95] text-st-text mb-6">
                     L'âme de Séoul <br>
-                    <span class="font-editorial lowercase italic font-normal text-st-accentDark text-3xl sm:text-5xl lg:text-6xl tracking-normal">rencontre le cœur de Paris.</span>
+                    <span class="font-editorial lowercase italic font-normal text-st-green text-3xl sm:text-5xl lg:text-6xl tracking-normal">rencontre le cœur de Paris.</span>
                 </h1>
 
                 <p class="text-base sm:text-lg text-st-muted font-normal leading-relaxed mb-8 max-w-xl">
@@ -221,7 +224,7 @@
                 <!-- Key Metrics Bar -->
                 <div class="grid grid-cols-3 gap-6 py-6 border-y border-st-border w-full mb-8">
                     <div>
-                        <span class="text-3xl sm:text-4xl font-black text-st-text block">4.9 ★</span>
+                        <span class="text-3xl sm:text-4xl font-black text-st-green block">4.9 ★</span>
                         <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Excellence Google Maps</span>
                     </div>
                     <div>
@@ -229,7 +232,7 @@
                         <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Pâtisseries Maison</span>
                     </div>
                     <div>
-                        <span class="text-3xl sm:text-4xl font-black text-st-accentDark block">Pigalle</span>
+                        <span class="text-3xl sm:text-4xl font-black text-st-green block">Pigalle</span>
                         <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Paris 9e Arrondissement</span>
                     </div>
                 </div>
@@ -237,38 +240,41 @@
                 <!-- CTAs -->
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
                     <a href="#specialites" 
-                       class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-st-text text-st-bg text-xs uppercase tracking-[0.2em] font-bold hover:bg-st-accentDark transition-all duration-300 shadow-lg">
+                       class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-st-green text-st-bg text-xs uppercase tracking-[0.2em] font-bold hover:bg-st-greenDark transition-all duration-300 shadow-xl shadow-st-green/15">
                         <span>Découvrir la Carte</span>
                         <i data-lucide="arrow-down" class="w-4 h-4"></i>
                     </a>
 
                     <a href="https://maps.google.com/?q=23+Rue+Marguerite+de+Rochechouart+75009+Paris" 
                        target="_blank"
-                       class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-st-text/20 bg-st-surface text-st-text hover:bg-st-card text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-st-accentDark"></i>
+                       class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-st-border bg-st-card text-st-text hover:bg-st-surface text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-st-green"></i>
                         <span>Itinéraire Métro</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Right Visual Image Card with Floating Concierge Badge -->
+            <!-- Right Visual Image Card with Floating Concierge Badge & Logo -->
             <div class="lg:col-span-5 relative">
                 <div class="luxury-img-card shadow-2xl border border-st-border bg-st-surface">
                     <img src="assets/hero-cafe.jpg" 
                          alt="Daldali Café Paris" 
                          class="w-full h-[520px] object-cover">
                     
-                    <div class="absolute inset-0 bg-gradient-to-t from-st-text/40 via-transparent to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-st-greenDark/50 via-transparent to-transparent pointer-events-none"></div>
                 </div>
 
-                <!-- Floating Luxury Badge (Karla Barros Style) -->
-                <div class="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 p-5 rounded-2xl bg-st-card border border-st-border shadow-2xl animate-bounce-slow flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-st-accent/30 text-st-accentDark flex items-center justify-center font-bold text-xl">
-                        ★
+                <!-- Floating Luxury Badge with Daldali Bunny Logo -->
+                <div class="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 p-4 sm:p-5 rounded-3xl bg-st-card border border-st-border shadow-2xl animate-bounce-slow flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-st-surface border border-st-border p-1.5 flex items-center justify-center">
+                        <img src="assets/logo-daldali.png" alt="Daldali Bunny" class="w-full h-full object-contain">
                     </div>
                     <div>
-                        <span class="text-xs uppercase tracking-[0.2em] font-black text-st-text block">Note 4.9 sur 5</span>
-                        <span class="text-[11px] text-st-muted font-medium">Recommandé par les guides parisiens</span>
+                        <div class="flex items-center gap-1.5 text-st-green">
+                            <span class="text-sm">★★★★★</span>
+                            <span class="text-xs uppercase tracking-[0.2em] font-black text-st-text">4.9 / 5</span>
+                        </div>
+                        <span class="text-[11px] text-st-muted font-medium block">Guide des Cafés &bull; Paris 9e</span>
                     </div>
                 </div>
             </div>
@@ -277,17 +283,17 @@
     </section>
 
     <!-- L'Univers & Le Concept: Seul & Paris -->
-    <section id="univers" class="py-24 px-6 sm:px-12 border-b border-st-border bg-st-surface/50">
+    <section id="univers" class="py-24 px-6 sm:px-12 border-b border-st-border bg-st-surface/60">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <div class="lg:col-span-6 flex flex-col items-start">
-                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-accentDark mb-3">L'Art de la Pause Café</span>
+                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-green mb-3">L'Art de la Pause Café</span>
                     <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-st-text mb-6 leading-tight">
                         Une escale gourmande & poétique à Rochechouart.
                     </h2>
                     <p class="text-base text-st-muted font-normal leading-relaxed mb-6">
-                        Fondé en 2023, <strong>DALDALI</strong> est né du désir d'apporter à Paris l'élégance minimaliste et la chaleur des salons de thé de Séoul. Ici, chaque détail est pensé pour créer une parenthèse de sérénité au milieu de l'effervescence parisienne.
+                        Fondé en 2023, <strong>DALDALI</strong> est né du désir d'apporter à Paris l'élégance minimaliste et la chaleur des salons de thé de Séoul. Ici, chaque détail — du vert profond apaisant de nos murs à nos céramiques artisanales — est pensé pour créer une parenthèse de sérénité.
                     </p>
                     <p class="text-base text-st-muted font-normal leading-relaxed mb-8">
                         Nos <em>Yakgwa</em> sont confectionnés selon la recette traditionnelle à base de farine de blé, d'huile de sésame, de gingembre et de miel précieux, offrant une texture fondante et croustillante incomparable.
@@ -295,21 +301,21 @@
 
                     <div class="flex items-center gap-6">
                         <div class="p-4 rounded-2xl bg-st-card border border-st-border">
-                            <span class="text-xs uppercase tracking-[0.18em] font-bold text-st-text block mb-1">Céramiques Uniques</span>
+                            <span class="text-xs uppercase tracking-[0.18em] font-bold text-st-green block mb-1">Céramiques Uniques</span>
                             <span class="text-xs text-st-muted">Art de la table coréen raffiné</span>
                         </div>
                         <div class="p-4 rounded-2xl bg-st-card border border-st-border">
-                            <span class="text-xs uppercase tracking-[0.18em] font-bold text-st-text block mb-1">Option Végane</span>
+                            <span class="text-xs uppercase tracking-[0.18em] font-bold text-st-green block mb-1">Option Végane</span>
                             <span class="text-xs text-st-muted">Laits végétaux d'avoine & soja</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="lg:col-span-6 grid grid-cols-2 gap-4">
-                    <div class="luxury-img-card h-80">
+                    <div class="luxury-img-card h-80 shadow-lg">
                         <img src="assets/interior-cozy.jpg" alt="Intérieur Daldali" class="w-full h-full object-cover">
                     </div>
-                    <div class="luxury-img-card h-80 mt-8">
+                    <div class="luxury-img-card h-80 mt-8 shadow-lg">
                         <img src="assets/ceramics.jpg" alt="Art de la table" class="w-full h-full object-cover">
                     </div>
                 </div>
@@ -324,7 +330,7 @@
             
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div>
-                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-accentDark block mb-3">Saveurs Signatures</span>
+                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-green block mb-3">Saveurs Signatures</span>
                     <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-st-text">
                         La Carte des Douceurs
                     </h2>
@@ -340,16 +346,16 @@
                 <!-- Spécialité 1 -->
                 <div class="service-card p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-st-accent/20 text-st-accentDark flex items-center justify-center font-bold mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-st-green/10 text-st-green flex items-center justify-center font-bold text-lg mb-6">
                             01
                         </div>
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-accentDark block mb-1">Pâtisserie Signature</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-green block mb-1">Pâtisserie Signature</span>
                         <h3 class="text-xl font-black uppercase text-st-text mb-3">Yakgwa au Miel</h3>
                         <p class="text-xs text-st-muted leading-relaxed font-normal mb-6">
                             Le biscuit impérial coréen par excellence. Frit lentement et confit dans un sirop de miel et gingembre frais.
                         </p>
                     </div>
-                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-text">
+                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-green">
                         Fait Maison &bull; Incontournable
                     </div>
                 </div>
@@ -357,16 +363,16 @@
                 <!-- Spécialité 2 -->
                 <div class="service-card p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-st-accent/20 text-st-accentDark flex items-center justify-center font-bold mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-st-green/10 text-st-green flex items-center justify-center font-bold text-lg mb-6">
                             02
                         </div>
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-accentDark block mb-1">Cérémonial Japon/Corée</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-green block mb-1">Cérémonial Japon/Corée</span>
                         <h3 class="text-xl font-black uppercase text-st-text mb-3">Matcha Latte</h3>
                         <p class="text-xs text-st-muted leading-relaxed font-normal mb-6">
                             Poudre de thé vert pure d'ombrage, fouettée au chasen et accompagnée de lait onctueux chaud ou glacé.
                         </p>
                     </div>
-                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-text">
+                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-green">
                         Chaud &bull; Iced Latte
                     </div>
                 </div>
@@ -374,16 +380,16 @@
                 <!-- Spécialité 3 -->
                 <div class="service-card p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-st-accent/20 text-st-accentDark flex items-center justify-center font-bold mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-st-green/10 text-st-green flex items-center justify-center font-bold text-lg mb-6">
                             03
                         </div>
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-accentDark block mb-1">Création Maison</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-green block mb-1">Création Maison</span>
                         <h3 class="text-xl font-black uppercase text-st-text mb-3">Banana Latte</h3>
                         <p class="text-xs text-st-muted leading-relaxed font-normal mb-6">
                             Une douceur régressive culte en Corée, revisitée avec un purée de banane maison et shot d'espresso intense.
                         </p>
                     </div>
-                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-text">
+                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-green">
                         Signature Gourmande
                     </div>
                 </div>
@@ -391,16 +397,16 @@
                 <!-- Spécialité 4 -->
                 <div class="service-card p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-st-accent/20 text-st-accentDark flex items-center justify-center font-bold mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-st-green/10 text-st-green flex items-center justify-center font-bold text-lg mb-6">
                             04
                         </div>
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-accentDark block mb-1">Origines Sélectionnées</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-st-green block mb-1">Origines Sélectionnées</span>
                         <h3 class="text-xl font-black uppercase text-st-text mb-3">Café de Spécialité</h3>
                         <p class="text-xs text-st-muted leading-relaxed font-normal mb-6">
                             Espresso calibré, Flat White velouté et extractions filtres douces mettant en valeur les notes florales et chocolatées.
                         </p>
                     </div>
-                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-text">
+                    <div class="pt-4 border-t border-st-border text-xs uppercase tracking-[0.18em] font-bold text-st-green">
                         Micro-Lots &bull; Éthique
                     </div>
                 </div>
@@ -409,22 +415,22 @@
         </div>
     </section>
 
-    <!-- Galerie Stagger Grid 100px (Signature Super Travel Luxury) -->
+    <!-- Galerie Stagger Grid 100px -->
     <section id="galerie" class="py-24 px-6 sm:px-12 border-b border-st-border bg-st-surface/40">
         <div class="max-w-7xl mx-auto">
             
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-accentDark block mb-2">Moments & Textures</span>
+                <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-green block mb-2">Moments & Textures</span>
                 <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-st-text">
                     La Galerie Daldali
                 </h2>
-                <div class="w-16 h-1 bg-st-accent mx-auto mt-4 rounded-full"></div>
+                <div class="w-16 h-1 bg-st-green mx-auto mt-4 rounded-full"></div>
             </div>
 
             <!-- Staggered Offset Grid -->
             <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                 
-                <!-- Item 1 (Col 1) -->
+                <!-- Item 1 -->
                 <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-st-border bg-st-card">
                     <img src="assets/yakgwa-pastry.jpg" alt="Yakgwa Coréen" class="w-full h-full object-cover">
                     <div class="portfolio-overlay-circle">
@@ -432,7 +438,7 @@
                     </div>
                 </div>
 
-                <!-- Item 2 (Col 2 - Offset +100px) -->
+                <!-- Item 2 (Offset +100px) -->
                 <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-st-border bg-st-card">
                     <img src="assets/matcha-latte.jpg" alt="Matcha Latte Cérémonial" class="w-full h-full object-cover">
                     <div class="portfolio-overlay-circle">
@@ -440,7 +446,7 @@
                     </div>
                 </div>
 
-                <!-- Item 3 (Col 1) -->
+                <!-- Item 3 -->
                 <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-st-border bg-st-card">
                     <img src="assets/barista-pour.jpg" alt="Extraction Barista" class="w-full h-full object-cover">
                     <div class="portfolio-overlay-circle">
@@ -448,7 +454,7 @@
                     </div>
                 </div>
 
-                <!-- Item 4 (Col 2 - Offset +100px) -->
+                <!-- Item 4 (Offset +100px) -->
                 <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-st-border bg-st-card">
                     <img src="assets/specialty-coffee.jpg" alt="Art du Café" class="w-full h-full object-cover">
                     <div class="portfolio-overlay-circle">
@@ -466,7 +472,7 @@
         <div class="max-w-7xl mx-auto">
             
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-st-accent/20 text-st-accentDark text-xs uppercase tracking-widest font-bold mb-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-st-green/10 text-st-green text-xs uppercase tracking-widest font-bold mb-4">
                     <span>Avis Google Maps Vérifiés</span>
                 </div>
                 <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-st-text">
@@ -476,10 +482,9 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <!-- Review 1 -->
                 <div class="p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
                     <div>
-                        <div class="text-st-accentDark text-lg mb-4">★★★★★</div>
+                        <div class="text-st-green text-lg mb-4">★★★★★</div>
                         <p class="text-sm text-st-text/80 font-normal leading-relaxed italic mb-6">
                             "Un véritable coup de cœur ! Le lieu est cosy et apaisant. Les Yakgwa sont incroyablement bons, fondants et pas trop sucrés. Le matcha latte est dosé à la perfection. Une adresse incontournable dans le 9e."
                         </p>
@@ -490,10 +495,9 @@
                     </div>
                 </div>
 
-                <!-- Review 2 -->
                 <div class="p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
                     <div>
-                        <div class="text-st-accentDark text-lg mb-4">★★★★★</div>
+                        <div class="text-st-green text-lg mb-4">★★★★★</div>
                         <p class="text-sm text-st-text/80 font-normal leading-relaxed italic mb-6">
                             "L'accueil est d'une gentillesse rare. On voyage directement à Séoul grâce aux pâtisseries traditionnelles et au design soigné. Bravo pour la qualité du café de spécialité !"
                         </p>
@@ -504,10 +508,9 @@
                     </div>
                 </div>
 
-                <!-- Review 3 -->
                 <div class="p-8 rounded-3xl bg-st-surface border border-st-border flex flex-col justify-between">
                     <div>
-                        <div class="text-st-accentDark text-lg mb-4">★★★★★</div>
+                        <div class="text-st-green text-lg mb-4">★★★★★</div>
                         <p class="text-sm text-st-text/80 font-normal leading-relaxed italic mb-6">
                             "Le banana latte glacé est addictif et les douceurs au sésame et miel sont un régal absolu. Superbe atmosphère pour lire ou se poser tranquillement près de Pigalle."
                         </p>
@@ -529,31 +532,31 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <div class="lg:col-span-7">
-                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-accentDark block mb-2">Nous Rendre Visite</span>
+                    <span class="text-xs uppercase tracking-[0.25em] font-bold text-st-green block mb-2">Nous Rendre Visite</span>
                     <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-st-text mb-6">
                         Venez savourer l'instant au café.
                     </h2>
                     
                     <div class="space-y-4 mb-8 text-sm text-st-muted font-normal">
                         <div class="flex items-start gap-3">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-st-accentDark shrink-0 mt-0.5"></i>
+                            <i data-lucide="map-pin" class="w-5 h-5 text-st-green shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-st-text font-bold block">Adresse :</strong>
                                 23 Rue Marguerite de Rochechouart, 75009 Paris (France)
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="train" class="w-5 h-5 text-st-accentDark shrink-0 mt-0.5"></i>
+                            <i data-lucide="train" class="w-5 h-5 text-st-green shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-st-text font-bold block">Métro à proximité :</strong>
                                 Cadet (Ligne 7) &bull; Notre-Dame-de-Lorette (Ligne 12) &bull; Anvers (Ligne 2)
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="instagram" class="w-5 h-5 text-st-accentDark shrink-0 mt-0.5"></i>
+                            <i data-lucide="instagram" class="w-5 h-5 text-st-green shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-st-text font-bold block">Actualités & Horaires en direct :</strong>
-                                Suivez nos ouvertures et créations sur <a href="https://instagram.com/daldali_paris" target="_blank" class="text-st-accentDark font-bold underline">@daldali_paris</a>
+                                Suivez nos ouvertures et créations sur <a href="https://instagram.com/daldali_paris" target="_blank" class="text-st-green font-bold underline">@daldali_paris</a>
                             </div>
                         </div>
                     </div>
@@ -561,7 +564,7 @@
                     <div class="flex flex-wrap gap-4">
                         <a href="https://maps.google.com/?q=23+Rue+Marguerite+de+Rochechouart+75009+Paris" 
                            target="_blank"
-                           class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-st-text text-st-bg text-xs uppercase tracking-[0.18em] font-bold hover:bg-st-accentDark transition-all duration-300">
+                           class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-st-green text-st-bg text-xs uppercase tracking-[0.18em] font-bold hover:bg-st-greenDark transition-all duration-300 shadow-md">
                             <i data-lucide="navigation" class="w-4 h-4"></i>
                             <span>Ouvrir dans Google Maps</span>
                         </a>
@@ -569,7 +572,7 @@
                         <a href="https://instagram.com/daldali_paris" 
                            target="_blank"
                            class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-st-border bg-st-surface text-st-text text-xs uppercase tracking-[0.18em] font-bold hover:bg-st-bg transition-all duration-300">
-                            <i data-lucide="send" class="w-4 h-4 text-st-accentDark"></i>
+                            <i data-lucide="send" class="w-4 h-4 text-st-green"></i>
                             <span>Écrire sur Instagram</span>
                         </a>
                     </div>
@@ -592,11 +595,11 @@
     </section>
 
     <!-- Luxury Footer -->
-    <footer class="py-16 px-6 sm:px-12 bg-st-text text-st-bg text-xs tracking-widest uppercase font-bold">
+    <footer class="py-16 px-6 sm:px-12 bg-st-greenDark text-st-bg text-xs tracking-widest uppercase font-bold">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
             <div class="flex items-center gap-4">
-                <div class="w-10 h-10 rounded-full bg-st-accent text-st-text flex items-center justify-center font-bold text-sm">
-                    달
+                <div class="w-12 h-12 rounded-full bg-st-card p-1 flex items-center justify-center shadow-md">
+                    <img src="assets/logo-daldali.png" alt="Daldali Logo" class="w-full h-full object-contain">
                 </div>
                 <div>
                     <span class="text-base font-black block text-st-bg">DALDALI</span>

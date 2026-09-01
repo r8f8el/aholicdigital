@@ -42,14 +42,16 @@
                 extend: {
                     colors: {
                         st: {
-                            bg: '#fdf8f3',
-                            surface: '#f5f0eb',
-                            card: '#ffffff',
-                            accent: '#e4a4bd',
-                            accentDark: '#c8809c',
-                            text: '#262626',
-                            muted: '#737373',
-                            border: 'rgba(38, 38, 38, 0.08)'
+                            bg: '#FAF8F4',
+                            surface: '#F2EFEB',
+                            card: '#FFFFFF',
+                            green: '#263B2F',
+                            greenDark: '#1A2920',
+                            greenLight: '#8EA68B',
+                            greenMuted: '#3A5442',
+                            text: '#1F2421',
+                            muted: '#5C635E',
+                            border: 'rgba(38, 59, 47, 0.12)'
                         }
                     },
                     fontFamily: {
@@ -64,51 +66,51 @@
     <style>
         * { font-family: 'League Spartan', sans-serif; }
         .font-editorial { font-family: 'Playfair Display', Georgia, serif; }
-        ::selection { background: #e4a4bd; color: #262626; }
+        ::selection { background: #263B2F; color: #FAF8F4; }
 
         [contenteditable="true"] {
-            outline: 1px dashed rgba(200, 128, 156, 0.5);
+            outline: 1px dashed rgba(38, 59, 47, 0.5);
             outline-offset: 4px;
             border-radius: 4px;
         }
         [contenteditable="true"]:focus {
-            outline: 2px solid #c8809c;
-            background: rgba(228, 164, 189, 0.1);
+            outline: 2px solid #263B2F;
+            background: rgba(38, 59, 47, 0.08);
         }
     </style>
 </head>
-<body class="bg-st-bg text-st-text font-sans antialiased overflow-x-hidden relative selection:bg-st-accent selection:text-st-text pt-14">
+<body class="bg-st-bg text-st-text font-sans antialiased overflow-x-hidden relative selection:bg-st-green selection:text-st-bg pt-14">
 
     <!-- Top Editor Floating Bar -->
-    <div class="fixed top-0 left-0 right-0 h-14 bg-st-surface border-b border-st-accent/40 z-[100] px-6 flex items-center justify-between text-xs font-mono">
+    <div class="fixed top-0 left-0 right-0 h-14 bg-st-surface border-b border-st-green/30 z-[100] px-6 flex items-center justify-between text-xs font-mono">
         <div class="flex items-center gap-3">
-            <span class="w-2.5 h-2.5 rounded-full bg-st-accentDark animate-pulse"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-st-green animate-pulse"></span>
             <span class="text-st-text font-bold uppercase tracking-wider">Mode Éditeur Visuel &bull; DALDALI Paris</span>
             <span class="text-st-muted hidden sm:inline">| Cliquez sur les textes pour éditer</span>
         </div>
         <div class="flex items-center gap-3">
-            <button onclick="alert('Modifications sauvegardées localement !')" class="px-4 py-1.5 rounded-full bg-st-text text-st-bg font-bold hover:bg-st-accentDark transition-colors flex items-center gap-1.5">
+            <button onclick="alert('Modifications sauvegardées localement !')" class="px-4 py-1.5 rounded-full bg-st-green text-st-bg font-bold hover:bg-st-greenDark transition-colors flex items-center gap-1.5">
                 <i data-lucide="save" class="w-3.5 h-3.5"></i>
                 <span>Enregistrer</span>
             </button>
-            <a href="index.html" class="px-3 py-1.5 rounded-full border border-st-border hover:border-st-accent text-st-text transition-colors">
+            <a href="index.html" class="px-3 py-1.5 rounded-full border border-st-border hover:border-st-green text-st-text transition-colors">
                 Voir le Site
             </a>
         </div>
     </div>
 
     <!-- Header -->
-    <header class="sticky top-14 z-50 bg-st-bg/90 backdrop-blur-md border-b border-st-border h-20 transition-all duration-300">
+    <header class="sticky top-14 z-50 bg-st-bg/95 backdrop-blur-md border-b border-st-border h-20 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 sm:px-12 h-full flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full bg-st-text text-st-bg flex items-center justify-center font-bold text-sm tracking-wider">
-                    달
+            <a href="#" class="flex items-center gap-3.5 group">
+                <div class="w-12 h-12 rounded-full bg-st-card border border-st-border p-1 shadow-sm flex items-center justify-center overflow-hidden">
+                    <img src="assets/logo-daldali.png" alt="Daldali Logo" class="w-full h-full object-contain">
                 </div>
                 <div class="flex flex-col">
                     <span contenteditable="true" class="text-xl tracking-[0.2em] font-black uppercase text-st-text">
                         DALDALI
                     </span>
-                    <span contenteditable="true" class="text-[9px] tracking-[0.28em] font-semibold text-st-muted uppercase">
+                    <span contenteditable="true" class="text-[9px] tracking-[0.28em] font-semibold text-st-greenMuted uppercase">
                         Café &bull; Pâtisserie &bull; Paris 9e
                     </span>
                 </div>
@@ -121,7 +123,7 @@
                 <a href="#visite">Venir au Café</a>
             </nav>
 
-            <a href="https://instagram.com/daldali_paris" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-st-text text-st-bg text-xs uppercase tracking-[0.18em] font-bold">
+            <a href="https://instagram.com/daldali_paris" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-st-green text-st-bg text-xs uppercase tracking-[0.18em] font-bold">
                 <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
                 <span>@daldali_paris</span>
             </a>
@@ -133,14 +135,14 @@
         <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             <div class="lg:col-span-7 flex flex-col items-start text-left">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-st-surface border border-st-border text-st-text text-xs uppercase tracking-[0.2em] font-bold mb-6">
-                    <span class="w-2 h-2 rounded-full bg-st-accent"></span>
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-st-surface border border-st-border text-st-green text-xs uppercase tracking-[0.2em] font-bold mb-6">
+                    <span class="w-2.5 h-2.5 rounded-full bg-st-green"></span>
                     <span contenteditable="true">Pigalle &bull; 23 Rue Marguerite de Rochechouart</span>
                 </div>
 
                 <h1 contenteditable="true" class="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95] text-st-text mb-6">
                     L'âme de Séoul <br>
-                    <span class="font-editorial lowercase italic font-normal text-st-accentDark text-3xl sm:text-5xl lg:text-6xl tracking-normal">rencontre le cœur de Paris.</span>
+                    <span class="font-editorial lowercase italic font-normal text-st-green text-3xl sm:text-5xl lg:text-6xl tracking-normal">rencontre le cœur de Paris.</span>
                 </h1>
 
                 <p contenteditable="true" class="text-base sm:text-lg text-st-muted font-normal leading-relaxed mb-8 max-w-xl">
@@ -149,16 +151,16 @@
 
                 <div class="grid grid-cols-3 gap-6 py-6 border-y border-st-border w-full mb-8">
                     <div>
-                        <span contenteditable="true" class="text-3xl sm:text-4xl font-black text-st-text block">4.9 ★</span>
-                        <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Google Maps</span>
+                        <span contenteditable="true" class="text-3xl sm:text-4xl font-black text-st-green block">4.9 ★</span>
+                        <span contenteditable="true" class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Google Maps</span>
                     </div>
                     <div>
                         <span contenteditable="true" class="text-3xl sm:text-4xl font-black text-st-text block">100%</span>
-                        <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Pâtisseries Maison</span>
+                        <span contenteditable="true" class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Pâtisseries Maison</span>
                     </div>
                     <div>
-                        <span contenteditable="true" class="text-3xl sm:text-4xl font-black text-st-accentDark block">Pigalle</span>
-                        <span class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Paris 9e</span>
+                        <span contenteditable="true" class="text-3xl sm:text-4xl font-black text-st-green block">Pigalle</span>
+                        <span contenteditable="true" class="text-[10px] uppercase tracking-[0.18em] text-st-muted font-semibold">Paris 9e</span>
                     </div>
                 </div>
             </div>
@@ -173,7 +175,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-16 px-6 sm:px-12 bg-st-text text-st-bg text-xs tracking-widest uppercase font-bold text-center">
+    <footer class="py-16 px-6 sm:px-12 bg-st-greenDark text-st-bg text-xs tracking-widest uppercase font-bold text-center">
         <p>&copy; 2026 DALDALI Paris. Éditeur Visuel Actif.</p>
     </footer>
 
