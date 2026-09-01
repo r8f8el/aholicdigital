@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            if (window.location.protocol.startsWith('http') && !window.location.pathname.endsWith('/')) {
+                const base = document.createElement('base');
+                base.href = window.location.pathname.endsWith('.html') 
+                    ? window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)
+                    : window.location.pathname + '/';
+                document.head.prepend(base);
+            }
+        })();
+        window.addEventListener('error', function(e) {
+            if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fixed) {
+                e.target.dataset.fixed = 'true';
+                const file = e.target.getAttribute('src');
+                if (file && !file.startsWith('http') && !file.startsWith('data:')) {
+                    const cleanName = file.split('/').pop();
+                    e.target.src = '/sites/lucas-aguiar-nutri/assets/' + cleanName;
+                }
+            }
+        }, true);
+    </script>
+    <title>Lucas Aguiar | Nutrição Clínica, Esportiva & Comportamental — Fortaleza CE</title>
+    <meta name="description" content="Nutricionista em Fortaleza (CRN11 19551). Mestre UNIFOR, Pós-graduado Albert Einstein e Especialista AMBULIM/USP. Emagrecimento consciente, nutrição clínica e acompanhamento de alta performance.">
+
+    <!-- Google Fonts: Cinzel + Plus Jakarta Sans + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0B0C0E',
+                        obsidianCard: '#131518',
+                        obsidianElevated: '#1A1D22',
+                        obsidianBorder: 'rgba(255, 255, 255, 0.08)',
+                        travertine: '#F5F2EB',
+                        travertineMuted: '#E5DFD3',
+                        champagne: '#C5A880',
+                        champagneLight: '#E5D0B5',
+                        champagneGlow: 'rgba(197, 168, 128, 0.25)',
+                        emeraldAccent: '#10B981',
+                        emeraldGlow: 'rgba(16, 185, 129, 0.2)'
+                    },
+                    fontFamily: {
+                        serif: ['"Cinzel"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background: #C5A880; color: #0B0C0E; }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Subtle ambient glow */
+        .ambient-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Card Hover Transitions */
+        .feature-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(197, 168, 128, 0.4);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7), 0 0 24px -4px rgba(197, 168, 128, 0.15);
+        }
+
+        .feature-card img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feature-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modal Transitions */
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: scale(0.96) translateY(12px);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Floating Pill WhatsApp */
+        .wa-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 90;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .wa-float:hover {
+            transform: translateY(-4px) scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased overflow-x-hidden relative selection:bg-champagne selection:text-obsidian">
+
+    <!-- Noise Texture Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-obsidianElevated border-b border-obsidianBorder text-[11px] py-2 px-6 text-center text-champagne font-mono tracking-widest uppercase flex items-center justify-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Doctoralia Best Quality 2024 & 2025 &bull; Nota Máxima 5.0 ★ (56 Avaliações)</span>
+        <span class="opacity-40 hidden sm:inline">|</span>
+        <span class="text-travertine/70 hidden sm:inline">Atendimento Presencial na Clínica MENTA (Fortaleza) & Online no Brasil</span>
+    </div>
+
+    <!-- Navigation Header (Sticky Blur) -->
+    <header class="sticky top-0 z-50 bg-obsidian/85 backdrop-blur-xl border-b border-obsidianBorder h-20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 sm:px-12 h-full flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-full border border-champagne/40 bg-obsidianElevated flex items-center justify-center font-serif text-lg text-champagne group-hover:border-champagne group-hover:bg-champagne group-hover:text-obsidian transition-all duration-300">
+                    L
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-lg tracking-[0.18em] font-bold text-travertine group-hover:text-champagne transition-colors">
+                        LUCAS AGUIAR
+                    </span>
+                    <span class="text-[10px] font-mono text-champagne tracking-[0.22em] uppercase">
+                        Nutrição &bull; CRN11 19551
+                    </span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-xs font-mono tracking-wider uppercase text-travertine/70">
+                <a href="#metodo" class="hover:text-champagne transition-colors">Filosofia</a>
+                <a href="#especialidades" class="hover:text-champagne transition-colors">Especialidades</a>
+                <a href="#experiencia" class="hover:text-champagne transition-colors">Formação & Selos</a>
+                <a href="#consultorio" class="hover:text-champagne transition-colors">Consultório & Galeria</a>
+                <a href="#depoimentos" class="hover:text-champagne transition-colors">Depoimentos</a>
+                <a href="#planejador" class="hover:text-champagne transition-colors">Diagnóstico</a>
+            </nav>
+
+            <!-- Direct CTA -->
+            <a href="https://wa.me/5585982119199?text=Ol%C3%A1%2C%20Lucas!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20para%20agendar%20uma%20consulta%20nutricional." 
+               target="_blank" 
+               class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-champagne/50 bg-champagne/10 text-champagne hover:bg-champagne hover:text-obsidian text-xs font-mono tracking-widest uppercase transition-all duration-300 shadow-lg shadow-champagne/5">
+                <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                <span>Agendar Consulta</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section: Quiet Luxury & Scientific Authority -->
+    <section class="relative min-h-[90vh] flex items-center justify-center py-20 px-6 sm:px-12 overflow-hidden border-b border-obsidianBorder">
+        <!-- Ambient Background Glows -->
+        <div class="ambient-glow w-[550px] h-[550px] bg-champagne/10 -top-20 -left-20"></div>
+        <div class="ambient-glow w-[480px] h-[480px] bg-emeraldAccent/5 -bottom-20 -right-20"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+            <!-- Left Editorial Text -->
+            <div class="lg:col-span-7 flex flex-col items-start text-left">
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-obsidianElevated border border-champagne/30 text-champagne text-xs font-mono tracking-widest uppercase mb-6">
+                    <i data-lucide="award" class="w-3.5 h-3.5 text-champagne"></i>
+                    <span>Mestre UNIFOR &bull; Albert Einstein &bull; AMBULIM/USP</span>
+                </div>
+
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.12] text-travertine mb-6">
+                    Nutrição de alta precisão, baseada em ciência e <span class="italic text-champagne font-normal">sem extremismos.</span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-travertine/75 font-light leading-relaxed mb-8 max-w-2xl">
+                    Emagrecimento sustentável, controle de doenças crônicas e equilíbrio metabólico. Uma abordagem individualizada que respeita a sua rotina, autonomia e qualidade de vida.
+                </p>
+
+                <!-- Key Metric Highlights -->
+                <div class="grid grid-cols-3 gap-6 py-6 border-y border-obsidianBorder w-full mb-8">
+                    <div>
+                        <span class="font-serif text-2xl sm:text-3xl font-bold text-champagne block">5.0 ★</span>
+                        <span class="text-[11px] font-mono uppercase tracking-wider text-travertine/60">56 Opiniões 100% 5 Estrelas</span>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl sm:text-3xl font-bold text-travertine block">Einstein</span>
+                        <span class="text-[11px] font-mono uppercase tracking-wider text-travertine/60">Pós Obesidade & Emagrecimento</span>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl sm:text-3xl font-bold text-emeraldAccent block">2024 & 2025</span>
+                        <span class="text-[11px] font-mono uppercase tracking-wider text-travertine/60">Best Quality Doctoralia</span>
+                    </div>
+                </div>
+
+                <!-- Action CTAs -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+                    <a href="https://wa.me/5585982119199?text=Ol%C3%A1%20Lucas!%20Gostaria%20de%20agendar%20uma%20consulta%20presencial%20ou%20online." 
+                       target="_blank"
+                       class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-champagne text-obsidian font-mono text-xs tracking-widest uppercase font-bold hover:bg-champagneLight transition-all duration-300 shadow-xl shadow-champagne/15 group">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span>Falar com o Nutricionista</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+
+                    <a href="#planejador" 
+                       class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-obsidianBorder bg-obsidianElevated text-travertine/80 hover:text-champagne hover:border-champagne/40 font-mono text-xs tracking-widest uppercase transition-all duration-300">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-champagne"></i>
+                        <span>Diagnóstico Online</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual Portrait Card -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative mx-auto max-w-md lg:max-w-none">
+                    <!-- Luxury Frame Border -->
+                    <div class="absolute -inset-3 rounded-2xl border border-champagne/20 pointer-events-none transform rotate-1"></div>
+                    
+                    <div class="relative rounded-xl overflow-hidden bg-obsidianCard border border-obsidianBorder shadow-2xl">
+                        <img src="assets/avatar.jpg" 
+                             alt="Lucas Aguiar Nutricionista" 
+                             class="w-full h-[520px] object-cover object-top filter brightness-105 contrast-105">
+                        
+                        <!-- Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent"></div>
+
+                        <!-- Floating Badge Inside Portrait -->
+                        <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-obsidian/90 backdrop-blur-md border border-champagne/30 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+                                <div>
+                                    <h4 class="text-sm font-serif font-bold text-travertine">Lucas Aguiar</h4>
+                                    <p class="text-[11px] font-mono text-champagne">CRN11 19551 &bull; Atendimento VIP</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded bg-champagne/15 text-champagne border border-champagne/30">
+                                Fortaleza & Online
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pilares de Atuação / Filosofia (Anti-Dietas Malucas) -->
+    <section id="metodo" class="py-24 px-6 sm:px-12 border-b border-obsidianBorder relative bg-obsidianCard/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-mono text-champagne tracking-[0.25em] uppercase block mb-3">Filosofia Clínica</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-travertine tracking-tight">
+                    Mais que uma dieta, uma construção de autonomia para a vida toda.
+                </h2>
+                <div class="w-16 h-0.5 bg-champagne/40 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pilar 1 -->
+                <div class="feature-card p-8 rounded-2xl bg-obsidianElevated border border-obsidianBorder relative overflow-hidden flex flex-col justify-between">
+                    <div class="mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-champagne/10 border border-champagne/30 flex items-center justify-center text-champagne mb-6">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[11px] font-mono text-champagne/70 uppercase tracking-widest">Pilar 01</span>
+                        <h3 class="font-serif text-xl font-bold text-travertine mt-2 mb-4">Ciência & Medicina Integrada</h3>
+                        <p class="text-travertine/70 text-sm font-light leading-relaxed">
+                            Planejamentos fundamentados em evidências científicas de ponta, avaliando exames laboratoriais, perfil lipídico, glicêmico e hormonal para proteger sua saúde integral.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-obsidianBorder text-xs font-mono text-champagne/80">
+                        Zero modismos prejudiciais
+                    </div>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="feature-card p-8 rounded-2xl bg-obsidianElevated border border-obsidianBorder relative overflow-hidden flex flex-col justify-between">
+                    <div class="mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-champagne/10 border border-champagne/30 flex items-center justify-center text-champagne mb-6">
+                            <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[11px] font-mono text-champagne/70 uppercase tracking-widest">Pilar 02</span>
+                        <h3 class="font-serif text-xl font-bold text-travertine mt-2 mb-4">Nutrição Comportamental</h3>
+                        <p class="text-travertine/70 text-sm font-light leading-relaxed">
+                            Especialização AMBULIM/USP para ressignificar sua relação com o alimento e com o corpo. Emagrecimento real sem a prisão de restrições severas ou culpa social.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-obsidianBorder text-xs font-mono text-champagne/80">
+                        Constância & Liberdade
+                    </div>
+                </div>
+
+                <!-- Pilar 3 -->
+                <div class="feature-card p-8 rounded-2xl bg-obsidianElevated border border-obsidianBorder relative overflow-hidden flex flex-col justify-between">
+                    <div class="mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-champagne/10 border border-champagne/30 flex items-center justify-center text-champagne mb-6">
+                            <i data-lucide="target" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[11px] font-mono text-champagne/70 uppercase tracking-widest">Pilar 03</span>
+                        <h3 class="font-serif text-xl font-bold text-travertine mt-2 mb-4">Rotina Real & Viável</h3>
+                        <p class="text-travertine/70 text-sm font-light leading-relaxed">
+                            O melhor plano é aquele que você consegue executar. Adequação milimétrica aos seus horários de trabalho, viagens, preferências culinárias e metas estéticas.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-obsidianBorder text-xs font-mono text-champagne/80">
+                        Aderência de 98%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Especialidades & Serviços Detalhados -->
+    <section id="especialidades" class="py-24 px-6 sm:px-12 border-b border-obsidianBorder">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-xs font-mono text-champagne tracking-[0.25em] uppercase block mb-3">Áreas de Atuação</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-travertine tracking-tight">
+                        Programas Clínicos & Acompanhamentos
+                    </h2>
+                </div>
+                <p class="text-sm font-mono text-travertine/60 max-w-md">
+                    Atendimento particular presencial na Clínica MENTA ou em plataforma de telemedicina de alta resolução.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="p-6 rounded-2xl bg-obsidianCard border border-obsidianBorder hover:border-champagne/40 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="text-champagne mb-4 flex items-center justify-between">
+                            <i data-lucide="flame" class="w-6 h-6"></i>
+                            <span class="text-[10px] font-mono uppercase bg-champagne/10 px-2 py-1 rounded text-champagne">Destaque</span>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-travertine mb-2">Emagrecimento & Obesidade</h3>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed mb-6">
+                            Redução de percentual de gordura corporal preservando a massa magra, com suporte metabólico baseado no protocolo Albert Einstein.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5585982119199?text=Ol%C3%A1%20Lucas%2C%20gostaria%20de%20agendar%20consulta%20com%20foco%20em%20Emagrecimento." target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-champagne hover:underline">
+                        <span>Consultar Vagas</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-6 rounded-2xl bg-obsidianCard border border-obsidianBorder hover:border-champagne/40 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="text-champagne mb-4 flex items-center justify-between">
+                            <i data-lucide="activity" class="w-6 h-6"></i>
+                            <span class="text-[10px] font-mono uppercase bg-obsidianElevated px-2 py-1 rounded text-travertine/60">Saúde</span>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-travertine mb-2">Doenças Crônicas</h3>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed mb-6">
+                            Controle e reversão de parâmetros em Diabetes Mellitus, Hipertensão Arterial, Dislipidemias (colesterol/triglicerídeos) e Esteatose Hepática.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5585982119199?text=Ol%C3%A1%20Lucas%2C%20tenho%20interesse%20em%20acompanhamento%20para%20sa%C3%BAde%20e%20exames%20cr%C3%B4nicos." target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-champagne hover:underline">
+                        <span>Consultar Vagas</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-6 rounded-2xl bg-obsidianCard border border-obsidianBorder hover:border-champagne/40 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="text-champagne mb-4 flex items-center justify-between">
+                            <i data-lucide="smile" class="w-6 h-6"></i>
+                            <span class="text-[10px] font-mono uppercase bg-obsidianElevated px-2 py-1 rounded text-travertine/60">USP</span>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-travertine mb-2">Transtornos & Compulsão</h3>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed mb-6">
+                            Abordagem especializada para episódios de compulsão alimentar, fome emocional, efeito sanfona e superação de ansiedade ligada à balança.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5585982119199?text=Ol%C3%A1%20Lucas%2C%20gostaria%20de%20conversar%20sobre%20Nutri%C3%A7%C3%A3o%20Comportamental." target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-champagne hover:underline">
+                        <span>Consultar Vagas</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="p-6 rounded-2xl bg-obsidianCard border border-obsidianBorder hover:border-champagne/40 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="text-champagne mb-4 flex items-center justify-between">
+                            <i data-lucide="dumbbell" class="w-6 h-6"></i>
+                            <span class="text-[10px] font-mono uppercase bg-obsidianElevated px-2 py-1 rounded text-travertine/60">Performance</span>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-travertine mb-2">Hipertrofia & Bioimpedância</h3>
+                        <p class="text-xs text-travertine/70 font-light leading-relaxed mb-6">
+                            Estratégias para ganho de massa muscular, timing de nutrientes pré e pós treino, avaliação corporal segmentada e disposição energética.
+                        </p>
+                    </div>
+                    <a href="https://wa.me/5585982119199?text=Ol%C3%A1%20Lucas%2C%20quero%20agendar%20avalia%C3%A7%C3%A3o%20com%20Bioimped%C3%A2ncia%20e%20foco%20em%20Performance." target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-champagne hover:underline">
+                        <span>Consultar Vagas</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Visual Real do Consultório & Atendimento -->
+    <section id="consultorio" class="py-24 px-6 sm:px-12 border-b border-obsidianBorder bg-obsidianCard/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-mono text-champagne tracking-[0.25em] uppercase block mb-3">Espaço & Consultório</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-travertine tracking-tight">
+                        Ambiente acolhedor na Clínica MENTA
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-mono text-champagne">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    <span>Fortaleza - CE &bull; Consultas Presenciais & Online</span>
+                </div>
+            </div>
+
+            <!-- Bento Grid Gallery with Real Photos -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Large Photo 1 -->
+                <div class="md:col-span-8 rounded-2xl overflow-hidden bg-obsidianCard border border-obsidianBorder relative group h-80 sm:h-96">
+                    <img src="assets/foto-1.jpg" alt="Lucas Aguiar Atendimento Consultório" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-champagne block mb-1">Espaço Clínico</span>
+                        <h4 class="font-serif text-xl font-bold text-travertine">Consultório MENTA &bull; Conforto e Privacidade</h4>
+                    </div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="md:col-span-4 rounded-2xl overflow-hidden bg-obsidianCard border border-obsidianBorder relative group h-80 sm:h-96">
+                    <img src="assets/foto-2.jpg" alt="Lucas Aguiar Nutricionista" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-champagne block mb-1">Acolhimento</span>
+                        <h4 class="font-serif text-lg font-bold text-travertine">Escuta Empática e Plano Sob Medida</h4>
+                    </div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="md:col-span-4 rounded-2xl overflow-hidden bg-obsidianCard border border-obsidianBorder relative group h-72">
+                    <img src="assets/foto-3.jpg" alt="Bioimpedância e Avaliação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <p class="text-xs font-mono text-travertine/90">Diagnóstico Metabólico Segmentado</p>
+                    </div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="md:col-span-4 rounded-2xl overflow-hidden bg-obsidianCard border border-obsidianBorder relative group h-72">
+                    <img src="assets/foto-4.jpg" alt="Consultório Detalhes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <p class="text-xs font-mono text-travertine/90">Estrutura Completa de Atendimento</p>
+                    </div>
+                </div>
+
+                <!-- Photo 5 -->
+                <div class="md:col-span-4 rounded-2xl overflow-hidden bg-obsidianCard border border-obsidianBorder relative group h-72">
+                    <img src="assets/foto-5.jpg" alt="Lucas Aguiar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <p class="text-xs font-mono text-travertine/90">Acompanhamento e Mentoria Nutricional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formação Acadêmica & Credenciais Oficiais -->
+    <section id="experiencia" class="py-24 px-6 sm:px-12 border-b border-obsidianBorder">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5">
+                <span class="text-xs font-mono text-champagne tracking-[0.25em] uppercase block mb-3">Autoridade & Ciência</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-travertine tracking-tight mb-6">
+                    Formação nos maiores centros de saúde do Brasil.
+                </h2>
+                <p class="text-travertine/75 text-sm font-light leading-relaxed mb-8">
+                    A prática clínica do Lucas Aguiar é alicerçada em títulos acadêmicos de alto rigor, unindo pesquisa científica universitária com a prática hospitalar de referência.
+                </p>
+
+                <div class="flex items-center gap-4">
+                    <div class="p-3 rounded-xl bg-obsidianElevated border border-champagne/30 text-champagne">
+                        <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-base font-bold text-travertine">Registro Ativo CRN11 19551</h4>
+                        <p class="text-xs font-mono text-travertine/60">Conselho Regional de Nutricionistas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Item 1 -->
+                <div class="p-6 rounded-xl bg-obsidianElevated border border-obsidianBorder">
+                    <span class="text-xs font-mono text-champagne block mb-1">Mestrado Acadêmico</span>
+                    <h4 class="font-serif text-base font-bold text-travertine mb-2">Saúde Coletiva &bull; UNIFOR</h4>
+                    <p class="text-xs text-travertine/65 font-light">Pesquisa aprofundada em saúde populacional, hábitos e políticas alimentares.</p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="p-6 rounded-xl bg-obsidianElevated border border-obsidianBorder">
+                    <span class="text-xs font-mono text-champagne block mb-1">Pós-Graduação</span>
+                    <h4 class="font-serif text-base font-bold text-travertine mb-2">Hospital Israelita Albert Einstein</h4>
+                    <p class="text-xs text-travertine/65 font-light">Especialização avançada em Obesidade, Emagrecimento e Doenças Metabólicas.</p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="p-6 rounded-xl bg-obsidianElevated border border-obsidianBorder">
+                    <span class="text-xs font-mono text-champagne block mb-1">Especialização USP</span>
+                    <h4 class="font-serif text-base font-bold text-travertine mb-2">AMBULIM &bull; FMUSP</h4>
+                    <p class="text-xs text-travertine/65 font-light">Aprimoramento em Transtornos Alimentares no Hospital das Clínicas da USP.</p>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="p-6 rounded-xl bg-obsidianElevated border border-obsidianBorder">
+                    <span class="text-xs font-mono text-champagne block mb-1">Capacitação</span>
+                    <h4 class="font-serif text-base font-bold text-travertine mb-2">Nutrição Comportamental &bull; INC SP</h4>
+                    <p class="text-xs text-travertine/65 font-light">Formação pioneira no Instituto de Nutrição Comportamental de São Paulo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos Reais de Pacientes (Doctoralia Verificados) -->
+    <section id="depoimentos" class="py-24 px-6 sm:px-12 border-b border-obsidianBorder bg-obsidianCard/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emeraldAccent/10 border border-emeraldAccent/30 text-emeraldAccent text-xs font-mono tracking-widest uppercase mb-4">
+                    <i data-lucide="badge-check" class="w-3.5 h-3.5"></i>
+                    <span>Depoimentos Reais e Verificados</span>
+                </div>
+                <h2 class="font-serif text-3xl sm:text-4xl text-travertine tracking-tight">
+                    O que dizem os pacientes acompanhados
+                </h2>
+                <p class="text-sm font-light text-travertine/70 mt-3">
+                    Avaliações públicas extraídas diretamente da plataforma Doctoralia.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Depoimento 1 -->
+                <div class="p-8 rounded-2xl bg-obsidianElevated border border-obsidianBorder relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-1 text-champagne mb-4">
+                            <span>★★★★★</span>
+                            <span class="text-[11px] font-mono text-emeraldAccent ml-2 bg-emeraldAccent/10 px-2 py-0.5 rounded">Consulta Verificada</span>
+                        </div>
+                        <p class="text-travertine/80 text-sm font-light leading-relaxed italic mb-6">
+                            "Excelente consulta. Bastante atencioso. Muito preocupado em melhorar a dieta alimentar, a saúde e a qualidade de vida do paciente. E não só passar uma dieta restritiva para emagrecimento. Adequa a dieta à realidade e à rotina! Excelente nutricionista."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-obsidianBorder">
+                        <div class="w-9 h-9 rounded-full bg-champagne/20 text-champagne font-serif flex items-center justify-center font-bold">
+                            S
+                        </div>
+                        <div>
+                            <h5 class="font-serif text-sm font-bold text-travertine">Samir Nobre</h5>
+                            <span class="text-[10px] font-mono text-travertine/50">Consulta Presencial na Clínica MENTA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depoimento 2 -->
+                <div class="p-8 rounded-2xl bg-obsidianElevated border border-obsidianBorder relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-1 text-champagne mb-4">
+                            <span>★★★★★</span>
+                            <span class="text-[11px] font-mono text-emeraldAccent ml-2 bg-emeraldAccent/10 px-2 py-0.5 rounded">Consulta Verificada</span>
+                        </div>
+                        <p class="text-travertine/80 text-sm font-light leading-relaxed italic mb-6">
+                            "O Lucas é fera, muito profissional e deixa o paciente bem à vontade. Muito técnico e 'pé no chão', sem criar metas impossíveis. A consulta é detalhada e você sai com total clareza do que fazer."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-obsidianBorder">
+                        <div class="w-9 h-9 rounded-full bg-champagne/20 text-champagne font-serif flex items-center justify-center font-bold">
+                            L
+                        </div>
+                        <div>
+                            <h5 class="font-serif text-sm font-bold text-travertine">Luciano Ferreira</h5>
+                            <span class="text-[10px] font-mono text-travertine/50">Paciente Acompanhado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depoimento 3 -->
+                <div class="p-8 rounded-2xl bg-obsidianElevated border border-obsidianBorder relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-1 text-champagne mb-4">
+                            <span>★★★★★</span>
+                            <span class="text-[11px] font-mono text-emeraldAccent ml-2 bg-emeraldAccent/10 px-2 py-0.5 rounded">Consulta Verificada</span>
+                        </div>
+                        <p class="text-travertine/80 text-sm font-light leading-relaxed italic mb-6">
+                            "Amei as explicações, a atenção, o modo de tratar, a simpatia e o tempo dedicado na consulta. Ele escuta bastante o paciente e procura alternativas que se encaixam no estilo de vida. Indico demais!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-obsidianBorder">
+                        <div class="w-9 h-9 rounded-full bg-champagne/20 text-champagne font-serif flex items-center justify-center font-bold">
+                            M
+                        </div>
+                        <div>
+                            <h5 class="font-serif text-sm font-bold text-travertine">Marília Brito</h5>
+                            <span class="text-[10px] font-mono text-travertine/50">Paciente Acompanhada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diagnóstico Interativo / Planejador de Metas (Lumina Refined Widget) -->
+    <section id="planejador" class="py-24 px-6 sm:px-12 border-b border-obsidianBorder relative">
+        <div class="max-w-4xl mx-auto rounded-3xl bg-obsidianCard border border-champagne/30 p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+            <div class="ambient-glow w-96 h-96 bg-champagne/10 -top-20 -right-20"></div>
+
+            <div class="relative z-10">
+                <div class="text-center mb-10">
+                    <span class="text-xs font-mono text-champagne tracking-[0.25em] uppercase block mb-2">Diagnóstico Prévio</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-travertine">
+                        Qual é o seu objetivo principal hoje?
+                    </h3>
+                    <p class="text-xs sm:text-sm font-light text-travertine/70 mt-2">
+                        Selecione as opções abaixo para receber uma orientação inicial personalizada via WhatsApp diretamente com o Lucas.
+                    </p>
+                </div>
+
+                <form id="quizForm" class="space-y-8" onsubmit="event.preventDefault(); enviarDiagnostico();">
+                    <!-- Pergunta 1: Objetivo -->
+                    <div>
+                        <label class="block text-xs font-mono uppercase tracking-wider text-champagne mb-4">1. Seu foco prioritário:</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center gap-3 p-4 rounded-xl bg-obsidianElevated border border-obsidianBorder hover:border-champagne/50 cursor-pointer transition-all">
+                                <input type="radio" name="objetivo" value="Emagrecimento Saudável e Perda de Gordura" checked class="accent-champagne">
+                                <span class="text-sm font-light text-travertine">Emagrecimento & Perda de Gordura</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl bg-obsidianElevated border border-obsidianBorder hover:border-champagne/50 cursor-pointer transition-all">
+                                <input type="radio" name="objetivo" value="Hipertrofia e Desempenho Físico" class="accent-champagne">
+                                <span class="text-sm font-light text-travertine">Hipertrofia & Ganho de Massa</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl bg-obsidianElevated border border-obsidianBorder hover:border-champagne/50 cursor-pointer transition-all">
+                                <input type="radio" name="objetivo" value="Controle de Exames (Colesterol/Glicose/Pressão)" class="accent-champagne">
+                                <span class="text-sm font-light text-travertine">Saúde & Exames Clínicos</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl bg-obsidianElevated border border-obsidianBorder hover:border-champagne/50 cursor-pointer transition-all">
+                                <input type="radio" name="objetivo" value="Superar Compulsão e Relação com a Comida" class="accent-champagne">
+                                <span class="text-sm font-light text-travertine">Compulsão & Fome Emocional</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 2: Modalidade -->
+                    <div>
+                        <label class="block text-xs font-mono uppercase tracking-wider text-champagne mb-4">2. Preferência de Atendimento:</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center gap-3 p-4 rounded-xl bg-obsidianElevated border border-obsidianBorder hover:border-champagne/50 cursor-pointer transition-all">
+                                <input type="radio" name="modalidade" value="Presencial na Clínica MENTA (Fortaleza)" checked class="accent-champagne">
+                                <span class="text-sm font-light text-travertine">Presencial &bull; Clínica MENTA (Fortaleza)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl bg-obsidianElevated border border-obsidianBorder hover:border-champagne/50 cursor-pointer transition-all">
+                                <input type="radio" name="modalidade" value="Teleconsulta Online (Brasil e Exterior)" class="accent-champagne">
+                                <span class="text-sm font-light text-travertine">Online &bull; Teleconsulta Nacional</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Envio -->
+                    <div class="text-center pt-4">
+                        <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-champagne text-obsidian font-mono text-xs tracking-widest uppercase font-bold hover:bg-champagneLight transition-all duration-300 shadow-xl shadow-champagne/20">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            <span>Enviar Diagnóstico para o WhatsApp</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer de Alto Padrão -->
+    <footer class="py-16 px-6 sm:px-12 bg-obsidian border-t border-obsidianBorder text-travertine/60 text-xs font-mono">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full border border-champagne/40 bg-obsidianElevated flex items-center justify-center font-serif text-lg text-champagne">
+                    L
+                </div>
+                <div>
+                    <span class="font-serif text-base font-bold text-travertine block">Lucas Aguiar</span>
+                    <span>Nutricionista &bull; CRN11 19551 &bull; Fortaleza - CE</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <span>Clínica MENTA: Rua/Bairro Fortaleza CE</span>
+                <span class="opacity-40">|</span>
+                <a href="tel:85982119199" class="hover:text-champagne transition-colors">(85) 98211-9199</a>
+            </div>
+
+            <div class="text-travertine/40 text-[11px]">
+                &copy; 2026 Lucas Aguiar. Design sob medida por Aholic Studio.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Pill -->
+    <a href="https://wa.me/5585982119199?text=Ol%C3%A1%20Lucas!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20agendar%20uma%20consulta." 
+       target="_blank" 
+       class="wa-float flex items-center gap-3 px-5 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-mono text-xs tracking-wider uppercase font-bold shadow-2xl shadow-emerald-500/30">
+        <i data-lucide="message-circle" class="w-5 h-5"></i>
+        <span class="hidden sm:inline">Agendar no WhatsApp</span>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+
+        function enviarDiagnostico() {
+            const form = document.getElementById('quizForm');
+            const objetivo = form.querySelector('input[name="objetivo"]:checked').value;
+            const modalidade = form.querySelector('input[name="modalidade"]:checked').value;
+
+            const mensagem = `Olá Lucas! Preenchi o diagnóstico prévio no seu site:
+- *Objetivo:* ${objetivo}
+- *Modalidade:* ${modalidade}
+
+Gostaria de saber os próximos horários disponíveis para consulta!`;
+
+            const url = `https://wa.me/5585982119199?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

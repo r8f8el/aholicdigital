@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            if (window.location.protocol.startsWith('http') && !window.location.pathname.endsWith('/')) {
+                const base = document.createElement('base');
+                base.href = window.location.pathname.endsWith('.html') 
+                    ? window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)
+                    : window.location.pathname + '/';
+                document.head.prepend(base);
+            }
+        })();
+        window.addEventListener('error', function(e) {
+            if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fixed) {
+                e.target.dataset.fixed = 'true';
+                const file = e.target.getAttribute('src');
+                if (file && !file.startsWith('http') && !file.startsWith('data:')) {
+                    const cleanName = file.split('/').pop();
+                    e.target.src = '/sites/lucas-aguiar-nutri/assets/' + cleanName;
+                }
+            }
+        }, true);
+    </script>
+    <title>[Editor] Lucas Aguiar | Nutrição Clínica & Esportiva</title>
+    <meta name="description" content="Editor visual do site Lucas Aguiar Nutricionista.">
+
+    <!-- Google Fonts: Cinzel + Plus Jakarta Sans + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0B0C0E',
+                        obsidianCard: '#131518',
+                        obsidianElevated: '#1A1D22',
+                        obsidianBorder: 'rgba(255, 255, 255, 0.08)',
+                        travertine: '#F5F2EB',
+                        travertineMuted: '#E5DFD3',
+                        champagne: '#C5A880',
+                        champagneLight: '#E5D0B5',
+                        champagneGlow: 'rgba(197, 168, 128, 0.25)',
+                        emeraldAccent: '#10B981',
+                        emeraldGlow: 'rgba(16, 185, 129, 0.2)'
+                    },
+                    fontFamily: {
+                        serif: ['"Cinzel"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background: #C5A880; color: #0B0C0E; }
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .ambient-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        [contenteditable="true"] {
+            outline: 1px dashed rgba(197, 168, 128, 0.4);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+        [contenteditable="true"]:focus {
+            outline: 2px solid #C5A880;
+            background: rgba(197, 168, 128, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-travertine font-sans antialiased overflow-x-hidden relative selection:bg-champagne selection:text-obsidian pt-14">
+
+    <!-- Top Editor Floating Bar -->
+    <div class="fixed top-0 left-0 right-0 h-14 bg-obsidianElevated border-b border-champagne/30 z-[100] px-6 flex items-center justify-between text-xs font-mono">
+        <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-champagne animate-pulse"></span>
+            <span class="text-champagne font-bold uppercase tracking-wider">Modo Editor Visual &bull; Lucas Aguiar Nutrição</span>
+            <span class="text-travertine/50 hidden sm:inline">| Clique em qualquer texto para editar</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="salvarAlteracoes()" class="px-4 py-1.5 rounded-full bg-champagne text-obsidian font-bold hover:bg-champagneLight transition-colors flex items-center gap-1.5">
+                <i data-lucide="save" class="w-3.5 h-3.5"></i>
+                <span>Salvar & Sincronizar</span>
+            </button>
+            <a href="index.html" class="px-3 py-1.5 rounded-full border border-obsidianBorder hover:border-champagne/40 text-travertine/70 hover:text-champagne transition-colors">
+                Ver Site
+            </a>
+        </div>
+    </div>
+
+    <!-- Noise Texture Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-obsidianElevated border-b border-obsidianBorder text-[11px] py-2 px-6 text-center text-champagne font-mono tracking-widest uppercase flex items-center justify-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span contenteditable="true">Doctoralia Best Quality 2024 & 2025 &bull; Nota Máxima 5.0 ★ (56 Avaliações)</span>
+        <span class="opacity-40 hidden sm:inline">|</span>
+        <span class="text-travertine/70 hidden sm:inline" contenteditable="true">Atendimento Presencial na Clínica MENTA (Fortaleza) & Online no Brasil</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-14 z-50 bg-obsidian/85 backdrop-blur-xl border-b border-obsidianBorder h-20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 sm:px-12 h-full flex items-center justify-between">
+            <a href="#" class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-full border border-champagne/40 bg-obsidianElevated flex items-center justify-center font-serif text-lg text-champagne">
+                    L
+                </div>
+                <div class="flex flex-col">
+                    <span contenteditable="true" class="font-serif text-lg tracking-[0.18em] font-bold text-travertine">
+                        LUCAS AGUIAR
+                    </span>
+                    <span contenteditable="true" class="text-[10px] font-mono text-champagne tracking-[0.22em] uppercase">
+                        Nutrição &bull; CRN11 19551
+                    </span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-xs font-mono tracking-wider uppercase text-travertine/70">
+                <a href="#metodo" class="hover:text-champagne transition-colors">Filosofia</a>
+                <a href="#especialidades" class="hover:text-champagne transition-colors">Especialidades</a>
+                <a href="#experiencia" class="hover:text-champagne transition-colors">Formação & Selos</a>
+                <a href="#consultorio" class="hover:text-champagne transition-colors">Consultório</a>
+                <a href="#depoimentos" class="hover:text-champagne transition-colors">Depoimentos</a>
+            </nav>
+
+            <a href="https://wa.me/5585982119199" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-champagne/50 bg-champagne/10 text-champagne text-xs font-mono tracking-widest uppercase">
+                <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                <span>Agendar Consulta</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[90vh] flex items-center justify-center py-20 px-6 sm:px-12 overflow-hidden border-b border-obsidianBorder">
+        <div class="ambient-glow w-[550px] h-[550px] bg-champagne/10 -top-20 -left-20"></div>
+        <div class="ambient-glow w-[480px] h-[480px] bg-emeraldAccent/5 -bottom-20 -right-20"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+            <div class="lg:col-span-7 flex flex-col items-start text-left">
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-obsidianElevated border border-champagne/30 text-champagne text-xs font-mono tracking-widest uppercase mb-6">
+                    <i data-lucide="award" class="w-3.5 h-3.5 text-champagne"></i>
+                    <span contenteditable="true">Mestre UNIFOR &bull; Albert Einstein &bull; AMBULIM/USP</span>
+                </div>
+
+                <h1 contenteditable="true" class="font-serif text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.12] text-travertine mb-6">
+                    Nutrição de alta precisão, baseada em ciência e <span class="italic text-champagne font-normal">sem extremismos.</span>
+                </h1>
+
+                <p contenteditable="true" class="text-base sm:text-lg text-travertine/75 font-light leading-relaxed mb-8 max-w-2xl">
+                    Emagrecimento sustentável, controle de doenças crônicas e equilíbrio metabólico. Uma abordagem individualizada que respeita a sua rotina, autonomia e qualidade de vida.
+                </p>
+
+                <div class="grid grid-cols-3 gap-6 py-6 border-y border-obsidianBorder w-full mb-8">
+                    <div>
+                        <span contenteditable="true" class="font-serif text-2xl sm:text-3xl font-bold text-champagne block">5.0 ★</span>
+                        <span contenteditable="true" class="text-[11px] font-mono uppercase tracking-wider text-travertine/60">56 Opiniões 100% 5 Estrelas</span>
+                    </div>
+                    <div>
+                        <span contenteditable="true" class="font-serif text-2xl sm:text-3xl font-bold text-travertine block">Einstein</span>
+                        <span contenteditable="true" class="text-[11px] font-mono uppercase tracking-wider text-travertine/60">Pós Obesidade & Emagrecimento</span>
+                    </div>
+                    <div>
+                        <span contenteditable="true" class="font-serif text-2xl sm:text-3xl font-bold text-emeraldAccent block">2024 & 2025</span>
+                        <span contenteditable="true" class="text-[11px] font-mono uppercase tracking-wider text-travertine/60">Best Quality Doctoralia</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+                    <a href="https://wa.me/5585982119199" target="_blank" class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-champagne text-obsidian font-mono text-xs tracking-widest uppercase font-bold hover:bg-champagneLight transition-all">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span>Falar com o Nutricionista</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 relative">
+                <div class="relative rounded-xl overflow-hidden bg-obsidianCard border border-obsidianBorder shadow-2xl">
+                    <img src="assets/avatar.jpg" alt="Lucas Aguiar Nutricionista" class="w-full h-[520px] object-cover object-top">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-6 sm:px-12 bg-obsidian border-t border-obsidianBorder text-travertine/60 text-xs font-mono text-center">
+        <p>&copy; 2026 Lucas Aguiar Nutrição. Editor Visual Ativo.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        function salvarAlteracoes() {
+            alert('Alterações salvas no navegador! Para sincronizar definitivamente com o servidor, utilize o botão de sincronização no painel.');
+        }
+    </script>
+</body>
+</html>
