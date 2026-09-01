@@ -25,102 +25,237 @@
         }, true);
     </script>
     <title>DALDALI • Café & Pâtisserie Coréenne | Paris 9e (Pigalle)</title>
-    <meta name="description" content="Coffee shop et salon de thé coréen à Paris (23 Rue Marguerite de Rochechouart). Yakgwa artisanal au miel, Matcha Latte, Banana Latte et café de spécialité.">
+    <meta name="description" content="Coffee shop d'exception à Paris 9e. Yakgwa artisanal au miel, Matcha Latte, Banana Latte et café de spécialité.">
 
-    <!-- Google Fonts: League Spartan + Playfair Display -->
+    <!-- Google Fonts: League Spartan + Playfair Display + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=League+Spartan:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        * { font-family: 'League Spartan', sans-serif; }
+        :root {
+            --vert-daldali: #263B2F;
+            --vert-daldali-dark: #1A2920;
+            --vert-daldali-light: #3D5A47;
+            --vert-daldali-soft: #E8EFEA;
+            --bg-creme: #FAF8F4;
+            --texte-sombre: #1F2421;
+        }
+
+        * { 
+            font-family: 'League Spartan', sans-serif;
+            box-sizing: border-box;
+        }
         .font-editorial { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
         ::selection { background: #263B2F; color: #FAF8F4; }
 
+        #custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #263B2F;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+            z-index: 99999;
+            opacity: 0;
+        }
+        #custom-cursor-follower {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(38, 59, 47, 0.4);
+            transform: translate(-50%, -50%);
+            transition: transform 0.12s ease-out, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+            z-index: 99998;
+            opacity: 0;
+        }
+        body:hover #custom-cursor,
+        body:hover #custom-cursor-follower {
+            opacity: 1;
+        }
+        .cursor-hover #custom-cursor {
+            width: 64px;
+            height: 64px;
+            background: rgba(38, 59, 47, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .cursor-hover #custom-cursor-follower {
+            width: 76px;
+            height: 76px;
+            border-color: rgba(38, 59, 47, 0.8);
+        }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #1A2920;
+            z-index: 100000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #FAF8F4;
+            transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.8s ease;
+        }
+        #preloader.loaded {
+            transform: translateY(-100%);
+            pointer-events: none;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 22s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
         @keyframes bounce-slow {
-            0%, 100% { transform: translateY(-5%); }
-            50% { transform: translateY(5%); }
+            0%, 100% { transform: translateY(-4px) rotate(0deg); }
+            50% { transform: translateY(6px) rotate(1deg); }
         }
         .animate-bounce-slow {
-            animation: bounce-slow 4s ease-in-out infinite;
+            animation: bounce-slow 4.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(38, 59, 47, 0.3); }
+            50% { box-shadow: 0 0 0 16px rgba(38, 59, 47, 0); }
+        }
+        .pulse-glow {
+            animation: pulse-glow 2.5s infinite;
         }
 
         @media (min-width: 768px) {
             .stagger-grid .stagger-item:nth-child(even) {
-                margin-top: 100px;
+                margin-top: 90px;
             }
+        }
+
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-item.revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
         .luxury-img-card {
             overflow: hidden;
-            border-radius: 24px;
+            border-radius: 28px;
             position: relative;
+            transform: perspective(1000px);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .luxury-img-card img {
-            filter: grayscale(100%);
-            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: grayscale(85%);
+            transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .luxury-img-card:hover img {
             filter: grayscale(0%);
-            transform: scale(1.08);
+            transform: scale(1.07);
+        }
+        .luxury-img-card:hover {
+            box-shadow: 0 32px 64px -16px rgba(38, 59, 47, 0.35);
         }
 
-        .portfolio-item-card {
-            overflow: hidden;
-            border-radius: 20px;
+        .service-card {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.5s ease;
             position: relative;
+            overflow: hidden;
         }
-        .portfolio-item-card img {
-            filter: grayscale(100%);
-            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.7s ease;
+            pointer-events: none;
         }
-        .portfolio-item-card:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.08);
+        .service-card:hover::before {
+            left: 100%;
         }
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: #FFFFFF !important;
+            border-color: #263B2F !important;
+            box-shadow: 0 28px 56px -12px rgba(38, 59, 47, 0.2);
+        }
+
         .portfolio-overlay-circle {
-            width: 88px;
-            height: 88px;
+            width: 90px;
+            height: 90px;
             background: #263B2F;
             border-radius: 50%;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
+            transform: translate(-50%, -50%) scale(0.6);
             opacity: 0;
             transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             pointer-events: none;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
         }
-        .portfolio-item-card:hover .portfolio-overlay-circle {
+        .luxury-img-card:hover .portfolio-overlay-circle {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
         }
-
-        .service-card {
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .service-card:hover {
-            transform: translateY(-8px);
-            background: #ffffff;
-            border-color: #263B2F !important;
-            box-shadow: 0 24px 48px -12px rgba(38, 59, 47, 0.15);
-        }
     </style>
 </head>
-<body class="bg-[#FAF8F4] text-[#1F2421] font-sans antialiased overflow-x-hidden relative selection:bg-[#263B2F] selection:text-[#FAF8F4]">
+<body class="bg-[#FAF8F4] text-[#1F2421] font-sans antialiased overflow-x-hidden relative">
 
-    <!-- Top Luxury Header Bar -->
-    <header class="sticky top-0 z-50 bg-[#FAF8F4]/95 backdrop-blur-md border-b border-[#263B2F]/10 h-20 transition-all duration-300">
+    <div id="custom-cursor" class="hidden md:flex items-center justify-center text-[10px] uppercase font-bold text-[#FAF8F4] tracking-widest"></div>
+    <div id="custom-cursor-follower" class="hidden md:block"></div>
+
+    <div id="preloader">
+        <div class="flex flex-col items-center justify-center text-center p-6">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white p-2 border-2 border-[#263B2F] shadow-2xl mb-6 transform scale-90 animate-pulse">
+                <img src="assets/logo-daldali.png" alt="Daldali Paris" class="w-full h-full object-contain">
+            </div>
+            <span class="text-xs uppercase tracking-[0.35em] text-[#8EA68B] font-mono-tech mb-2">달달이 &bull; SÉOUL &bull; PARIS</span>
+            <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-[0.2em] text-[#FAF8F4] mb-3">
+                DALDALI
+            </h2>
+            <p class="font-editorial italic text-base sm:text-lg text-[#FAF8F4]/80 mb-8">
+                L'art de la pause café &bull; Pigalle 9e
+            </p>
+            <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden relative">
+                <div id="progress-fill" class="h-full bg-[#8EA68B] transition-all duration-700 ease-out" style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-50 bg-[#FAF8F4]/90 backdrop-blur-xl border-b border-[#263B2F]/10 h-20 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 sm:px-12 h-full flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3.5 group">
-                <div class="w-12 h-12 rounded-full bg-white border border-[#263B2F]/20 p-1 shadow-sm flex items-center justify-center overflow-hidden group-hover:border-[#263B2F] transition-colors">
+            <a href="#" class="flex items-center gap-3.5 group cursor-target">
+                <div class="w-12 h-12 rounded-full bg-white border border-[#263B2F]/20 p-1 shadow-sm flex items-center justify-center overflow-hidden group-hover:scale-105 group-hover:border-[#263B2F] transition-all duration-300">
                     <img src="assets/logo-daldali.png" alt="Daldali Logo" class="w-full h-full object-contain">
                 </div>
                 <div class="flex flex-col">
@@ -134,16 +269,16 @@
             </a>
 
             <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.2em] font-bold text-[#1F2421]/80">
-                <a href="#univers" class="hover:text-[#263B2F] transition-colors">L'Univers</a>
-                <a href="#specialites" class="hover:text-[#263B2F] transition-colors">La Carte</a>
-                <a href="#galerie" class="hover:text-[#263B2F] transition-colors">Galerie</a>
-                <a href="#avis" class="hover:text-[#263B2F] transition-colors">Avis & Éloges</a>
-                <a href="#visite" class="hover:text-[#263B2F] transition-colors">Venir au Café</a>
+                <a href="#univers" class="hover:text-[#263B2F] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#263B2F] hover:after:w-full after:transition-all after:duration-300">L'Univers</a>
+                <a href="#specialites" class="hover:text-[#263B2F] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#263B2F] hover:after:w-full after:transition-all after:duration-300">La Carte</a>
+                <a href="#galerie" class="hover:text-[#263B2F] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#263B2F] hover:after:w-full after:transition-all after:duration-300">Galerie</a>
+                <a href="#avis" class="hover:text-[#263B2F] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#263B2F] hover:after:w-full after:transition-all after:duration-300">Avis & Éloges</a>
+                <a href="#visite" class="hover:text-[#263B2F] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#263B2F] hover:after:w-full after:transition-all after:duration-300">Venir au Café</a>
             </nav>
 
             <a href="https://instagram.com/daldali_paris" 
                target="_blank" 
-               class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#263B2F] text-[#FAF8F4] hover:bg-[#1A2920] text-xs uppercase tracking-[0.18em] font-bold transition-all duration-300 shadow-md shadow-[#263B2F]/15">
+               class="cursor-target inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#263B2F] text-[#FAF8F4] hover:bg-[#1A2920] text-xs uppercase tracking-[0.18em] font-bold transition-all duration-300 shadow-md shadow-[#263B2F]/20 transform hover:scale-105 active:scale-95">
                 <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
                 <span class="hidden sm:inline">@daldali_paris</span>
                 <span class="sm:hidden">Instagram</span>
@@ -151,13 +286,32 @@
         </div>
     </header>
 
+    <div class="bg-[#263B2F] text-[#FAF8F4] py-3 overflow-hidden border-y border-[#1A2920] select-none">
+        <div class="animate-marquee whitespace-nowrap text-xs uppercase font-mono-tech tracking-[0.25em] flex items-center gap-8">
+            <span>&bull; YAKGWA ARTISANAL AU MIEL</span>
+            <span>&bull; MATCHA LATTE CÉRÉMONIAL</span>
+            <span>&bull; CAFÉ DE SPÉCIALITÉ</span>
+            <span>&bull; PÂTISSERIES FAITES MAISON</span>
+            <span>&bull; PIGALLE &bull; 23 RUE MARGUERITE DE ROCHECHOUART</span>
+            <span>&bull; SÉOUL RENCONTRE PARIS</span>
+            <span>&bull; NOTE GOOGLE 4.9 ★</span>
+            <span>&bull; YAKGWA ARTISANAL AU MIEL</span>
+            <span>&bull; MATCHA LATTE CÉRÉMONIAL</span>
+            <span>&bull; CAFÉ DE SPÉCIALITÉ</span>
+            <span>&bull; PÂTISSERIES FAITES MAISON</span>
+            <span>&bull; PIGALLE &bull; 23 RUE MARGUERITE DE ROCHECHOUART</span>
+            <span>&bull; SÉOUL RENCONTRE PARIS</span>
+            <span>&bull; NOTE GOOGLE 4.9 ★</span>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="relative min-h-[85vh] flex items-center justify-center py-16 px-6 sm:px-12 overflow-hidden border-b border-[#263B2F]/10">
         <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
-            <div class="lg:col-span-7 flex flex-col items-start text-left">
-                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#E8EFEA] border border-[#263B2F]/30 text-[#263B2F] text-xs uppercase tracking-[0.2em] font-bold mb-6">
-                    <span class="w-2.5 h-2.5 rounded-full bg-[#263B2F] animate-pulse"></span>
+            <div class="lg:col-span-7 flex flex-col items-start text-left reveal-item">
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#E8EFEA] border border-[#263B2F]/30 text-[#263B2F] text-xs uppercase tracking-[0.2em] font-bold mb-6 pulse-glow">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#263B2F] animate-ping"></span>
                     <span class="text-[#263B2F] font-black">Pigalle &bull; 23 Rue Marguerite de Rochechouart</span>
                 </div>
 
@@ -171,15 +325,15 @@
                 </p>
 
                 <div class="grid grid-cols-3 gap-6 py-6 border-y border-[#263B2F]/10 w-full mb-8">
-                    <div>
+                    <div class="transform hover:scale-105 transition-transform">
                         <span class="text-3xl sm:text-4xl font-black text-[#263B2F] block">4.9 ★</span>
                         <span class="text-[10px] uppercase tracking-[0.18em] text-[#5C635E] font-semibold">Excellence Google Maps</span>
                     </div>
-                    <div>
+                    <div class="transform hover:scale-105 transition-transform">
                         <span class="text-3xl sm:text-4xl font-black text-[#1F2421] block">100%</span>
                         <span class="text-[10px] uppercase tracking-[0.18em] text-[#5C635E] font-semibold">Pâtisseries Maison</span>
                     </div>
-                    <div>
+                    <div class="transform hover:scale-105 transition-transform">
                         <span class="text-3xl sm:text-4xl font-black text-[#263B2F] block">Pigalle</span>
                         <span class="text-[10px] uppercase tracking-[0.18em] text-[#5C635E] font-semibold">Paris 9e Arrondissement</span>
                     </div>
@@ -187,31 +341,34 @@
 
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
                     <a href="#specialites" 
-                       class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#263B2F] text-[#FAF8F4] text-xs uppercase tracking-[0.2em] font-bold hover:bg-[#1A2920] transition-all duration-300 shadow-xl shadow-[#263B2F]/20">
+                       class="cursor-target inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#263B2F] text-[#FAF8F4] text-xs uppercase tracking-[0.2em] font-bold hover:bg-[#1A2920] transition-all duration-300 shadow-xl shadow-[#263B2F]/20 transform hover:-translate-y-1">
                         <span>Découvrir la Carte</span>
-                        <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                        <i data-lucide="arrow-down" class="w-4 h-4 animate-bounce"></i>
                     </a>
 
                     <a href="https://maps.google.com/?q=23+Rue+Marguerite+de+Rochechouart+75009+Paris" 
                        target="_blank"
-                       class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-[#263B2F]/20 bg-white text-[#1F2421] hover:bg-[#E8EFEA] text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300">
+                       class="cursor-target inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-[#263B2F]/20 bg-white text-[#1F2421] hover:bg-[#E8EFEA] text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 transform hover:-translate-y-1">
                         <i data-lucide="map-pin" class="w-4 h-4 text-[#263B2F]"></i>
                         <span>Itinéraire Métro</span>
                     </a>
                 </div>
             </div>
 
-            <div class="lg:col-span-5 relative">
+            <div class="lg:col-span-5 relative reveal-item" style="transition-delay: 200ms;">
                 <div class="luxury-img-card shadow-2xl border border-[#263B2F]/15 bg-white">
                     <img src="assets/hero-cafe.jpg" 
                          alt="Daldali Café Paris" 
                          class="w-full h-[520px] object-cover">
                     
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1A2920]/50 via-transparent to-transparent pointer-events-none"></div>
+                    <div class="portfolio-overlay-circle">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-[#FAF8F4]">DALDALI</span>
+                    </div>
                 </div>
 
                 <div class="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 p-4 sm:p-5 rounded-3xl bg-white border border-[#263B2F]/20 shadow-2xl animate-bounce-slow flex items-center gap-4">
-                    <div class="w-14 h-14 rounded-2xl bg-[#E8EFEA] border border-[#263B2F]/20 p-1.5 flex items-center justify-center">
+                    <div class="w-14 h-14 rounded-2xl bg-[#E8EFEA] border border-[#263B2F]/20 p-1.5 flex items-center justify-center shadow-inner">
                         <img src="assets/logo-daldali.png" alt="Daldali Bunny" class="w-full h-full object-contain">
                     </div>
                     <div>
@@ -232,7 +389,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
-                <div class="lg:col-span-6 flex flex-col items-start">
+                <div class="lg:col-span-6 flex flex-col items-start reveal-item">
                     <span class="text-xs uppercase tracking-[0.25em] font-bold text-[#263B2F] mb-3 block">L'Art de la Pause Café</span>
                     <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#1F2421] mb-6 leading-tight">
                         Une escale gourmande & poétique à Rochechouart.
@@ -245,18 +402,18 @@
                     </p>
 
                     <div class="flex items-center gap-6">
-                        <div class="p-4 rounded-2xl bg-white border border-[#263B2F]/15 shadow-sm">
+                        <div class="p-4 rounded-2xl bg-white border border-[#263B2F]/15 shadow-sm transform hover:-translate-y-1 transition-transform">
                             <span class="text-xs uppercase tracking-[0.18em] font-bold text-[#263B2F] block mb-1">Céramiques Uniques</span>
                             <span class="text-xs text-[#5C635E]">Art de la table coréen raffiné</span>
                         </div>
-                        <div class="p-4 rounded-2xl bg-white border border-[#263B2F]/15 shadow-sm">
+                        <div class="p-4 rounded-2xl bg-white border border-[#263B2F]/15 shadow-sm transform hover:-translate-y-1 transition-transform">
                             <span class="text-xs uppercase tracking-[0.18em] font-bold text-[#263B2F] block mb-1">Option Végane</span>
                             <span class="text-xs text-[#5C635E]">Laits végétaux d'avoine & soja</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4 reveal-item" style="transition-delay: 200ms;">
                     <div class="luxury-img-card h-80 shadow-lg border border-[#263B2F]/10">
                         <img src="assets/interior-cozy.jpg" alt="Intérieur Daldali" class="w-full h-full object-cover">
                     </div>
@@ -273,7 +430,7 @@
     <section id="specialites" class="py-24 px-6 sm:px-12 border-b border-[#263B2F]/10">
         <div class="max-w-7xl mx-auto">
             
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal-item">
                 <div>
                     <span class="text-xs uppercase tracking-[0.25em] font-bold text-[#263B2F] block mb-3">Saveurs Signatures</span>
                     <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#1F2421]">
@@ -287,9 +444,9 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
-                <div class="service-card p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between">
+                <div class="service-card cursor-target p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between reveal-item" style="transition-delay: 100ms;">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-[#E8EFEA] text-[#263B2F] flex items-center justify-center font-bold text-lg mb-6 border border-[#263B2F]/20">
+                        <div class="w-12 h-12 rounded-2xl bg-[#E8EFEA] text-[#263B2F] flex items-center justify-center font-bold text-lg mb-6 border border-[#263B2F]/20 shadow-sm">
                             01
                         </div>
                         <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#263B2F] block mb-1">Pâtisserie Signature</span>
@@ -303,9 +460,9 @@
                     </div>
                 </div>
 
-                <div class="service-card p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between">
+                <div class="service-card cursor-target p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between reveal-item" style="transition-delay: 200ms;">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-[#E8EFEA] text-[#263B2F] flex items-center justify-center font-bold text-lg mb-6 border border-[#263B2F]/20">
+                        <div class="w-12 h-12 rounded-2xl bg-[#E8EFEA] text-[#263B2F] flex items-center justify-center font-bold text-lg mb-6 border border-[#263B2F]/20 shadow-sm">
                             02
                         </div>
                         <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#263B2F] block mb-1">Cérémonial Japon/Corée</span>
@@ -319,9 +476,9 @@
                     </div>
                 </div>
 
-                <div class="service-card p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between">
+                <div class="service-card cursor-target p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between reveal-item" style="transition-delay: 300ms;">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-[#E8EFEA] text-[#263B2F] flex items-center justify-center font-bold text-lg mb-6 border border-[#263B2F]/20">
+                        <div class="w-12 h-12 rounded-2xl bg-[#E8EFEA] text-[#263B2F] flex items-center justify-center font-bold text-lg mb-6 border border-[#263B2F]/20 shadow-sm">
                             03
                         </div>
                         <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#263B2F] block mb-1">Création Maison</span>
@@ -335,9 +492,9 @@
                     </div>
                 </div>
 
-                <div class="service-card p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between">
+                <div class="service-card cursor-target p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between reveal-item" style="transition-delay: 400ms;">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-[#E8EFEA] text-[#263B2F] flex items-center justify-center font-bold text-lg mb-6 border border-[#263B2F]/20">
+                        <div class="w-12 h-12 rounded-2xl bg-[#E8EFEA] text-[#263B2F] flex items-center justify-center font-bold text-lg mb-6 border border-[#263B2F]/20 shadow-sm">
                             04
                         </div>
                         <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#263B2F] block mb-1">Origines Sélectionnées</span>
@@ -359,7 +516,7 @@
     <section id="galerie" class="py-24 px-6 sm:px-12 border-b border-[#263B2F]/10 bg-[#F2EFEB]">
         <div class="max-w-7xl mx-auto">
             
-            <div class="text-center max-w-3xl mx-auto mb-16">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-item">
                 <span class="text-xs uppercase tracking-[0.25em] font-bold text-[#263B2F] block mb-2">Moments & Textures</span>
                 <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#1F2421]">
                     La Galerie Daldali
@@ -369,28 +526,28 @@
 
             <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                 
-                <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-[#263B2F]/15 bg-white">
+                <div class="stagger-item luxury-img-card h-[460px] shadow-xl border border-[#263B2F]/15 bg-white reveal-item">
                     <img src="assets/yakgwa-pastry.jpg" alt="Yakgwa Coréen" class="w-full h-full object-cover">
                     <div class="portfolio-overlay-circle">
                         <span class="text-[11px] font-black uppercase tracking-widest text-[#FAF8F4]">YAKGWA</span>
                     </div>
                 </div>
 
-                <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-[#263B2F]/15 bg-white">
+                <div class="stagger-item luxury-img-card h-[460px] shadow-xl border border-[#263B2F]/15 bg-white reveal-item" style="transition-delay: 200ms;">
                     <img src="assets/matcha-latte.jpg" alt="Matcha Latte Cérémonial" class="w-full h-full object-cover">
                     <div class="portfolio-overlay-circle">
                         <span class="text-[11px] font-black uppercase tracking-widest text-[#FAF8F4]">MATCHA</span>
                     </div>
                 </div>
 
-                <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-[#263B2F]/15 bg-white">
+                <div class="stagger-item luxury-img-card h-[460px] shadow-xl border border-[#263B2F]/15 bg-white reveal-item">
                     <img src="assets/barista-pour.jpg" alt="Extraction Barista" class="w-full h-full object-cover">
                     <div class="portfolio-overlay-circle">
                         <span class="text-[11px] font-black uppercase tracking-widest text-[#FAF8F4]">CAFÉ</span>
                     </div>
                 </div>
 
-                <div class="stagger-item portfolio-item-card h-[460px] shadow-xl border border-[#263B2F]/15 bg-white">
+                <div class="stagger-item luxury-img-card h-[460px] shadow-xl border border-[#263B2F]/15 bg-white reveal-item" style="transition-delay: 200ms;">
                     <img src="assets/specialty-coffee.jpg" alt="Art du Café" class="w-full h-full object-cover">
                     <div class="portfolio-overlay-circle">
                         <span class="text-[11px] font-black uppercase tracking-widest text-[#FAF8F4]">PIGALLE</span>
@@ -406,7 +563,7 @@
     <section id="avis" class="py-24 px-6 sm:px-12 border-b border-[#263B2F]/10">
         <div class="max-w-7xl mx-auto">
             
-            <div class="text-center max-w-2xl mx-auto mb-16">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal-item">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8EFEA] border border-[#263B2F]/20 text-[#263B2F] text-xs uppercase tracking-widest font-bold mb-4">
                     <span>Avis Google Maps Vérifiés</span>
                 </div>
@@ -417,7 +574,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between">
+                <div class="p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between reveal-item transform hover:-translate-y-2 transition-transform duration-300">
                     <div>
                         <div class="text-[#263B2F] text-lg mb-4">★★★★★</div>
                         <p class="text-sm text-[#1F2421]/85 font-normal leading-relaxed italic mb-6">
@@ -430,7 +587,7 @@
                     </div>
                 </div>
 
-                <div class="p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between">
+                <div class="p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between reveal-item transform hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 150ms;">
                     <div>
                         <div class="text-[#263B2F] text-lg mb-4">★★★★★</div>
                         <p class="text-sm text-[#1F2421]/85 font-normal leading-relaxed italic mb-6">
@@ -443,7 +600,7 @@
                     </div>
                 </div>
 
-                <div class="p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between">
+                <div class="p-8 rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 flex flex-col justify-between reveal-item transform hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 300ms;">
                     <div>
                         <div class="text-[#263B2F] text-lg mb-4">★★★★★</div>
                         <p class="text-sm text-[#1F2421]/85 font-normal leading-relaxed italic mb-6">
@@ -463,7 +620,7 @@
 
     <!-- Informations Pratiques -->
     <section id="visite" class="py-24 px-6 sm:px-12 border-b border-[#263B2F]/10 bg-[#FAF8F4]">
-        <div class="max-w-7xl mx-auto rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 p-8 sm:p-14 shadow-xl">
+        <div class="max-w-7xl mx-auto rounded-3xl bg-[#F2EFEB] border border-[#263B2F]/15 p-8 sm:p-14 shadow-xl reveal-item">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <div class="lg:col-span-7">
@@ -499,14 +656,14 @@
                     <div class="flex flex-wrap gap-4">
                         <a href="https://maps.google.com/?q=23+Rue+Marguerite+de+Rochechouart+75009+Paris" 
                            target="_blank"
-                           class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#263B2F] text-[#FAF8F4] text-xs uppercase tracking-[0.18em] font-bold hover:bg-[#1A2920] transition-all duration-300 shadow-md">
+                           class="cursor-target inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#263B2F] text-[#FAF8F4] text-xs uppercase tracking-[0.18em] font-bold hover:bg-[#1A2920] transition-all duration-300 shadow-md transform hover:scale-105">
                             <i data-lucide="navigation" class="w-4 h-4"></i>
                             <span>Ouvrir dans Google Maps</span>
                         </a>
 
                         <a href="https://instagram.com/daldali_paris" 
                            target="_blank"
-                           class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#263B2F]/20 bg-white text-[#1F2421] text-xs uppercase tracking-[0.18em] font-bold hover:bg-[#FAF8F4] transition-all duration-300">
+                           class="cursor-target inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#263B2F]/20 bg-white text-[#1F2421] text-xs uppercase tracking-[0.18em] font-bold hover:bg-[#FAF8F4] transition-all duration-300 transform hover:scale-105">
                             <i data-lucide="send" class="w-4 h-4 text-[#263B2F]"></i>
                             <span>Écrire sur Instagram</span>
                         </a>
@@ -552,8 +709,75 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
         lucide.createIcons();
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const fill = document.getElementById('progress-fill');
+            const preloader = document.getElementById('preloader');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 25;
+                if (fill) fill.style.width = width + '%';
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        if (preloader) preloader.classList.add('loaded');
+                    }, 400);
+                }
+            }, 100);
+        });
+
+        const cursor = document.getElementById('custom-cursor');
+        const follower = document.getElementById('custom-cursor-follower');
+        let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (cursor) {
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+            }
+        });
+
+        function animateCursor() {
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
+            if (follower) {
+                follower.style.left = followerX + 'px';
+                follower.style.top = followerY + 'px';
+            }
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('a, button, .cursor-target, .luxury-img-card, .service-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.body.classList.add('cursor-hover');
+                if (cursor) {
+                    if (el.classList.contains('luxury-img-card')) cursor.innerText = 'GOÛTER';
+                    else if (el.classList.contains('service-card')) cursor.innerText = 'CARTE';
+                    else cursor.innerText = '';
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                document.body.classList.remove('cursor-hover');
+                if (cursor) cursor.innerText = '';
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
