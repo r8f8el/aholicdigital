@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -4445,59 +4445,137 @@ function executarAuditoriaWeb() {
   
   var resDiv = document.getElementById('audit-resultado');
   resDiv.style.display = 'block';
-  resDiv.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted)">⏳ Conectando e auditando site... Aguarde...</div>';
+  resDiv.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted)"><div style="font-size:28px;margin-bottom:8px">⏳</div>Analisando site com Google PageSpeed Insights...<br><span style="font-size:11px;opacity:0.7">Isso pode levar 15-30 segundos</span></div>';
   document.getElementById('btn-importar-audit').style.display = 'none';
 
   var urlFinal = (alvo.startsWith('http://') || alvo.startsWith('https://')) ? alvo : 'https://' + alvo;
 
-  // Auditoria via endpoint local ou diagnóstico inteligente
-  setTimeout(function() {
-    var score = 75;
-    var tec = 'Wix / WordPress Antigo';
-    var falha = 'Carregamento pesado e perda de autoridade para clientes de alto padrão.';
-    var whats = '5548991762241';
-    var insta = '@espacocoralpsi';
+  // ✅ Auditoria REAL via Google PageSpeed Insights API (gratuita, sem chave)
+  var apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent(urlFinal) + '&category=performance&category=seo&category=accessibility&strategy=mobile';
 
-    if (alvo.toLowerCase().indexOf('coral') !== -1) {
-      score = 75;
-      tec = 'Wix (Construtor Genérico)';
-      falha = 'Desenvolvido em Wix: scripts pesados, SEO limitado e sem funil de alta conversão.';
-      whats = '5548991762241';
-      insta = '@espacocoralpsi';
-    } else {
-      score = 65;
-      tec = 'HTML / WordPress Convencional';
-      falha = 'Layout desatualizado, sem prova social destacada e botão de WhatsApp sem mensagem pré-definida.';
-      whats = '';
-      insta = '';
-    }
+  fetch(apiUrl)
+    .then(function(resp) {
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      return resp.json();
+    })
+    .then(function(data) {
+      var lh = data.lighthouseResult;
+      var cats = lh.categories;
 
-    leadAuditadoTemp = {
-      nome: alvo.replace(/https?:\/\//i, '').replace(/www\./i, '').split('.')[0].toUpperCase(),
-      siteAntigo: urlFinal,
-      nicho: 'Psicologia / Clínicas',
-      cidade: 'Florianópolis',
-      motivo: falha,
-      whatsapp: whats,
-      email: insta,
-      nota: 5.0,
-      avaliacoes: 38
-    };
+      var perfScore = Math.round((cats.performance ? cats.performance.score : 0) * 100);
+      var seoScore = Math.round((cats.seo ? cats.seo.score : 0) * 100);
+      var a11yScore = Math.round((cats.accessibility ? cats.accessibility.score : 0) * 100);
+      var avgScore = Math.round((perfScore + seoScore + a11yScore) / 3);
 
-    resDiv.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">' +
-      '<div style="font-weight:800;font-size:15px;color:var(--ink)">' + urlFinal + '</div>' +
-      '<span style="background:' + (score >= 70 ? '#FEF3C7;color:#92400E' : '#FEE2E2;color:#991B1B') + ';font-weight:800;font-size:11px;padding:4px 10px;border-radius:999px">Score: ' + score + '/100</span>' +
-      '</div>' +
-      '<div style="font-size:12px;color:var(--ink-secondary);line-height:1.6">' +
-      '<div><b>🛠️ Tecnologia:</b> ' + tec + '</div>' +
-      '<div><b>💬 WhatsApp:</b> ' + (whats || 'Não detectado diretamente') + '</div>' +
-      '<div><b>📸 Instagram:</b> ' + (insta || 'Não detectado') + '</div>' +
-      '<div style="margin-top:10px;padding:10px;background:#FFF;border:1px solid #E2E8F0;border-radius:8px">' +
-      '<b style="color:#DC2626">🚨 Falha para Abordagem:</b><br>' + falha +
-      '</div></div>';
+      // Extrair métricas reais
+      var audits = lh.audits;
+      var fcp = audits['first-contentful-paint'] ? audits['first-contentful-paint'].displayValue : '—';
+      var lcp = audits['largest-contentful-paint'] ? audits['largest-contentful-paint'].displayValue : '—';
+      var cls = audits['cumulative-layout-shift'] ? audits['cumulative-layout-shift'].displayValue : '—';
+      var si = audits['speed-index'] ? audits['speed-index'].displayValue : '—';
+      var mobile = audits['viewport'] ? (audits['viewport'].score === 1 ? '✅ Sim' : '❌ Não') : '—';
+      var https = audits['is-on-https'] ? (audits['is-on-https'].score === 1 ? '✅ Sim' : '❌ Não') : '—';
 
-    document.getElementById('btn-importar-audit').style.display = 'inline-block';
-  }, 1000);
+      // Detectar tecnologia do site
+      var tecDetalhes = [];
+      var stacks = (lh.stackPacks || []);
+      stacks.forEach(function(s) { tecDetalhes.push(s.title || s.id); });
+      var tec = tecDetalhes.length > 0 ? tecDetalhes.join(', ') : 'HTML / Não identificado';
+
+      // Screenshot real do site
+      var screenshot = '';
+      if (audits['final-screenshot'] && audits['final-screenshot'].details && audits['final-screenshot'].details.data) {
+        screenshot = audits['final-screenshot'].details.data;
+      }
+
+      // Gerar diagnóstico inteligente (falhas encontradas)
+      var falhas = [];
+      if (perfScore < 50) falhas.push('Performance muito baixa no mobile (' + perfScore + '/100) — site pesado e lento');
+      else if (perfScore < 80) falhas.push('Performance abaixo do ideal (' + perfScore + '/100) — pode perder clientes impacientes');
+      if (seoScore < 70) falhas.push('SEO fraco (' + seoScore + '/100) — invisível no Google para buscas locais');
+      if (a11yScore < 70) falhas.push('Acessibilidade baixa (' + a11yScore + '/100) — exclui parte dos visitantes');
+      if (mobile === '❌ Não') falhas.push('Não responsivo — experiência péssima no celular');
+      if (https === '❌ Não') falhas.push('Sem HTTPS — Google penaliza e navegadores mostram "Não Seguro"');
+      if (falhas.length === 0) falhas.push('Site razoável, mas com espaço para melhorias significativas em design e conversão');
+      var falhaTexto = falhas.join('. ') + '.';
+
+      // Salvar para importação
+      var nomeLimpo = urlFinal.replace(/https?:\/\//i, '').replace(/www\./i, '').split('/')[0].split('.')[0];
+      leadAuditadoTemp = {
+        nome: nomeLimpo.charAt(0).toUpperCase() + nomeLimpo.slice(1),
+        siteAntigo: urlFinal,
+        nicho: '',
+        cidade: '',
+        motivo: falhaTexto,
+        whatsapp: '',
+        email: '',
+        nota: 0,
+        avaliacoes: 0
+      };
+
+      // Cores dos scores
+      function scoreCor(s) { return s >= 90 ? '#059669' : s >= 50 ? '#D97706' : '#DC2626'; }
+      function scoreBg(s) { return s >= 90 ? '#ECFDF5' : s >= 50 ? '#FFFBEB' : '#FEF2F2'; }
+
+      var html = '';
+
+      // Screenshot
+      if (screenshot) {
+        html += '<div style="margin-bottom:16px;border-radius:12px;overflow:hidden;border:1px solid var(--line);max-height:220px"><img src="' + screenshot + '" style="width:100%;display:block" alt="Screenshot"></div>';
+      }
+
+      // URL + Score
+      html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">' +
+        '<div style="font-weight:800;font-size:14px;color:var(--ink);word-break:break-all">' + urlFinal + '</div>' +
+        '<span style="background:' + scoreBg(avgScore) + ';color:' + scoreCor(avgScore) + ';font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px;white-space:nowrap">Score Médio: ' + avgScore + '/100</span>' +
+        '</div>';
+
+      // Score Cards
+      html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">';
+      [['⚡ Performance', perfScore], ['🔍 SEO', seoScore], ['♿ Acessibilidade', a11yScore]].forEach(function(item) {
+        html += '<div style="background:' + scoreBg(item[1]) + ';border:1px solid ' + scoreCor(item[1]) + '20;border-radius:10px;padding:12px;text-align:center">' +
+          '<div style="font-size:24px;font-weight:800;color:' + scoreCor(item[1]) + '">' + item[1] + '</div>' +
+          '<div style="font-size:10px;color:var(--muted);margin-top:2px;font-weight:600">' + item[0] + '</div></div>';
+      });
+      html += '</div>';
+
+      // Métricas detalhadas
+      html += '<div style="font-size:12px;color:var(--ink-secondary);line-height:1.8;margin-bottom:12px">' +
+        '<div><b>🛠️ Tecnologia:</b> ' + tec + '</div>' +
+        '<div><b>⏱️ First Paint:</b> ' + fcp + ' · <b>LCP:</b> ' + lcp + '</div>' +
+        '<div><b>📐 Layout Shift (CLS):</b> ' + cls + ' · <b>Speed Index:</b> ' + si + '</div>' +
+        '<div><b>📱 Mobile-friendly:</b> ' + mobile + ' · <b>🔒 HTTPS:</b> ' + https + '</div>' +
+        '</div>';
+
+      // Diagnóstico
+      html += '<div style="margin-top:12px;padding:12px 14px;background:#FFF;border:1px solid #E2E8F0;border-radius:10px">' +
+        '<b style="color:#DC2626;font-size:12px">🚨 Diagnóstico para Abordagem:</b><br>' +
+        '<span style="font-size:12px;color:var(--ink-secondary)">' + falhaTexto + '</span></div>';
+
+      resDiv.innerHTML = html;
+      document.getElementById('btn-importar-audit').style.display = 'inline-block';
+    })
+    .catch(function(err) {
+      // Fallback: mostrar erro amigável
+      resDiv.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted)">' +
+        '<div style="font-size:28px;margin-bottom:8px">⚠️</div>' +
+        '<div style="font-weight:700;margin-bottom:4px">Não foi possível auditar este site</div>' +
+        '<div style="font-size:12px">' + (err.message || 'Verifique se a URL está correta e acessível.') + '</div>' +
+        '<div style="font-size:11px;margin-top:8px;color:var(--dim)">Dica: use a URL completa (ex: https://exemplo.com.br)</div></div>';
+
+      leadAuditadoTemp = {
+        nome: alvo.replace(/https?:\/\//i, '').replace(/www\./i, '').split('.')[0].toUpperCase(),
+        siteAntigo: urlFinal,
+        nicho: '',
+        cidade: '',
+        motivo: 'Site inacessível ou com erro de carregamento — possível oportunidade de criação do zero.',
+        whatsapp: '',
+        email: '',
+        nota: 0,
+        avaliacoes: 0
+      };
+      document.getElementById('btn-importar-audit').style.display = 'inline-block';
+    });
 }
 
 function importarLeadAuditado() {
