@@ -1,0 +1,122 @@
+{
+  "editorial-atelier": {
+    "name": "Editorial de Atelier",
+    "nichos": ["arquitetura", "dermato", "luxo", "spa", "decoração", "estética", "rejuvenescimento"],
+    "fonts": { "display": "Newsreader", "body": "Inter" },
+    "dark": true,
+    "defaults": {
+      "--ah-primary": "#C5A880",
+      "--ah-accent":  "#D4A96D",
+      "--ah-bg":      "#0D0C0B",
+      "--ah-surface": "#141210",
+      "--ah-text":    "#F5F0EB",
+      "--ah-text-muted": "#9A9290"
+    },
+    "motion": {
+      "preloader": true, "marquee": true, "parallax": true,
+      "counters": true, "cursor": true
+    },
+    "layout": "asymmetric-editorial",
+    "description": "Asymmetric editorial, serifas nobres, respiro amplo. Ideal para Arquitetura, Dermato, Luxo."
+  },
+  "cinema-local": {
+    "name": "Cinema Local",
+    "nichos": ["cafeteria", "café", "restaurante", "gastronomia", "bar", "patisserie", "bakery"],
+    "fonts": { "display": "League Spartan", "body": "Playfair Display" },
+    "dark": true,
+    "defaults": {
+      "--ah-primary": "#E0A96D",
+      "--ah-accent":  "#E0A96D",
+      "--ah-bg":      "#111413",
+      "--ah-surface": "#1A1D1C",
+      "--ah-text":    "#F5EFEB",
+      "--ah-text-muted": "#9BA39F"
+    },
+    "motion": {
+      "preloader": true, "marquee": true, "parallax": true,
+      "counters": true, "cursor": true
+    },
+    "layout": "full-bleed-dark-luxury",
+    "description": "Full-bleed dark luxury, vídeo/fotos imersivas. Ideal para gastronomia, cafés, spas."
+  },
+  "cartaz-modular": {
+    "name": "Cartaz Modular",
+    "nichos": ["psicologia", "nutrição", "bem-estar", "coaching", "yoga", "terapeuta"],
+    "fonts": { "display": "Plus Jakarta Sans", "body": "Plus Jakarta Sans" },
+    "dark": false,
+    "defaults": {
+      "--ah-primary": "#5B8A72",
+      "--ah-accent":  "#5B8A72",
+      "--ah-bg":      "#FAFAF8",
+      "--ah-surface": "#F0EDE8",
+      "--ah-text":    "#1C1C1A",
+      "--ah-text-muted": "#6B7280"
+    },
+    "motion": {
+      "preloader": true, "marquee": false, "parallax": false,
+      "counters": true, "cursor": false
+    },
+    "layout": "color-blocks",
+    "description": "Color-blocks harmônicos, pílula flutuante, acolhedor. Ideal para Psicologia, Nutrição."
+  },
+  "instrumento-digital": {
+    "name": "Instrumento Digital",
+    "nichos": ["odontologia", "saúde", "clínica", "medicina", "tecnologia médica"],
+    "fonts": { "display": "Plus Jakarta Sans", "body": "Inter" },
+    "dark": false,
+    "defaults": {
+      "--ah-primary": "#0EA5E9",
+      "--ah-accent":  "#0EA5E9",
+      "--ah-bg":      "#F8FAFC",
+      "--ah-surface": "#F1F5F9",
+      "--ah-text":    "#0F172A",
+      "--ah-text-muted": "#64748B"
+    },
+    "motion": {
+      "preloader": true, "marquee": false, "parallax": false,
+      "counters": true, "cursor": false
+    },
+    "layout": "swiss-precision",
+    "description": "Swiss design, precisão cirúrgica, confiança. Ideal para Odonto, Tecnologia Médica."
+  },
+  "brutalismo-comercial": {
+    "name": "Brutalismo Comercial",
+    "nichos": ["barbearia", "academia", "streetwear", "tatuagem", "estúdio"],
+    "fonts": { "display": "League Spartan", "body": "League Spartan" },
+    "dark": true,
+    "defaults": {
+      "--ah-primary": "#F5FF00",
+      "--ah-accent":  "#F5FF00",
+      "--ah-bg":      "#0A0A0A",
+      "--ah-surface": "#141414",
+      "--ah-text":    "#F5F5F5",
+      "--ah-text-muted": "#888888"
+    },
+    "motion": {
+      "preloader": true, "marquee": true, "parallax": false,
+      "counters": true, "cursor": true
+    },
+    "layout": "heavy-grid",
+    "description": "Heavy grid, tipografia display pesada, alto contraste. Ideal para Barbearia, Academia."
+  },
+  "arquivo-vivo": {
+    "name": "Arquivo Vivo",
+    "nichos": ["advocacia", "consultoria", "contabilidade", "perícia", "auditoria"],
+    "fonts": { "display": "JetBrains Mono", "body": "Inter" },
+    "dark": true,
+    "defaults": {
+      "--ah-primary": "#6EE7B7",
+      "--ah-accent":  "#6EE7B7",
+      "--ah-bg":      "#0C0F0E",
+      "--ah-surface": "#131716",
+      "--ah-text":    "#E7F0EC",
+      "--ah-text-muted": "#8A9E96"
+    },
+    "motion": {
+      "preloader": true, "marquee": true, "parallax": false,
+      "counters": true, "cursor": true
+    },
+    "layout": "index-matrix",
+    "description": "Index matrix, monospace labels, dados técnicos. Ideal para Advocacia, Consultoria."
+  }
+}

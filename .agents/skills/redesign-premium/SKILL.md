@@ -3,74 +3,144 @@ name: redesign-premium
 description: Esta skill deve ser usada ao redesenhar o site de um cliente prospectado — criar uma versão nova, premium e de alta conversão da página existente, mantendo conteúdo, logo e paleta do cliente. Acione quando o usuário disser "redesenhar site", "melhorar página", "refazer o site do cliente", "criar site" ou pedir para redesenhar (skill redesign-premium).
 ---
 
-# Criação e Redesign Premium de Páginas (Alta Conversão & Anti-Slop)
+# Criação e Redesign Premium de Páginas v2.0 (Motor Automático + Motion Engine)
 
-Criar uma presença digital impecável para o cliente — seja **Redesenhando um site fraco** ou **Criando o Primeiro Site Oficial do Zero** (para quem só tem Instagram/Google Maps). O cliente precisa ver a página e sentir que o negócio dele foi elevado ao padrão de estúdio de design de elite.
-
-## ⚡ Geração Automatizada em 1 Clique (Recomendado)
-Para compilar um site completo com design anti-slop, logo coletada, fotos reais e transições fluidas:
-- **Via Terminal/Script**: `python scripts/gerar-site-lead.py --slug "<slug-do-lead>" --preset auto`
-- **Via Windows**: Duplo clique em `gerar-site.bat` (lista leads disponíveis e compila instantaneamente)
-- **Presets Suportados**: `quiet-luxury` (estética/luxo), `swiss-precision` (odonto/saúde tech), `warm-organic` (psico/bem-estar), `monografia-editorial` (arquitetura/decor), `cinema-3d-spatial` (dark/impacto) ou templates personalizados na pasta `referencias/templates/`.
+Criar uma presença digital impecável para o cliente — seja **Redesenhando um site fraco** ou **Criando o Primeiro Site Oficial do Zero**. O resultado deve incluir: fotos reais do cliente, cores extraídas da identidade visual e animações cinematográficas em todo site.
 
 ---
 
-## 🛑 Etapa 0: Briefing & Presets de Direção Visual (Anti-Slop)
+## ⚡ Geração Automática em 1 Comando (OBRIGATÓRIO)
 
-Antes de gerar qualquer linha de código HTML, a IA **DEVE verificar ou consultar a Direção Criativa**:
+**Sempre use o `aholic-generator.py` como ponto de entrada.**
 
-1. 🎨 **Preset de Direção Visual (`referencias/presets-visuais.json`):**
-   - Verificar se o lead já possui um `creative_direction_card` gerado no dashboard.
-   - Caso não possua, selecionar ou sugerir o preset mais adequado entre os 6 disponíveis:
-     - 🏛️ **Editorial de Atelier** (Asymmetrical editorial, serifa nobre, respiro amplo — Arquitetura/Dermato/Luxo).
-     - ⚡ **Brutalismo Comercial** (Heavy grid, tipografia display pesada, alto contraste — Barbearias/Academias/Streetwear).
-     - 🗂️ **Arquivo Vivo** (Index matrix, monospace labels, dados técnicos — Advocacia/Consultoria/Perícias).
-     - 🎬 **Cinema Local** (Full-bleed dark luxury, vídeo/fotos imersivas — Rejuvenescimento/Spas/Alta Gastronomia).
-     - 🎨 **Cartaz Modular** (Color-blocks harmônicos, pílula flutuante, acolhedor — Psicologia/Nutrição/Bem-estar).
-     - 📐 **Instrumento Digital** (Swiss design, precisão cirúrgica, confiança — Odonto Digital/Tecnologia Médica).
-   - **Regra de Diversidade:** Nunca repetir a mesma receita nos últimos 3 sites do mesmo nicho sem autorização explícita.
-2. 📸 **Instagram / Google Maps do Cliente:** Extrair fotos reais, logo e tom de voz autêntico.
-3. 🎯 **Serviço Carro-Chefe:** Procedimento ou serviço principal a ser destacado no Hero e no botão de WhatsApp.
+```bash
+# Exemplo completo (com fotos do Maps + Instagram + paleta da logo)
+python scripts/aholic-generator.py \
+  --slug "nome-do-cliente" \
+  --preset auto \
+  --instagram "@instagram_do_cliente" \
+  --maps "https://maps.app.goo.gl/..." \
+  --info '{"nome":"Nome Cliente","nicho":"Cafeteria","cidade":"São Paulo","nota":4.9,"avaliacoes":120,"telefone":"(11) 99999-9999","whatsapp":"11999999999","endereco":"Rua X, 123","horarios":"Seg-Sex 8h-18h","servicos":["Especialidade 1","Especialidade 2"]}'
 
----
+# Listar presets disponíveis
+python scripts/aholic-generator.py --list
 
-## 🚫 Diretrizes Rígidas Anti-Slop (Padrão Estúdio)
+# Sem fotos automáticas (apenas HTML + cores do preset)
+python scripts/aholic-generator.py --slug "slug" --preset "cinema-local" --no-photos
+```
 
-1. **PROIBIDO Gradientes Neon Clichês:** Nada de fundos roxo/ciano cyberpunk sem justificativa de marca.
-2. **PROIBIDO Textos Robóticos de IA:** Nunca usar frases como "Revolucione sua jornada", "Embarque em uma experiência única", "Descubra a excelência". A copy deve ser humana, direta, focada no benefício real e nas dores do paciente/cliente.
-3. **PROIBIDO Pessoas Artificiais de IA:** Usar fotos REAIS do Instagram/Google Maps do estabelecimento ou fotografia editorial limpa e natural.
-4. **Informações 100% Reais:** Endereço, horários, depoimentos 5 estrelas reais do Google Maps e número de WhatsApp no formato correto (`55DDDNUMERO`).
-
----
-
-## 🛠️ Design System e Especificações Técnicas
-
-- **Framework:** HTML5 + Tailwind CSS (via CDN) + Lucide Icons + Google Fonts. Sem dependências pesadas de build.
-- **Tipografia:** Fonte do arquétipo escolhido (ex: *Newsreader* + *Inter* para luxo; *Plus Jakarta Sans* para tecnologia).
-- **Layout Bento Grid & Cards:** Seções organizadas em blocos elegantes com cantos arredondados (`rounded-2xl`), sombras suaves (`shadow-sm` / `shadow-xl`) e bordas sutis (`border border-slate-100` ou `border-stone-200/60`).
-- **Prova Social em Destaque:** Nota real do Google Maps em destaque com estrelas douradas e depoimentos reais.
-- **Conversão no WhatsApp:** Botão flutuante fixo no canto inferior direito e botões de ação contextuais (`https://wa.me/55DDDNUMERO?text=Olá! Vim pelo site e gostaria de agendar uma avaliação para [Serviço]`).
-- **Página Autocontida:** Arquivo único `sites/[slug]/[slug].html` ultra-rápido, abrindo em menos de 1 segundo.
-- **Editor e Comparador:** Gerar a versão editável `sites/[slug]/[slug]-editor.html` e atualizar o comparador antes/depois `comparar.html`.
+O gerador automaticamente:
+1. **Extrai fotos reais** do Google Maps e Instagram público (via Playwright)
+2. **Lê a logo** e extrai a paleta de cores da identidade visual do cliente
+3. **Adapta o preset** às cores reais do negócio (primary, accent, bg, text)
+4. **Injeta o Motion Engine** (`referencias/motion-engine.js`): preloader cinematográfico, cursor magnético, scroll reveal, counters animados, parallax e marquee
+5. **Gera os 3 arquivos padrão**: `index.html`, `[slug].html`, `[slug]-editor.html`
+6. **Publica automaticamente** via `git push → Vercel`
 
 ---
 
-## 🚀 Etapa 5: Deploy Automático na Vercel (https://aholicdigital.vercel.app/)
+## 🎨 Presets Disponíveis (`referencias/presets-dinamicos.json`)
 
-Toda vez que um site for **criado ou modificado**:
-1. Atualizar os dados do lead e a versão em `dashboard.html` e sincronizar com `index.html`.
-2. Executar o commit com `git add .` e mensagem descritiva (ex: `feat: publica site [slug] na Vercel`).
-3. Disparar o `git push origin main` para que a Vercel atualize instantaneamente o site oficial.
-4. Fornecer o link oficial público ao vivo: `https://aholicdigital.vercel.app/sites/[slug]/[slug].html`.
+| Preset | Nichos | Fontes | Modo |
+|---|---|---|---|
+| `editorial-atelier` | Arquitetura, Dermato, Luxo, Spa | Newsreader + Inter | Dark |
+| `cinema-local` | Cafeteria, Restaurante, Gastronomia | League Spartan + Playfair | Dark |
+| `cartaz-modular` | Psicologia, Nutrição, Bem-estar | Plus Jakarta Sans | Light |
+| `instrumento-digital` | Odontologia, Saúde, Clínica | Plus Jakarta Sans + Inter | Light |
+| `brutalismo-comercial` | Barbearia, Academia, Streetwear | League Spartan | Dark |
+| `arquivo-vivo` | Advocacia, Consultoria | JetBrains Mono + Inter | Dark |
+
+> **`--preset auto`** seleciona o preset correto baseado no nicho automaticamente.
 
 ---
 
-## 📋 Checklist Final de Entrega
+## 🎬 Motion Engine Padrão (`referencias/motion-engine.js`)
 
-- [ ] Instagram do cliente consultado e fotos reais aplicadas
-- [ ] Arquétipo de design respeitado (cores, tipografia e espaçamento alinhados aos presets visuais)
-- [ ] Zero texto de preenchimento ou clichês de IA
-- [ ] Todos os botões e CTAs com link direto para o WhatsApp no formato correto
-- [ ] 100% responsivo no mobile (360px a 430px) sem rolagem horizontal
-- [ ] `[slug]-editor.html` gerado e registrado no dashboard
-- [ ] Sincronizado no GitHub e publicado na Vercel (`https://aholicdigital.vercel.app/`)
+Todo site gerado pelo `aholic-generator.py` já inclui automaticamente:
+
+- **Preloader Cinematic Curtain**: cortinas se abrem revelando o site com o nome do cliente
+- **Scroll Reveal**: elementos entram suavemente ao rolar a página (stagger escalonado)
+- **Cursor Magnético**: cursor personalizado na cor `--ah-accent` do cliente
+- **Contadores Animados**: números sobem suavemente ao entrar na viewport
+- **Parallax em Imagens**: profundidade de scroll nas fotos
+- **Marquee Infinita**: faixa de informações animada
+- **Float Badge Bounce**: badge de avaliação flutuante animado
+- **Header Shadow**: header ganha sombra ao rolar
+
+Para adicionar manualmente a um site existente:
+```html
+<script src="/referencias/motion-engine.js"></script>
+<!-- ou inline (copie o conteúdo do arquivo) -->
+```
+
+Configuração via `meta` tags ou atributos `data-ah-*`:
+```html
+<meta name="ah-brand" content="Nome do Cliente">
+<meta name="ah-sub" content="Nicho • Cidade">
+```
+
+---
+
+## 📸 Extração de Fotos (`scripts/extrair-fotos.py`)
+
+```bash
+# Extrai fotos do Maps e Instagram
+python scripts/extrair-fotos.py \
+  --slug "cafe-shin" \
+  --maps "https://maps.app.goo.gl/..." \
+  --instagram "cafeshinparis" \
+  --max 8
+```
+
+Salva em `sites/[slug]/assets/fotos/` e cria `assets/fotos.json` com catálogo.
+
+---
+
+## 🎨 Extração de Paleta (`referencias/color-extractor.py`)
+
+```bash
+# Extrai paleta da logo
+python referencias/color-extractor.py --slug "cafe-shin" --url "https://..." 
+# ou
+python referencias/color-extractor.py --slug "cafe-shin" --img "sites/cafe-shin/assets/logo.png"
+```
+
+Gera `sites/[slug]/assets/paleta.json` com:
+- `tokens`: variáveis CSS `--ah-*` prontas para uso
+- `css_vars`: bloco `:root{}` completo para colar no `<style>`
+- `contrast_check`: verificação WCAG AA automática
+
+---
+
+## 🛑 Diretrizes Anti-Slop (Padrão Estúdio)
+
+1. **PROIBIDO** gradientes neon clichês sem justificativa de marca
+2. **PROIBIDO** textos genéricos de IA ("Revolucione sua jornada", "Embarque em uma experiência")
+3. **PROIBIDO** fotos de banco de imagem de pessoas: usar fotos REAIS do Maps/Instagram do cliente
+4. **OBRIGATÓRIO** informações 100% reais: endereço, horários, avaliações reais do Google Maps, WhatsApp no formato `wa.me/55DDDNUMERO`
+
+---
+
+## 🚀 Deploy Automático (Vercel)
+
+O `aholic-generator.py` faz o deploy automaticamente. Para deploy manual:
+
+```bash
+git add .
+git commit -m "feat([slug]): site premium com motion engine — [Nome do Cliente]"
+git push origin main
+```
+
+URL de produção: `https://aholicdigital.vercel.app/sites/[slug]/index.html`
+
+---
+
+## 📋 Checklist Final
+
+- [ ] `aholic-generator.py` executado com `--instagram` e/ou `--maps`
+- [ ] Fotos reais baixadas (verificar `sites/[slug]/assets/fotos/`)
+- [ ] Paleta extraída da logo (verificar `sites/[slug]/assets/paleta.json`)
+- [ ] Motion Engine presente no HTML gerado
+- [ ] WhatsApp e Instagram funcionando nos botões
+- [ ] Deploy na Vercel confirmado
+- [ ] Dashboard atualizado com o novo lead
