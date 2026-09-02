@@ -14,4 +14,4 @@
 | 10 | **Lucas Aguiar \| Nutrição Clínica & Comportamental** | 5.0 ★ | 56 | (85) 98211-9199 | **Do Zero** | *(Nenhum)* | Mestre UNIFOR, Einstein & AMBULIM/USP em Fortaleza - CE. Site 'Lumina Luxury Editorial' com fotos reais. | site_pronto |
 | 11 | **DALDALI \| Café & Pâtisserie Coréenne** | 4.9 ★ | 48 | *(Instagram DM)* | **Do Zero** | *(Nenhum)* | Café de especialidade e doces tradicionais coreanos (Yakgwa/Matcha) em Pigalle, Paris 9e. Sem site oficial. Estilo 'Super Travel Luxury'. | site_pronto |
 | 12 | **Apocalypse Coffee Roasters \| Café Shin** | 4.9 ★ | 62 | *(Instagram DM)* | **Redesign** | apocalypsecoffee.com | Torrefação artesanal de cafés orgânicos especiais. Design importado via Superdesign (Draft 5b241203). | site_pronto |
-
+| 13 | **BACOFFEE Cafeteria** | 4.7 ★ | 260 | (11) 91360-3173 | **Do Zero** | *(Nenhum)* | Eleita Melhor Cafeteria de GRU (Maia, Guarulhos). Cafés de micro lote, brunch de domingo e toasts artesanais. Estilo 'Editorial de Atelier' com motion engine. | site_pronto |
