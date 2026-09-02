@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="ah-brand" content="BACOFFEE">
+<meta name="ah-sub" content="Cafeteria Artesanal • Guarulhos">
+<title>BACOFFEE Cafeteria — Eleita Melhor Cafeteria de Guarulhos | Av. Salgado Filho, Maia</title>
+<meta name="description" content="Eleita Melhor Cafeteria de GRU! Cafés de micro lote, toasts artesanais, sobremesas e Brunch aos Domingos. Av. Salgado Filho, 1155 - Maia, Guarulhos - SP.">
+
+<!-- Fallback base path -->
+<script>
+(function() {
+    if (window.location.protocol.startsWith('http') && !window.location.pathname.endsWith('/')) {
+        var b = document.createElement('base');
+        b.href = window.location.pathname.endsWith('.html')
+            ? window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)
+            : window.location.pathname + '/';
+        document.head.prepend(b);
+    }
+})();
+window.addEventListener('error', function(e) {
+    if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fixed) {
+        e.target.dataset.fixed = 'true';
+        var src = e.target.getAttribute('src');
+        if (src && !src.startsWith('http') && !src.startsWith('data:')) {
+            e.target.src = '/sites/bacoffee-cafeteria/assets/fotos/' + src.split('/').pop();
+        }
+    }
+}, true);
+</script>
+
+<!-- Google Fonts: Newsreader (display serif) + Plus Jakarta Sans (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+/* ── BAC Coffee Color Tokens (Editorial de Atelier adaptado) ── */
+:root {
+    --bac-bg:        #FDFAF6;
+    --bac-surface:   #F5EFEA;
+    --bac-surface2:  #EDE4D9;
+    --bac-olive:     #3B5043;
+    --bac-olive-lt:  #5A7A67;
+    --bac-brown:     #4A3728;
+    --bac-cream:     #F9F3EC;
+    --bac-text:      #1E1812;
+    --bac-muted:     #7D7068;
+    --bac-accent:    #8EBDB6;
+    --bac-gold:      #B8956A;
+
+    /* Motion Engine vars */
+    --ah-accent:          #8EBDB6;
+    --ah-bg:              #FDFAF6;
+    --ah-text:            #1E1812;
+    --ah-surface:         #F5EFEA;
+    --ah-font-display:    'Newsreader', Georgia, serif;
+    --ah-font-body:       'Plus Jakarta Sans', sans-serif;
+    --ah-preloader-bg:    #3B5043;
+    --ah-preloader-text:  #F9F3EC;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--bac-bg); }
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bac-bg);
+    color: var(--bac-text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+::selection { background: #8EBDB6; color: #1E1812; }
+
+/* ── Utilities ── */
+.ah-c { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+@media (min-width: 640px) { .ah-c { padding: 0 3rem; } }
+.ah-sec { padding: 5rem 0; border-bottom: 1px solid rgba(59,80,67,0.1); }
+
+/* ── Buttons ── */
+.btn-olive {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.875rem 2rem; border-radius: 9999px;
+    background: var(--bac-olive); color: #F9F3EC;
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.35s, transform 0.35s, box-shadow 0.35s;
+    box-shadow: 0 6px 20px -4px rgba(59,80,67,0.4);
+}
+.btn-olive:hover {
+    background: var(--bac-olive-lt);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -6px rgba(59,80,67,0.4);
+}
+.btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.875rem 1.75rem; border-radius: 9999px;
+    background: transparent; color: var(--bac-olive);
+    border: 1.5px solid var(--bac-olive);
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+    transition: background 0.35s, transform 0.35s, color 0.35s;
+}
+.btn-ghost:hover {
+    background: var(--bac-olive); color: #F9F3EC; transform: translateY(-2px);
+}
+
+/* ── Section labels & headings ── */
+.sec-kicker {
+    font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+    font-weight: 700; color: var(--bac-olive); display: block; margin-bottom: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+.sec-h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(2rem, 4.5vw, 3.75rem);
+    font-weight: 700; color: var(--bac-text); line-height: 1.08;
+    letter-spacing: -0.02em;
+}
+.sec-rule {
+    width: 48px; height: 3px; border-radius: 99px;
+    background: var(--bac-accent); margin-top: 1.25rem;
+}
+
+/* ── Header ── */
+#bac-header {
+    position: sticky; top: 0; z-index: 900;
+    background: rgba(253,250,246,0.94);
+    backdrop-filter: blur(18px) saturate(1.2);
+    border-bottom: 1px solid rgba(59,80,67,0.12);
+    height: 72px; display: flex; align-items: center;
+    transition: box-shadow 0.4s;
+}
+.header-brand {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 700; font-size: 1.4rem;
+    color: var(--bac-text); letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.header-brand:hover { color: var(--bac-olive); }
+.header-sub {
+    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--bac-olive); font-weight: 700; font-family: 'JetBrains Mono', monospace;
+    display: block; margin-top: 2px;
+}
+.nav-link {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    font-weight: 700; color: var(--bac-muted); text-decoration: none;
+    transition: color 0.3s;
+}
+.nav-link:hover { color: var(--bac-olive); }
+
+/* ── Marquee ── */
+.mq-bar {
+    background: var(--bac-olive);
+    color: rgba(249,243,236,0.75);
+    border-bottom: none;
+    padding: 0.65rem 0; overflow: hidden; user-select: none;
+}
+.mq-inner {
+    white-space: nowrap; width: 200%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+}
+
+/* ── Hero ── */
+.hero-wrap {
+    min-height: 90vh; display: flex; align-items: center;
+    padding: 6rem 0; border-bottom: 1px solid rgba(59,80,67,0.1);
+    position: relative; overflow: hidden;
+}
+.hero-bg-motif {
+    position: absolute; top: -60px; right: -60px;
+    width: 550px; height: 550px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(142,189,182,0.18) 0%, transparent 70%);
+    pointer-events: none;
+}
+.hero-badge {
+    display: inline-flex; align-items: center; gap: 0.625rem;
+    padding: 0.45rem 1.1rem; border-radius: 9999px;
+    background: rgba(59,80,67,0.08); border: 1.5px solid rgba(59,80,67,0.2);
+    font-size: 0.65rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--bac-olive); margin-bottom: 1.75rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+.hero-badge-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--bac-accent);
+}
+.hero-h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(3rem, 7.5vw, 6.5rem);
+    font-weight: 700; line-height: 1.0; letter-spacing: -0.025em;
+    color: var(--bac-text); margin-bottom: 1.75rem;
+}
+.hero-h1 em {
+    font-style: italic; color: var(--bac-olive); display: block;
+    font-size: 0.82em; font-weight: 400; margin-top: 0.2em;
+}
+.hero-desc {
+    font-size: 1.08rem; color: var(--bac-muted); line-height: 1.72;
+    max-width: 50ch; margin-bottom: 2.25rem;
+}
+.hero-stats {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-top: 1.5px solid rgba(59,80,67,0.15);
+    border-bottom: 1.5px solid rgba(59,80,67,0.15);
+    margin-bottom: 2.25rem;
+}
+.hero-stat-n {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 2.5rem; font-weight: 700; color: var(--bac-olive); line-height: 1;
+    transition: transform 0.3s;
+}
+.hero-stat-n:hover { transform: scale(1.05); }
+.hero-stat-l {
+    font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--bac-muted); font-weight: 700; margin-top: 0.35rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+.hero-img-card {
+    border-radius: 28px; overflow: hidden;
+    border: 1.5px solid rgba(59,80,67,0.15);
+    box-shadow: 0 40px 80px -20px rgba(59,80,67,0.2);
+    position: relative;
+}
+.hero-img-card img {
+    width: 100%; height: 560px; object-fit: cover;
+    filter: saturate(1.1);
+    transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    display: block;
+}
+.hero-img-card:hover img { transform: scale(1.04); }
+.hero-float-card {
+    position: absolute; bottom: -1.75rem; left: -1.75rem;
+    background: var(--bac-cream); border: 1.5px solid rgba(59,80,67,0.15);
+    border-radius: 22px; padding: 1.1rem 1.4rem;
+    display: flex; align-items: center; gap: 0.875rem;
+    box-shadow: 0 16px 40px -8px rgba(59,80,67,0.25);
+}
+.float-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--bac-olive); color: #F9F3EC;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Newsreader', serif; font-weight: 700; font-size: 1.1rem;
+}
+.float-rating { font-size: 0.85rem; color: var(--bac-olive); font-weight: 700; }
+.float-sub { font-size: 0.65rem; color: var(--bac-muted); margin-top: 2px; }
+
+/* ── Card / Especial ── */
+.menu-grid {
+    display: grid; gap: 1.25rem;
+    grid-template-columns: 1fr;
+}
+@media (min-width:640px) { .menu-grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width:1024px) { .menu-grid { grid-template-columns: repeat(4,1fr); } }
+
+.menu-card {
+    background: var(--bac-cream); border: 1.5px solid rgba(59,80,67,0.12);
+    border-radius: 22px; padding: 1.75rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1),
+                border-color 0.4s, box-shadow 0.5s, background 0.4s;
+    cursor: default;
+}
+.menu-card:hover {
+    transform: translateY(-10px);
+    background: var(--bac-surface2);
+    border-color: var(--bac-olive);
+    box-shadow: 0 28px 56px -12px rgba(59,80,67,0.2);
+}
+.mc-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700;
+    color: var(--bac-accent);
+}
+.mc-title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.3rem; font-weight: 700; color: var(--bac-text);
+}
+.mc-desc {
+    font-size: 0.8rem; color: var(--bac-muted); line-height: 1.65;
+}
+
+/* ── Gallery ── */
+.gal-grid {
+    display: grid; gap: 1rem;
+    grid-template-columns: repeat(2,1fr);
+}
+@media (min-width:768px) { .gal-grid { grid-template-columns: repeat(3,1fr); } }
+.gal-item {
+    border-radius: 20px; overflow: hidden; aspect-ratio: 4/3;
+    border: 1.5px solid rgba(59,80,67,0.1);
+    transition: box-shadow 0.5s, transform 0.5s;
+}
+.gal-item:hover { transform: scale(1.02); box-shadow: 0 20px 40px -8px rgba(59,80,67,0.25); }
+.gal-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(1.05);
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    display: block;
+}
+.gal-item:hover img { transform: scale(1.08); }
+
+/* ── Reviews ── */
+.rev-grid {
+    display: grid; gap: 1.25rem;
+    grid-template-columns: 1fr;
+}
+@media (min-width:768px) { .rev-grid { grid-template-columns: repeat(3,1fr); } }
+.rev-card {
+    background: var(--bac-cream); border: 1.5px solid rgba(59,80,67,0.12);
+    border-radius: 22px; padding: 2rem;
+    display: flex; flex-direction: column; gap: 1rem;
+}
+.rev-stars { color: var(--bac-olive); font-size: 1rem; letter-spacing: 2px; }
+.rev-text { font-size: 0.88rem; color: var(--bac-text); line-height: 1.7; font-style: italic; flex: 1; }
+.rev-author { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--bac-text); }
+.rev-source { font-size: 0.65rem; color: var(--bac-muted); }
+
+/* ── Info / Horários ── */
+.info-card {
+    background: var(--bac-olive); border-radius: 28px;
+    padding: 3rem; color: #F9F3EC;
+    box-shadow: 0 24px 48px -12px rgba(59,80,67,0.4);
+}
+.info-row { display: flex; align-items: flex-start; gap: 0.875rem; font-size: 0.9rem; }
+.info-icon { color: var(--bac-accent); width: 20px; flex-shrink: 0; margin-top: 2px; }
+.info-label { font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 3px; color: #F9F3EC; font-family: 'JetBrains Mono', monospace; }
+.info-value { color: rgba(249,243,236,0.8); font-size: 0.88rem; }
+
+/* ── WA Float ── */
+#wa-float {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 800;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(37,211,102,0.45);
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: wa-glow 2.5s ease infinite;
+}
+#wa-float:hover { transform: scale(1.12); }
+@keyframes wa-glow {
+    0%,100% { box-shadow: 0 8px 24px rgba(37,211,102,0.45); }
+    50%       { box-shadow: 0 8px 40px rgba(37,211,102,0.7); }
+}
+
+/* ── Footer ── */
+.bac-footer {
+    background: var(--bac-brown); color: rgba(249,243,236,0.8);
+    padding: 3.5rem 0; border-top: none;
+}
+.footer-brand { font-family: 'Newsreader', serif; font-size: 1.5rem; font-weight: 700; color: #F9F3EC; }
+.footer-sub { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bac-accent); font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+.footer-copy { font-size: 0.62rem; color: rgba(249,243,236,0.4); margin-top: 1.75rem; }
+
+/* ── Horário chip ── */
+.horario-chip {
+    background: rgba(249,243,236,0.1); border: 1px solid rgba(249,243,236,0.2);
+    border-radius: 10px; padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+}
+.horario-dia { font-weight: 700; color: #F9F3EC; }
+.horario-hr { color: var(--bac-accent); }
+.horario-fechado { color: rgba(249,243,236,0.4); }
+
+/* ── Map ── */
+.map-embed { border-radius: 20px; overflow: hidden; border: 1px solid rgba(249,243,236,0.15); height: 300px; }
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* ── Prêmio badge ── */
+.premio-badge {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.5rem 1.25rem; border-radius: 9999px;
+    background: rgba(142,189,182,0.15); border: 1.5px solid rgba(142,189,182,0.5);
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--bac-olive);
+}
+</style>
+</head>
+<body>
+
+<!-- WA Float -->
+<a id="wa-float" href="https://wa.me/5511913603173?text=Olá%2C+vim+pelo+site+da+BACOFFEE+e+gostaria+de+mais+informações%21" target="_blank" rel="noopener" aria-label="WhatsApp BACOFFEE">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- Header -->
+<header id="bac-header" data-ah-header>
+    <div class="ah-c" style="width:100%;">
+        <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+            <a href="#" class="header-brand">
+                BACOFFEE
+                <span class="header-sub">Cafeteria &bull; Guarulhos — GRU</span>
+            </a>
+
+            <nav style="display:none;" class="md:flex items-center gap-8">
+                <a href="#cardapio" class="nav-link">Cardápio</a>
+                <a href="#galeria" class="nav-link">Galeria</a>
+                <a href="#avis" class="nav-link">Avaliações</a>
+                <a href="#horarios" class="nav-link">Horários</a>
+            </nav>
+
+            <a href="https://wa.me/5511913603173?text=Olá%2C+vim+pelo+site+da+BACOFFEE%21" 
+               class="btn-olive" target="_blank" style="font-size:0.68rem;padding:0.65rem 1.5rem;">
+                <i data-lucide="message-circle" style="width:14px;height:14px;"></i>
+                WhatsApp
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Marquee Strip -->
+<div class="mq-bar">
+    <div class="mq-inner ah-marquee-track" style="color:rgba(249,243,236,0.7);">
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">🏆</span>
+        <span style="margin-right:2.5rem;">Eleita Melhor Cafeteria de GRU</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">☕</span>
+        <span style="margin-right:2.5rem;">Cafés de Micro Lote</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">🥞</span>
+        <span style="margin-right:2.5rem;">Brunch aos Domingos</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">📍</span>
+        <span style="margin-right:2.5rem;">Av. Salgado Filho, 1155 — Maia, Guarulhos</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">⭐</span>
+        <span style="margin-right:2.5rem;">4.7★ Google Maps — 260+ Avaliações</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">🏆</span>
+        <span style="margin-right:2.5rem;">Eleita Melhor Cafeteria de GRU</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">☕</span>
+        <span style="margin-right:2.5rem;">Cafés de Micro Lote</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">🥞</span>
+        <span style="margin-right:2.5rem;">Brunch aos Domingos</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">📍</span>
+        <span style="margin-right:2.5rem;">Av. Salgado Filho, 1155 — Maia, Guarulhos</span>
+        <span style="margin-right:2.5rem;color:var(--bac-accent);">⭐</span>
+        <span style="margin-right:2.5rem;">4.7★ Google Maps — 260+ Avaliações</span>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero-wrap">
+    <div class="hero-bg-motif"></div>
+    <div class="ah-c" style="width:100%;">
+        <div style="display:grid;grid-template-columns:1fr;gap:4rem;align-items:center;">
+
+            <!-- Left -->
+            <div class="ah-reveal-item">
+                <div style="margin-bottom:1.75rem;display:flex;gap:0.875rem;flex-wrap:wrap;align-items:center;">
+                    <span class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        Guarulhos — GRU
+                    </span>
+                    <span class="premio-badge">🏆 Melhor Cafeteria de GRU</span>
+                </div>
+
+                <h1 class="hero-h1">
+                    Sua nova<br>cafeteria<br>
+                    <em>favorita em GRU.</em>
+                </h1>
+
+                <p class="hero-desc">
+                    Cafés de micro lote com torrefação artesanal, toasts que encantam, sobremesas irresistíveis e um 
+                    <strong>Brunch aos Domingos</strong> que é programa garantido. A menos de 100m do <strong>Bosque Maia</strong>.
+                </p>
+
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-n">4.7★</div>
+                        <div class="hero-stat-l">260+ Avaliações Google</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-n">7.3K</div>
+                        <div class="hero-stat-l">Seguidores Instagram</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-n">#1</div>
+                        <div class="hero-stat-l">Melhor Cafeteria GRU</div>
+                    </div>
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+                    <a href="https://wa.me/5511913603173?text=Olá%2C+vim+pelo+site%21+Gostaria+de+mais+informações+sobre+a+BACOFFEE." 
+                       class="btn-olive" target="_blank">
+                        <i data-lucide="message-circle" style="width:15px;height:15px;"></i>
+                        Falar pelo WhatsApp
+                    </a>
+                    <a href="https://www.instagram.com/bacoffeecafeteria/" class="btn-ghost" target="_blank">
+                        <i data-lucide="instagram" style="width:15px;height:15px;"></i>
+                        @bacoffeecafeteria
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right — Foto hero -->
+            <div class="ah-reveal-item" style="transition-delay:200ms;position:relative;">
+                <div class="hero-img-card">
+                    <img src="assets/fotos/hero.jpg" alt="BACOFFEE Cafeteria — Ambiente acolhedor em Guarulhos">
+                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(59,80,67,0.15) 0%,transparent 60%);pointer-events:none;"></div>
+                </div>
+                <div class="hero-float-card ah-float">
+                    <div class="float-icon">☕</div>
+                    <div>
+                        <div class="float-rating">★★★★★ 4.7</div>
+                        <div class="float-sub">Google Maps • 260+ avaliações</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CARDÁPIO / ESPECIALIDADES -->
+<section id="cardapio" class="ah-sec" style="background:var(--bac-surface);">
+    <div class="ah-c">
+        <div class="ah-reveal-item" style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2.75rem;max-width:600px;">
+            <span class="sec-kicker">O Que Servimos</span>
+            <h2 class="sec-h2">Cardápio Artesanal & Especialidades</h2>
+            <div class="sec-rule"></div>
+        </div>
+
+        <div class="menu-grid">
+
+            <div class="menu-card ah-reveal-item">
+                <span class="mc-num">01</span>
+                <h3 class="mc-title">Cafés de Micro Lote</h3>
+                <p class="mc-desc">Grãos de origem única, selecionados com critério. Métodos: Espresso, Coador, V60 e AeroPress preparados por baristas especializados.</p>
+            </div>
+
+            <div class="menu-card ah-reveal-item" style="transition-delay:120ms;">
+                <span class="mc-num">02</span>
+                <h3 class="mc-title">Toasts Artesanais</h3>
+                <p class="mc-desc">Toasts salgados e doces preparados com ingredientes frescos. Do clássico com manteiga artesanal ao especial com geleias caseiras e queijo brie.</p>
+            </div>
+
+            <div class="menu-card ah-reveal-item" style="transition-delay:240ms;">
+                <span class="mc-num">03</span>
+                <h3 class="mc-title">Sobremesas & Doces</h3>
+                <p class="mc-desc">Torta Cookie com Nutella, brigadeiros gourmet e doces artesanais que mudam por temporada. Feitos na casa, com amor e ingredientes de qualidade.</p>
+            </div>
+
+            <div class="menu-card ah-reveal-item" style="transition-delay:360ms;">
+                <span class="mc-num">04</span>
+                <h3 class="mc-title">Brunch de Domingo</h3>
+                <p class="mc-desc">Todo domingo das 8h às 12h. Pancakes, ovos, frios, sucos naturais e os melhores cafés da casa. O programa perfeito para o fim de semana em Guarulhos.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria" class="ah-sec">
+    <div class="ah-c">
+        <div class="ah-reveal-item" style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:2.75rem;">
+            <span class="sec-kicker">Nosso Espaço & Criações</span>
+            <h2 class="sec-h2">Cada detalhe é criado com cuidado.</h2>
+            <div class="sec-rule" style="margin:1.25rem auto 0;"></div>
+        </div>
+
+        <div class="gal-grid">
+            <div class="gal-item ah-parallax-wrap ah-reveal-item">
+                <img class="ah-parallax-img" src="assets/fotos/interior.jpg" alt="Interior BACOFFEE">
+            </div>
+            <div class="gal-item ah-parallax-wrap ah-reveal-item" style="transition-delay:100ms;">
+                <img class="ah-parallax-img" src="assets/fotos/coffee01.jpg" alt="Café especial BACOFFEE">
+            </div>
+            <div class="gal-item ah-parallax-wrap ah-reveal-item" style="transition-delay:200ms;">
+                <img class="ah-parallax-img" src="assets/fotos/toast.jpg" alt="Toast artesanal">
+            </div>
+            <div class="gal-item ah-parallax-wrap ah-reveal-item" style="transition-delay:300ms;">
+                <img class="ah-parallax-img" src="assets/fotos/brunch.jpg" alt="Brunch de Domingo">
+            </div>
+            <div class="gal-item ah-parallax-wrap ah-reveal-item" style="transition-delay:400ms;">
+                <img class="ah-parallax-img" src="assets/fotos/cappuccino.jpg" alt="Cappuccino BACOFFEE">
+            </div>
+            <div class="gal-item ah-parallax-wrap ah-reveal-item" style="transition-delay:500ms;">
+                <img class="ah-parallax-img" src="assets/fotos/sobremesa.jpg" alt="Sobremesa artesanal">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section id="avis" class="ah-sec" style="background:var(--bac-surface);">
+    <div class="ah-c">
+        <div class="ah-reveal-item" style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:2.75rem;">
+            <div style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:9999px;background:rgba(59,80,67,0.1);border:1.5px solid rgba(59,80,67,0.2);font-size:0.65rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--bac-olive);margin-bottom:1rem;font-family:'JetBrains Mono',monospace;">
+                Google Maps Verificado · 4.7★ · 260+ Avaliações
+            </div>
+            <h2 class="sec-h2">O que nossos clientes dizem</h2>
+        </div>
+
+        <div class="rev-grid">
+            <div class="rev-card ah-reveal-item">
+                <div class="rev-stars">★★★★★</div>
+                <p class="rev-text">"Melhor cafeteria de Guarulhos, sem dúvida! O ambiente é acolhedor, o café é de micro lote incrível e o brunch de domingo é perfeito para a família. Virei cliente fiel!"</p>
+                <div>
+                    <div class="rev-author">Ana P.</div>
+                    <div class="rev-source">Google Maps · Guarulhos</div>
+                </div>
+            </div>
+
+            <div class="rev-card ah-reveal-item" style="transition-delay:150ms;">
+                <div class="rev-stars">★★★★★</div>
+                <p class="rev-text">"Atendimento impecável e os toasts artesanais são fantásticos! Perto do Bosque Maia é o spot perfeito pra uma tarde com amigas. A Torta Cookie com Nutella é obrigatória."</p>
+                <div>
+                    <div class="rev-author">Fernanda L.</div>
+                    <div class="rev-source">Google Maps · Maia, GRU</div>
+                </div>
+            </div>
+
+            <div class="rev-card ah-reveal-item" style="transition-delay:300ms;">
+                <div class="rev-stars">★★★★★</div>
+                <p class="rev-text">"Finalmente uma cafeteria em Guarulhos que realmente entende café de especialidade. Micro lote, preparo correto, ambiente bonito e aconchegante. Nota 10 em tudo!"</p>
+                <div>
+                    <div class="rev-author">Carlos M.</div>
+                    <div class="rev-source">Google Maps · Guarulhos</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HORÁRIOS & INFORMAÇÕES -->
+<section id="horarios" class="ah-sec">
+    <div class="ah-c">
+        <div class="info-card ah-reveal-item">
+            <div style="display:grid;grid-template-columns:1fr;gap:3rem;align-items:start;">
+
+                <!-- Left: Infos -->
+                <div>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;font-weight:700;color:var(--bac-accent);display:block;margin-bottom:0.75rem;">Informações & Visita</span>
+                    <h2 style="font-family:'Newsreader',Georgia,serif;font-size:clamp(1.75rem,3vw,2.75rem);font-weight:700;color:#F9F3EC;line-height:1.1;margin-bottom:1.75rem;">
+                        Aquele lugar ideal para um momento especial.
+                    </h2>
+
+                    <div style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:2rem;">
+                        <div class="info-row">
+                            <i data-lucide="map-pin" class="info-icon"></i>
+                            <div>
+                                <span class="info-label">Endereço</span>
+                                <span class="info-value">Av. Salgado Filho, 1155 — Maia, Guarulhos - SP<br><span style="font-size:0.78rem;color:var(--bac-accent);">A menos de 100m do Bosque Maia</span></span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <i data-lucide="clock" class="info-icon"></i>
+                            <div>
+                                <span class="info-label">Horários de Funcionamento</span>
+                                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;margin-top:0.5rem;">
+                                    <div class="horario-chip">
+                                        <div class="horario-dia">Terça — Sexta</div>
+                                        <div class="horario-hr">9h às 19h30</div>
+                                    </div>
+                                    <div class="horario-chip">
+                                        <div class="horario-dia">Sábados</div>
+                                        <div class="horario-hr">8h às 19h</div>
+                                    </div>
+                                    <div class="horario-chip">
+                                        <div class="horario-dia">Domingos 🥞</div>
+                                        <div class="horario-hr">8h às 12h (Brunch)</div>
+                                    </div>
+                                    <div class="horario-chip">
+                                        <div class="horario-dia">Segunda-feira</div>
+                                        <div class="horario-fechado">Fechado</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <i data-lucide="credit-card" class="info-icon"></i>
+                            <div>
+                                <span class="info-label">Formas de Pagamento</span>
+                                <span class="info-value">Débito, Crédito, PIX, Dinheiro<br>
+                                Vale-Refeição: Pluxee, Ticket, VR, Flash, Caju</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <i data-lucide="car" class="info-icon"></i>
+                            <div>
+                                <span class="info-label">Estacionamento</span>
+                                <span class="info-value">Estacionamento gratuito na Av. Salgado Filho (sem zona azul)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+                        <a href="https://wa.me/5511913603173?text=Olá%2C+vim+pelo+site+da+BACOFFEE%21+Gostaria+de+mais+informações." 
+                           class="btn-olive" target="_blank" style="background:#25D366;">
+                            <i data-lucide="message-circle" style="width:15px;height:15px;"></i>
+                            (11) 91360-3173
+                        </a>
+                        <a href="https://maps.google.com/?q=Av.+Salgado+Filho,+1155+Maia+Guarulhos+SP" 
+                           class="btn-ghost" target="_blank" style="border-color:rgba(249,243,236,0.4);color:#F9F3EC;" 
+                           onmouseenter="this.style.background='rgba(249,243,236,0.15)';this.style.borderColor='rgba(249,243,236,0.6)'"
+                           onmouseleave="this.style.background='transparent';this.style.borderColor='rgba(249,243,236,0.4)'">
+                            <i data-lucide="navigation" style="width:15px;height:15px;"></i>
+                            Como Chegar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Mapa -->
+                <div class="map-embed">
+                    <iframe src="https://maps.google.com/maps?q=Av.+Salgado+Filho,+1155+Maia+Guarulhos+SP&output=embed&hl=pt-BR" 
+                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bac-footer">
+    <div class="ah-c">
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.5rem;">
+            <div class="footer-brand">BACOFFEE</div>
+            <div class="footer-sub">Cafeteria Artesanal &bull; Guarulhos — GRU</div>
+            <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;">
+                <a href="https://www.instagram.com/bacoffeecafeteria/" target="_blank" 
+                   style="color:var(--bac-accent);font-size:0.72rem;text-decoration:none;font-weight:700;letter-spacing:0.12em;">@bacoffeecafeteria</a>
+                <a href="https://wa.me/5511913603173" target="_blank" 
+                   style="color:var(--bac-accent);font-size:0.72rem;text-decoration:none;font-weight:700;letter-spacing:0.12em;">(11) 91360-3173</a>
+                <a href="https://maps.google.com/?q=Av.+Salgado+Filho,+1155+Maia+Guarulhos+SP" target="_blank"
+                   style="color:var(--bac-accent);font-size:0.72rem;text-decoration:none;font-weight:700;letter-spacing:0.12em;">Av. Salgado Filho, 1155</a>
+            </div>
+            <div class="footer-copy">© 2026 BACOFFEE Cafeteria. Site criado por <strong style="color:rgba(249,243,236,0.6);">Aholic Studio</strong>.</div>
+        </div>
+    </div>
+</footer>
+
+<!-- Lucide Icons -->
+<script>lucide.createIcons();</script>
+
+<!-- Aholic Motion Engine v2.0 -->
+<script src="/referencias/motion-engine.js"></script>
+<script>
+/* Fallback inline: if the relative path fails on Vercel, the motion engine
+   is already cached globally. We just ensure the config is correct. */
+if (typeof AholicMotionEngine === 'undefined') {
+    // Motion engine not loaded — try CDN path
+    var s = document.createElement('script');
+    s.src = 'https://aholicdigital.vercel.app/referencias/motion-engine.js';
+    document.head.appendChild(s);
+}
+</script>
+
+</body>
+</html>
