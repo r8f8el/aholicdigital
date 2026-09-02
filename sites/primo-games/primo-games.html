@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="ah-brand" content="PRIMO GAMES">
+<meta name="ah-sub" content="Consoles • Jogos • Assistência Técnica | Goiânia">
+<title>PRIMO GAMES — Mais de 28 Anos de Tradição Gamer | Goiânia — GO</title>
+<meta name="description" content="A maior e mais tradicional loja de games de Goiás. PlayStation 5, Nintendo Switch, Xbox, PC Gamer, Jogos em Mídia Física, Trocas e Assistência Técnica Especializada. Entregas para todo o Brasil.">
+
+<!-- Base URL fix & Image fallback -->
+<script>
+(function() {
+    if (window.location.protocol.startsWith('http') && !window.location.pathname.endsWith('/')) {
+        var b = document.createElement('base');
+        b.href = window.location.pathname.endsWith('.html')
+            ? window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)
+            : window.location.pathname + '/';
+        document.head.prepend(b);
+    }
+})();
+window.addEventListener('error', function(e) {
+    if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fixed) {
+        e.target.dataset.fixed = 'true';
+        var src = e.target.getAttribute('src');
+        if (src && !src.startsWith('http') && !src.startsWith('data:')) {
+            e.target.src = '/sites/primo-games/assets/fotos/' + src.split('/').pop();
+        }
+    }
+}, true);
+</script>
+
+<!-- Google Fonts: Inter (Structural UI) + Playfair Display (Editorial Italic) + JetBrains Mono (Technical Readouts) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+/* ── Warm Industrial Design System Specification ── */
+:root {
+    --wi-bg:           #EBEBE8;
+    --wi-fg:           #18181B;
+    --wi-accent:       #0066FF;
+    --wi-accent-hover: #0052CC;
+    --wi-accent-glow:  rgba(0, 102, 255, 0.25);
+    --wi-green:        #22C55E;
+    --wi-border:       #D4D4D8;
+    --wi-border-dark:  rgba(24, 24, 27, 0.12);
+    --wi-surface:      #F4F4F5;
+    --wi-surface-alt:  #E4E4E0;
+    --wi-muted:        #71717A;
+    --wi-dark-bg:      #18181B;
+    --wi-dark-text:    #EBEBE8;
+
+    /* Aholic Engine Variables */
+    --ah-accent:          #0066FF;
+    --ah-bg:              #EBEBE8;
+    --ah-text:            #18181B;
+    --ah-surface:         #F4F4F5;
+    --ah-font-display:    'Inter', sans-serif;
+    --ah-font-body:       'Inter', sans-serif;
+    --ah-preloader-bg:    #18181B;
+    --ah-preloader-text:  #EBEBE8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: var(--wi-bg);
+    color: var(--wi-fg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--wi-bg);
+    color: var(--wi-fg);
+    position: relative;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: var(--wi-accent);
+    color: #FFFFFF;
+}
+
+/* ── 1. Fractal Noise Overlay (0.04 Opacity) ── */
+#wi-noise-layer {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 99998;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ── 2. Structural 12-Column Grid Lines ── */
+#wi-grid-lines {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1600px;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    padding: 0 1.5rem;
+}
+@media (min-width: 640px) {
+    #wi-grid-lines { padding: 0 3rem; }
+}
+.wi-col-line {
+    border-right: 1px solid rgba(24, 24, 27, 0.06);
+    height: 100%;
+}
+.wi-col-line:first-child {
+    border-left: 1px solid rgba(24, 24, 27, 0.06);
+}
+
+/* ── Container & Structural Boundaries ── */
+.wi-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+@media (min-width: 640px) {
+    .wi-container { padding: 0 3rem; }
+}
+
+.wi-border-b { border-bottom: 1px solid var(--wi-border); }
+.wi-border-t { border-top: 1px solid var(--wi-border); }
+.wi-border-l { border-left: 1px solid var(--wi-border); }
+.wi-border-r { border-right: 1px solid var(--wi-border); }
+.wi-border-all { border: 1px solid var(--wi-border); }
+
+/* ── Typography Utilities ── */
+.font-editorial {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.mono-readout {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wi-muted);
+}
+
+.stroke-text {
+    -webkit-text-stroke: 1.5px var(--wi-fg);
+    color: transparent;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stroke-text:hover {
+    color: var(--wi-fg);
+}
+
+.stroke-text-white {
+    -webkit-text-stroke: 1px rgba(235, 235, 232, 0.3);
+    color: transparent;
+}
+
+/* ── Status Indicator Pulse ── */
+.live-pulse {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--wi-border);
+    background: rgba(244, 244, 245, 0.7);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wi-fg);
+}
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--wi-green);
+    position: relative;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+.pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid var(--wi-green);
+    animation: pulse-ring 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* ── Buttons (Sharp & Rounded CTAs) ── */
+.btn-electric {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2.25rem;
+    background: var(--wi-accent);
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--wi-accent);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px var(--wi-accent-glow);
+}
+.btn-electric:hover {
+    background: var(--wi-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--wi-accent-glow);
+}
+.btn-electric i {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-electric:hover i {
+    transform: rotate(45deg);
+}
+
+.btn-rect {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: var(--wi-fg);
+    color: var(--wi-bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--wi-fg);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-rect:hover {
+    background: var(--wi-accent);
+    border-color: var(--wi-accent);
+    color: #FFFFFF;
+}
+
+.btn-outline-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 9999px;
+    border: 1px solid var(--wi-border);
+    background: transparent;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wi-fg);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-outline-pill:hover {
+    background: var(--wi-fg);
+    color: var(--wi-bg);
+    border-color: var(--wi-fg);
+}
+
+/* ── Sticky Header (80px) ── */
+#wi-header {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    height: 80px;
+    background: rgba(235, 235, 232, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--wi-border);
+    display: flex;
+    align-items: center;
+}
+.header-nav-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wi-fg);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.header-nav-link:hover {
+    color: var(--wi-accent);
+}
+.header-logo-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    color: var(--wi-fg);
+}
+.logo-serif {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+.logo-sans {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+}
+
+/* ── Marquee Ribbon (120px, #F4F4F5) ── */
+.wi-marquee-ribbon {
+    height: 120px;
+    background: var(--wi-surface);
+    border-top: 1px solid var(--wi-border);
+    border-bottom: 1px solid var(--wi-border);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+    position: relative;
+    z-index: 2;
+}
+.wi-marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: wi-marquee-flow 32s linear infinite;
+    will-change: transform;
+}
+.wi-marquee-track:hover {
+    animation-play-state: paused;
+}
+@keyframes wi-marquee-flow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.marquee-text-node {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+    padding-right: 3rem;
+}
+.marquee-star {
+    color: var(--wi-accent);
+    margin: 0 2rem;
+    font-size: 1.5rem;
+}
+
+/* ── Interactive Project / Category List (Clip-path Reveal) ── */
+.project-row {
+    position: relative;
+    height: 180px;
+    border-bottom: 1px solid var(--wi-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (min-width: 768px) {
+    .project-row {
+        height: 220px;
+        padding: 0 2.5rem;
+    }
+}
+.project-row:hover {
+    background-color: rgba(244, 244, 245, 0.85);
+}
+
+.project-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--wi-fg);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 4;
+    position: relative;
+}
+.project-row:hover .project-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    transform: translateX(12px);
+    color: var(--wi-accent);
+}
+
+.project-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wi-muted);
+    z-index: 4;
+    position: relative;
+}
+
+.project-image-reveal {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+    clip-path: inset(0 0 0 100%);
+    transition: clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+.project-row:hover .project-image-reveal {
+    clip-path: inset(0 0 0 0);
+}
+.project-image-reveal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    mix-blend-mode: multiply;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-row:hover .project-image-reveal img {
+    transform: scale(1.06);
+}
+
+.project-view-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--wi-accent);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    z-index: 5;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-row:hover .project-view-circle {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ── Hero Glassmorphic Spec Card ── */
+.spec-glass-card {
+    background: rgba(235, 235, 232, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(24, 24, 27, 0.15);
+    padding: 1.5rem;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+}
+
+/* ── Massive Dark Footer ── */
+.wi-massive-footer {
+    background: var(--wi-dark-bg);
+    color: var(--wi-dark-text);
+    position: relative;
+    overflow: hidden;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+}
+.footer-contact-link {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    color: var(--wi-dark-text);
+    text-decoration: none;
+    border-bottom: 2px solid rgba(235, 235, 232, 0.2);
+    padding-bottom: 0.5rem;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-block;
+}
+.footer-contact-link:hover {
+    color: var(--wi-accent);
+    border-bottom-color: var(--wi-accent);
+    transform: translateX(8px);
+}
+.footer-ghost-marquee {
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    width: 200%;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 20vw;
+    line-height: 0.8;
+    color: rgba(235, 235, 232, 0.035);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<!-- 1. Fractal Noise Texture Layer -->
+<div id="wi-noise-layer" aria-hidden="true"></div>
+
+<!-- 2. Structural 12-Column Grid Lines Overlay -->
+<div id="wi-grid-lines" aria-hidden="true">
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+    <div class="wi-col-line"></div>
+</div>
+
+<!-- 3. Sticky Technical Header (80px) -->
+<header id="wi-header">
+    <div class="wi-container w-full">
+        <div class="flex items-center justify-between relative">
+            
+            <!-- Left: Minimalist Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#hardware" class="header-nav-link">01 // Hardware</a>
+                <a href="#catalogo" class="header-nav-link">02 // Acervo</a>
+                <a href="#assistencia" class="header-nav-link">03 // Lab Técnico</a>
+                <a href="#unidades" class="header-nav-link">04 // Unidades</a>
+            </nav>
+
+            <!-- Center: Logo (Italic Serif + Bold Sans) -->
+            <a href="#" class="header-logo-center">
+                <span class="logo-serif">Primo</span>
+                <span class="logo-sans">GAMES</span>
+            </a>
+
+            <!-- Right: Status Badge + CTA -->
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex live-pulse">
+                    <span class="pulse-dot"></span>
+                    <span>2 Lojas Abertas</span>
+                </div>
+                <a href="https://wa.me/5562996443118?text=Olá+Primo+Games!+Gostaria+de+consultar+consoles+e+jogos." 
+                   class="btn-outline-pill" target="_blank">
+                    <i data-lucide="message-square" style="width:12px;height:12px;"></i>
+                    Atendimento
+                </a>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- 4. Split Hero Section (12 Columns) -->
+<section class="wi-border-b relative z-10 py-16 lg:py-24">
+    <div class="wi-container">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-stretch">
+            
+            <!-- Left (7 Columns): Structural Content Stack -->
+            <div class="lg:col-span-7 flex flex-col justify-between pr-0 lg:pr-8 ah-reveal-item">
+                
+                <div>
+                    <!-- Status Indicator -->
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="live-pulse">
+                            <span class="pulse-dot"></span>
+                            <span>Goiânia — 28+ Anos de Tradição Gamer</span>
+                        </span>
+                        <span class="mono-readout">// EST. 1996</span>
+                    </div>
+
+                    <!-- Massive 3-Line Heading -->
+                    <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-[110px] font-black uppercase tracking-[-0.05em] leading-[0.88] mb-8">
+                        <span class="stroke-text block">Hardcore</span>
+                        <span class="block">Gaming</span>
+                        <span class="font-editorial normal-case text-5xl sm:text-6xl lg:text-[85px] text-zinc-900 block mt-2">
+                            Authority.
+                        </span>
+                    </h1>
+
+                    <!-- Technical Readout Subtitle -->
+                    <p class="text-base sm:text-lg text-zinc-600 max-w-[52ch] leading-relaxed mb-10 font-normal">
+                        A maior referência em consoles de última geração, jogos em mídia física, hardware e assistência técnica especializada do Centro-Oeste. Compra, venda, troca e envios para todo o Brasil.
+                    </p>
+                </div>
+
+                <!-- Metrics Matrix & Action Button -->
+                <div>
+                    <div class="grid grid-cols-3 gap-6 py-6 wi-border-t wi-border-b mb-8">
+                        <div>
+                            <div class="text-3xl lg:text-4xl font-black text-zinc-900 tracking-tight">4.7★</div>
+                            <div class="mono-readout mt-1">476+ Reviews Google</div>
+                        </div>
+                        <div class="wi-border-l pl-6">
+                            <div class="text-3xl lg:text-4xl font-black text-zinc-900 tracking-tight">112K</div>
+                            <div class="mono-readout mt-1">Comunidade Instagram</div>
+                        </div>
+                        <div class="wi-border-l pl-6">
+                            <div class="text-3xl lg:text-4xl font-black text-[#0066FF] tracking-tight">28+</div>
+                            <div class="mono-readout mt-1">Anos de Mercado</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="https://wa.me/5562996443118?text=Olá+Primo+Games!+Quero+consultar+a+tabela+de+preços+de+consoles." 
+                           class="btn-electric" target="_blank">
+                            <span>Consultar Tabela</span>
+                            <i data-lucide="arrow-up-right" style="width:16px;height:16px;"></i>
+                        </a>
+                        <a href="#unidades" class="btn-rect">
+                            <span>Ver Lojas Físicas</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right (5 Columns): Framed Industrial Showcase with Glass Specs -->
+            <div class="lg:col-span-5 relative flex flex-col justify-end ah-reveal-item" style="transition-delay: 150ms;">
+                
+                <!-- Internal 20px Framed Photo Container -->
+                <div class="wi-border-all bg-zinc-200 p-5 relative overflow-hidden" style="min-height: 520px;">
+                    <img src="assets/fotos/hero-ps5.jpg" alt="PlayStation 5 & Hardware na Primo Games" 
+                         class="w-full h-full object-cover grayscale contrast-125 block" style="min-height: 480px;">
+                    
+                    <!-- Glassmorphic UI Card Overlay -->
+                    <div class="spec-glass-card absolute bottom-6 left-6 right-6 z-20">
+                        <div class="flex items-center justify-between pb-3 wi-border-b mb-3">
+                            <span class="mono-readout">// SYSTEM OVERVIEW</span>
+                            <span class="mono-readout text-[#0066FF]">ATACADO & VAREJO</span>
+                        </div>
+                        <div class="space-y-2 text-xs font-mono text-zinc-700">
+                            <div class="flex justify-between">
+                                <span>CONSOLES:</span>
+                                <span class="font-bold text-zinc-900">PS5 PRO • SLIM • SWITCH OLED • XBOX</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>LOGÍSTICA:</span>
+                                <span class="font-bold text-[#22C55E]">ENVIOS NACIONAIS EXPRESSOS</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>PAGAMENTO:</span>
+                                <span class="font-bold text-zinc-900">PARCELAMENTO ATÉ 18X • PIX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 5. Marquee Ticker (120px, #F4F4F5) -->
+<div class="wi-marquee-ribbon">
+    <div class="wi-marquee-track">
+        <div class="marquee-text-node">
+            <span class="stroke-text">PLAYSTATION 5</span>
+            <span class="marquee-star">✦</span>
+            <span class="font-editorial">Nintendo Switch OLED</span>
+            <span class="marquee-star">✦</span>
+            <span>XBOX SERIES X</span>
+            <span class="marquee-star">✦</span>
+            <span class="stroke-text">JOGOS MÍDIA FÍSICA</span>
+            <span class="marquee-star">✦</span>
+            <span class="font-editorial">Assistência Especializada</span>
+            <span class="marquee-star">✦</span>
+            <span>TROCAS & SEMINOVOS</span>
+            <span class="marquee-star">✦</span>
+        </div>
+        <div class="marquee-text-node">
+            <span class="stroke-text">PLAYSTATION 5</span>
+            <span class="marquee-star">✦</span>
+            <span class="font-editorial">Nintendo Switch OLED</span>
+            <span class="marquee-star">✦</span>
+            <span>XBOX SERIES X</span>
+            <span class="marquee-star">✦</span>
+            <span class="stroke-text">JOGOS MÍDIA FÍSICA</span>
+            <span class="marquee-star">✦</span>
+            <span class="font-editorial">Assistência Especializada</span>
+            <span class="marquee-star">✦</span>
+            <span>TROCAS & SEMINOVOS</span>
+            <span class="marquee-star">✦</span>
+        </div>
+    </div>
+</div>
+
+<!-- 6. Interactive Category & Hardware List (Clip-Path Project Reveal) -->
+<section id="hardware" class="wi-border-b relative z-10">
+    <div class="wi-container py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <span class="mono-readout block mb-3">// CATÁLOGO DE PRODUTOS & SERVIÇOS</span>
+                <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-[-0.03em]">
+                    Departamentos <span class="font-editorial normal-case text-zinc-500">& Hardware.</span>
+                </h2>
+            </div>
+            <p class="text-xs font-mono text-zinc-500 mt-4 md:mt-0 tracking-wider">
+                PASSE O CURSOR PARA REVELAR OS EQUIPAMENTOS [01—05]
+            </p>
+        </div>
+    </div>
+
+    <!-- Interactive Rows -->
+    <div class="wi-border-t">
+        
+        <!-- Row 1: PlayStation Ecosystem -->
+        <a href="https://wa.me/5562996443118?text=Olá!+Quero+consultar+consoles+e+jogos+PlayStation+5." 
+           class="project-row block text-inherit no-underline" target="_blank">
+            <div>
+                <span class="project-meta block mb-1">01. CONSOLES DE ALTA PERFORMANCE</span>
+                <h3 class="project-title">PlayStation 5 & Slim</h3>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="mono-readout hidden sm:inline-block">A PRONTA ENTREGA</span>
+                <div class="project-view-circle"><i data-lucide="arrow-right" style="width:18px;height:18px;"></i></div>
+            </div>
+            <div class="project-image-reveal">
+                <img src="assets/fotos/hero-ps5.jpg" alt="PlayStation 5 Primo Games">
+            </div>
+        </a>
+
+        <!-- Row 2: Nintendo Switch Ecosystem -->
+        <a href="https://wa.me/5562996443118?text=Olá!+Quero+consultar+Nintendo+Switch+OLED+e+jogos." 
+           class="project-row block text-inherit no-underline" target="_blank">
+            <div>
+                <span class="project-meta block mb-1">02. PORTÁTEIS & NINTENDO</span>
+                <h3 class="project-title">Nintendo Switch OLED</h3>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="mono-readout hidden sm:inline-block">VERSÕES NACIONAL & IMPORTADA</span>
+                <div class="project-view-circle"><i data-lucide="arrow-right" style="width:18px;height:18px;"></i></div>
+            </div>
+            <div class="project-image-reveal">
+                <img src="assets/fotos/switch.jpg" alt="Nintendo Switch Primo Games">
+            </div>
+        </a>
+
+        <!-- Row 3: Xbox Ecosystem -->
+        <a href="https://wa.me/5562996443118?text=Olá!+Quero+consultar+Xbox+Series+X+e+Series+S." 
+           class="project-row block text-inherit no-underline" target="_blank">
+            <div>
+                <span class="project-meta block mb-1">03. MICROSOFT ECOSYSTEM</span>
+                <h3 class="project-title">Xbox Series X & S</h3>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="mono-readout hidden sm:inline-block">NOVO & GARANTIA OFICIAL</span>
+                <div class="project-view-circle"><i data-lucide="arrow-right" style="width:18px;height:18px;"></i></div>
+            </div>
+            <div class="project-image-reveal">
+                <img src="assets/fotos/xbox.jpg" alt="Xbox Series X Primo Games">
+            </div>
+        </a>
+
+        <!-- Row 4: Retro Gaming & Collectibles -->
+        <a href="https://wa.me/5562996443118?text=Olá!+Gostaria+de+saber+sobre+jogos+e+consoles+Retrô." 
+           class="project-row block text-inherit no-underline" target="_blank">
+            <div>
+                <span class="project-meta block mb-1">04. ACERVO RETRÔ & COLECIONÁVEIS</span>
+                <h3 class="project-title">Vintage & Retrogaming</h3>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="mono-readout hidden sm:inline-block">RARIDADES & FITAS ORIGINAIS</span>
+                <div class="project-view-circle"><i data-lucide="arrow-right" style="width:18px;height:18px;"></i></div>
+            </div>
+            <div class="project-image-reveal">
+                <img src="assets/fotos/retro.jpg" alt="Consoles Retrô Primo Games">
+            </div>
+        </a>
+
+        <!-- Row 5: Lab de Assistência Técnica -->
+        <a href="https://wa.me/5562996443118?text=Olá!+Preciso+de+orçamento+para+conserto+de+console/controle." 
+           class="project-row block text-inherit no-underline" target="_blank">
+            <div>
+                <span class="project-meta block mb-1">05. MANUTENÇÃO & ENGENHARIA</span>
+                <h3 class="project-title">Assistência Técnica Especializada</h3>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="mono-readout hidden sm:inline-block">LABORATÓRIO PRÓPRIO EM GOIÂNIA</span>
+                <div class="project-view-circle"><i data-lucide="arrow-right" style="width:18px;height:18px;"></i></div>
+            </div>
+            <div class="project-image-reveal">
+                <img src="assets/fotos/assistencia.jpg" alt="Assistência Técnica Primo Games">
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- 7. Philosophical Parallax & 28-Year Heritage Matrix -->
+<section class="wi-border-b py-20 lg:py-28 relative z-10 bg-zinc-100">
+    <div class="wi-container">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-8 ah-reveal-item">
+                <span class="mono-readout block mb-4 text-[#0066FF]">// MANIFESTO DE TRADIÇÃO</span>
+                <blockquote class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-[-0.03em] leading-tight text-zinc-900 mb-8">
+                    "Desde 1996, não vendemos apenas equipamentos. Construímos a história dos games em Goiás, geração após geração."
+                </blockquote>
+                <p class="text-base sm:text-lg text-zinc-600 max-w-[65ch] leading-relaxed mb-8">
+                    Com mais de duas décadas e meia de portas abertas em Campinas, a Primo Games sobreviveu às trocas de gerações, do cartucho ao disco óptico e agora ao digital, mantendo sempre o compromisso de atendimento honesto, garantia transparente e os melhores preços do Brasil.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <span class="live-pulse">✓ 2 Lojas Físicas em Goiânia</span>
+                    <span class="live-pulse">✓ Compra & Venda de Seminovos</span>
+                    <span class="live-pulse">✓ Atacado e Varejo</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 wi-border-all bg-[#EBEBE8] p-8 ah-reveal-item" style="transition-delay: 150ms;">
+                <span class="mono-readout block mb-4">// SISTEMA DE TROCA (TRADE-IN)</span>
+                <h4 class="text-2xl font-black uppercase mb-4">Seu Usado Vale Dinheiro</h4>
+                <p class="text-sm text-zinc-600 leading-relaxed mb-6">
+                    Traga seus jogos em mídia física, controles ou consoles antigos (PS4, Xbox One, Switch). Nós avaliamos e abatemos o valor na hora para você levar seu console de nova geração.
+                </p>
+                <a href="https://wa.me/5562996443118?text=Olá!+Gostaria+de+avaliar+meu+console/jogo+usado+na+troca." 
+                   class="btn-rect w-full text-center block" target="_blank">
+                    Simular Avaliação
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 8. Technical Lab & Services Grid -->
+<section id="assistencia" class="wi-border-b py-20 relative z-10">
+    <div class="wi-container">
+        <div class="mb-14">
+            <span class="mono-readout block mb-3">// LABORATÓRIO ESPECIALIZADO</span>
+            <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-[-0.03em]">
+                Assistência Técnica <span class="font-editorial normal-case text-zinc-500">& Engenharia.</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="wi-border-all bg-[#F4F4F5] p-6 flex flex-col justify-between hover:border-[#0066FF] transition-all">
+                <div>
+                    <span class="mono-readout text-[#0066FF] block mb-3">01 // REBALLING & CHIPSET</span>
+                    <h3 class="text-xl font-bold uppercase mb-2">Manutenção de Placas</h3>
+                    <p class="text-xs text-zinc-600 leading-relaxed">
+                        Reparo avançado em placas-mãe de PS5, PS4, Xbox Series e Nintendo Switch com estações BGA de precisão.
+                    </p>
+                </div>
+                <div class="pt-6 mt-6 wi-border-t mono-readout text-zinc-500">DIAGNÓSTICO GRÁTIS</div>
+            </div>
+
+            <div class="wi-border-all bg-[#F4F4F5] p-6 flex flex-col justify-between hover:border-[#0066FF] transition-all">
+                <div>
+                    <span class="mono-readout text-[#0066FF] block mb-3">02 // PORTAS HDMI & CONECTORES</span>
+                    <h3 class="text-xl font-bold uppercase mb-2">Troca de Portas HDMI</h3>
+                    <p class="text-xs text-zinc-600 leading-relaxed">
+                        Substituição de conectores HDMI danificados em PS5 e Xbox com solda industrial e garantia de sinal 4K/120Hz.
+                    </p>
+                </div>
+                <div class="pt-6 mt-6 wi-border-t mono-readout text-zinc-500">SERVIÇO RÁPIDO</div>
+            </div>
+
+            <div class="wi-border-all bg-[#F4F4F5] p-6 flex flex-col justify-between hover:border-[#0066FF] transition-all">
+                <div>
+                    <span class="mono-readout text-[#0066FF] block mb-3">03 // DRIFT & CONTROLES</span>
+                    <h3 class="text-xl font-bold uppercase mb-2">Analógicos & Drift</h3>
+                    <p class="text-xs text-zinc-600 leading-relaxed">
+                        Instalação de analógicos Hall Effect (anti-drift magnético) e troca de botões para DualSense, Xbox e Joy-Cons.
+                    </p>
+                </div>
+                <div class="pt-6 mt-6 wi-border-t mono-readout text-zinc-500">HALL EFFECT READY</div>
+            </div>
+
+            <div class="wi-border-all bg-[#F4F4F5] p-6 flex flex-col justify-between hover:border-[#0066FF] transition-all">
+                <div>
+                    <span class="mono-readout text-[#0066FF] block mb-3">04 // LIMPEZA PREVENTIVA</span>
+                    <h3 class="text-xl font-bold uppercase mb-2">Metal Líquido & Limpeza</h3>
+                    <p class="text-xs text-zinc-600 leading-relaxed">
+                        Higienização completa contra superaquecimento e reaplicação técnica de metal líquido e pasta térmica premium.
+                    </p>
+                </div>
+                <div class="pt-6 mt-6 wi-border-t mono-readout text-zinc-500">MÁXIMA EFICIÊNCIA</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 9. Google Maps, Reviews & Store Units -->
+<section id="unidades" class="wi-border-b py-20 relative z-10 bg-zinc-100">
+    <div class="wi-container">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <!-- Left (7 Cols): Store Units & Hours -->
+            <div class="lg:col-span-7">
+                <span class="mono-readout block mb-3 text-[#0066FF]">// LOCALIZAÇÃO & HORÁRIOS</span>
+                <h2 class="text-4xl font-black uppercase tracking-[-0.03em] mb-8">
+                    Nossas Unidades em <span class="font-editorial normal-case text-zinc-500">Goiânia.</span>
+                </h2>
+
+                <div class="space-y-6">
+                    
+                    <!-- Unit 1 -->
+                    <div class="wi-border-all bg-[#EBEBE8] p-6">
+                        <div class="flex items-center justify-between pb-3 wi-border-b mb-3">
+                            <span class="font-bold text-sm uppercase">Unidade Matriz — Camelódromo de Campinas 1</span>
+                            <span class="mono-readout text-[#0066FF]">STANDS 221 A 223</span>
+                        </div>
+                        <p class="text-xs text-zinc-700 font-mono mb-2">
+                            📍 Av. Anhanguera, nº 8044 — Setor Campinas, Goiânia - GO, 74523-605
+                        </p>
+                        <p class="text-xs text-zinc-500 font-mono">
+                            🕒 Seg a Sex: 08:00 às 18:00 | Sábado: 08:00 às 14:00 | Domingo: Fechado
+                        </p>
+                    </div>
+
+                    <!-- Reviews Matrix -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="wi-border-all bg-[#EBEBE8] p-5">
+                            <div class="text-[#0066FF] text-sm mb-2">★★★★★</div>
+                            <p class="text-xs text-zinc-700 italic leading-relaxed mb-3">
+                                "Melhor loja de games de Goiânia há anos! Compro desde a época do PS2. Atendimento do Rodrigo e equipe é nota 10."
+                            </p>
+                            <span class="mono-readout block">Lucas S. // Google Review</span>
+                        </div>
+                        <div class="wi-border-all bg-[#EBEBE8] p-5">
+                            <div class="text-[#0066FF] text-sm mb-2">★★★★★</div>
+                            <p class="text-xs text-zinc-700 italic leading-relaxed mb-3">
+                                "Peguei meu PS5 na troca dando meu PS4. Avaliação super justa e o videogame lacrado com garantia total. Recomendo!"
+                            </p>
+                            <span class="mono-readout block">Matheus R. // Google Review</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right (5 Cols): Map Embed -->
+            <div class="lg:col-span-5 wi-border-all bg-zinc-200 p-2 overflow-hidden" style="height: 440px;">
+                <iframe 
+                    src="https://maps.google.com/maps?q=Av.+Anhanguera,+8044+Setor+Campinas+Goiania+GO&output=embed&hl=pt-BR"
+                    width="100%" height="100%" style="border:0;filter:grayscale(80%) contrast(1.1);" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- 10. Direct Sales Team Contacts Section -->
+<section class="wi-border-b py-16 relative z-10 bg-[#F4F4F5]">
+    <div class="wi-container">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+            <div>
+                <span class="mono-readout block mb-2 text-[#0066FF]">// ATENDIMENTO DIRETO VIA WHATSAPP</span>
+                <h3 class="text-3xl font-black uppercase">Fale com Nossos Especialistas</h3>
+            </div>
+            <span class="mono-readout">FIXO COMERCIAL: (62) 3291-3560</span>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a href="https://wa.me/5562996443118?text=Olá+Rodrigo!+Gostaria+de+um+orçamento." 
+               class="wi-border-all bg-[#EBEBE8] p-5 block text-center hover:border-[#0066FF] transition-all no-underline text-inherit" target="_blank">
+                <span class="mono-readout block mb-1">CONSULTOR 01</span>
+                <div class="font-black text-lg text-zinc-900 mb-1">Rodrigo</div>
+                <span class="text-xs font-mono text-[#0066FF]">(62) 99644-3118</span>
+            </a>
+
+            <a href="https://wa.me/5562985701994?text=Olá+Orion!+Gostaria+de+um+orçamento." 
+               class="wi-border-all bg-[#EBEBE8] p-5 block text-center hover:border-[#0066FF] transition-all no-underline text-inherit" target="_blank">
+                <span class="mono-readout block mb-1">CONSULTOR 02</span>
+                <div class="font-black text-lg text-zinc-900 mb-1">Orion</div>
+                <span class="text-xs font-mono text-[#0066FF]">(62) 98570-1994</span>
+            </a>
+
+            <a href="https://wa.me/5562982084494?text=Olá+Nelson!+Gostaria+de+um+orçamento." 
+               class="wi-border-all bg-[#EBEBE8] p-5 block text-center hover:border-[#0066FF] transition-all no-underline text-inherit" target="_blank">
+                <span class="mono-readout block mb-1">CONSULTOR 03</span>
+                <div class="font-black text-lg text-zinc-900 mb-1">Nelson</div>
+                <span class="text-xs font-mono text-[#0066FF]">(62) 98208-4494</span>
+            </a>
+
+            <a href="https://wa.me/5562994628832?text=Olá+Bruno!+Gostaria+de+um+orçamento." 
+               class="wi-border-all bg-[#EBEBE8] p-5 block text-center hover:border-[#0066FF] transition-all no-underline text-inherit" target="_blank">
+                <span class="mono-readout block mb-1">CONSULTOR 04</span>
+                <div class="font-black text-lg text-zinc-900 mb-1">Bruno</div>
+                <span class="text-xs font-mono text-[#0066FF]">(62) 99462-8832</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 11. Massive Industrial Footer -->
+<footer class="wi-massive-footer">
+    
+    <!-- Giant Background Marquee Ghost -->
+    <div class="footer-ghost-marquee">
+        PRIMO GAMES GOIÂNIA // EST. 1996 // HARDCORE GAMING
+    </div>
+
+    <div class="wi-container relative z-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 wi-border-b" style="border-color: rgba(235, 235, 232, 0.15);">
+            
+            <div class="lg:col-span-6">
+                <span class="mono-readout block mb-4 text-[#0066FF]">// PEDIDOS & COTAÇÕES RÁPIDAS</span>
+                <a href="https://wa.me/5562996443118" class="footer-contact-link" target="_blank">
+                    Fale Conosco no WhatsApp →
+                </a>
+                <p class="text-sm text-zinc-400 mt-6 max-w-[42ch] font-mono leading-relaxed">
+                    Entregas para todo o Brasil via Sedex, Jadlog e Motoboy Expresso para Goiânia e região metropolitana.
+                </p>
+            </div>
+
+            <div class="lg:col-span-3">
+                <span class="mono-readout block mb-4 text-zinc-400">// REDES & CONTATO</span>
+                <ul class="space-y-3 text-sm font-mono list-none p-0">
+                    <li><a href="https://www.instagram.com/primogames/" target="_blank" class="text-zinc-300 hover:text-[#0066FF] transition-colors">Instagram @primogames (112K)</a></li>
+                    <li><a href="tel:6232913560" class="text-zinc-300 hover:text-[#0066FF] transition-colors">Fixo: (62) 3291-3560</a></li>
+                    <li><a href="https://linktr.ee/primogames" target="_blank" class="text-zinc-300 hover:text-[#0066FF] transition-colors">Linktree Oficial</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-3">
+                <span class="mono-readout block mb-4 text-zinc-400">// UNIDADE MATRIZ</span>
+                <p class="text-xs font-mono text-zinc-400 leading-relaxed">
+                    Av. Anhanguera, 8044<br>
+                    Camelódromo de Campinas 1<br>
+                    Stands 221 a 223 — Setor Campinas<br>
+                    Goiânia - GO, 74523-605
+                </p>
+            </div>
+
+        </div>
+
+        <!-- System Operational Bar -->
+        <div class="flex flex-col sm:flex-row items-center justify-between pt-8 gap-4">
+            <div class="flex items-center gap-3">
+                <span class="pulse-dot"></span>
+                <span class="mono-readout text-zinc-400">SYSTEM OPERATIONAL // PRIMO GAMES v2.0</span>
+            </div>
+            <div class="mono-readout text-zinc-500">
+                © 2026 PRIMO GAMES. PROJETO DESENVOLVIDO POR <strong class="text-zinc-300">AHOLIC STUDIO</strong>.
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<!-- Lucide Icons -->
+<script>lucide.createIcons();</script>
+
+<!-- Aholic Motion Engine v2.0 -->
+<script src="/referencias/motion-engine.js"></script>
+
+</body>
+</html>
