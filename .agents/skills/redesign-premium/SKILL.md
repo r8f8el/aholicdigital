@@ -49,6 +49,7 @@ O gerador automaticamente:
 | `instrumento-digital` | Odontologia, Saúde, Clínica | Plus Jakarta Sans + Inter | Light |
 | `brutalismo-comercial` | Barbearia, Academia, Streetwear | League Spartan | Dark |
 | `arquivo-vivo` | Advocacia, Consultoria | JetBrains Mono + Inter | Dark |
+| `warm-industrial` | Engenharia, Arquitetura, Design de Produto, Manufatura, Roastery | Inter + Playfair Display Italic | Light (#EBEBE8) |
 
 > **`--preset auto`** seleciona o preset correto baseado no nicho automaticamente.
 

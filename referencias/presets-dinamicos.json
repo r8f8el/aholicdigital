@@ -118,5 +118,28 @@
     },
     "layout": "index-matrix",
     "description": "Index matrix, monospace labels, dados técnicos. Ideal para Advocacia, Consultoria."
+  },
+  "warm-industrial": {
+    "name": "Warm Industrial & Structural Grid",
+    "nichos": ["engenharia", "arquitetura", "design", "produto", "manufatura", "roastery", "tecnologia", "editorial", "mobiliário"],
+    "fonts": { "display": "Inter", "editorial": "Playfair Display", "body": "Inter", "mono": "JetBrains Mono" },
+    "dark": false,
+    "defaults": {
+      "--ah-primary": "#18181B",
+      "--ah-accent":  "#0066FF",
+      "--ah-accent-green": "#22C55E",
+      "--ah-bg":      "#EBEBE8",
+      "--ah-surface": "#F4F4F5",
+      "--ah-border":  "#D4D4D8",
+      "--ah-text":    "#18181B",
+      "--ah-text-muted": "#71717A"
+    },
+    "motion": {
+      "preloader": true, "marquee": true, "parallax": true,
+      "counters": true, "cursor": true, "clip_path": true, "noise": true
+    },
+    "layout": "12-column-rigid-structural-grid",
+    "description": "Industrial-chic com grid 12 colunas aparente, fundo #EBEBE8, tipografia Inter + Playfair Display Italic, stroke text, revelação clip-path, ruído fractal 4% e acento azul elétrico #0066FF."
   }
 }
+

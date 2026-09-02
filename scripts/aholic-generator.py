@@ -89,6 +89,13 @@ PRESETS = {
         "dark": True,
         "motion": {"preloader": True, "marquee": True, "parallax": False},
     },
+    "warm-industrial": {
+        "name": "Warm Industrial & Structural Grid",
+        "nichos": ["engenharia", "arquitetura", "design", "produto", "manufatura", "roastery", "mobiliario"],
+        "fonts": {"display": "Inter", "body": "Inter"},
+        "dark": False,
+        "motion": {"preloader": True, "marquee": True, "parallax": True},
+    },
 }
 
 

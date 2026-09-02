@@ -901,5 +901,101 @@
     ],
     "prioridade_conversao": 1,
     "ativo": true
+  },
+  {
+    "id": "warm-industrial",
+    "nome": "Warm Industrial & Structural Grid",
+    "descricao": "Design system industrial-chic centrado em grids estruturais de 12 colunas, tons de cinza aquecido (#EBEBE8), tipografia editorial monumental de alto impacto com acentos técnicos 'readout' (Inter + Playfair Display Italic), textura de ruído fractal 4%, stroke text, revelações clip-path em cubic-bezier(0.16, 1, 0.3, 1) e acento azul elétrico #0066FF.",
+    "origem": "https://superdesign.dev/warm-industrial",
+    "screenshot": "assets/presets/warm-industrial.webp",
+    "tags": [
+      "warm-industrial",
+      "industrial-chic",
+      "structural-grid",
+      "12-columns",
+      "inter",
+      "playfair-display",
+      "stroke-text",
+      "clip-path-reveal",
+      "fractal-noise",
+      "electric-blue",
+      "zinc-300-hairlines",
+      "technical-readout"
+    ],
+    "nichos_recomendados": [
+      "Engenharia & Construção Civil",
+      "Estúdios de Design & Arquitetura",
+      "Design de Produto & Mobiliário",
+      "Tecnologia Industrial & Manufatura",
+      "Moda Conceitual, Eyewear & Acessórios",
+      "Consultoria Técnica & Inovação",
+      "Gastronomia Industrial / Roastery / Cafés Especiais",
+      "Projetos Editoriais, Revistas & Portfólios de Autoridade"
+    ],
+    "nichos_evitar": [
+      "Clínicas Pediátricas Lúdicas",
+      "Comércio Varejista Popular",
+      "Salões Tradicionais Românticos"
+    ],
+    "composicao": "12-column-rigid-structural-grid",
+    "navegacao": "sticky-header-80px-backdrop-blur-centered-logo",
+    "densidade": "alta",
+    "tipografia": {
+      "display": "Inter (Bold 700 / Black 900, 8xl-10xl 128px-160px, tracking -0.05em, com efeito stroke-text)",
+      "editorial": "Playfair Display (Italic 400 para contraste de elegância editorial)",
+      "body": "Inter (Regular 400 / Bold 700, leitura estrutural nítida)",
+      "labels": "Inter / JetBrains Mono (10px, bold uppercase, tracking 0.2em-0.3em)",
+      "escala": "extrema"
+    },
+    "imagem": {
+      "tratamento": "grayscale-clip-path-reveal (Grayscale 100% com mix-blend-multiply #0066FF/20, moldura interna de 20px e transição clip-path inset(0 0 0 100%) para inset(0 0 0 0) em 0.6s cubic-bezier(0.16, 1, 0.3, 1))",
+      "proporcoes": ["16:9", "4:5", "3:2", "row-300px"]
+    },
+    "movimento": {
+      "estilo": [
+        "clip-path-project-reveal-0.6s",
+        "cubic-bezier-0.16-1-0.3-1-inertia",
+        "stroke-text-contrast-shift",
+        "live-status-pulse-green",
+        "rapid-7xl-marquee-ribbon-120px",
+        "persistent-fractal-noise-overlay-0.04"
+      ],
+      "intensidade_interacao": 3,
+      "respeita_prefers_reduced_motion": true
+    },
+    "paleta": {
+      "estilo": "warm-industrial-gray-zinc-e-electric-blue",
+      "sugestoes": {
+        "fundo": "#EBEBE8",
+        "superficie": "#F4F4F5",
+        "texto": "#18181B",
+        "texto_secundario": "#71717A",
+        "acento": "#0066FF",
+        "acento_secundario": "#22C55E",
+        "linha": "#D4D4D8",
+        "grid_lines": "rgba(24, 24, 27, 0.1)"
+      }
+    },
+    "componentes_permitidos": [
+      "persistent-12-column-background-grid",
+      "sticky-header-80px-centered-logo",
+      "split-hero-stroke-text-and-framed-image",
+      "marquee-ticker-7xl-electric-stars",
+      "interactive-project-list-clip-path-reveal",
+      "philosophical-parallax-quote",
+      "technical-journal-grid",
+      "massive-dark-footer-with-20vw-marquee",
+      "live-status-pulse-indicator-dot",
+      "global-fractal-noise-overlay-svg"
+    ],
+    "proibicoes": [
+      "bordas-arredondadas-excessivas (manter retangular exceto botoes cta e badges)",
+      "fundos-brancos-hospitalares-frios (manter sempre o tom #EBEBE8)",
+      "sombras-difusas-flutuantes",
+      "gradientes-coloridos-suaves"
+    ],
+    "prioridade_conversao": 1,
+    "ativo": true
   }
 ]
+

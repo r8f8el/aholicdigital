@@ -105,6 +105,15 @@ PRESETS_BUILTIN = {
         "icon_pack": "lucide",
         "dark": True,
     },
+    "warm-industrial": {
+        "name": "Warm Industrial & Structural Grid",
+        "nichos": ["engenharia", "arquitetura", "design", "produto", "manufatura", "roastery", "mobiliario"],
+        "fonts": {"display": "Inter", "body": "Inter"},
+        "motion": {"preloader": True, "marquee": True, "parallax": True, "counters": True},
+        "layout": "12-column-rigid-structural-grid",
+        "icon_pack": "lucide",
+        "dark": False,
+    },
 }
 
 # ─── Utilities ───────────────────────────────────────────────────────────────
