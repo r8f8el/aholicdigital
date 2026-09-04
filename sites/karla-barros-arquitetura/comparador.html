@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
-<!-- TEMPLATE DO COMPARADOR � uso: substituir __CLIENTES__ pelo array JSON e salvar como comparar.html na RAIZ da pasta conectada -->
+<!DOCTYPE html>
+<!-- TEMPLATE DO COMPARADOR — uso: substituir __CLIENTES__ pelo array JSON e salvar como comparar.html na RAIZ da pasta conectada -->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comparador � Antes vs Depois</title>
+<title>Comparador — Antes vs Depois</title>
 <style>
   :root{--bg:#0f1420;--card:#1a2130;--ink:#e8ecf4;--muted:#8a97ad;--line:#2a3346;--old:#ef4444;--new:#22c55e;--blue:#3b82f6}
   *{box-sizing:border-box}
@@ -31,7 +31,7 @@
 </head>
 <body>
 <h1>Antes vs Depois</h1>
-<p class="sub">Esquerda: site atual do cliente � Direita: nova vers�o criada pelo Claude. Se o site antigo n�o carregar aqui (alguns bloqueiam incorpora��o), use o link "abrir em nova aba".</p>
+<p class="sub">Esquerda: site atual do cliente · Direita: nova versão criada pelo Claude. Se o site antigo não carregar aqui (alguns bloqueiam incorporação), use o link "abrir em nova aba".</p>
 <div class="tabs" id="tabs"></div>
 <div class="cols">
   <div class="col">
@@ -39,11 +39,11 @@
     <div id="oldwrap"></div>
   </div>
   <div class="col">
-    <div class="chead"><span class="lb"><span class="dot n"></span>NOVA VERS�O</span><a id="newlink" href="#" target="_blank" rel="noopener">abrir em nova aba ↗</a></div>
+    <div class="chead"><span class="lb"><span class="dot n"></span>NOVA VERSÃO</span><a id="newlink" href="#" target="_blank" rel="noopener">abrir em nova aba ↗</a></div>
     <div id="newwrap"></div>
   </div>
 </div>
-<p class="hint">Dica: para editar uma p�gina, abra o arquivo <b>[cliente]-editor.html</b> na pasta sites/[cliente]/.</p>
+<p class="hint">Dica: para editar uma página, abra o arquivo <b>[cliente]-editor.html</b> na pasta sites/[cliente]/.</p>
 <script>
 var CLIENTES=__CLIENTES__;
 var tabs=document.getElementById('tabs');
