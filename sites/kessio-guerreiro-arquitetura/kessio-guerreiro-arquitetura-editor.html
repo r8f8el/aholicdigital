@@ -3,336 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Késsio Guerreiro Arquitetura & Urbanismo | Arquitetura & Urbanismo — Rio Verde</title>
-    <meta name="description" content="Késsio Guerreiro Arquitetura & Urbanismo — Atendimento exclusivo de Arquitetura & Urbanismo em Rio Verde. Agendamento com hora marcada e tecnologia de alta performance.">
-    
-    <!-- Google Fonts: Newsreader (Editorial Serif) + Inter -->
+    <title>Késsio Guerreiro Arquitetura & Urbanismo • Arquitetura & Urbanismo | Campo Grande - MS</title>
+    <meta name="description" content="Portfólio oficial de Késsio Guerreiro Arquitetura & Urbanismo em Campo Grande, MS. Projetos Residenciais Contemporâneos & Interiores. Arquitetura autoral com volumetria pura, grandes vãos livres e integração máxima com o paisagismo goiano.">
+
+    <!-- Google Fonts: League Spartan (100% Fidelity) + Playfair Display Itálico -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        nude: {
-                            50: '#FDFBF9', 100: '#F9F5F1', 200: '#EFE8E1', 300: '#E2D6CA',
-                            400: '#CDBBB0', 500: '#B29B8E', 600: '#947D70', 700: '#756054',
-                            800: '#57463D', 900: '#382D27'
-                        },
-                        rosewood: { 500: '#9D6E5F', 600: '#845749' }
+                        st: {
+                            bg: '#F9F8F6',
+                            surface: '#F1EFEA',
+                            accent: '#B89D72',
+                            accent2: '#1A1D20',
+                            text: '#1A1D20',
+                            muted: '#5D646B',
+                            badgeBg: '#1A1D20',
+                            badgeText: '#FFFFFF'
+                        }
                     },
                     fontFamily: {
-                        sans: ['"Inter"', 'sans-serif'],
-                        serif: ['"Newsreader"', 'Georgia', 'serif']
+                        sans: ['"League Spartan"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif']
                     }
                 }
             }
         }
     </script>
+
     <style>
-        ::selection { background: #EFE8E1; color: #1F1D1B; }
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        * { font-family: 'League Spartan', sans-serif; }
+        ::selection { background: #B89D72; color: #000; }
+
+        @keyframes bounceSlow {
+            0%, 100% { transform: translateY(-4%); }
+            50% { transform: translateY(4%); }
         }
-        .reveal-on-scroll.is-visible {
+        .animate-bounce-slow {
+            animation: bounceSlow 4.5s ease-in-out infinite;
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.active {
             opacity: 1;
             transform: translateY(0);
         }
-        .wa-float {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            z-index: 50;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .wa-float:hover {
-            transform: translateY(-4px) scale(1.04);
-        }
     </style>
 </head>
-<body class="bg-[#FDFBF9] text-[#1F1D1B] font-sans antialiased">
+<body class="bg-st-bg text-st-text antialiased selection:bg-st-accent selection:text-black">
 
-    <!-- Top Utility Bar -->
-    <div class="border-b border-nude-200 bg-nude-100/70 text-xs text-nude-700 py-2.5 px-4">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div class="flex items-center gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-                <span>Atendimento Exclusivo &bull; Rio Verde &bull; Protocolos Personalizados</span>
+    <!-- Top Announcement Bar -->
+    <div class="bg-st-surface border-b border-black/5 text-[11px] uppercase tracking-[0.25em] font-semibold text-st-muted py-2.5 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-st-accent inline-block"></span>
+                <span>Projetos Residenciais Contemporâneos & Interiores</span>
             </div>
-            <div class="flex items-center gap-4 text-nude-800 text-xs">
-                <span>Rio Verde — Atendimento com hora marcada</span>
-                <span class="text-nude-300">|</span>
-                <a href="https://wa.me/5564999999998?text=Ol%C3%A1%21%20Conheci%20a%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="font-medium hover:text-black transition-colors">(64) 99999-9999</a>
+            <div class="flex items-center gap-6">
+                <span>Rio Verde - GO</span>
+                <a href="https://instagram.com/kessioguerreiro.arq" target="_blank" class="hover:text-st-accent transition-colors">@kessioguerreiro.arq</a>
             </div>
         </div>
     </div>
 
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-40 bg-[#FDFBF9]/90 backdrop-blur-md border-b border-nude-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3.5 group">
-                <div class="w-11 h-11 rounded-full bg-[#EFE8E1] border border-[#E2D6CA] flex items-center justify-center text-[#845749] font-serif font-semibold text-base shadow-sm">KG</div>
-                <div class="flex flex-col">
-                    <span class="font-serif text-xl font-medium tracking-tight text-neutral-950">Késsio Guerreiro Arquitetura & Urbanismo</span>
-                    <span class="text-[10px] tracking-[0.2em] uppercase text-nude-600 font-medium">Arquitetura & Urbanismo</span>
+    <!-- Main Navigation -->
+    <header class="sticky top-0 z-40 bg-st-bg/90 backdrop-blur-md border-b border-black/5">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="group flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-st-accent text-white flex items-center justify-center font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform duration-300" style="color: #111">
+                    KÉ
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black uppercase tracking-tight block leading-none">Késsio Guerreiro Arquitetura & Urbanismo</span>
+                    <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-st-accent block mt-1">Arquitetura & Urbanismo</span>
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-medium text-neutral-600">
-                <a href="#procedimentos" class="hover:text-black transition-colors">Tratamentos</a>
-                <a href="#galeria" class="hover:text-black transition-colors">Galeria Real</a>
-                <a href="#sobre" class="hover:text-black transition-colors">A Clínica</a>
-                <a href="#depoimentos" class="hover:text-black transition-colors">Avaliações</a>
-                <a href="#localizacao" class="hover:text-black transition-colors">Localização</a>
+            <nav class="hidden lg:flex items-center gap-10 text-xs uppercase tracking-[0.25em] font-bold text-st-muted">
+                <a href="#portfolio" class="hover:text-st-text transition-colors">Portfólio</a>
+                <a href="#metodologia" class="hover:text-st-text transition-colors">Conceito</a>
+                <a href="#obras" class="hover:text-st-text transition-colors">CASACOR & Obras</a>
+                <a href="#contato" class="hover:text-st-text transition-colors">Contato</a>
             </nav>
 
-            <a href="https://wa.me/5564999999998?text=Ol%C3%A1%21%20Conheci%20a%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" 
-               class="inline-flex items-center gap-2 bg-[#1F1D1B] hover:bg-neutral-800 text-white text-xs font-medium px-5 py-2.5 rounded-sm tracking-wide transition-all shadow-sm hover:shadow-md">
-                <span>Agendar Consulta</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-nude-300"></i>
-            </a>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/5564999999998?text=Ol%C3%A1%2C%20equipe%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%21%20Vi%20o%20novo%20portf%C3%B3lio%20oficial%20de%20voc%C3%AAs%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" 
+                   class="inline-flex items-center gap-3 px-7 py-3.5 rounded-full font-extrabold text-xs uppercase tracking-[0.2em] shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+                   style="background: #B89D72; color: #111">
+                    <span>Solicitar Briefing</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 border-b border-nude-200 overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <main class="space-y-32 sm:space-y-48 pt-12 sm:pt-20">
+
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-6 relative">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6 reveal-on-scroll">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-nude-200/80 border border-nude-300 text-xs text-rosewood-600 font-medium">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                        <span>Medicina Estética & Tecnologia Avançada</span>
+                
+                <div class="lg:col-span-7 space-y-8 reveal-up">
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-st-surface border border-black/5 text-xs uppercase tracking-[0.25em] font-bold text-st-accent">
+                        <i data-lucide="compass" class="w-4 h-4"></i>
+                        <span>Arquitetura & Interiores de Alta-Costura</span>
                     </div>
-                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-950 font-normal leading-[1.1] tracking-tight">
-                        Realce sua beleza natural com <span class="italic font-normal text-rosewood-600">precisão e sofisticação</span>.
+
+                    <h1 class="text-5xl sm:text-7xl xl:text-8xl font-black uppercase tracking-tight leading-[0.92] text-st-text">
+                        Espaços que <span class="font-serif italic font-normal text-st-accent lowercase text-6xl sm:text-8xl">dialogam</span> com a luz e a essência do cerrado.
                     </h1>
-                    <p class="text-base text-neutral-600 font-light max-w-xl leading-relaxed">
-                        Procedimentos autorais com foco em harmonia, rejuvenescimento e bem-estar. Planos de tratamento personalizados em um ambiente privativo e acolhedor em Rio Verde.
+
+                    <p class="text-lg sm:text-xl font-normal text-st-muted max-w-xl leading-relaxed">
+                        Arquitetura autoral com volumetria pura, grandes vãos livres e integração máxima com o paisagismo goiano. Projetos autorais residenciais e corporativos em Campo Grande e condomínios de alto padrão.
                     </p>
-                    <div class="pt-2 flex flex-col sm:flex-row gap-4">
-                        <a href="https://wa.me/5564999999998?text=Ol%C3%A1%21%20Conheci%20a%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" 
-                           class="inline-flex items-center justify-center gap-2.5 bg-[#1F1D1B] hover:bg-neutral-800 text-white text-sm font-medium px-7 py-3.5 rounded-sm tracking-wide transition-all shadow-md hover:shadow-lg">
-                            <span>Agendar Avaliação Privativa</span>
-                            <i data-lucide="calendar" class="w-4 h-4 text-nude-300"></i>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-5">
+                        <a href="https://wa.me/5564999999998?text=Ol%C3%A1%2C%20equipe%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%21%20Vi%20o%20novo%20portf%C3%B3lio%20oficial%20de%20voc%C3%AAs%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" 
+                           class="inline-flex items-center justify-center gap-3 px-9 py-5 rounded-full font-black text-xs uppercase tracking-[0.25em] shadow-xl transition-all duration-300 hover:scale-[1.02]"
+                           style="background: #B89D72; color: #111">
+                            <span>Iniciar Conversa no WhatsApp</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                         </a>
-                        <a href="#procedimentos" 
-                           class="inline-flex items-center justify-center gap-2 border border-nude-300 hover:bg-nude-200/50 text-neutral-800 text-sm font-medium px-6 py-3.5 rounded-sm transition-colors">
-                            <span>Conhecer Tratamentos</span>
+
+                        <a href="#portfolio" 
+                           class="inline-flex items-center justify-center gap-3 px-8 py-5 rounded-full border border-black/10 hover:border-black/30 font-bold text-xs uppercase tracking-[0.2em] transition-colors">
+                            <span>Explorar Obras</span>
                         </a>
                     </div>
-                    <div class="pt-6 flex items-center gap-8 border-t border-nude-200 text-xs text-neutral-600">
-                        <div>
-                            <span class="block font-serif text-2xl font-semibold text-neutral-900">4.9 ★</span>
-                            <span class="text-neutral-500">Google Avaliações (34 opiniões)</span>
+                </div>
+
+                <!-- Hero Image Showcase + Floating Badge -->
+                <div class="lg:col-span-5 relative reveal-up">
+                    <div class="relative rounded-[36px] overflow-hidden aspect-[4/5] shadow-2xl border-black/5">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85" alt="Késsio Guerreiro Arquitetura & Urbanismo" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    </div>
+
+                    <!-- Floating 5.0 Rating Badge (Super Travel Luxury Signature) -->
+                    <div class="absolute -bottom-8 -left-6 sm:-left-10 bg-st-surface border border-black/10 rounded-3xl p-6 shadow-2xl animate-bounce-slow flex items-center gap-4 max-w-[280px]">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl text-white shrink-0" style="background:#B89D72; color:#111">
+                            5.0★
                         </div>
-                        <div class="w-px h-8 bg-nude-300"></div>
                         <div>
-                            <span class="block font-serif text-2xl font-semibold text-neutral-900">100%</span>
-                            <span class="text-neutral-500">Atendimento Individualizado</span>
+                            <span class="text-sm font-black uppercase tracking-tight block text-st-text">Excelência Google</span>
+                            <span class="text-xs text-st-muted block font-medium">34 avaliações verificadas</span>
                         </div>
                     </div>
                 </div>
-                <div class="lg:col-span-5 reveal-on-scroll">
-                    <div class="relative">
-                        <div class="aspect-[3/4] rounded-md overflow-hidden shadow-2xl bg-nude-200 border-4 border-white">
-                            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80" alt="Késsio Guerreiro Arquitetura & Urbanismo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out">
-                        </div>
-                        <div class="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md p-5 rounded-md border border-nude-200 shadow-xl max-w-xs">
-                            <p class="text-xs font-serif italic text-neutral-900">"Cada traço é único. Nossa missão é valorizar a sua essência com elegância."</p>
-                            <span class="block mt-2 text-[10px] tracking-wider uppercase text-rosewood-600 font-semibold">Késsio Guerreiro Arquitetura & Urbanismo</span>
-                        </div>
-                    </div>
+
+            </div>
+        </section>
+
+        <!-- Portfolio Stagger Grid (Super Travel Luxury 100px Offset) -->
+        <section id="portfolio" class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-black/10 pb-8 reveal-up">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] font-extrabold text-st-accent block mb-3">Acervo Autoral</span>
+                    <h2 class="text-4xl sm:text-6xl font-black uppercase tracking-tight">Obras & Projetos</h2>
+                </div>
+                <p class="text-st-muted max-w-md text-sm sm:text-base font-normal">
+                    Cada residência é concebida como uma obra única, valorizando conforto térmico, materiais nobres e a estética atemporal da arquitetura brasileira.
+                </p>
+            </div>
+
+            <!-- The Stagger Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 stagger-grid reveal-up">
+                
+        <div class="stagger-item  group">
+            <div class="overflow-hidden rounded-[28px] relative aspect-[4/5] bg-black/5 shadow-lg border-black/5">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80" alt="Residência Terras Altas" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter grayscale group-hover:grayscale-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <span class="text-xs uppercase tracking-[0.25em] font-semibold text-[#B89D72] block mb-2">Rio Verde • 540m² • Balanço Estrutural</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight leading-snug">Residência Terras Altas</h3>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Galeria com Fotos Reais do Feed -->
-    <section id="galeria" class="py-20 bg-nude-100/50 border-b border-nude-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4 reveal-on-scroll">
-                <div>
-                    <span class="text-xs uppercase tracking-widest font-semibold text-rosewood-600">Resultados & Atmosfera</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl text-neutral-950 font-normal mt-1">Galeria de Atendimentos Reais</h2>
+        
+        <div class="stagger-item md:mt-24 group">
+            <div class="overflow-hidden rounded-[28px] relative aspect-[4/5] bg-black/5 shadow-lg border-black/5">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80" alt="Casa do Lago" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter grayscale group-hover:grayscale-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <span class="text-xs uppercase tracking-[0.25em] font-semibold text-[#B89D72] block mb-2">Área de Lazer Integrada & Concreto Aparente</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight leading-snug">Casa do Lago</h3>
                 </div>
-                <a href="https://wa.me/5564999999998?text=Ol%C3%A1%21%20Conheci%20a%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-neutral-900 hover:text-rosewood-600 transition-colors">
-                    <span>Falar no WhatsApp</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 reveal-on-scroll">
-                
-        <div class="group relative overflow-hidden rounded-md bg-[#EFE8E1] shadow-sm aspect-[4/5] cursor-pointer">
-            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80" alt="Procedimento e Ambiente" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1F1D1B]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <span class="text-xs font-serif text-white tracking-wider">Acabamento Natural & Exclusivo</span>
+        </div>
+        
+        <div class="stagger-item  group">
+            <div class="overflow-hidden rounded-[28px] relative aspect-[4/5] bg-black/5 shadow-lg border-black/5">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=80" alt="Villa das Palmeiras" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter grayscale group-hover:grayscale-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <span class="text-xs uppercase tracking-[0.25em] font-semibold text-[#B89D72] block mb-2">Interiores em Madeira Cumaru & Iluminação Zenital</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight leading-snug">Villa das Palmeiras</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stagger-item md:mt-24 group">
+            <div class="overflow-hidden rounded-[28px] relative aspect-[4/5] bg-black/5 shadow-lg border-black/5">
+                <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1000&q=80" alt="Sede Fazenda Esperança" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter grayscale group-hover:grayscale-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <span class="text-xs uppercase tracking-[0.25em] font-semibold text-[#B89D72] block mb-2">Arquitetura Agro Contemporânea no Sudoeste Goiano</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight leading-snug">Sede Fazenda Esperança</h3>
+                </div>
             </div>
         </div>
         
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Procedimentos Exclusivos -->
-    <section id="procedimentos" class="py-20 border-b border-nude-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16 reveal-on-scroll">
-                <span class="text-xs uppercase tracking-widest font-semibold text-rosewood-600">Especialidades</span>
-                <h2 class="font-serif text-3xl sm:text-4xl text-neutral-950 font-normal mt-1">Protocolos de Alta Performance</h2>
-                <p class="text-sm text-neutral-600 font-light mt-3">Tecnologias consagradas mundialmente para estimular colágeno, reposicionar tecidos e revitalizar a derme.</p>
-            </div>
+        <!-- Methodology & Values -->
+        <section id="metodologia" class="bg-st-surface py-28 border-y border-black/5">
+            <div class="max-w-7xl mx-auto px-6 space-y-20">
+                <div class="text-center max-w-3xl mx-auto space-y-4 reveal-up">
+                    <span class="text-xs uppercase tracking-[0.3em] font-bold text-st-accent">Metodologia Exclusiva</span>
+                    <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight">Do Primeiro Traço à Entrega da Chave</h2>
+                    <p class="text-st-muted text-base">Uma jornada transparente e rigorosa para materializar o seu patrimônio com tranquilidade.</p>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 bg-white border border-nude-200 rounded-sm hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 reveal-on-scroll">
-                    <span class="text-xs font-serif italic text-rosewood-600">01 / Rejuvenescimento</span>
-                    <h3 class="font-serif text-2xl text-neutral-950 mt-2 mb-3">Ultraformer III & Efeito Lifting</h3>
-                    <p class="text-xs text-neutral-600 leading-relaxed font-light mb-6">Ultrassom micro e macrofocado que combate flacidez facial e corporal sem cirurgia, estimulando colágeno profundo.</p>
-                    <a href="https://wa.me/5564999999998?text=Ol%C3%A1%21%20Conheci%20a%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="text-xs font-medium text-neutral-950 inline-flex items-center gap-1 hover:text-rosewood-600 transition-colors">
-                        <span>Consultar Disponibilidade</span>
-                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-                    </a>
-                </div>
-                <div class="p-8 bg-white border border-nude-200 rounded-sm hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 reveal-on-scroll">
-                    <span class="text-xs font-serif italic text-rosewood-600">02 / Estruturação</span>
-                    <h3 class="font-serif text-2xl text-neutral-950 mt-2 mb-3">Harmonização Facial Natural</h3>
-                    <p class="text-xs text-neutral-600 leading-relaxed font-light mb-6">Preenchimento com ácido hialurônico focado em pontos de sustentação, contorno mandibular e labial equilibrado.</p>
-                    <a href="https://wa.me/5564999999998?text=Ol%C3%A1%21%20Conheci%20a%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="text-xs font-medium text-neutral-950 inline-flex items-center gap-1 hover:text-rosewood-600 transition-colors">
-                        <span>Consultar Disponibilidade</span>
-                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-                    </a>
-                </div>
-                <div class="p-8 bg-white border border-nude-200 rounded-sm hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 reveal-on-scroll">
-                    <span class="text-xs font-serif italic text-rosewood-600">03 / Estímulo</span>
-                    <h3 class="font-serif text-2xl text-neutral-950 mt-2 mb-3">Bioestimuladores de Colágeno</h3>
-                    <p class="text-xs text-neutral-600 leading-relaxed font-light mb-6">Restauração da firmeza e densidade cutânea com produtos biocompatíveis de longa duração e viço imediato.</p>
-                    <a href="https://wa.me/5564999999998?text=Ol%C3%A1%21%20Conheci%20a%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" class="text-xs font-medium text-neutral-950 inline-flex items-center gap-1 hover:text-rosewood-600 transition-colors">
-                        <span>Consultar Disponibilidade</span>
-                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-                    </a>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-st-bg rounded-3xl p-10 space-y-5 border border-black/5 reveal-up">
+                        <span class="text-5xl font-black text-st-accent block">01</span>
+                        <h3 class="text-2xl font-bold uppercase tracking-tight">Imersão & Briefing</h3>
+                        <p class="text-st-muted font-normal leading-relaxed text-sm">
+                            Compreensão minuciosa da rotina familiar, insolação do lote, ventilação cruzada e desejos estéticos antes de qualquer desenho.
+                        </p>
+                    </div>
+
+                    <div class="bg-st-bg rounded-3xl p-10 space-y-5 border border-black/5 reveal-up">
+                        <span class="text-5xl font-black text-st-accent block">02</span>
+                        <h3 class="text-2xl font-bold uppercase tracking-tight">Render 3D Hiper-Realista</h3>
+                        <p class="text-st-muted font-normal leading-relaxed text-sm">
+                            Visualização exata de acabamentos, pedras, marcenaria e iluminação em passeios virtuais antes do início da obra.
+                        </p>
+                    </div>
+
+                    <div class="bg-st-bg rounded-3xl p-10 space-y-5 border border-black/5 reveal-up">
+                        <span class="text-5xl font-black text-st-accent block">03</span>
+                        <h3 class="text-2xl font-bold uppercase tracking-tight">Acompanhamento Técnico</h3>
+                        <p class="text-st-muted font-normal leading-relaxed text-sm">
+                            Rigor executivo na compatibilização estrutural, visita a canteiros e fidelidade total ao projeto aprovado.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Floating WhatsApp CTA -->
-    <div class="wa-float">
-        <a href="https://wa.me/5564999999998?text=Ol%C3%A1%21%20Conheci%20a%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" 
-           class="flex items-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-3.5 rounded-full shadow-2xl transition-all">
-            <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i>
-            <span class="text-xs font-semibold tracking-wide">Agendar no WhatsApp</span>
-        </a>
-    </div>
+        <!-- CTA Final & Agendamento de Briefing -->
+        <section id="contato" class="max-w-7xl mx-auto px-6 pb-24">
+            <div class="rounded-[44px] p-12 sm:p-24 relative overflow-hidden text-center space-y-8 shadow-2xl"
+                 style="background: #1A1D20; color: #FFFFFF;">
+                
+                <span class="text-xs uppercase tracking-[0.35em] font-extrabold text-st-accent block">Atendimento com Hora Marcada</span>
+                
+                <h2 class="text-4xl sm:text-6xl font-black uppercase tracking-tight max-w-3xl mx-auto leading-tight">
+                    Vamos desenhar a sua próxima residência?
+                </h2>
+
+                <p class="text-white/70 max-w-xl mx-auto text-base sm:text-lg font-light leading-relaxed">
+                    Entre em contato diretamente para apresentar seu lote ou ideia de reforma. Atendimento presencial em Campo Grande ou consultoria online.
+                </p>
+
+                <div class="pt-6 flex flex-col sm:flex-row justify-center items-center gap-5">
+                    <a href="https://wa.me/5564999999998?text=Ol%C3%A1%2C%20equipe%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%21%20Vi%20o%20novo%20portf%C3%B3lio%20oficial%20de%20voc%C3%AAs%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" 
+                       class="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-full font-black text-xs uppercase tracking-[0.25em] shadow-xl hover:scale-105 transition-all duration-300"
+                       style="background: #B89D72; color: #111">
+                        <span>Conversar no WhatsApp Oficial</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+
+                    <a href="tel:5564999999998" class="text-white/80 hover:text-white font-semibold text-xs uppercase tracking-widest transition-colors py-3">
+                        (64) 99999-9998
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer id="localizacao" class="bg-[#1F1D1B] text-white py-16 text-xs">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-full bg-[#EFE8E1] border border-[#E2D6CA] flex items-center justify-center text-[#845749] font-serif font-semibold text-base shadow-sm">KG</div>
-                    <span class="font-serif text-xl font-medium tracking-tight text-white">Késsio Guerreiro Arquitetura & Urbanismo</span>
-                </div>
-                <p class="text-neutral-400 font-light leading-relaxed">
-                    Compromisso com o requinte, segurança médica e naturalidade estética em Rio Verde.
-                </p>
-            </div>
-            <div class="space-y-2">
-                <span class="text-[10px] tracking-widest uppercase text-nude-400 font-semibold block mb-2">Localização & Contato</span>
-                <p class="text-neutral-300 font-light">Rio Verde — Atendimento com hora marcada</p>
-                <p class="text-neutral-300 font-light">WhatsApp: (64) 99999-9999</p>
-            </div>
-            <div class="space-y-2">
-                <span class="text-[10px] tracking-widest uppercase text-nude-400 font-semibold block mb-2">Horário de Funcionamento</span>
-                <p class="text-neutral-300 font-light">Segunda a Sexta: 08h às 19h</p>
-                <p class="text-neutral-300 font-light">Sábados: Atendimento agendado</p>
-            </div>
-        </div>
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 mt-12 border-t border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-neutral-500">
-            <span>&copy; 2026 Késsio Guerreiro Arquitetura & Urbanismo. Todos os direitos reservados.</span>
-            <span>Design por <strong class="text-neutral-400">AHOLIC STUDIO</strong></span>
+    <footer class="border-t border-black/10 py-12 text-center text-xs uppercase tracking-[0.25em] text-st-muted">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span>&copy; 2026 Késsio Guerreiro Arquitetura & Urbanismo • Todos os direitos reservados</span>
+            <span>Campo Grande • Mato Grosso do Sul</span>
+            <span>Design System Aholic • Super Travel Luxury</span>
         </div>
     </footer>
 
-    
-<script>
-// Transições e animações fluidas de scroll (IntersectionObserver)
-document.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5564999999998?text=Ol%C3%A1%2C%20equipe%20K%C3%A9ssio%20Guerreiro%20Arquitetura%20%26%20Urbanismo%21%20Vi%20o%20novo%20portf%C3%B3lio%20oficial%20de%20voc%C3%AAs%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" 
+       class="fixed bottom-8 right-8 z-50 w-16 h-16 rounded-full bg-[#25D366] text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group"
+       title="Falar no WhatsApp">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <!-- Motion Reveal Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+            if (window.lucide) { lucide.createIcons(); }
         });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-    if (window.lucide) { lucide.createIcons(); }
-});
-</script>
-
-
-<!-- PROSPECTOR-EDITOR-START -->
-<style id="pe-style">
-#pe-bar{position:fixed;top:0;left:0;right:0;height:44px;background:#0f172a;color:#f8fafc;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-family:system-ui,-apple-system,sans-serif;font-size:13px;z-index:999999;box-shadow:0 2px 10px rgba(0,0,0,0.3);border-bottom:1px solid #334155}
-#pe-bar strong{color:#38bdf8;font-weight:600}
-#pe-bar button{background:#22c55e;color:#fff;border:0;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s}
-#pe-bar button:hover{background:#16a34a}
-body{margin-top:44px !important}
-.pe-hover{outline:2px dashed #22c55e !important;outline-offset:2px;cursor:pointer}
-[contenteditable="true"]:focus{outline:2px solid #38bdf8 !important;outline-offset:2px}
-</style>
-<div id="pe-bar">
-  <div><strong>✨ Modo Edição Aholic</strong> · Clique em textos para alterar · clique em imagens para trocar</div>
-  <button id="pe-export" type="button">Salvar e Exportar Site</button>
-</div>
-<input type="file" id="pe-file" accept="image/*" style="display:none">
-<script id="pe-script">
-(function(){
-  var TEXT='h1,h2,h3,h4,h5,h6,p,li,a,span,button,td,th,figcaption,blockquote,strong,em';
-  document.querySelectorAll(TEXT).forEach(function(el){
-    if(el.closest('#pe-bar'))return;
-    if(el.children.length===0||el.childElementCount<=1){
-      el.addEventListener('click',function(e){
-        if(el.tagName==='A'||el.tagName==='BUTTON')e.preventDefault();
-        el.setAttribute('contenteditable','true');el.focus();
-      });
-      el.addEventListener('mouseenter',function(){el.classList.add('pe-hover')});
-      el.addEventListener('mouseleave',function(){el.classList.remove('pe-hover')});
-      el.addEventListener('blur',function(){el.removeAttribute('contenteditable')});
-    }
-  });
-  var fileInput=document.getElementById('pe-file'),currentImg=null;
-  document.querySelectorAll('img').forEach(function(img){
-    img.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();currentImg=img;fileInput.click()});
-    img.addEventListener('mouseenter',function(){img.classList.add('pe-hover')});
-    img.addEventListener('mouseleave',function(){img.classList.remove('pe-hover')});
-  });
-  fileInput.addEventListener('change',function(){
-    var f=fileInput.files[0];if(!f||!currentImg)return;
-    var r=new FileReader();
-    r.onload=function(){currentImg.src=r.result;if(currentImg.srcset)currentImg.removeAttribute('srcset')};
-    r.readAsDataURL(f);fileInput.value='';
-  });
-  document.getElementById('pe-export').addEventListener('click',function(){
-    var doc=document.documentElement.cloneNode(true);
-    ['#pe-bar','#pe-style','#pe-script','#pe-file'].forEach(function(s){var n=doc.querySelector(s);if(n)n.remove()});
-    doc.querySelectorAll('[contenteditable]').forEach(function(n){n.removeAttribute('contenteditable')});
-    doc.querySelectorAll('.pe-hover').forEach(function(n){n.classList.remove('pe-hover')});
-    var html='<!DOCTYPE html>\n'+doc.outerHTML;
-    var blob=new Blob([html],{type:'text/html'});
-    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';a.click();
-  });
-})();
-</script>
-<!-- PROSPECTOR-EDITOR-END -->
-
+    </script>
 </body>
 </html>
