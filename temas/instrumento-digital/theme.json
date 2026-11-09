@@ -1,0 +1,141 @@
+{
+  "id": "instrumento-digital",
+  "nome": "Instrumento Digital",
+  "descricao": "Precisão suíça (Swiss Design), alinhamento milimétrico, microinterações limpas e foco absoluto em confiabilidade técnica e clareza.",
+  "origem": "https://curated-design.com/digital-instrument",
+  "screenshot": "assets/presets/instrumento-digital.webp",
+  "tags": [
+    "swiss-design",
+    "precisao",
+    "cirurgico",
+    "tecnologico",
+    "confianca"
+  ],
+  "nichos_recomendados": [
+    "Odontologia Digital & Implantes",
+    "Oftalmologia",
+    "Ortodontia Invisível",
+    "Diagnóstico por Imagem",
+    "Tecnologia Médica"
+  ],
+  "nichos_evitar": [
+    "Espaço Holístico / Místico",
+    "Brechós / Moda Vintage",
+    "Casas de Festas Infantis"
+  ],
+  "composicao": "precision-swiss-grid",
+  "navegacao": "topbar-with-stepper",
+  "densidade": "media",
+  "tipografia": {
+    "display": "Plus Jakarta Sans 800 (Sans geométrica de precisão técnica)",
+    "body": "Inter (Sans de leitura perfeita)",
+    "labels": "JetBrains Mono (Monospace para especificações e métricas)",
+    "escala": "moderada"
+  },
+  "imagem": {
+    "tratamento": "crisp-clinical-photography (fotos nítidas de consultório, tecnologia de escaneamento 3D e macro de tratamentos)",
+    "proporcoes": [
+      "16:9",
+      "1:1"
+    ]
+  },
+  "movimento": {
+    "estilo": [
+      "interactive-tabs",
+      "stepper-timeline",
+      "comparison-slider",
+      "micro-hover-card"
+    ],
+    "intensidade_interacao": 2,
+    "respeita_prefers_reduced_motion": true
+  },
+  "paleta": {
+    "estilo": "azul-cirurgico-e-slate-puro",
+    "sugestoes": {
+      "fundo": "#F8FAFC",
+      "superficie": "#FFFFFF",
+      "texto": "#0F172A",
+      "texto_secundario": "#64748B",
+      "acento": "#0284C7",
+      "acento_secundario": "#0D9488",
+      "linha": "#E2E8F0"
+    }
+  },
+  "componentes_permitidos": [
+    "passo-a-passo-do-tratamento",
+    "comparador-tecnologico",
+    "galeria-de-tecnologias-equipamentos",
+    "calculadora-ou-simulador-de-etapas",
+    "cta-whatsapp-com-mensagem-guiada"
+  ],
+  "proibicoes": [
+    "fontes-manuscritas",
+    "elementos-tortos-sem-grid",
+    "decoracoes-desconexas-da-ciencia",
+    "gradientes-arco-iris"
+  ],
+  "prioridade_conversao": 1,
+  "ativo": true,
+  "nicho": "Odontologia Digital & Implantes",
+  "tokens": {
+    "name": "Instrumento Digital",
+    "nichos": [
+      "odontologia",
+      "saúde",
+      "clínica",
+      "medicina",
+      "tecnologia médica"
+    ],
+    "fonts": {
+      "display": "Plus Jakarta Sans",
+      "body": "Inter"
+    },
+    "dark": false,
+    "defaults": {
+      "--ah-primary": "#0EA5E9",
+      "--ah-accent": "#0EA5E9",
+      "--ah-bg": "#F8FAFC",
+      "--ah-surface": "#F1F5F9",
+      "--ah-text": "#0F172A",
+      "--ah-text-muted": "#64748B"
+    },
+    "motion": {
+      "preloader": true,
+      "marquee": false,
+      "parallax": false,
+      "counters": true,
+      "cursor": false
+    },
+    "layout": "swiss-precision",
+    "description": "Swiss design, precisão cirúrgica, confiança. Ideal para Odonto, Tecnologia Médica."
+  },
+  "fontes": [
+    "presets-visuais",
+    "presets-dinamicos",
+    "catalogo-design"
+  ],
+  "aliases": [
+    "swiss-precision",
+    "odonto-tech",
+    "swiss-tech",
+    "swiss_tech"
+  ],
+  "motor": "swiss-precision",
+  "html_personalizado": false,
+  "arquetipo": "swiss_tech",
+  "referencia_local": "sites/quality-odontologia-face/quality-odontologia-face.html",
+  "paleta_arquetipo": {
+    "estilo": "arquetipo",
+    "sugestoes": {
+      "fundo": "#F8FAFC",
+      "superficie": "#FFFFFF",
+      "texto": "#0F172A",
+      "texto_secundario": "#64748B",
+      "acento": "#0284C7"
+    }
+  },
+  "html": "temas/instrumento-digital/casca.html",
+  "html_geracao": "temas/instrumento-digital/casca.html",
+  "preview": "temas/instrumento-digital/preview.html",
+  "ordem": 5
+}

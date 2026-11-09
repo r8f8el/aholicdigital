@@ -1,0 +1,72 @@
+{
+  "id": "dark-authority",
+  "nome": "Dark Authority & Contemporâneo",
+  "descricao": "⚖️ Dark Authority & Contemporâneo",
+  "nicho": "Advocacia Tributária / Criminal / Cível",
+  "nichos_recomendados": [
+    "Advocacia Tributária / Criminal / Cível",
+    "Perícias Judiciais",
+    "Finanças"
+  ],
+  "tipografia": {
+    "display": "Plus Jakarta Sans Bold / Cinzel",
+    "body": "Inter",
+    "labels": "JetBrains Mono"
+  },
+  "paleta": {
+    "estilo": "arquetipo",
+    "sugestoes": {
+      "fundo": "#0F172A",
+      "superficie": "#1E293B",
+      "texto": "#F8FAFC",
+      "texto_secundario": "#94A3B8",
+      "acento": "#D4AF37"
+    }
+  },
+  "fontes": [
+    "catalogo-design"
+  ],
+  "aliases": [
+    "dark_authority"
+  ],
+  "motor": "template",
+  "html_personalizado": false,
+  "ativo": true,
+  "origem": "referencias/catalogo-design.json",
+  "tokens": {
+    "fonts": {
+      "display": "Plus Jakarta Sans Bold",
+      "body": "Inter"
+    },
+    "defaults": {
+      "--ah-primary": "#D4AF37",
+      "--ah-accent": "#D4AF37",
+      "--ah-bg": "#0F172A",
+      "--ah-surface": "#1E293B",
+      "--ah-text": "#F8FAFC",
+      "--ah-text-muted": "#94A3B8"
+    },
+    "layout": "",
+    "dark": true,
+    "nichos": [
+      "advocacia tributária / criminal / cível",
+      "perícias judiciais",
+      "finanças"
+    ]
+  },
+  "arquetipo": "dark_authority",
+  "paleta_arquetipo": {
+    "estilo": "arquetipo",
+    "sugestoes": {
+      "fundo": "#0F172A",
+      "superficie": "#1E293B",
+      "texto": "#F8FAFC",
+      "texto_secundario": "#94A3B8",
+      "acento": "#D4AF37"
+    }
+  },
+  "html": "temas/dark-authority/casca.html",
+  "html_geracao": "temas/dark-authority/casca.html",
+  "preview": "temas/dark-authority/preview.html",
+  "ordem": 19
+}

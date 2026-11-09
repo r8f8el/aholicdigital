@@ -1,0 +1,77 @@
+{
+  "nome": "Normal is Boring",
+  "nicho": "Psicologia e neurodesenvolvimento",
+  "descricao": "Editorial de psicologia em linho e carvão, com Playfair Display. HTML de referência em referencias/templates/normal-is-boring.html.",
+  "tags": [
+    "psicologia",
+    "editorial",
+    "linho",
+    "template"
+  ],
+  "nichos_recomendados": [
+    "Psicologia",
+    "Neurodesenvolvimento",
+    "Terapia",
+    "Psicanálise"
+  ],
+  "nichos_evitar": [
+    "Oficinas Mecânicas",
+    "Varejo Agressivo"
+  ],
+  "composicao": "editorial-manifesto",
+  "navegacao": "chapter-index",
+  "densidade": "baixa",
+  "tipografia": {
+    "display": "Playfair Display",
+    "body": "Plus Jakarta Sans",
+    "labels": "JetBrains Mono",
+    "escala": "extrema"
+  },
+  "paleta": {
+    "estilo": "linho-e-carvao",
+    "sugestoes": {
+      "fundo": "#FAF9F6",
+      "superficie": "#FFFFFF",
+      "texto": "#0A0A0A",
+      "texto_secundario": "#7A766E",
+      "acento": "#5F7666",
+      "linha": "#E5E2D9"
+    }
+  },
+  "id": "normal-is-boring",
+  "origem": "referencias/templates/normal-is-boring.html",
+  "fontes": [
+    "templates"
+  ],
+  "aliases": [],
+  "motor": "template",
+  "html_personalizado": false,
+  "arquetipo": null,
+  "tokens": {
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "Plus Jakarta Sans"
+    },
+    "defaults": {
+      "--ah-primary": "#5F7666",
+      "--ah-accent": "#5F7666",
+      "--ah-bg": "#FAF9F6",
+      "--ah-surface": "#FFFFFF",
+      "--ah-text": "#0A0A0A",
+      "--ah-text-muted": "#7A766E"
+    },
+    "layout": "editorial-manifesto",
+    "dark": false,
+    "nichos": [
+      "psicologia",
+      "neurodesenvolvimento",
+      "terapia",
+      "psicanálise"
+    ]
+  },
+  "html_referencia": "referencias/templates/normal-is-boring.html",
+  "html": "temas/normal-is-boring/casca.html",
+  "html_geracao": "temas/normal-is-boring/casca.html",
+  "preview": "temas/normal-is-boring/preview.html",
+  "ordem": 18
+}

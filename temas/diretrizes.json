@@ -1,0 +1,28 @@
+{
+  "descricao": "A biblioteca viva é a pasta temas/<id>/. Os JSON em referencias/ são a origem histórica.",
+  "diretrizes_anti_slop": [
+    "PROIBIDO usar gradientes genéricos roxo/azul/ciano neon sem propósito de marca",
+    "PROIBIDO usar textos robóticos clichês ('Revolucione sua jornada', 'Descubra a excelência')",
+    "PROIBIDO usar fotos de stock com pessoas artificiais que não combinam com o público brasileiro",
+    "OBRIGATÓRIO coletar o Instagram (@perfil) ou Google Maps para extrair fotos e identidade real",
+    "OBRIGATÓRIO perguntar ao usuário o arquétipo visual ou referências antes de gerar o código"
+  ],
+  "placeholders": [
+    "NOME_EMPRESA",
+    "NOME_LEAD",
+    "NICHO",
+    "CIDADE",
+    "WHATSAPP_NUMERO",
+    "WHATSAPP_LINK",
+    "TELEFONE_VISUAL",
+    "LOGO_HTML",
+    "FOTO_HERO",
+    "FOTO_ESPECIALISTA",
+    "GALERIA_FOTOS_HTML",
+    "AVALIACOES_NOTA",
+    "AVALIACOES_QTD",
+    "ENDERECO",
+    "BIO_INSTAGRAM"
+  ],
+  "atualizado_em": "2026-11-09T18:48:34+00:00"
+}

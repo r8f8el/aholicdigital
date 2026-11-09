@@ -5,6 +5,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/", "destination": "/dashboard.html" },
+    { "source": "/index.html", "destination": "/dashboard.html" },
     { "source": "/admin", "destination": "/dashboard.html" },
     { "source": "/dashboard", "destination": "/dashboard.html" }
   ],

@@ -61,12 +61,24 @@ def teste_gerador_le_a_mesma_fonte():
     assert tema["id"] == "cinema-local"
     assert "Atelier Teste" in html
     assert "{{NOME_EMPRESA}}" not in html
+    assert "unsplash.com" not in html
+    assert "99999" not in html
     luxo, tema_luxo = mod.html_para_lead(lead, "quiet-luxury", None, [])
     assert tema_luxo["id"] == "editorial-atelier"
     assert "Atelier Teste" in luxo
-    assert "bg-[#FDFBF9]" in luxo
+    assert "unsplash.com" not in luxo
+    assert (RAIZ / "temas" / "editorial-atelier" / "theme.json").exists()
+    assert (RAIZ / "temas" / "editorial-atelier" / "casca.html").exists()
     lead_direcao = dict(lead, nicho="Psicologia", direcaoCriativa={"presetId": "swiss-precision"})
     assert mod.resolver_preset_id(lead_direcao, "auto") == "instrumento-digital"
+    sem_foto = mod.montar_contexto({"nome": "Sem Foto", "nicho": "Teste", "cidade": "Cidade"}, None, [])
+    assert "99999" not in sem_foto["WHATSAPP_NUMERO"]
+    assert sem_foto["FOTO_HERO"] == ""
+    try:
+        mod.html_para_lead(lead, "tema-que-nao-existe", None, [])
+        raise AssertionError("tema inexistente deveria falhar")
+    except mod.TemaIndisponivel as erro:
+        assert "não existe" in str(erro)
     print("ok gerador")
 
 

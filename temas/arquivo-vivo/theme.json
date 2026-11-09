@@ -1,0 +1,123 @@
+{
+  "id": "arquivo-vivo",
+  "nome": "Arquivo Vivo",
+  "descricao": "Organização inspirada em fichários, índices técnicos e catálogos de precisão, transmitindo autoridade analítica e profundidade.",
+  "origem": "https://curated-design.com/living-archive",
+  "screenshot": "assets/presets/arquivo-vivo.webp",
+  "tags": [
+    "arquivo",
+    "catalogo",
+    "analitico",
+    "tecnico",
+    "autoridade"
+  ],
+  "nichos_recomendados": [
+    "Advocacia Consultiva / Tributária",
+    "Consultoria de Engenharia",
+    "Perícias e Auditorias",
+    "Institutos de Pesquisa",
+    "Clínicas Especializadas"
+  ],
+  "nichos_evitar": [
+    "Baladas / Eventos",
+    "Restaurantes Fast-Food",
+    "Pet Shops"
+  ],
+  "composicao": "structured-index-matrix",
+  "navegacao": "drawer-and-filter-bar",
+  "densidade": "alta",
+  "tipografia": {
+    "display": "Plus Jakarta Sans 700 / Syne (Sans estruturada e firme)",
+    "body": "Inter / Roboto (Sans neutra de alta densidade informativa)",
+    "labels": "JetBrains Mono (Monospace para números de processos, referências e datas)",
+    "escala": "moderada"
+  },
+  "imagem": {
+    "tratamento": "documentary-grayscale (fotos documentais, retratos institucionais sóbrios e esquemas explicativos)",
+    "proporcoes": [
+      "16:9",
+      "3:2"
+    ]
+  },
+  "movimento": {
+    "estilo": [
+      "accordion-drawer",
+      "smooth-tab-switch",
+      "data-counter",
+      "list-expand"
+    ],
+    "intensidade_interacao": 1,
+    "respeita_prefers_reduced_motion": true
+  },
+  "paleta": {
+    "estilo": "sobriedade-institucional-navy-e-slate",
+    "sugestoes": {
+      "fundo": "#F1F5F9",
+      "superficie": "#FFFFFF",
+      "texto": "#0F172A",
+      "texto_secundario": "#475569",
+      "acento": "#0369A1",
+      "linha": "#CBD5E1"
+    }
+  },
+  "componentes_permitidos": [
+    "indice-de-atuacao",
+    "acervo-de-artigos-e-casos",
+    "tabela-comparativa-de-risco",
+    "credenciais-e-titulos",
+    "formulario-de-consulta"
+  ],
+  "proibicoes": [
+    "animacoes-saltitantes",
+    "cores-neon-gritantes",
+    "cards-desalinhados",
+    "copys-vendedoras-agressivas"
+  ],
+  "prioridade_conversao": 2,
+  "ativo": true,
+  "nicho": "Advocacia Consultiva / Tributária",
+  "tokens": {
+    "name": "Arquivo Vivo",
+    "nichos": [
+      "advocacia",
+      "consultoria",
+      "contabilidade",
+      "perícia",
+      "auditoria"
+    ],
+    "fonts": {
+      "display": "JetBrains Mono",
+      "body": "Inter"
+    },
+    "dark": true,
+    "defaults": {
+      "--ah-primary": "#6EE7B7",
+      "--ah-accent": "#6EE7B7",
+      "--ah-bg": "#0C0F0E",
+      "--ah-surface": "#131716",
+      "--ah-text": "#E7F0EC",
+      "--ah-text-muted": "#8A9E96"
+    },
+    "motion": {
+      "preloader": true,
+      "marquee": true,
+      "parallax": false,
+      "counters": true,
+      "cursor": true
+    },
+    "layout": "index-matrix",
+    "description": "Index matrix, monospace labels, dados técnicos. Ideal para Advocacia, Consultoria."
+  },
+  "fontes": [
+    "presets-visuais",
+    "presets-dinamicos"
+  ],
+  "aliases": [],
+  "motor": "template",
+  "html_personalizado": false,
+  "arquetipo": null,
+  "html": "temas/arquivo-vivo/casca.html",
+  "html_geracao": "temas/arquivo-vivo/casca.html",
+  "preview": "temas/arquivo-vivo/preview.html",
+  "ordem": 2
+}

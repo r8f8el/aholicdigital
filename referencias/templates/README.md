@@ -5,7 +5,7 @@ Esta pasta foi projetada para receber novos templates e presets de sites criados
 ## Como adicionar um novo Preset HTML
 
 Salve um arquivo `.html` nesta pasta com o nome do tema (ex: `luxo-minimalista.html`).
-Na próxima listagem, o dashboard e o gerador incorporam o arquivo na biblioteca `referencias/biblioteca/catalogo.json`.
+Na próxima listagem, o dashboard e o gerador incorporam o arquivo em `temas/<id>/`.
 
 Se o HTML tiver os marcadores abaixo, o gerador troca pelos dados do lead. Se for uma página fechada, sem marcadores, ela fica como prévia e a geração usa um modelo com as cores do tema — até alguém salvar um HTML próprio na biblioteca.
 

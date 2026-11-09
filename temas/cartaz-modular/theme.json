@@ -1,0 +1,127 @@
+{
+  "id": "cartaz-modular",
+  "nome": "Cartaz Modular",
+  "descricao": "Composição em blocos de cor harmônicos (color-block), pílulas flutuantes, tipografia calorosa e alta sensação de acolhimento.",
+  "origem": "https://curated-design.com/modular-poster",
+  "screenshot": "assets/presets/cartaz-modular.webp",
+  "tags": [
+    "modular",
+    "acolhedor",
+    "color-block",
+    "humanizado",
+    "dinamico"
+  ],
+  "nichos_recomendados": [
+    "Psicologia Clínica & TCC",
+    "Nutrição",
+    "Pediatria",
+    "Odontopediatria",
+    "Estúdios de Pilates & Yoga",
+    "Terapia Ocupacional"
+  ],
+  "nichos_evitar": [
+    "Direito Criminal",
+    "Segurança Armada",
+    "Fundos de Investimento"
+  ],
+  "composicao": "modular-color-blocks",
+  "navegacao": "floating-pill-menu",
+  "densidade": "media",
+  "tipografia": {
+    "display": "Outfit / DM Sans (Sans arredondada, amigável e confiável)",
+    "body": "Plus Jakarta Sans (Sans equilibrada e acolhedora)",
+    "labels": "JetBrains Mono (Pequenos badges em pílula)",
+    "escala": "moderada"
+  },
+  "imagem": {
+    "tratamento": "soft-rounded-cutouts (fotos humanizadas com cantos arredondados generosos e fundos em tons pastéis aquecidos)",
+    "proporcoes": [
+      "1:1",
+      "4:5",
+      "3:2"
+    ]
+  },
+  "movimento": {
+    "estilo": [
+      "soft-spring-hover",
+      "card-stagger-fade",
+      "pill-active-glow",
+      "smooth-scroll"
+    ],
+    "intensidade_interacao": 2,
+    "respeita_prefers_reduced_motion": true
+  },
+  "paleta": {
+    "estilo": "warm-organic-terracota-salvia-e-creme",
+    "sugestoes": {
+      "fundo": "#FAF8F5",
+      "superficie": "#FFFFFF",
+      "texto": "#2D2823",
+      "texto_secundario": "#6E6860",
+      "acento": "#8F9E8B",
+      "acento_secundario": "#D4A373",
+      "linha": "rgba(226, 219, 210, 0.7)"
+    }
+  },
+  "componentes_permitidos": [
+    "apresentacao-humanizada",
+    "cards-de-abordagens-e-especialidades",
+    "faq-interativo-sanfonado",
+    "depoimentos-em-cards-acolhedores",
+    "agendamento-direto-whatsapp"
+  ],
+  "proibicoes": [
+    "estetica-hospitalar-gelada",
+    "cores-pesadas-de-cemiterio",
+    "termos-tecnicos-sem-explicacao",
+    "fotos-de-stock-americanas"
+  ],
+  "prioridade_conversao": 1,
+  "ativo": true,
+  "nicho": "Psicologia Clínica & TCC",
+  "tokens": {
+    "name": "Cartaz Modular",
+    "nichos": [
+      "psicologia",
+      "nutrição",
+      "bem-estar",
+      "coaching",
+      "yoga",
+      "terapeuta"
+    ],
+    "fonts": {
+      "display": "Plus Jakarta Sans",
+      "body": "Plus Jakarta Sans"
+    },
+    "dark": false,
+    "defaults": {
+      "--ah-primary": "#5B8A72",
+      "--ah-accent": "#5B8A72",
+      "--ah-bg": "#FAFAF8",
+      "--ah-surface": "#F0EDE8",
+      "--ah-text": "#1C1C1A",
+      "--ah-text-muted": "#6B7280"
+    },
+    "motion": {
+      "preloader": true,
+      "marquee": false,
+      "parallax": false,
+      "counters": true,
+      "cursor": false
+    },
+    "layout": "color-blocks",
+    "description": "Color-blocks harmônicos, pílula flutuante, acolhedor. Ideal para Psicologia, Nutrição."
+  },
+  "fontes": [
+    "presets-visuais",
+    "presets-dinamicos"
+  ],
+  "aliases": [],
+  "motor": "template",
+  "html_personalizado": false,
+  "arquetipo": null,
+  "html": "temas/cartaz-modular/casca.html",
+  "html_geracao": "temas/cartaz-modular/casca.html",
+  "preview": "temas/cartaz-modular/preview.html",
+  "ordem": 4
+}

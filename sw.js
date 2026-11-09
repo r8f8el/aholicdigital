@@ -2,7 +2,6 @@
 const CACHE_NAME = 'aholic-os-v1';
 const ASSETS_TO_CACHE = [
   './',
-  './index.html',
   './dashboard.html',
   './manifest.json',
   './assets/aholic-logo.png',

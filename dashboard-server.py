@@ -4,8 +4,8 @@
 Uso: python dashboard-server.py  (ou duplo clique em iniciar-dashboard.bat)
 Abre em http://localhost:8765 — edições, exclusões e drag&drop salvam no prospector.db
 
-A biblioteca de temas é referencias/biblioteca/catalogo.json. /api/presets e /api/temas
-leem e gravam esse mesmo catálogo.
+A biblioteca de temas é a pasta temas/<id>/. /api/presets e /api/temas
+leem e gravam essa mesma pasta.
 """
 import json, sqlite3, os, sys, webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer

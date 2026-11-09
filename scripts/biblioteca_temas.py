@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 """Biblioteca única de temas da Aholic.
 
-O dashboard e o gerador leem e gravam o mesmo catálogo:
+O dashboard e o gerador leem e gravam a mesma pasta:
 
-  referencias/biblioteca/catalogo.json
-  referencias/biblioteca/html/<id>.html
+  temas/<id>/theme.json
+  temas/<id>/casca.html
+  temas/<id>/preview.html
 
 Cada tema guarda nome, nicho, prévia e o HTML (além dos tokens e metadados
 que já existiam nos presets). Arquétipos, presets visuais, presets dinâmicos
@@ -21,6 +22,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
@@ -434,12 +436,14 @@ def gerar_shell(tema):
 class Biblioteca:
     def __init__(self, raiz):
         self.raiz = Path(raiz).resolve()
-        self.pasta = self.raiz / "referencias" / "biblioteca"
-        self.caminho = self.pasta / "catalogo.json"
-        self.pasta_html = self.pasta / "html"
+        self.pasta = self.raiz / "temas"
+        self.caminho = self.pasta
+
+    def _tem_pastas(self):
+        return self.pasta.exists() and any(self.pasta.glob("*/theme.json"))
 
     def garantir(self):
-        if not self.caminho.exists():
+        if not self._tem_pastas():
             self.reindexar(preservar_personalizados=False)
         return self
 
@@ -483,7 +487,7 @@ class Biblioteca:
                 tema = self.resolver(tid)
                 if tema and tema.get("ativo") is not False:
                     return tema["id"]
-        return "editorial-atelier"
+        return None
 
     def salvar(self, dados, html=None):
         if not isinstance(dados, dict):
@@ -589,7 +593,7 @@ class Biblioteca:
             return ""
         html = self.ler_html_geracao(tema)
         if not html:
-            html = gerar_shell(tema)
+            return ""
         return aplicar_placeholders(html, contexto or {})
 
     def ler_html_geracao(self, tema):
@@ -636,7 +640,7 @@ class Biblioteca:
 
     def reindexar(self, preservar_personalizados=True):
         antigo = {}
-        if preservar_personalizados and self.caminho.exists():
+        if preservar_personalizados and self._tem_pastas():
             for tema in self._temas():
                 antigo[tema.get("id")] = tema
         temas = self._construir_de_fontes()
@@ -755,18 +759,20 @@ class Biblioteca:
         return temas
 
     def _materializar_html(self, tema):
-        rel_shell = "referencias/biblioteca/html/{0}.html".format(tema["id"])
-        caminho = self._caminho_seguro(rel_shell)
-        caminho.parent.mkdir(parents=True, exist_ok=True)
-        caminho.write_text(gerar_shell(tema), encoding="utf-8", newline="\n")
+        tid = tema["id"]
+        pasta = self.pasta / tid
+        pasta.mkdir(parents=True, exist_ok=True)
+        casca = gerar_shell(tema)
+        (pasta / "casca.html").write_text(casca, encoding="utf-8", newline="\n")
+        preview = casca
         if tema.get("html_referencia"):
-            tema["html"] = tema["html_referencia"]
-            tema["preview"] = tema["html_referencia"]
-            tema["html_geracao"] = rel_shell
-        else:
-            tema["html"] = rel_shell
-            tema["preview"] = rel_shell
-            tema["html_geracao"] = rel_shell
+            origem = self._caminho_seguro(tema["html_referencia"])
+            if origem.exists():
+                preview = origem.read_text(encoding="utf-8", errors="replace")
+        (pasta / "preview.html").write_text(preview, encoding="utf-8", newline="\n")
+        tema["html"] = "temas/{0}/casca.html".format(tid)
+        tema["html_geracao"] = tema["html"]
+        tema["preview"] = "temas/{0}/preview.html".format(tid)
         return tema
 
     def _templates_ausentes(self, temas):
@@ -932,41 +938,58 @@ class Biblioteca:
         return score
 
     def _gravar_documento(self, tid, documento):
-        rel = "referencias/biblioteca/html/{0}.html".format(tid)
+        rel = "temas/{0}/casca.html".format(tid)
         caminho = self._caminho_seguro(rel)
         caminho.parent.mkdir(parents=True, exist_ok=True)
         caminho.write_text(documento, encoding="utf-8", newline="\n")
+        (caminho.parent / "preview.html").write_text(documento, encoding="utf-8", newline="\n")
         return rel
 
     def _gravar_catalogo(self, temas):
-        atual = {}
-        if self.caminho.exists():
-            try:
-                atual = json.loads(self.caminho.read_text(encoding="utf-8"))
-            except Exception:
-                atual = {}
-        diretrizes = atual.get("diretrizes_anti_slop")
-        if not diretrizes:
-            bruto = self._ler_json("referencias/catalogo-design.json", {})
-            diretrizes = bruto.get("diretrizes_anti_slop") or []
-        doc = {
-            "versao": 1,
-            "descricao": "Biblioteca única de temas. O dashboard e o gerador leem este catálogo.",
-            "fonte": "referencias/biblioteca/catalogo.json",
-            "atualizado_em": _agora(),
-            "diretrizes_anti_slop": diretrizes,
-            "placeholders": PLACEHOLDERS,
-            "temas": temas,
-        }
         self.pasta.mkdir(parents=True, exist_ok=True)
-        self._atomic_json(self.caminho, doc)
+        diretrizes = self._ler_json("temas/diretrizes.json", {})
+        if not isinstance(diretrizes, dict) or not diretrizes.get("diretrizes_anti_slop"):
+            bruto = self._ler_json("referencias/catalogo-design.json", {})
+            diretrizes = {
+                "descricao": "A biblioteca viva é a pasta temas/<id>/. Os JSON em referencias/ são a origem histórica.",
+                "diretrizes_anti_slop": bruto.get("diretrizes_anti_slop") or [],
+                "placeholders": PLACEHOLDERS,
+            }
+        diretrizes["atualizado_em"] = _agora()
+        diretrizes["placeholders"] = PLACEHOLDERS
+        self._atomic_json(self.pasta / "diretrizes.json", diretrizes)
+        mantidos = set()
+        for ordem, tema in enumerate(temas):
+            tema = dict(tema)
+            tema["ordem"] = ordem
+            tema["html"] = "temas/{0}/casca.html".format(tema["id"])
+            tema["html_geracao"] = tema["html"]
+            tema["preview"] = "temas/{0}/preview.html".format(tema["id"])
+            pasta = self.pasta / tema["id"]
+            pasta.mkdir(parents=True, exist_ok=True)
+            self._atomic_json(pasta / "theme.json", tema)
+            mantidos.add(tema["id"])
+            temas[ordem] = tema
+        for pasta in list(self.pasta.iterdir()):
+            if pasta.is_dir() and pasta.name not in mantidos and (pasta / "theme.json").exists():
+                shutil.rmtree(pasta)
 
     def _temas(self):
-        if not self.caminho.exists():
+        if not self.pasta.exists():
             return []
-        doc = json.loads(self.caminho.read_text(encoding="utf-8"))
-        temas = doc.get("temas") if isinstance(doc, dict) else None
-        return list(temas) if isinstance(temas, list) else []
+        temas = []
+        for pasta in self.pasta.iterdir():
+            arquivo = pasta / "theme.json"
+            if not pasta.is_dir() or not arquivo.exists():
+                continue
+            try:
+                tema = json.loads(arquivo.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if isinstance(tema, dict) and tema.get("id"):
+                temas.append(tema)
+        temas.sort(key=lambda t: (t.get("ordem", 9999), t.get("id") or ""))
+        return temas
 
     def _ler_json(self, rel, padrao):
         caminho = self.raiz / rel
@@ -1038,9 +1061,9 @@ def main():
     parser.add_argument("--reindex", action="store_true", help="Reconstrói o catálogo a partir dos presets, arquétipos e templates, preservando HTML salvo")
     args = parser.parse_args()
     bib = Biblioteca(raiz)
-    if args.reindex or not bib.caminho.exists():
-        temas = bib.reindexar(preservar_personalizados=bib.caminho.exists())
-        print("Catálogo gravado em {0} ({1} temas).".format(bib.caminho, len(temas)))
+    if args.reindex or not bib._tem_pastas():
+        temas = bib.reindexar(preservar_personalizados=bib._tem_pastas())
+        print("Temas gravados em {0} ({1} temas).".format(bib.pasta, len(temas)))
     if args.list or not args.reindex:
         for tema in bib.listar():
             estado = "HTML salvo" if tema.get("html_personalizado") else tema.get("motor") or "template"

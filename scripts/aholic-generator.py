@@ -611,8 +611,8 @@ def build_html(slug: str, info: dict, preset_key: str, preset: dict,
 
 
 def update_dashboard(slug: str, info: dict, preset_key: str, site_url: str):
-    """Update dashboard.html and index.html with new lead data."""
-    update_script = SCRIPTS_DIR / 'atualizar_dashboard.cjs'
+    """Atualiza o dashboard.html com o lead gerado."""
+    update_script = RAIZ / 'jobs' / 'clientes' / 'atualizar_dashboard.cjs'
     if not update_script.exists():
         print('  ⚠️  atualizar_dashboard.cjs não encontrado')
         return
@@ -686,13 +686,9 @@ def main():
     args = parser.parse_args()
 
     if args.list:
-        print('\n🎨 Presets Disponíveis:\n')
-        for key, p in PRESETS.items():
-            print(f'  [{key}]  {p["name"]}')
-            print(f'    Nichos: {", ".join(p["nichos"])}')
-            print(f'    Fontes: {p["fonts"]["display"]} + {p["fonts"]["body"]}')
-            print()
-        return
+        raise SystemExit(subprocess.call(
+            [sys.executable, str(SCRIPTS_DIR / 'gerar-site-lead.py'), '--list-temas']
+        ))
 
     if not args.slug:
         parser.print_help()
@@ -723,9 +719,13 @@ def main():
         json.dump(info, f, ensure_ascii=False, indent=2)
 
     # ── Select preset ──
-    preset_key = args.preset if args.preset != 'auto' else auto_select_preset(info.get('nicho', ''))
-    preset = PRESETS.get(preset_key, PRESETS['cinema-local'])
-    print(f'\n🎨 Preset: {preset["name"]} [{preset_key}]')
+    sys.path.insert(0, str(SCRIPTS_DIR))
+    from biblioteca_temas import Biblioteca
+    if args.preset != 'auto' and not Biblioteca(RAIZ).resolver(args.preset):
+        print(f'\nTema inexistente: {args.preset}', file=sys.stderr)
+        print('Veja os ids com: py scripts/gerar-site-lead.py --list-temas', file=sys.stderr)
+        sys.exit(1)
+    print(f'\n🎨 Tema pedido: {args.preset}')
 
     # ── Step 1: Extract Photos ──
     if not args.no_photos and (args.instagram or args.maps or args.maps_query):
@@ -750,38 +750,15 @@ def main():
     else:
         print('\n🎨 Fase 2: Pulando extração de cores (--no-colors)')
 
-    # ── Step 3: Load data ──
-    palette = load_palette(slug)
-    photos  = load_photos(slug)
-
-    print(f'\n  🖼️  Hero: {photos.get("hero_candidate", "(nenhuma)")}')
-    print(f'  🖼️  Galeria: {len(photos.get("gallery", []))} fotos')
-    print(f'  🎨 Paleta: {"extraída da logo" if palette else "padrão do preset"}')
-
-    # ── Step 4: Generate HTML ──
-    print('\n📄 Fase 3: Gerando HTML...')
-    html = build_html(slug, info, preset_key, preset, palette, photos)
-
-    # Write files
-    out_dir = SITES_DIR / slug
-    (out_dir / 'index.html').write_text(html, encoding='utf-8')
-    (out_dir / f'{slug}.html').write_text(html, encoding='utf-8')
-
-    # Editor version
-    editor_bar = '''<div style="position:fixed;top:0;left:0;right:0;height:48px;background:#0f172a;color:#f8fafc;
-        display:flex;align-items:center;justify-content:space-between;padding:0 20px;
-        font-family:system-ui;font-size:13px;z-index:999999;border-bottom:1px solid #334155;">
-      <strong style="color:#38bdf8;">✨ Modo Edição Aholic</strong>
-      <button onclick="alert('Exportar em breve!')" style="background:#22c55e;color:#fff;border:0;
-          padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">Exportar Site</button>
-    </div>'''
-    editor_html = html.replace('<body ', '<body style="padding-top:48px;" ').replace('<body>', '<body style="padding-top:48px;">')
-    editor_html = editor_html.replace('</header>', '</header>' + editor_bar, 1)
-    (out_dir / f'{slug}-editor.html').write_text(editor_html, encoding='utf-8')
-
-    print(f'  ✅ sites/{slug}/index.html')
-    print(f'  ✅ sites/{slug}/{slug}.html')
-    print(f'  ✅ sites/{slug}/{slug}-editor.html')
+    # ── Step 3: a página sai só de scripts/gerar-site-lead.py ──
+    print('\n📄 Fase 3: Gerando HTML pela biblioteca temas/ ...')
+    codigo = subprocess.call([
+        sys.executable, str(SCRIPTS_DIR / 'gerar-site-lead.py'),
+        '--slug', slug, '--preset', args.preset,
+    ])
+    if codigo != 0:
+        print('Geração interrompida. Nenhum arquivo novo de tema inválido e nenhum deploy.', file=sys.stderr)
+        sys.exit(codigo)
 
     # ── Step 5: Deploy ──
     if not args.no_push:

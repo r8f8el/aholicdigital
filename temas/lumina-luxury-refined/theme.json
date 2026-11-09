@@ -1,0 +1,92 @@
+{
+  "nome": "Lumina Luxury Refined",
+  "nicho": "Arquitetura de alto padrão",
+  "descricao": "Arquitetura em obsidiana e champanhe, com Cinzel e muito espaço negativo. HTML de referência em referencias/templates/lumina-luxury-refined.html.",
+  "tags": [
+    "arquitetura",
+    "luxo",
+    "obsidiana",
+    "champagne",
+    "template"
+  ],
+  "nichos_recomendados": [
+    "Arquitetura de Alto Padrão",
+    "Design de Interiores",
+    "Engenharia Conceito"
+  ],
+  "nichos_evitar": [
+    "Comércio Popular",
+    "Serviços de Emergência"
+  ],
+  "composicao": "obsidian-editorial",
+  "navegacao": "fixed-serif-header",
+  "densidade": "baixa",
+  "tipografia": {
+    "display": "Cinzel",
+    "body": "Plus Jakarta Sans",
+    "labels": "JetBrains Mono",
+    "escala": "extrema"
+  },
+  "paleta": {
+    "estilo": "obsidiana-e-champagne",
+    "sugestoes": {
+      "fundo": "#0B0C0E",
+      "superficie": "#131518",
+      "texto": "#F5F2EB",
+      "texto_secundario": "#E5DFD3",
+      "acento": "#C5A880",
+      "linha": "rgba(255, 255, 255, 0.08)"
+    }
+  },
+  "id": "lumina-luxury-refined",
+  "origem": "referencias/templates/lumina-luxury-refined.html",
+  "fontes": [
+    "templates",
+    "catalogo-design"
+  ],
+  "aliases": [
+    "monografia-editorial",
+    "monografia_editorial",
+    "lumina-luxury"
+  ],
+  "motor": "template",
+  "html_personalizado": false,
+  "arquetipo": "monografia_editorial",
+  "tokens": {
+    "fonts": {
+      "display": "Cinzel",
+      "body": "Plus Jakarta Sans"
+    },
+    "defaults": {
+      "--ah-primary": "#C5A880",
+      "--ah-accent": "#C5A880",
+      "--ah-bg": "#0B0C0E",
+      "--ah-surface": "#131518",
+      "--ah-text": "#F5F2EB",
+      "--ah-text-muted": "#E5DFD3"
+    },
+    "layout": "obsidian-editorial",
+    "dark": true,
+    "nichos": [
+      "arquitetura de alto padrão",
+      "design de interiores",
+      "engenharia conceito"
+    ]
+  },
+  "html_referencia": "referencias/templates/lumina-luxury-refined.html",
+  "referencia_local": "sites/karla-barros-arquitetura/versoes/v2-quiet-luxury-italiana.html",
+  "paleta_arquetipo": {
+    "estilo": "arquetipo",
+    "sugestoes": {
+      "fundo": "#F7F6F2",
+      "superficie": "#FFFFFF",
+      "texto": "#1C1917",
+      "texto_secundario": "#78716C",
+      "acento": "#292524"
+    }
+  },
+  "html": "temas/lumina-luxury-refined/casca.html",
+  "html_geracao": "temas/lumina-luxury-refined/casca.html",
+  "preview": "temas/lumina-luxury-refined/preview.html",
+  "ordem": 16
+}

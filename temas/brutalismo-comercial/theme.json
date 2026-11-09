@@ -1,0 +1,123 @@
+{
+  "id": "brutalismo-comercial",
+  "nome": "Brutalismo Comercial",
+  "descricao": "Grid geométrico marcado, tipografia display ultra-pesada, contraste preto/branco e alto impacto visual urbano.",
+  "origem": "https://curated-design.com/commercial-brutalism",
+  "screenshot": "assets/presets/brutalismo-comercial.webp",
+  "tags": [
+    "brutalista",
+    "urbano",
+    "alto-impacto",
+    "tipografico",
+    "direto"
+  ],
+  "nichos_recomendados": [
+    "Barbearia Conceito",
+    "Academia Boutique / Crossfit",
+    "Estúdio de Tatuagem",
+    "Gastronomia Urbana / Burger",
+    "Marcas Jovens"
+  ],
+  "nichos_evitar": [
+    "Clínica Pediátrica",
+    "Consultório de Psicologia Sensível",
+    "Escritório de Advocacia Conservador"
+  ],
+  "composicao": "heavy-grid-blocks",
+  "navegacao": "fixed-top-border-dock",
+  "densidade": "alta",
+  "tipografia": {
+    "display": "Space Grotesk / Syne 800 (Sans-serif display ultra-pesada e expansiva)",
+    "body": "Inter (Sans compacta e direta)",
+    "labels": "Space Mono (Mono crua em caixas com borda sólida)",
+    "escala": "extrema"
+  },
+  "imagem": {
+    "tratamento": "high-contrast-monochrome (alto contraste, filtros duotone ou preto e branco com acentos vibrantes)",
+    "proporcoes": [
+      "1:1",
+      "4:5"
+    ]
+  },
+  "movimento": {
+    "estilo": [
+      "ticker-marquee",
+      "instant-hover-invert",
+      "snap-scroll",
+      "border-glow"
+    ],
+    "intensidade_interacao": 3,
+    "respeita_prefers_reduced_motion": true
+  },
+  "paleta": {
+    "estilo": "alto-contraste-preto-e-branco-com-neon",
+    "sugestoes": {
+      "fundo": "#0C0D0E",
+      "superficie": "#16181A",
+      "texto": "#F8FAFC",
+      "texto_secundario": "#94A3B8",
+      "acento": "#00D084",
+      "linha": "#27272A"
+    }
+  },
+  "componentes_permitidos": [
+    "marquee-infinito",
+    "cardapio-tabela-bruta",
+    "galeria-em-mural",
+    "cta-bold-whatsapp",
+    "localizacao-mapa-escuro"
+  ],
+  "proibicoes": [
+    "sombras-difusas",
+    "tons-pasteis-apagados",
+    "fontes-cursivas-romanticas",
+    "ilustracoes-fofas"
+  ],
+  "prioridade_conversao": 1,
+  "ativo": true,
+  "nicho": "Barbearia Conceito",
+  "tokens": {
+    "name": "Brutalismo Comercial",
+    "nichos": [
+      "barbearia",
+      "academia",
+      "streetwear",
+      "tatuagem",
+      "estúdio"
+    ],
+    "fonts": {
+      "display": "League Spartan",
+      "body": "League Spartan"
+    },
+    "dark": true,
+    "defaults": {
+      "--ah-primary": "#F5FF00",
+      "--ah-accent": "#F5FF00",
+      "--ah-bg": "#0A0A0A",
+      "--ah-surface": "#141414",
+      "--ah-text": "#F5F5F5",
+      "--ah-text-muted": "#888888"
+    },
+    "motion": {
+      "preloader": true,
+      "marquee": true,
+      "parallax": false,
+      "counters": true,
+      "cursor": true
+    },
+    "layout": "heavy-grid",
+    "description": "Heavy grid, tipografia display pesada, alto contraste. Ideal para Barbearia, Academia."
+  },
+  "fontes": [
+    "presets-visuais",
+    "presets-dinamicos"
+  ],
+  "aliases": [],
+  "motor": "template",
+  "html_personalizado": false,
+  "arquetipo": null,
+  "html": "temas/brutalismo-comercial/casca.html",
+  "html_geracao": "temas/brutalismo-comercial/casca.html",
+  "preview": "temas/brutalismo-comercial/preview.html",
+  "ordem": 1
+}

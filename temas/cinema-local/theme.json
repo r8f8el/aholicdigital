@@ -1,0 +1,126 @@
+{
+  "id": "cinema-local",
+  "nome": "Cinema Local",
+  "descricao": "Atmosfera dark luxury imersiva com imagens full-bleed, transições cinematográficas e foco na experiência sensorial da marca.",
+  "origem": "https://curated-design.com/local-cinema",
+  "screenshot": "assets/presets/cinema-local.webp",
+  "tags": [
+    "cinematografico",
+    "imersivo",
+    "dark-luxury",
+    "sensorial",
+    "experiencia"
+  ],
+  "nichos_recomendados": [
+    "Rejuvenescimento Facial & Harmonização",
+    "Spas & Resorts",
+    "Restaurantes de Alta Gastronomia",
+    "Hotelaria Boutique",
+    "Estética Premium"
+  ],
+  "nichos_evitar": [
+    "Contabilidade",
+    "Autoescolas",
+    "Serviços Técnicos de Informática"
+  ],
+  "composicao": "fullbleed-cinematic-scroll",
+  "navegacao": "translucent-floating-header",
+  "densidade": "baixa",
+  "tipografia": {
+    "display": "Cinzel / Cormorant Garamond (Serifada cinematográfica refinada com tracking ampliado)",
+    "body": "Plus Jakarta Sans / Inter 300 (Sans leve e elegante)",
+    "labels": "Space Grotesk (Labels com espaçamento generoso)",
+    "escala": "extrema"
+  },
+  "imagem": {
+    "tratamento": "ambient-fullwidth (fotografia de ambiente em alta resolução, iluminação dramática e sobreposições sutis)",
+    "proporcoes": [
+      "16:9",
+      "21:9",
+      "9:16"
+    ]
+  },
+  "movimento": {
+    "estilo": [
+      "parallax-smooth",
+      "curtain-reveal",
+      "glow-pulse",
+      "video-backdrop"
+    ],
+    "intensidade_interacao": 2,
+    "respeita_prefers_reduced_motion": true
+  },
+  "paleta": {
+    "estilo": "dark-luxury-carvao-e-ouro-antigo",
+    "sugestoes": {
+      "fundo": "#0A0B0D",
+      "superficie": "#14161B",
+      "texto": "#F8FAFC",
+      "texto_secundario": "#A1A1AA",
+      "acento": "#D4AF37",
+      "linha": "rgba(255, 255, 255, 0.1)"
+    }
+  },
+  "componentes_permitidos": [
+    "hero-cinematografico-com-video",
+    "galeria-de-experiencias",
+    "transformacoes-antes-depois-slider",
+    "depoimentos-em-video-audio",
+    "reserva-vip-whatsapp"
+  ],
+  "proibicoes": [
+    "tabelas-de-preco-brutas-no-hero",
+    "fundo-branco-hospitalar",
+    "botoes-chatos-sem-hover",
+    "excesso-de-texto-corrido"
+  ],
+  "prioridade_conversao": 2,
+  "ativo": true,
+  "nicho": "Rejuvenescimento Facial & Harmonização",
+  "tokens": {
+    "name": "Cinema Local",
+    "nichos": [
+      "cafeteria",
+      "café",
+      "restaurante",
+      "gastronomia",
+      "bar",
+      "patisserie",
+      "bakery"
+    ],
+    "fonts": {
+      "display": "League Spartan",
+      "body": "Playfair Display"
+    },
+    "dark": true,
+    "defaults": {
+      "--ah-primary": "#E0A96D",
+      "--ah-accent": "#E0A96D",
+      "--ah-bg": "#111413",
+      "--ah-surface": "#1A1D1C",
+      "--ah-text": "#F5EFEB",
+      "--ah-text-muted": "#9BA39F"
+    },
+    "motion": {
+      "preloader": true,
+      "marquee": true,
+      "parallax": true,
+      "counters": true,
+      "cursor": true
+    },
+    "layout": "full-bleed-dark-luxury",
+    "description": "Full-bleed dark luxury, vídeo/fotos imersivas. Ideal para gastronomia, cafés, spas."
+  },
+  "fontes": [
+    "presets-visuais",
+    "presets-dinamicos"
+  ],
+  "aliases": [],
+  "motor": "template",
+  "html_personalizado": false,
+  "arquetipo": null,
+  "html": "temas/cinema-local/casca.html",
+  "html_geracao": "temas/cinema-local/casca.html",
+  "preview": "temas/cinema-local/preview.html",
+  "ordem": 3
+}

@@ -228,8 +228,8 @@ def renderizar_quiet_luxury(lead, logo_path, fotos):
     nome = lead.get('nome', 'Clínica Especializada')
     cidade = lead.get('cidade', 'Brasil')
     nicho = lead.get('nicho', 'Estética Avançada')
-    whatsapp = lead.get('whatsapp') or "5564999999999"
-    telefone = lead.get('telefone') or "(64) 99999-9999"
+    whatsapp = re.sub(r'\D', '', str(lead.get('whatsapp') or ''))
+    telefone = lead.get('telefone') or ''
     endereco = lead.get('endCliente') or f"{cidade} — Atendimento com hora marcada"
     nota = lead.get('nota') or 5.0
     avaliacoes = lead.get('avaliacoes') or 35
@@ -245,7 +245,7 @@ def renderizar_quiet_luxury(lead, logo_path, fotos):
         logo_html = f'<div class="w-11 h-11 rounded-full bg-[#EFE8E1] border border-[#E2D6CA] flex items-center justify-center text-[#845749] font-serif font-semibold text-base shadow-sm">{iniciais}</div>'
 
     # Fotos reais para hero e galeria
-    hero_img = fotos[0] if len(fotos) > 0 else "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80"
+    hero_img = fotos[0] if len(fotos) > 0 else ''
     especialista_img = fotos[1] if len(fotos) > 1 else hero_img
     
     galeria_html = ""
@@ -525,8 +525,8 @@ def renderizar_swiss_precision(lead, logo_path, fotos):
     nome = lead.get('nome', 'Clínica Odontológica')
     cidade = lead.get('cidade', 'Brasil')
     nicho = lead.get('nicho', 'Odontologia Avançada')
-    whatsapp = lead.get('whatsapp') or "5564999999999"
-    telefone = lead.get('telefone') or "(64) 99999-9999"
+    whatsapp = re.sub(r'\D', '', str(lead.get('whatsapp') or ''))
+    telefone = lead.get('telefone') or ''
     endereco = lead.get('endCliente') or f"{cidade} — Centro Clínico Integrado"
     nota = lead.get('nota') or 5.0
     avaliacoes = lead.get('avaliacoes') or 40
@@ -540,7 +540,7 @@ def renderizar_swiss_precision(lead, logo_path, fotos):
     else:
         logo_html = f'<div class="w-10 h-10 rounded-md bg-[#0F172A] text-white flex items-center justify-center font-mono font-bold text-sm">{iniciais}</div>'
 
-    hero_img = fotos[0] if len(fotos) > 0 else "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80"
+    hero_img = fotos[0] if len(fotos) > 0 else ''
     
     galeria_html = ""
     fotos_grid = fotos[1:5] if len(fotos) >= 5 else (fotos if fotos else [hero_img])
@@ -723,16 +723,18 @@ def preset_salvo(lead):
         return bruto.get('presetId') or bruto.get('preset_id') or bruto.get('temaId')
     return None
 
+class TemaIndisponivel(Exception):
+    """Tema ausente ou sem casca. A geração para antes de gravar qualquer HTML."""
+
 def resolver_preset_id(lead, preset_id):
     bib = biblioteca()
     if preset_id and preset_id != 'auto':
         tema = bib.resolver(preset_id)
-        return tema['id'] if tema else preset_id
+        return tema['id'] if tema else None
     salvo = preset_salvo(lead)
     if salvo:
         tema = bib.resolver(salvo)
-        if tema:
-            return tema['id']
+        return tema['id'] if tema else None
     return bib.escolher((lead or {}).get('nicho'))
 
 def montar_contexto(lead, logo_path, fotos):
@@ -741,7 +743,7 @@ def montar_contexto(lead, logo_path, fotos):
     nome = lead.get('nome') or 'Estúdio'
     cidade = lead.get('cidade') or ''
     nicho = lead.get('nicho') or ''
-    whatsapp = re.sub(r'\D', '', str(lead.get('whatsapp') or '')) or '5500000000000'
+    whatsapp = re.sub(r'\D', '', str(lead.get('whatsapp') or ''))
     telefone = lead.get('telefone') or ''
     endereco = lead.get('endCliente') or cidade or ''
     nota = '' if lead.get('nota') in (None, '') else lead.get('nota')
@@ -749,15 +751,15 @@ def montar_contexto(lead, logo_path, fotos):
     bio = lead.get('obs') or lead.get('motivo') or '%s em %s.' % (nicho or nome, cidade or 'atendimento com hora marcada')
     iniciais = gerar_iniciais(nome)
     wa_msg = urllib.parse.quote('Olá! Vi o site da %s e quero conversar.' % nome)
-    wa_link = 'https://wa.me/%s?text=%s' % (whatsapp, wa_msg)
+    wa_link = ('https://wa.me/%s?text=%s' % (whatsapp, wa_msg)) if whatsapp else ''
     if logo_path:
         logo_html = '<img src="%s" alt="%s" style="width:48px;height:48px;object-fit:cover;border-radius:50%%">' % (
             html_lib.escape(str(logo_path), quote=True), html_lib.escape(nome, quote=True))
     else:
         logo_html = '<span class="monograma">%s</span>' % html_lib.escape(iniciais)
-    hero = fotos[0] if fotos else 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80'
+    hero = fotos[0] if fotos else ''
     especialista = fotos[1] if len(fotos) > 1 else hero
-    fotos_grid = fotos[:4] if fotos else [hero]
+    fotos_grid = fotos[:4] if fotos else []
     galeria = ''.join(
         '<figure><img src="%s" alt="%s"></figure>' % (html_lib.escape(str(f), quote=True), html_lib.escape(nome, quote=True))
         for f in fotos_grid
@@ -784,19 +786,28 @@ def montar_contexto(lead, logo_path, fotos):
 
 def html_para_lead(lead, preset_id, logo_path, fotos):
     bib = biblioteca()
-    preset_id = resolver_preset_id(lead, preset_id)
-    tema = bib.resolver(preset_id)
-    motor = (tema or {}).get('motor') or 'template'
-    personalizado = bool(tema and tema.get('html_personalizado'))
-    if tema and not personalizado and motor == 'quiet-luxury':
-        return renderizar_quiet_luxury(lead, logo_path, fotos), tema
-    if tema and not personalizado and motor == 'swiss-precision':
-        return renderizar_swiss_precision(lead, logo_path, fotos), tema
-    if tema:
-        html = bib.renderizar(tema, montar_contexto(lead, logo_path, fotos))
-        if html and '<html' in html.lower():
-            return html, tema
-    return renderizar_quiet_luxury(lead, logo_path, fotos), tema
+    pedido = preset_id or 'auto'
+    resolvido = resolver_preset_id(lead, pedido)
+    if not resolvido:
+        if pedido and pedido != 'auto':
+            raise TemaIndisponivel(
+                "O tema '%s' não existe na pasta temas/. Veja os ids com --list-temas. Nada foi gravado." % pedido
+            )
+        raise TemaIndisponivel(
+            "Nenhum tema da biblioteca serve o nicho '%s'. Escolha um id com --list-temas. Nada foi gravado."
+            % ((lead or {}).get('nicho') or 'sem nicho')
+        )
+    tema = bib.resolver(resolvido)
+    if not tema:
+        raise TemaIndisponivel("O tema '%s' não está pronto. Nada foi gravado." % resolvido)
+    html = bib.renderizar(tema, montar_contexto(lead, logo_path, fotos))
+    if not html or '<html' not in html.lower():
+        raise TemaIndisponivel(
+            "O tema '%s' não tem casca HTML em temas/%s/casca.html. Nada foi gravado." % (tema['id'], tema['id'])
+        )
+    if '{{NOME_EMPRESA}}' in html:
+        raise TemaIndisponivel("A casca do tema '%s' não foi preenchida. Nada foi gravado." % tema['id'])
+    return html, tema
 
 def listar_temas():
     bib = biblioteca()
@@ -818,22 +829,23 @@ def compilar_site(slug, preset_id="auto"):
         print(f"[-] Erro: Lead com slug '{slug}' não encontrado no banco prospector.db.")
         return False
 
-    pasta_lead = os.path.join(SITES_DIR, slug)
-    os.makedirs(pasta_lead, exist_ok=True)
-    
     logo_path, fotos = detectar_assets_lead(slug)
     print(f"[*] Compilando site para: {lead['nome']} ({slug})")
     print(f"  • Logo identificado: {logo_path if logo_path else '(monograma autoral gerado)'}")
     print(f"  • Fotos reais disponíveis: {len(fotos)}")
 
-    html_puro, tema = html_para_lead(lead, preset_id, logo_path, fotos)
-    if tema:
-        origem = 'HTML salvo na biblioteca' if tema.get('html_personalizado') else tema.get('motor')
-        print(f"  • Tema da biblioteca: {tema['nome']} ({tema['id']})")
-        print(f"  • Como gera: {origem}")
-        print(f"  • Arquivo do tema: {tema.get('html')}")
-    else:
-        print(f"  • Preset não encontrado na biblioteca ({preset_id}); usando o motor editorial.")
+    try:
+        html_puro, tema = html_para_lead(lead, preset_id, logo_path, fotos)
+    except TemaIndisponivel as erro:
+        print("[-] %s" % erro, file=sys.stderr)
+        return False
+
+    pasta_lead = os.path.join(SITES_DIR, slug)
+    os.makedirs(pasta_lead, exist_ok=True)
+    origem = 'HTML salvo na biblioteca' if tema.get('html_personalizado') else 'casca do tema'
+    print(f"  • Tema: {tema['nome']} ({tema['id']})")
+    print(f"  • Origem: {origem}")
+    print(f"  • Arquivo: {tema.get('html')}")
 
     # 1. Gera o arquivo final limpo: index.html
     caminho_index = os.path.join(pasta_lead, "index.html")
@@ -882,7 +894,8 @@ def main():
         print("[-] Especifique um slug com --slug <nome> ou use --list para ver os disponíveis.")
         sys.exit(1)
 
-    compilar_site(args.slug, args.preset)
+    if not compilar_site(args.slug, args.preset):
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

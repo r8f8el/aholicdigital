@@ -1,0 +1,143 @@
+{
+  "id": "editorial-atelier",
+  "nome": "Editorial de Atelier",
+  "descricao": "Estética autoral de ateliê com foco em alta elegância, fotografia de grande porte e espaço negativo generoso.",
+  "origem": "https://curated-design.com/editorial-atelier",
+  "screenshot": "assets/presets/editorial-atelier.webp",
+  "tags": [
+    "editorial",
+    "sofisticado",
+    "cultural",
+    "fotografico",
+    "minimalista"
+  ],
+  "nichos_recomendados": [
+    "Arquitetura",
+    "Design de Interiores",
+    "Estética Facial Avançada",
+    "Dermatologia",
+    "Restaurante Autoral",
+    "Alta Joalheria"
+  ],
+  "nichos_evitar": [
+    "Comércio Popular",
+    "Serviços de Emergência 24h",
+    "Desentupidoras / Chaveiros"
+  ],
+  "composicao": "asymmetrical-editorial",
+  "navegacao": "chapter-index",
+  "densidade": "baixa",
+  "tipografia": {
+    "display": "Newsreader / Playfair Display (Serifada elegante e editorial)",
+    "body": "Plus Jakarta Sans (Sans neutra, limpa e legível)",
+    "labels": "JetBrains Mono (Mono técnica discreta para metadados)",
+    "escala": "extrema"
+  },
+  "imagem": {
+    "tratamento": "large-crops-overlap (recortes verticais nobres, sobreposição e bordas finas)",
+    "proporcoes": [
+      "3:4",
+      "16:9",
+      "1:1"
+    ]
+  },
+  "movimento": {
+    "estilo": [
+      "mask-reveal",
+      "slow-scroll",
+      "image-hover-shift",
+      "subtle-fade"
+    ],
+    "intensidade_interacao": 2,
+    "respeita_prefers_reduced_motion": true
+  },
+  "paleta": {
+    "estilo": "neutros-nobres-com-acento-champagne",
+    "sugestoes": {
+      "fundo": "#FBFBFA",
+      "superficie": "#FFFFFF",
+      "texto": "#18181B",
+      "texto_secundario": "#71717A",
+      "acento": "#C5A880",
+      "linha": "rgba(226, 232, 240, 0.8)"
+    }
+  },
+  "componentes_permitidos": [
+    "manifesto",
+    "projetos-autorais",
+    "galeria-editorial",
+    "depoimentos-em-aspas",
+    "contato-agendamento"
+  ],
+  "proibicoes": [
+    "bento-grid-saturado",
+    "gradiente-neon",
+    "cards-flutuantes-com-sombra-pesada",
+    "hero-saas-falso"
+  ],
+  "prioridade_conversao": 3,
+  "ativo": true,
+  "nicho": "Arquitetura",
+  "tokens": {
+    "name": "Editorial de Atelier",
+    "nichos": [
+      "arquitetura",
+      "dermato",
+      "luxo",
+      "spa",
+      "decoração",
+      "estética",
+      "rejuvenescimento"
+    ],
+    "fonts": {
+      "display": "Newsreader",
+      "body": "Inter"
+    },
+    "dark": true,
+    "defaults": {
+      "--ah-primary": "#C5A880",
+      "--ah-accent": "#D4A96D",
+      "--ah-bg": "#0D0C0B",
+      "--ah-surface": "#141210",
+      "--ah-text": "#F5F0EB",
+      "--ah-text-muted": "#9A9290"
+    },
+    "motion": {
+      "preloader": true,
+      "marquee": true,
+      "parallax": true,
+      "counters": true,
+      "cursor": true
+    },
+    "layout": "asymmetric-editorial",
+    "description": "Asymmetric editorial, serifas nobres, respiro amplo. Ideal para Arquitetura, Dermato, Luxo."
+  },
+  "fontes": [
+    "presets-visuais",
+    "presets-dinamicos",
+    "catalogo-design"
+  ],
+  "aliases": [
+    "quiet-luxury",
+    "estetica-luxo",
+    "quiet_luxury"
+  ],
+  "motor": "quiet-luxury",
+  "html_personalizado": false,
+  "arquetipo": "quiet_luxury",
+  "referencia_local": "sites/clinica-anielly-vilela/clinica-anielly-vilela.html",
+  "paleta_arquetipo": {
+    "estilo": "arquetipo",
+    "sugestoes": {
+      "fundo": "#FBFBFA",
+      "superficie": "#FFFFFF",
+      "texto": "#18181B",
+      "texto_secundario": "#71717A",
+      "acento": "#C5A880"
+    }
+  },
+  "html": "temas/editorial-atelier/casca.html",
+  "html_geracao": "temas/editorial-atelier/casca.html",
+  "preview": "temas/editorial-atelier/preview.html",
+  "ordem": 0
+}
