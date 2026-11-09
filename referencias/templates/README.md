@@ -4,8 +4,12 @@ Esta pasta foi projetada para receber novos templates e presets de sites criados
 
 ## Como adicionar um novo Preset HTML
 
-Basta salvar um arquivo `.html` nesta pasta com o nome do preset (ex: `luxo-minimalista.html`, `dark-impacto.html`).
-O gerador automático (`scripts/gerar-site-lead.py`) irá reconhecê-lo dinamicamente no menu e injetar os dados do lead minerado usando as seguintes variáveis:
+Salve um arquivo `.html` nesta pasta com o nome do tema (ex: `luxo-minimalista.html`).
+Na próxima listagem, o dashboard e o gerador incorporam o arquivo em `temas/<id>/`.
+
+Se o HTML tiver os marcadores abaixo, o gerador troca pelos dados do lead. Se for uma página fechada, sem marcadores, ela fica como prévia e a geração usa um modelo com as cores do tema — até alguém salvar um HTML próprio na biblioteca.
+
+Marcadores:
 
 - `{{NOME_EMPRESA}}` ou `{{NOME_LEAD}}`: Nome do cliente / clínica / especialista
 - `{{NICHO}}`: Nicho de atuação (ex: Estética Avançada, Odontologia)

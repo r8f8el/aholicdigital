@@ -1760,6 +1760,10 @@ tr:hover td {
     <label>Proibições / Anti-Slop (separadas por vírgula)</label>
     <input id="mp-proibicoes" placeholder="bento-grid, gradiente-neon, hero-saas-falso">
 
+    <label>HTML do tema</label>
+    <p style="font-size:11px;color:var(--muted);margin:0 0 6px">O que você colar aqui entra na biblioteca e o gerador passa a usar esse HTML. Deixe em branco para manter o arquivo atual. Marcadores: {{NOME_EMPRESA}}, {{NICHO}}, {{CIDADE}}, {{WHATSAPP_LINK}}, {{TELEFONE_VISUAL}}, {{LOGO_HTML}}, {{FOTO_HERO}}, {{GALERIA_FOTOS_HTML}}, {{ENDERECO}}, {{BIO_INSTAGRAM}}.</p>
+    <textarea id="mp-html" rows="6" placeholder="Cole um documento HTML completo para substituir o tema. Em branco, a biblioteca conserva o HTML que já está salvo."></textarea>
+
     <div class="mbot">
       <button class="cancelar" onclick="fecharModalPreset()">Cancelar</button>
       <button class="salvar" onclick="salvarPresetModal()">Salvar Preset</button>
@@ -1787,6 +1791,7 @@ tr:hover td {
           <button id="btn-prev-mob" onclick="setPresetPreviewMode('mobile')" style="border:0;background:transparent;color:var(--muted);padding:5px 12px;border-radius:var(--radius-pill);font-size:11.5px;font-weight:700;cursor:pointer">📱 Mobile</button>
         </div>
         <button onclick="copiarPromptPresetAtual()" class="btn-cta" style="background:#1E293B;padding:6px 14px;font-size:11.5px;box-shadow:none">📋 Copiar Prompt</button>
+        <button onclick="salvarCopiaDoPreview()" class="btn-cta" style="padding:6px 14px;font-size:11.5px">Salvar cópia na biblioteca</button>
         <button class="cancelar" style="padding:6px 12px;font-size:12px" onclick="fecharPreviewPreset()">✕</button>
       </div>
     </div>
@@ -1825,26 +1830,28 @@ var sb = null; // Supabase Client
 
 function getSupabaseConfig() {
   return {
-    url: localStorage.getItem('supabase_url') || 'https://gpignxwsxfbkelckrebd.supabase.co',
-    key: localStorage.getItem('supabase_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwaWdueHdzeGZia2VsY2tyZWJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NjQ3OTcsImV4cCI6MjEwMzQ0MDc5N30.Ex2iAC0VoW9svg2rMKNwWU9rYz5FNTQaz6qa9GL97tU'
+    url: localStorage.getItem('supabase_url') || '',
+    key: localStorage.getItem('supabase_key') || ''
   };
+}
+
+function supabaseConfiguradoPeloUsuario() {
+  var cfg = getSupabaseConfig();
+  return !!(cfg.url && cfg.key);
 }
 
 function initSupabase() {
   var cfg = getSupabaseConfig();
-  if (cfg.url && cfg.key && window.supabase) {
-    try {
-      sb = window.supabase.createClient(cfg.url, cfg.key);
-      MODE = 'supabase';
-      atualizarModoUI();
-      carregarDadosSupabase();
-      configurarRealtime();
-      return true;
-    } catch(e) {
-      console.error('Erro ao conectar Supabase:', e);
-    }
+  if (!(cfg.url && cfg.key && window.supabase)) return false;
+  try {
+    sb = window.supabase.createClient(cfg.url, cfg.key);
+  } catch (e) {
+    console.error('Erro ao conectar Supabase:', e);
+    return false;
   }
-  return false;
+  carregarDadosSupabase();
+  configurarRealtime();
+  return true;
 }
 
 function carregarDadosSupabase() {
@@ -1883,6 +1890,8 @@ function carregarDadosSupabase() {
         });
       }
 
+      MODE = 'supabase';
+      atualizarModoUI();
       leads = sbLeads;
       sb.from('versoes_site').select('*').order('numero', { ascending: false }).then(function(vRes) {
         if (vRes && vRes.data) {
@@ -1906,6 +1915,10 @@ function carregarDadosSupabase() {
       render();
     }
   }).catch(function() {
+    if (MODE === 'supabase') {
+      MODE = 'file';
+      atualizarModoUI();
+    }
     render();
   });
 }
@@ -2049,929 +2062,26 @@ function atualizarModoUI() {
 }
 
 // === PRESETS VISUAIS & BASE DE DESIGN ===
-var PRESETS_PADRAO = [
-  {
-    "id": "editorial-atelier",
-    "nome": "Editorial de Atelier",
-    "descricao": "Estética autoral de ateliê com foco em alta elegância, fotografia de grande porte e espaço negativo generoso.",
-    "origem": "https://curated-design.com/editorial-atelier",
-    "tags": ["editorial", "sofisticado", "cultural", "fotografico", "minimalista"],
-    "nichos_recomendados": ["Arquitetura", "Design de Interiores", "Estética Facial Avançada", "Dermatologia", "Restaurante Autoral", "Alta Joalheria"],
-    "nichos_evitar": ["Comércio Popular", "Serviços de Emergência 24h", "Desentupidoras / Chaveiros"],
-    "composicao": "asymmetrical-editorial",
-    "navegacao": "chapter-index",
-    "densidade": "baixa",
-    "tipografia": {
-      "display": "Newsreader / Playfair Display (Serifada elegante e editorial)",
-      "body": "Plus Jakarta Sans (Sans neutra, limpa e legível)",
-      "labels": "JetBrains Mono (Mono técnica discreta para metadados)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "large-crops-overlap (recortes verticais nobres, sobreposição e bordas finas)",
-      "proporcoes": ["3:4", "16:9", "1:1"]
-    },
-    "movimento": {
-      "estilo": ["mask-reveal", "slow-scroll", "image-hover-shift", "subtle-fade"],
-      "intensidade_interacao": 2,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "neutros-nobres-com-acento-champagne",
-      "sugestoes": {
-        "fundo": "#FBFBFA",
-        "superficie": "#FFFFFF",
-        "texto": "#18181B",
-        "texto_secundario": "#71717A",
-        "acento": "#C5A880",
-        "linha": "rgba(226, 232, 240, 0.8)"
-      }
-    },
-    "componentes_permitidos": ["manifesto", "projetos-autorais", "galeria-editorial", "depoimentos-em-aspas", "contato-agendamento"],
-    "proibicoes": ["bento-grid-saturado", "gradiente-neon", "cards-flutuantes-com-sombra-pesada", "hero-saas-falso"],
-    "prioridade_conversao": 3,
-    "ativo": true
-  },
-  {
-    "id": "brutalismo-comercial",
-    "nome": "Brutalismo Comercial",
-    "descricao": "Grid geométrico marcado, tipografia display ultra-pesada, contraste preto/branco e alto impacto visual urbano.",
-    "origem": "https://curated-design.com/commercial-brutalism",
-    "tags": ["brutalista", "urbano", "alto-impacto", "tipografico", "direto"],
-    "nichos_recomendados": ["Barbearia Conceito", "Academia Boutique / Crossfit", "Estúdio de Tatuagem", "Gastronomia Urbana / Burger", "Marcas Jovens"],
-    "nichos_evitar": ["Clínica Pediátrica", "Consultório de Psicologia Sensível", "Escritório de Advocacia Conservador"],
-    "composicao": "heavy-grid-blocks",
-    "navegacao": "fixed-top-border-dock",
-    "densidade": "alta",
-    "tipografia": {
-      "display": "Space Grotesk / Syne 800 (Sans-serif display ultra-pesada e expansiva)",
-      "body": "Inter (Sans compacta e direta)",
-      "labels": "Space Mono (Mono crua em caixas com borda sólida)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "high-contrast-monochrome (alto contraste, filtros duotone ou preto e branco com acentos vibrantes)",
-      "proporcoes": ["1:1", "4:5"]
-    },
-    "movimento": {
-      "estilo": ["ticker-marquee", "instant-hover-invert", "snap-scroll", "border-glow"],
-      "intensidade_interacao": 3,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "alto-contraste-preto-e-branco-com-neon",
-      "sugestoes": {
-        "fundo": "#0C0D0E",
-        "superficie": "#16181A",
-        "texto": "#F8FAFC",
-        "texto_secundario": "#94A3B8",
-        "acento": "#00D084",
-        "linha": "#27272A"
-      }
-    },
-    "componentes_permitidos": ["marquee-infinito", "cardapio-tabela-bruta", "galeria-em-mural", "cta-bold-whatsapp", "localizacao-mapa-escuro"],
-    "proibicoes": ["sombras-difusas", "tons-pasteis-apagados", "fontes-cursivas-romanticas", "ilustracoes-fofas"],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "arquivo-vivo",
-    "nome": "Arquivo Vivo",
-    "descricao": "Organização inspirada em fichários, índices técnicos e catálogos de precisão, transmitindo autoridade analítica e profundidade.",
-    "origem": "https://curated-design.com/living-archive",
-    "tags": ["arquivo", "catalogo", "analitico", "tecnico", "autoridade"],
-    "nichos_recomendados": ["Advocacia Consultiva / Tributária", "Consultoria de Engenharia", "Perícias e Auditorias", "Institutos de Pesquisa", "Clínicas Especializadas"],
-    "nichos_evitar": ["Baladas / Eventos", "Restaurantes Fast-Food", "Pet Shops"],
-    "composicao": "structured-index-matrix",
-    "navegacao": "drawer-and-filter-bar",
-    "densidade": "alta",
-    "tipografia": {
-      "display": "Plus Jakarta Sans 700 / Syne (Sans estruturada e firme)",
-      "body": "Inter / Roboto (Sans neutra de alta densidade informativa)",
-      "labels": "JetBrains Mono (Monospace para números de processos, referências e datas)",
-      "escala": "moderada"
-    },
-    "imagem": {
-      "tratamento": "documentary-grayscale (fotos documentais, retratos institucionais sóbrios e esquemas explicativos)",
-      "proporcoes": ["16:9", "3:2"]
-    },
-    "movimento": {
-      "estilo": ["accordion-drawer", "smooth-tab-switch", "data-counter", "list-expand"],
-      "intensidade_interacao": 1,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "sobriedade-institucional-navy-e-slate",
-      "sugestoes": {
-        "fundo": "#F1F5F9",
-        "superficie": "#FFFFFF",
-        "texto": "#0F172A",
-        "texto_secundario": "#475569",
-        "acento": "#0369A1",
-        "linha": "#CBD5E1"
-      }
-    },
-    "componentes_permitidos": ["indice-de-atuacao", "acervo-de-artigos-e-casos", "tabela-comparativa-de-risco", "credenciais-e-titulos", "formulario-de-consulta"],
-    "proibicoes": ["animacoes-saltitantes", "cores-neon-gritantes", "cards-desalinhados", "copys-vendedoras-agressivas"],
-    "prioridade_conversao": 2,
-    "ativo": true
-  },
-  {
-    "id": "cinema-local",
-    "nome": "Cinema Local",
-    "descricao": "Atmosfera dark luxury imersiva com imagens full-bleed, transições cinematográficas e foco na experiência sensorial da marca.",
-    "origem": "https://curated-design.com/local-cinema",
-    "tags": ["cinematografico", "imersivo", "dark-luxury", "sensorial", "experiencia"],
-    "nichos_recomendados": ["Rejuvenescimento Facial & Harmonização", "Spas & Resorts", "Restaurantes de Alta Gastronomia", "Hotelaria Boutique", "Estética Premium"],
-    "nichos_evitar": ["Contabilidade", "Autoescolas", "Serviços Técnicos de Informática"],
-    "composicao": "fullbleed-cinematic-scroll",
-    "navegacao": "translucent-floating-header",
-    "densidade": "baixa",
-    "tipografia": {
-      "display": "Cinzel / Cormorant Garamond (Serifada cinematográfica refinada com tracking ampliado)",
-      "body": "Plus Jakarta Sans / Inter 300 (Sans leve e elegante)",
-      "labels": "Space Grotesk (Labels com espaçamento generoso)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "ambient-fullwidth (fotografia de ambiente em alta resolução, iluminação dramática e sobreposições sutis)",
-      "proporcoes": ["16:9", "21:9", "9:16"]
-    },
-    "movimento": {
-      "estilo": ["parallax-smooth", "curtain-reveal", "glow-pulse", "video-backdrop"],
-      "intensidade_interacao": 2,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "dark-luxury-carvao-e-ouro-antigo",
-      "sugestoes": {
-        "fundo": "#0A0B0D",
-        "superficie": "#14161B",
-        "texto": "#F8FAFC",
-        "texto_secundario": "#A1A1AA",
-        "acento": "#D4AF37",
-        "linha": "rgba(255, 255, 255, 0.1)"
-      }
-    },
-    "componentes_permitidos": ["hero-cinematografico-com-video", "galeria-de-experiencias", "transformacoes-antes-depois-slider", "depoimentos-em-video-audio", "reserva-vip-whatsapp"],
-    "proibicoes": ["tabelas-de-preco-brutas-no-hero", "fundo-branco-hospitalar", "botoes-chatos-sem-hover", "excesso-de-texto-corrido"],
-    "prioridade_conversao": 2,
-    "ativo": true
-  },
-  {
-    "id": "cartaz-modular",
-    "nome": "Cartaz Modular",
-    "descricao": "Composição em blocos de cor harmônicos (color-block), pílulas flutuantes, tipografia calorosa e alta sensação de acolhimento.",
-    "origem": "https://curated-design.com/modular-poster",
-    "tags": ["modular", "acolhedor", "color-block", "humanizado", "dinamico"],
-    "nichos_recomendados": ["Psicologia Clínica & TCC", "Nutrição", "Pediatria", "Odontopediatria", "Estúdios de Pilates & Yoga", "Terapia Ocupacional"],
-    "nichos_evitar": ["Direito Criminal", "Segurança Armada", "Fundos de Investimento"],
-    "composicao": "modular-color-blocks",
-    "navegacao": "floating-pill-menu",
-    "densidade": "media",
-    "tipografia": {
-      "display": "Outfit / DM Sans (Sans arredondada, amigável e confiável)",
-      "body": "Plus Jakarta Sans (Sans equilibrada e acolhedora)",
-      "labels": "JetBrains Mono (Pequenos badges em pílula)",
-      "escala": "moderada"
-    },
-    "imagem": {
-      "tratamento": "soft-rounded-cutouts (fotos humanizadas com cantos arredondados generosos e fundos em tons pastéis aquecidos)",
-      "proporcoes": ["1:1", "4:5", "3:2"]
-    },
-    "movimento": {
-      "estilo": ["soft-spring-hover", "card-stagger-fade", "pill-active-glow", "smooth-scroll"],
-      "intensidade_interacao": 2,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "warm-organic-terracota-salvia-e-creme",
-      "sugestoes": {
-        "fundo": "#FAF8F5",
-        "superficie": "#FFFFFF",
-        "texto": "#2D2823",
-        "texto_secundario": "#6E6860",
-        "acento": "#8F9E8B",
-        "acento_secundario": "#D4A373",
-        "linha": "rgba(226, 219, 210, 0.7)"
-      }
-    },
-    "componentes_permitidos": ["apresentacao-humanizada", "cards-de-abordagens-e-especialidades", "faq-interativo-sanfonado", "depoimentos-em-cards-acolhedores", "agendamento-direto-whatsapp"],
-    "proibicoes": ["estetica-hospitalar-gelada", "cores-pesadas-de-cemiterio", "termos-tecnicos-sem-explicacao", "fotos-de-stock-americanas"],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "instrumento-digital",
-    "nome": "Instrumento Digital",
-    "descricao": "Precisão suíça (Swiss Design), alinhamento milimétrico, microinterações limpas e foco absoluto em confiabilidade técnica e clareza.",
-    "origem": "https://curated-design.com/digital-instrument",
-    "tags": ["swiss-design", "precisao", "cirurgico", "tecnologico", "confianca"],
-    "nichos_recomendados": ["Odontologia Digital & Implantes", "Oftalmologia", "Ortodontia Invisível", "Diagnóstico por Imagem", "Tecnologia Médica"],
-    "nichos_evitar": ["Espaço Holístico / Místico", "Brechós / Moda Vintage", "Casas de Festas Infantis"],
-    "composicao": "precision-swiss-grid",
-    "navegacao": "topbar-with-stepper",
-    "densidade": "media",
-    "tipografia": {
-      "display": "Plus Jakarta Sans 800 (Sans geométrica de precisão técnica)",
-      "body": "Inter (Sans de leitura perfeita)",
-      "labels": "JetBrains Mono (Monospace para especificações e métricas)",
-      "escala": "moderada"
-    },
-    "imagem": {
-      "tratamento": "crisp-clinical-photography (fotos nítidas de consultório, tecnologia de escaneamento 3D e macro de tratamentos)",
-      "proporcoes": ["16:9", "1:1"]
-    },
-    "movimento": {
-      "estilo": ["interactive-tabs", "stepper-timeline", "comparison-slider", "micro-hover-card"],
-      "intensidade_interacao": 2,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "azul-cirurgico-e-slate-puro",
-      "sugestoes": {
-        "fundo": "#F8FAFC",
-        "superficie": "#FFFFFF",
-        "texto": "#0F172A",
-        "texto_secundario": "#64748B",
-        "acento": "#0284C7",
-        "acento_secundario": "#0D9488",
-        "linha": "#E2E8F0"
-      }
-    },
-    "componentes_permitidos": ["passo-a-passo-do-tratamento", "comparador-tecnologico", "galeria-de-tecnologias-equipamentos", "calculadora-ou-simulador-de-etapas", "cta-whatsapp-com-mensagem-guiada"],
-    "proibicoes": ["fontes-manuscritas", "elementos-tortos-sem-grid", "decoracoes-desconexas-da-ciencia", "gradientes-arco-iris"],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "luxury-brutalist-echo",
-    "nome": "Brutalismo Suíço & Echo Stack",
-    "descricao": "Estética luxury-brutalist de raiz suíça com tipografia display monumental, camadas de texto em eco (offset text layering), alto contraste monocromático e grid assimétrico com cartazes em pílula.",
-    "origem": "https://curated-design.com/swiss-luxury-brutalist-echo",
-    "tags": ["swiss-design", "editorial", "luxury-brutalist", "echo-stack", "monocromatico", "tipografico", "alto-impacto"],
-    "nichos_recomendados": ["Arquitetura & Urbanismo", "Estúdios de Design & Branding", "Moda Autoral & Alta Joalheria", "Consultoria Estratégica & M&A", "Advocacia de Elite", "Hotelaria Boutique & Conceito", "Restaurantes & Bares Conceituais"],
-    "nichos_evitar": ["Comércio Popular", "Serviços de Emergência 24h", "Clínica Pediátrica Infantil"],
-    "composicao": "swiss-echo-asymmetrical-grid",
-    "navegacao": "sticky-header-blur-with-inverted-pill",
-    "densidade": "moderada",
-    "tipografia": {
-      "display": "Clash Display Bold 700 (Tracking -0.05em, leading 0.9, com camadas de eco offset)",
-      "body": "Satoshi Medium 500 (Sans limpa, funcional e equilibrada)",
-      "labels": "Satoshi Uppercase 14px (Espaçamento largo e transição sutil)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "editorial-grayscale-reveal (Inicia em 20% grayscale, transição para 100% cor e 1.05x scale no hover com clip-path reveal)",
-      "proporcoes": ["1:1", "16:9", "4:5", "pill-vertical-500px"]
-    },
-    "movimento": {
-      "estilo": ["echo-text-stack", "clip-path-inset-reveal", "scale-1.05-hover", "grayscale-to-color-transition", "icon-12deg-rotation"],
-      "intensidade_interacao": 2,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "monocromatico-alto-contraste-suico",
-      "sugestoes": {
-        "fundo": "#F2F2F2",
-        "superficie": "#FFFFFF",
-        "texto": "#111111",
-        "texto_secundario": "#838282",
-        "acento": "#1E1E1E",
-        "acento_secundario": "#BFBFBF",
-        "linha": "rgba(30, 30, 30, 0.1)"
-      }
-    },
-    "componentes_permitidos": [
-      "typographic-echo-stack",
-      "philosophy-editorial-quote",
-      "asymmetrical-showcase-grid",
-      "bespoke-service-cards",
-      "pill-shaped-vertical-showcase",
-      "deep-dark-footer"
-    ],
-    "proibicoes": [
-      "icones-e-ilustracoes-fofas",
-      "gradientes-neon-ou-arco-iris",
-      "sombras-pesadas-flutuantes",
-      "bento-grid-colorido-saas"
-    ],
-    "prioridade_conversao": 2,
-    "ativo": true
-  },
-  {
-    "id": "technical-blueprint-wireframe",
-    "nome": "Blueprint Técnico & Grid Estrutural",
-    "descricao": "Sistema de design estrutural inspirado em plantas técnicas e wireframes de alta precisão: mosaico de painéis retangulares com linhas de 1px (hairlines), marcadores de canto em L (corner markers), tipografia Space Grotesk + JetBrains Mono, imagens com blend luminosity e zero sombras.",
-    "origem": "https://superdesign.dev/blueprint-wireframe",
-    "screenshot": "assets/presets/technical-blueprint.webp",
-    "tags": ["blueprint", "wireframe", "tecnico", "estrutural", "precisao", "hairlines", "monospaced", "corner-markers", "mosaic-grid"],
-    "nichos_recomendados": [
-      "Engenharia Civil & Construção",
-      "Clínicas Médicas & Diagnóstico por Imagem",
-      "Arquitetura Estrutural & BIM",
-      "Postos de Combustível & Logística",
-      "Consultoria de Processos & Auditoria",
-      "Gastronomia Industrial / Steakhouse",
-      "Tecnologia & Segurança"
-    ],
-    "nichos_evitar": [
-      "Clínicas Pediátricas Lúdicas",
-      "Spas Românticos / Florais",
-      "Brechós Vintage"
-    ],
-    "composicao": "mosaic-panel-bento-grid",
-    "navegacao": "technical-header-with-numbered-indices",
-    "densidade": "alta",
-    "tipografia": {
-      "display": "Space Grotesk (Bold, tracking-tight -0.05em, leading 0.9)",
-      "body": "General Sans / Inter (Leitura nítida, neutra e funcional)",
-      "labels": "JetBrains Mono (10-12px, tracking 0.1em, com prefixos numéricos 01. / 02.)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "mix-blend-luminosity-shift (Opacidade 90% com blend luminosity e transição suave para cor natural no hover)",
-      "proporcoes": ["1:1", "16:9", "4:5"]
-    },
-    "movimento": {
-      "estilo": [
-        "network-orbit-rotation",
-        "snappy-linear-hover",
-        "corner-marker-glow",
-        "luminosity-to-color-reveal"
-      ],
-      "intensidade_interacao": 2,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "papel-tecnico-e-accent-marca (adaptavel a qualquer cor de marca)",
-      "sugestoes": {
-        "fundo": "#F7F7F5",
-        "superficie": "#FFFFFF",
-        "texto": "#1A1A18",
-        "texto_secundario": "#5A5A56",
-        "acento": "#1A3C2B",
-        "acento_secundario": "#FF8C69",
-        "linha": "rgba(58, 58, 56, 0.2)"
-      }
-    },
-    "componentes_permitidos": [
-      "mosaic-background-panels",
-      "technical-bento-grid-with-color-tabs",
-      "corner-marker-container",
-      "network-topology-graph",
-      "status-badge-square-dot",
-      "monospaced-testimonial-card",
-      "technical-form-cta"
-    ],
-    "proibicoes": [
-      "sombras-difusas-ou-drop-shadows",
-      "gradientes-pesados-saas",
-      "bordas-arredondadas-excessivas (max 2px)",
-      "textos-vendedores-sem-dados"
-    ],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "raw-form-brutalist-blobs",
-    "nome": "Raw Form & Cartaz Atmosférico",
-    "descricao": "Estética brutalista contemporânea que combina tipografia monumental dramática (18vw com recuo) e profundidade atmosférica com manchas gradientes orgânicas (blurred blobs em multiply), grids sem borda e transições cubic-bezier de alto padrão.",
-    "origem": "https://superdesign.dev/raw-form",
-    "screenshot": "assets/presets/raw-form.webp",
-    "tags": ["brutalista", "poster", "atmosferico", "blobs-gradient", "clash-display", "dramatico", "editorial", "alto-impacto"],
-    "nichos_recomendados": [
-      "Restaurantes Conceituais & Gastronomia Urbana",
-      "Cafés Especiais & Torrefações",
-      "Moda Autoral & Streetwear",
-      "Estúdios de Arquitetura & Design",
-      "Barbearias Conceito & Estética Masculina",
-      "Produtoras Culturais & Eventos"
-    ],
-    "nichos_evitar": [
-      "Clínicas Odontológicas Tradicionais",
-      "Escritórios Contábeis Conservadores",
-      "Serviços B2B Técnicos Formais"
-    ],
-    "composicao": "full-viewport-poster-breaks",
-    "navegacao": "minimalist-fixed-dock-with-mix-blend",
-    "densidade": "moderada",
-    "tipografia": {
-      "display": "Clash Display (Bold 700, tracking -0.05em, leading 0.75, segunda linha com recuo)",
-      "body": "Satoshi (Medium 500, limpa e funcional)",
-      "labels": "Satoshi Uppercase (14px, tracking 0.15em)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "borderless-subtle-zoom (Aspecto 3:4 sem moldura com zoom 1.05 e troca de cor no título)",
-      "proporcoes": ["3:4", "1:1", "16:9"]
-    },
-    "movimento": {
-      "estilo": [
-        "pulsing-gradient-blobs",
-        "cubic-bezier-slide-up-0.8s",
-        "directional-slide-fill-button",
-        "title-color-shift-hover"
-      ],
-      "intensidade_interacao": 3,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "warm-stone-e-accent-vibrante (adaptavel a marca do cliente)",
-      "sugestoes": {
-        "fundo": "#E4E2DD",
-        "superficie": "#D9D6D0",
-        "texto": "#1E1E1E",
-        "texto_secundario": "#444444",
-        "acento": "#DB4A2B",
-        "acento_secundario": "#F8A348",
-        "linha": "rgba(30, 30, 30, 0.15)"
-      }
-    },
-    "componentes_permitidos": [
-      "hero-poster-typographic-break",
-      "animated-gradient-blobs-multiply",
-      "borderless-product-or-service-grid",
-      "massive-category-divider",
-      "campaign-block-12-columns",
-      "interactive-cta-slide-fill",
-      "monospaced-year-giant-footer"
-    ],
-    "proibicoes": [
-      "cards-com-muitas-sombras-brancas",
-      "gradientes-neon-estilo-cripto",
-      "fontes-cursivas-finas",
-      "layouts-cheios-de-linhas-desnecessarias"
-    ],
-    "prioridade_conversao": 2,
-    "ativo": true
-  },
-  {
-    "id": "super-travel-luxury",
-    "nome": "Super Travel Luxury & Boutique Rose",
-    "descricao": "Sistema de design de alta-costura com forte impacto editorial: tipografia geométrica pura (League Spartan em todos os pesos), grid desalinhado com offset de 100px, selo flutuante de concierge com bounce de 4s, cards com preenchimento dinâmico e revelação suave de fotos em escala de cinza para cor.",
-    "origem": "https://superdesign.dev/super-travel",
-    "screenshot": "assets/presets/super-travel.webp",
-    "tags": ["luxury", "boutique", "league-spartan", "staggered-grid", "dusty-rose", "editorial", "alta-costura", "bounce-badge"],
-    "nichos_recomendados": [
-      "Arquitetura & Design de Interiores de Luxo",
-      "Clínicas Boutique & Estética Facial Avançada",
-      "Psicologia & Desenvolvimento Humano de Elite",
-      "Hotelaria Boutique & Viagens Exclusivas",
-      "Alta Joalheria & Moda Conceitual",
-      "Consultoria Estratégica & M&A"
-    ],
-    "nichos_evitar": [
-      "Comércio Popular",
-      "Serviços Mecânicos / Oficinas",
-      "Lojas de Departamento"
-    ],
-    "composicao": "staggered-asymmetric-gallery",
-    "navegacao": "glassmorphic-top-bar-80px",
-    "densidade": "baixa",
-    "tipografia": {
-      "display": "League Spartan (Bold/Heavy 700-900, tracking-tighter, line-height 0.8, com 1 palavra em itálico minúsculo)",
-      "body": "League Spartan (Regular 400-500, leitura geométrica e pura)",
-      "labels": "League Spartan Uppercase (10px, 900 weight, tracking 0.4em)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "grayscale-to-color-zoom (Inicia em grayscale 100%, transição de 1s para cor total e zoom 1.08 no hover)",
-      "proporcoes": ["3:4", "4:5", "16:9"]
-    },
-    "movimento": {
-      "estilo": [
-        "floating-concierge-bounce-4s",
-        "weighted-cubic-bezier-reveal-1s",
-        "service-card-color-fill-0.7s",
-        "hover-overlay-circle-view-case"
-      ],
-      "intensidade_interacao": 3,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "warm-sand-charcoal-e-accent-rose (adaptavel a marca do cliente)",
-      "sugestoes": {
-        "fundo": "#FDF8F3",
-        "superficie": "#F5F0EB",
-        "texto": "#262626",
-        "texto_secundario": "rgba(38, 38, 38, 0.7)",
-        "acento": "#E4A4BD",
-        "acento_secundario": "#DF93A6",
-        "linha": "rgba(38, 38, 38, 0.1)"
-      }
-    },
-    "componentes_permitidos": [
-      "hero-editorial-staggered-heading",
-      "floating-concierge-badge-bounce",
-      "service-grid-dynamic-color-fill",
-      "portfolio-staggered-grid-100px-offset",
-      "hover-black-circle-overlay",
-      "split-footer-12-columns"
-    ],
-    "proibicoes": [
-      "gradientes-vibrantes-multicoloridos",
-      "mistura-de-fontes-sem-proposito",
-      "sombras-escuras-pesadas",
-      "bordas-arredondadas-gigantes (padrão 16px/24px)"
-    ],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "kinetic-electric-orange",
-    "nome": "Kinetic Orange & Brutalismo de Alto Impacto",
-    "descricao": "Estética brutalista digital de altíssimo impacto e energia: tipografia ultra-pesada (Archivo Black a 16vw), metadados técnicos (Space Mono), seções inclinadas a -2°, letreiros em marquee duplo contínuo e indicador circular rotativo de 12s.",
-    "origem": "https://superdesign.dev/kinetic-orange",
-    "screenshot": "assets/presets/kinetic-orange.webp",
-    "tags": ["kinetic", "brutalista", "archivo-black", "space-mono", "marquee-duplo", "alto-impacto", "energia", "rotativo"],
-    "nichos_recomendados": [
-      "Academias Boutique / Crossfit / Performance",
-      "Barbearias Conceito & Estúdios de Tatuagem",
-      "Streetwear, Sneakers & Moda Urbana",
-      "Bares Conceituais, Festivais & Casas Noturnas",
-      "Hamburguerias Artesanais & Gastronomia Urbana",
-      "Agências Criativas, Audiovisual & Tech Startups"
-    ],
-    "nichos_evitar": [
-      "Clínicas Pediátricas e de Psicologia Sensível",
-      "Escritórios de Advocacia Tradicionais",
-      "Consultórios Médicos Conservadores"
-    ],
-    "composicao": "stacked-skewed-sections",
-    "navegacao": "floating-black-pill-navbar",
-    "densidade": "alta",
-    "tipografia": {
-      "display": "Archivo Black (Uppercase, tracking -0.04em, line-height 0.85)",
-      "body": "Inter (Sans compacta e nítida)",
-      "labels": "Space Mono (Uppercase, tracking -0.02em para índices e metadados)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "raw-high-contrast-framed (Bordas sólidas de 2px, sem raios arredondados e transição de escala 1.1x no hover)",
-      "proporcoes": ["1:1", "4:5", "16:9"]
-    },
-    "movimento": {
-      "estilo": [
-        "continuous-dual-marquee",
-        "rotating-svg-scroll-indicator-12s",
-        "horizontal-shift-translate-x-4",
-        "arrow-45deg-reveal-hover"
-      ],
-      "intensidade_interacao": 3,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "electric-vibrant-e-solid-black (adaptavel a cor eletrica do cliente)",
-      "sugestoes": {
-        "fundo": "#FF4D00",
-        "superficie": "#000000",
-        "texto": "#000000",
-        "texto_secundario": "#FFFFFF",
-        "acento": "#000000",
-        "acento_secundario": "#FFFFFF",
-        "linha": "#000000"
-      }
-    },
-    "componentes_permitidos": [
-      "hero-fullscreen-archivo-black",
-      "rotating-scroll-indicator-svg",
-      "skewed-marquee-section-2deg",
-      "vertical-brutalist-service-list",
-      "floating-black-pill-nav",
-      "giant-cta-14vw"
-    ],
-    "proibicoes": [
-      "sombras-suaves-ou-drop-shadows",
-      "gradientes-pasteis",
-      "bordas-arredondadas (apenas em botoes pilula)",
-      "fontes-cursivas-ou-serifadas-classicas"
-    ],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "cinematic-3d-spatial",
-    "nome": "Cinema 3D & Profundidade Espacial",
-    "descricao": "Experiência teatral imersiva em Dark Mode com profundidade tridimensional pura: perspectiva espacial de 2000px, prisma/cubo 3D rotativo de 4 faces no Hero, tipografia display ultra-pesada (Aspekta 900 a 12vw), janelas estilo macOS com controles de semáforo e simulador interativo de investimento com slider customizado.",
-    "origem": "https://superdesign.dev/cinematic-3d",
-    "screenshot": "assets/presets/cinematic-3d.webp",
-    "tags": ["cinematic", "3d-spatial", "dark-mode", "cube-3d", "aspekta", "glassmorphism", "teatral", "neon-glow"],
-    "nichos_recomendados": [
-      "Produtoras Audiovisuais, Cinema & VFX",
-      "Spas & Clínicas Dark Luxury / Harmonização Noturna",
-      "Startups de IA, SaaS Premium & Web3 / 3D",
-      "Restaurantes Noturnos, Speakeasies & Rooftops",
-      "Estúdios de Games & Arquitetura 3D / Render",
-      "Festivais de Música & Casas de Espetáculos"
-    ],
-    "nichos_evitar": [
-      "Clínicas Médicas Tradicionais / Pediátricas",
-      "Contabilidades Formais / Cartórios",
-      "Comércio Varejista Popular"
-    ],
-    "composicao": "spatial-3d-vertical-flow",
-    "navegacao": "mix-blend-difference-sticky-bar",
-    "densidade": "baixa",
-    "tipografia": {
-      "display": "Aspekta / Plus Jakarta Sans (Black 900, tracking-tighter, uppercase 12vw)",
-      "body": "Aspekta / Inter (Light 300, 1.125rem, leitura etérea e fluida)",
-      "labels": "Aspekta Bold 700 (Uppercase, tracking 0.2em)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "cube-face-or-macos-window (Imagens aplicadas nas 4 faces do prisma 3D e cards de projetos com botões semáforo macOS)",
-      "proporcoes": ["1:1", "16:9", "4:3"]
-    },
-    "movimento": {
-      "estilo": [
-        "rotate-x-3d-cube-continuous",
-        "pulsing-live-red-dot",
-        "glass-calculator-dynamic-slider",
-        "purple-ambient-glow-pulse"
-      ],
-      "intensidade_interacao": 3,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "deep-obsidian-e-neon-accent (adaptavel a marca do cliente)",
-      "sugestoes": {
-        "fundo": "#050505",
-        "superficie": "#111111",
-        "texto": "#FFFFFF",
-        "texto_secundario": "#999999",
-        "acento": "#06B6D4",
-        "acento_secundario": "#EC4899",
-        "linha": "rgba(255, 255, 255, 0.1)"
-      }
-    },
-    "componentes_permitidos": [
-      "hero-3d-cube-wrapper-perspective",
-      "sticky-mix-blend-navbar-with-live-dot",
-      "macos-traffic-light-project-showcase",
-      "interactive-glass-calculator-slider",
-      "dark-purple-ambient-glow-pricing",
-      "editorial-scale-monumental-footer"
-    ],
-    "proibicoes": [
-      "fundos-claros-hospitalares",
-      "sombras-escuras-padrao (usar bordas white/10 e blur)",
-      "fontes-cursivas-infantis",
-      "layouts-chatos-2d-sem-profundidade"
-    ],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "season-04-high-fashion-brutalist",
-    "nome": "Season 04 & High-Fashion Brutalism",
-    "descricao": "Estética brutalista de alta-costura com textura de ruído analógico perpétua (SVG fractalNoise), tipografia monumental (Clash Grotesk a 13.5vw com recuo de 20vw), seção de manifesto com recuo editorial, acentos em terracota queimado e microinterações em verde neon ácido.",
-    "origem": "https://superdesign.dev/season-04",
-    "screenshot": "assets/presets/season-04.webp",
-    "tags": ["high-fashion", "brutalismo", "ruido-analogico", "clash-grotesk", "manifesto", "neon-acid", "terracota", "editorial"],
-    "nichos_recomendados": [
-      "Alta Moda, Streetwear & Alfaiataria Autoral",
-      "Estúdios de Branding, Design Gráfico & Tipografia",
-      "Arquitetura Brutalista & Interiores Conceituais",
-      "Gastronomia Conceito, Cafés de Especialidade & Bares",
-      "Barbearias de Luxo & Estúdios de Tatuagem Fine-Line",
-      "Galerias de Arte, Festivais & Casas Noturnas"
-    ],
-    "nichos_evitar": [
-      "Clínicas Médicas Tradicionais / Pediátricas",
-      "Escritórios Contábeis Formais",
-      "Lojas de Varejo de Massa"
-    ],
-    "composicao": "asymmetric-12-column-grid",
-    "navegacao": "mix-blend-difference-dock-with-neon-hover",
-    "densidade": "moderada",
-    "tipografia": {
-      "display": "Clash Grotesk / Clash Display (Bold 700, tracking -0.04em, leading 0.85, 13.5vw com recuo de 20vw na linha 2)",
-      "body": "General Sans / Inter (Neutro e funcional)",
-      "labels": "JetBrains Mono / Space Mono (Uppercase para preços, metadados e tags técnicas)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "high-contrast-grayscale-grain (Alto contraste, P&B com ruído analógico e zoom 1.05 no hover)",
-      "proporcoes": ["4:5", "3:4", "16:9"]
-    },
-    "movimento": {
-      "estilo": [
-        "neon-underline-scale-cubic",
-        "quick-view-badge-reveal-hover",
-        "persistent-noise-overlay-multiply",
-        "border-color-shift-on-hover"
-      ],
-      "intensidade_interacao": 3,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "neutral-raw-linen-e-burnt-accent (adaptavel a marca do cliente)",
-      "sugestoes": {
-        "fundo": "#E3E2DE",
-        "superficie": "#1B0E0D",
-        "texto": "#1B0E0D",
-        "texto_secundario": "#61220F",
-        "acento": "#C72A09",
-        "acento_secundario": "#31EF07",
-        "linha": "rgba(27, 14, 13, 0.15)"
-      }
-    },
-    "componentes_permitidos": [
-      "split-indented-headline-hero",
-      "persistent-svg-noise-overlay",
-      "editorial-manifesto-indented",
-      "ribbon-category-divider-12vw",
-      "asymmetric-product-service-grid",
-      "neon-acid-hover-badges",
-      "ghost-title-monumental-footer"
-    ],
-    "proibicoes": [
-      "sombras-escuras-difusas",
-      "gradientes-coloridos-suaves",
-      "bordas-arredondadas-sem-corte-seco",
-      "textos-comerciais-padrao"
-    ],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "high-contrast-saas-golden",
-    "nome": "High-Contrast Editorial SaaS & Golden Yellow",
-    "descricao": "Brutalist-lite B2C SaaS landing page com tipografia Anton (8xl-9xl) + Satoshi, destaque amarelo ouro #ffe17c, grid pattern 40px, blocos de contraste problema/solução e bento grid de features.",
-    "origem": "https://superdesign.dev/high-contrast-saas-golden",
-    "screenshot": "assets/presets/high-contrast-saas-golden.webp",
-    "tags": [
-      "saas",
-      "b2c",
-      "brutalist-lite",
-      "golden-yellow",
-      "anton",
-      "satoshi",
-      "high-contrast",
-      "grid-pattern"
-    ],
-    "nichos_recomendados": [
-      "SaaS & Software",
-      "Startups B2C",
-      "Aplicativos & Ferramentas Digitais",
-      "Agências Tech",
-      "Produtos Digitais de Alta Conversão"
-    ],
-    "nichos_evitar": [
-      "Clínicas Tradicionais",
-      "Consultório Formal Conservador",
-      "Advocacia Clássica"
-    ],
-    "composicao": "bento-grid-contrast-funnel",
-    "navegacao": "fixed-header-pill-cta",
-    "densidade": "alta",
-    "tipografia": {
-      "display": "Anton (Uppercase, tracking normal, leading 0.9, escala 8xl-9xl)",
-      "body": "Satoshi / Inter (Weights 400, 500, 700)",
-      "labels": "Satoshi / JetBrains Mono (Tracking-widest, text-xs com dot amarelo)",
-      "escala": "extrema"
-    },
-    "imagem": {
-      "tratamento": "abstract-ui-mockup-and-grayscale-avatars (Mockup de browser com semáforos, grid e swatch #FFE17C + avatares 48px em escala de cinza)",
-      "proporcoes": ["3:4", "16:9", "1:1", "auto-rows-400px"]
-    },
-    "movimento": {
-      "estilo": [
-        "card-cubic-bezier-transform-300ms",
-        "numeral-opacity-reveal-on-hover",
-        "pulse-yellow-indicator-dot",
-        "cta-scale-105-hover"
-      ],
-      "intensidade_interacao": 3,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "charcoal-white-golden-yellow (adaptavel a marca do cliente)",
-      "sugestoes": {
-        "fundo": "#FFFFFF",
-        "superficie": "#171E19",
-        "texto": "#171E19",
-        "texto_secundario": "#71717A",
-        "acento": "#FFE17C",
-        "acento_secundario": "#272727",
-        "linha": "rgba(23, 30, 25, 0.1)"
-      }
-    },
-    "componentes_permitidos": [
-      "rotated-15deg-highlight-bars",
-      "grid-pattern-hero-40px",
-      "problem-solution-contrast-split",
-      "abstract-browser-ui-mockup",
-      "bento-feature-grid-3col",
-      "how-it-works-massive-8xl-numerals",
-      "testimonial-high-contrast-cards",
-      "high-impact-golden-footer-cta"
-    ],
-    "proibicoes": [
-      "gradientes-pasteis-suaves-genericos",
-      "bordas-arredondadas-infantis-sem-contraste",
-      "cards-flutuantes-sem-estrutura-de-grid",
-      "textos-longos-sem-destaque-visual"
-    ],
-    "prioridade_conversao": 1,
-    "ativo": true
-  },
-  {
-    "id": "softly-wellness",
-    "nome": "Softly Digital Wellness & Living Room",
-    "descricao": "Estética acolhedora de sala de estar digital (Digital Living Room) com foco em psicologia de elite, terapia e bem-estar: linho natural, ruído sutil de 3%, tipografia Outfit com acentos em itálico manuscrito, cards de toque suave e zero frieza clínica.",
-    "origem": "https://superdesign.dev/softly-wellness",
-    "screenshot": "assets/presets/softly-wellness.webp",
-    "tags": ["wellness", "psicologia", "acolhedor", "living-room", "outfit", "cursive", "linho", "anti-clinico"],
-    "nichos_recomendados": [
-      "Psicologia & Psicanálise de Alto Padrão",
-      "Terapia Holística & Mindfulness",
-      "Nutrição Integrativa & Medicina do Estilo de Vida",
-      "Estúdios de Yoga, Pilates & Respiração",
-      "Desenvolvimento Pessoal & Mentorias Humanas"
-    ],
-    "nichos_evitar": [
-      "Oficinas Mecânicas / Desentupidoras",
-      "Lojas de Departamento / Varejo Agressivo",
-      "Direito Criminal"
-    ],
-    "composicao": "warm-living-room-bento",
-    "navegacao": "soft-floating-glass-pill",
-    "densidade": "baixa",
-    "tipografia": {
-      "display": "Outfit (Bold 700, tracking -0.03em, com palavras de destaque em Playfair Cursive itálico)",
-      "body": "Outfit / Inter (Regular 400, leitura suave e humana)",
-      "labels": "Outfit Medium (12px, tracking 0.15em)",
-      "escala": "moderada"
-    },
-    "imagem": {
-      "tratamento": "warm-natural-light (Fotos com luz natural, tons terrosos, bordas arredondadas de 24px e leve sombra quente)",
-      "proporcoes": ["4:5", "1:1", "16:9"]
-    },
-    "movimento": {
-      "estilo": [
-        "soft-card-float-hover",
-        "gentle-pill-fade",
-        "breathe-pulse-indicator"
-      ],
-      "intensidade_interacao": 2,
-      "respeita_prefers_reduced_motion": true
-    },
-    "paleta": {
-      "estilo": "warm-linen-terracotta-e-sage",
-      "sugestoes": {
-        "fundo": "#FDFCF8",
-        "superficie": "#FFFFFF",
-        "texto": "#2D3748",
-        "texto_secundario": "#718096",
-        "acento": "#E07A5F",
-        "acento_secundario": "#81B29A",
-        "linha": "rgba(224, 122, 95, 0.15)"
-      }
-    },
-    "componentes_permitidos": [
-      "living-room-welcome-hero",
-      "gentle-service-cards",
-      "breathe-quote-manifesto",
-      "human-faq-accordion",
-      "warm-whatsapp-concierge"
-    ],
-    "proibicoes": [
-      "fundo-branco-hospitalar-frio",
-      "sombras-pretas-pesadas",
-      "gradientes-neon-cripto",
-      "termos-tecnicos-sem-acolhimento"
-    ],
-    "prioridade_conversao": 1,
-    "ativo": true
-  }
-];
-
-var PRESETS = (function() {
-  var salvo = JSON.parse(localStorage.getItem('prospector_presets') || 'null');
-  if (!salvo || !Array.isArray(salvo)) return PRESETS_PADRAO;
-  // Mescla novos presets que não existam no localStorage do usuário
-  PRESETS_PADRAO.forEach(function(padrao) {
-    var existe = salvo.find(function(s) { return s.id === padrao.id; });
-    if (!existe) {
-      salvo.push(padrao);
-    }
-  });
-  return salvo;
-})();
+var PRESETS = [];
+try {
+  var cacheTemas = JSON.parse(localStorage.getItem('prospector_presets') || 'null');
+  if (Array.isArray(cacheTemas)) PRESETS = cacheTemas;
+} catch (e) {}
 
 function carregarPresetsRemoto() {
-  fetch('/api/presets', { cache: 'no-store' }).then(function(r) {
+  return fetch('/api/presets', { cache: 'no-store' }).then(function(r) {
     if (!r.ok) throw 0;
     return r.json();
   }).then(function(lista) {
+    if (lista && lista.temas) lista = lista.temas;
     if (Array.isArray(lista) && lista.length) {
       PRESETS = lista;
       localStorage.setItem('prospector_presets', JSON.stringify(PRESETS));
       if (view === 'presets') render();
+      return true;
     }
-  }).catch(function() {});
+    return false;
+  }).catch(function() { return false; });
 }
 carregarPresetsRemoto();
 
@@ -2981,25 +2091,32 @@ function aplicaOv(arr) {
 }
 var leads = aplicaOv(D.leads || []);
 
-// Tenta conectar no servidor local se Supabase não estiver configurado
-if (!initSupabase()) {
-  fetch('/api/leads', { cache: 'no-store' }).then(function(r) {
+// Com o dashboard-server.py ligado, o painel segue o SQLite.
+// O selo Supabase só aparece depois de uma leitura real, e só se o servidor local não responder.
+function ligarSqliteLocal() {
+  return fetch('/api/leads', { cache: 'no-store' }).then(function(r) {
     if (!r.ok) throw 0;
     return r.json();
   }).then(function(j) {
+    if (!Array.isArray(j)) throw 0;
     MODE = 'db';
+    sb = null;
     leads = j;
     fetch('/api/config', { cache: 'no-store' }).then(function(r) { return r.json(); }).then(function(c) {
       CFG = (c && c.contratante !== undefined) ? c.contratante : c;
       HG = (c && c.hostgator) || {};
       if (view === 'config') render();
-    });
+    }).catch(function() {});
     atualizarModoUI();
     render();
-  }).catch(function() {
-    atualizarModoUI();
-  });
+    return true;
+  }).catch(function() { return false; });
 }
+ligarSqliteLocal().then(function(noServidor) {
+  if (noServidor) return;
+  if (supabaseConfiguradoPeloUsuario()) initSupabase();
+  else atualizarModoUI();
+});
 
 var CORES = {
   novo: 'var(--novo)',
@@ -3089,7 +2206,12 @@ function salvarOv(slug, ch) {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(ch)
-    }).then(recarrega);
+    }).then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return recarrega();
+    }).catch(function() {
+      alert('Não foi possível salvar no banco. Abra o dashboard com iniciar-dashboard.bat.');
+    });
     return;
   }
   OV[slug] = Object.assign(OV[slug] || {}, ch);
@@ -3449,9 +2571,28 @@ function salvarDirecaoEscolhida() {
     status: 'direcao_definida'
   };
 
-  salvarOv(direcaoSlugAtual, { direcaoCriativa: cardDirecao });
+  var slugDirecao = direcaoSlugAtual;
+  var nomeLead = l ? l.nome : 'o lead';
+  var nomePreset = p.nome;
   fecharModalDirecao();
-  alert('✨ Direção Criativa definida com sucesso para ' + (l ? l.nome : 'o lead') + '!\nPreset: ' + p.nome);
+  if (MODE === 'supabase') {
+    salvarOv(slugDirecao, { direcaoCriativa: cardDirecao });
+    alert('Direção criativa definida para ' + nomeLead + '.\nPreset: ' + nomePreset);
+    return;
+  }
+  fetch('/api/leads/' + encodeURIComponent(slugDirecao), {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ direcaoCriativa: cardDirecao })
+  }).then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }).then(function() {
+    if (MODE === 'db') recarrega();
+    alert('Direção criativa gravada para ' + nomeLead + '.\nPreset: ' + nomePreset + '\nCom o preset em auto, o gerador usa este tema.');
+  }).catch(function() {
+    alert('Não foi possível gravar a direção no banco. Abra o dashboard com iniciar-dashboard.bat.');
+  });
 }
 
 function aprovarParaContato(slug) {
@@ -3464,9 +2605,74 @@ function aprovarParaContato(slug) {
 
 // === GESTÃO DE PRESETS (CRUD & PREVIEW) ===
 var presetEdicaoId = null;
+var presetHtmlOriginal = '';
+var presetPreviewHtmlBruto = '';
+
+function aplicarTemaNaLista(tema) {
+  if (!tema || !tema.id) return;
+  var i = PRESETS.findIndex(function(x) { return x.id === tema.id; });
+  if (i >= 0) PRESETS[i] = tema;
+  else PRESETS.push(tema);
+  localStorage.setItem('prospector_presets', JSON.stringify(PRESETS));
+}
+
+function persistirTema(obj, htmlDocumento) {
+  var payload = JSON.parse(JSON.stringify(obj || {}));
+  delete payload.html;
+  delete payload.preview;
+  delete payload.html_geracao;
+  delete payload.html_referencia;
+  delete payload.aliases;
+  if (htmlDocumento) payload.html = htmlDocumento;
+  return fetch('/api/temas', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r) {
+    if (!r.ok) {
+      return r.json().catch(function() { return {}; }).then(function(j) {
+        throw new Error(j.erro || ('HTTP ' + r.status));
+      });
+    }
+    return r.json();
+  }).then(function(res) {
+    if (res && res.tema) aplicarTemaNaLista(res.tema);
+    return carregarPresetsRemoto().then(function() { return true; });
+  }).catch(function(err) {
+    alert('Não foi possível gravar o tema na biblioteca do projeto. Abra o dashboard com iniciar-dashboard.bat.\n' + (err && err.message ? err.message : ''));
+    return false;
+  });
+}
+
+function preencherAmostra(html) {
+  var foto = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000"><rect width="100%" height="100%" fill="#d9d3c7"/><text x="50%" y="50%" fill="#5c574e" font-size="28" text-anchor="middle" font-family="Georgia">Foto do cliente</text></svg>');
+  var mapa = {
+    NOME_EMPRESA: 'Estúdio Exemplo',
+    NOME_LEAD: 'Estúdio Exemplo',
+    NICHO: 'Ofício de exemplo',
+    CIDADE: 'Cidade Exemplo',
+    WHATSAPP_NUMERO: '5500000000000',
+    WHATSAPP_LINK: '#',
+    TELEFONE_VISUAL: '(00) 00000-0000',
+    LOGO_HTML: '<span class="monograma">EX</span>',
+    FOTO_HERO: foto,
+    FOTO_ESPECIALISTA: foto,
+    GALERIA_FOTOS_HTML: '<figure><img src="' + foto + '" alt="Estúdio Exemplo"></figure>',
+    AVALIACOES_NOTA: '5.0',
+    AVALIACOES_QTD: '32',
+    ENDERECO: 'Rua Exemplo, 100 — Cidade Exemplo',
+    BIO_INSTAGRAM: 'Texto de exemplo para ver o tema com o conteúdo de um cliente fictício.'
+  };
+  return String(html || '').replace(/\{\{([A-Z0-9_]+)\}\}/g, function(_, chave) {
+    return mapa[chave] != null ? mapa[chave] : '';
+  });
+}
 
 function abrirModalPreset(id) {
   presetEdicaoId = id || null;
+  presetHtmlOriginal = '';
+  var campoHtml = document.getElementById('mp-html');
+  if (campoHtml) campoHtml.value = '';
   var p = id ? PRESETS.find(function(x) { return x.id === id; }) : null;
   document.getElementById('mp-titulo').textContent = p ? 'Editar Preset — ' + p.nome : 'Novo Preset de Direção Visual';
   document.getElementById('mp-id').value = p ? p.id : '';
@@ -3488,6 +2694,17 @@ function abrirModalPreset(id) {
   document.getElementById('mp-proibicoes').value = p && p.proibicoes ? p.proibicoes.join(', ') : '';
 
   document.getElementById('m-preset-bg').classList.add('aberto');
+  if (p && p.id) {
+    fetch('/api/temas/' + encodeURIComponent(p.id) + '/html', { cache: 'no-store' }).then(function(r) {
+      return r.ok ? r.text() : '';
+    }).then(function(texto) {
+      if (presetEdicaoId !== p.id) return;
+      var campo = document.getElementById('mp-html');
+      if (!campo || (campo.value && campo.value !== presetHtmlOriginal)) return;
+      presetHtmlOriginal = texto || '';
+      campo.value = presetHtmlOriginal;
+    }).catch(function() {});
+  }
 }
 
 function fecharModalPreset() {
@@ -3516,47 +2733,49 @@ function salvarPresetModal() {
   var proibs = document.getElementById('mp-proibicoes').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
 
   var idx = PRESETS.findIndex(function(x) { return x.id === id; });
-  var obj = {
+  var base = idx >= 0 ? PRESETS[idx] : {};
+  var palAnterior = (base.paleta && base.paleta.sugestoes) || {};
+  var obj = Object.assign({}, base, {
     id: id,
     nome: nome,
     descricao: desc,
-    origem: 'Criado no Aholic OS',
     tags: tags,
     nichos_recomendados: nichos,
     nichos_evitar: nichosEvitar,
+    nicho: nichos[0] || base.nicho || 'Geral',
     composicao: comp,
     navegacao: nav,
     densidade: dens,
-    tipografia: { display: fDisplay, body: fBody, labels: 'JetBrains Mono' },
-    imagem: { tratamento: 'custom', proporcoes: ['16:9', '1:1'] },
-    movimento: { estilo: ['smooth-scroll', 'hover-lift'], intensidade_interacao: 2, respeita_prefers_reduced_motion: true },
-    paleta: { estilo: 'custom', sugestoes: { fundo: cFundo, superficie: '#FFFFFF', texto: '#111315', acento: cAcento } },
+    tipografia: Object.assign({}, base.tipografia || {}, { display: fDisplay, body: fBody, labels: (base.tipografia && base.tipografia.labels) || 'JetBrains Mono' }),
+    paleta: {
+      estilo: (base.paleta && base.paleta.estilo) || 'custom',
+      sugestoes: Object.assign({}, palAnterior, { fundo: cFundo, acento: cAcento, superficie: palAnterior.superficie || '#FFFFFF', texto: palAnterior.texto || '#111315' })
+    },
     componentes_permitidos: comps,
     proibicoes: proibs,
     prioridade_conversao: conv,
-    ativo: true
-  };
+    ativo: base.ativo !== false
+  });
+  if (!base.origem) obj.origem = 'Criado no Aholic OS';
 
-  if (idx >= 0) {
-    PRESETS[idx] = Object.assign({}, PRESETS[idx], obj);
-  } else {
-    PRESETS.push(obj);
-  }
-
-  salvarPresetsLocal();
-  fecharModalPreset();
-  render();
+  var htmlAtual = (document.getElementById('mp-html') || {}).value || '';
+  var htmlDoc = null;
+  if (htmlAtual.trim() && htmlAtual !== presetHtmlOriginal) htmlDoc = htmlAtual;
+  if (idx >= 0) obj = Object.assign({}, PRESETS[idx], obj);
+  persistirTema(obj, htmlDoc).then(function(ok) {
+    if (!ok) return;
+    fecharModalPreset();
+    render();
+  });
 }
 
 function salvarPresetsLocal() {
   localStorage.setItem('prospector_presets', JSON.stringify(PRESETS));
-  if (MODE === 'db') {
-    fetch('/api/presets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(PRESETS)
-    }).catch(function(e) { console.error('Erro ao salvar presets via API:', e); });
-  }
+  fetch('/api/presets', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(PRESETS)
+  }).then(function() { return carregarPresetsRemoto(); }).catch(function(e) { console.error('Erro ao salvar presets via API:', e); });
 }
 
 function duplicarPreset(id) {
@@ -3566,17 +2785,17 @@ function duplicarPreset(id) {
   var clone = JSON.parse(JSON.stringify(p));
   clone.id = novoId;
   clone.nome = p.nome + ' (Cópia)';
-  PRESETS.push(clone);
-  salvarPresetsLocal();
-  render();
+  clone.origem = 'Cópia de ' + p.id;
+  delete clone.aliases;
+  delete clone.arquetipo;
+  persistirTema(clone, null).then(function(ok) { if (ok) render(); });
 }
 
 function toggleAtivoPreset(id) {
   var p = PRESETS.find(function(x) { return x.id === id; });
   if (!p) return;
   p.ativo = !p.ativo;
-  salvarPresetsLocal();
-  render();
+  persistirTema(p, null).then(function(ok) { if (ok) render(); });
 }
 
 var presetPreviewAtualObj = null;
@@ -3978,9 +3197,21 @@ function abrirPreviewPreset(id) {
   var fDisplay = (p.tipografia && p.tipografia.display) || 'Plus Jakarta Sans';
   var fBody = (p.tipografia && p.tipografia.body) || 'Inter';
 
-  // Renderiza o Iframe com a Mini-Landing Page ao Vivo
+  // A prévia vem do HTML da biblioteca. O demo local só entra se o arquivo não abrir.
   var frame = document.getElementById('mpp-frame');
-  frame.srcdoc = gerarHtmlDemoPreset(p);
+  presetPreviewHtmlBruto = '';
+  frame.srcdoc = '<p style="font-family:sans-serif;padding:24px">Carregando o HTML do tema…</p>';
+  fetch('/api/temas/' + encodeURIComponent(id) + '/preview', { cache: 'no-store' }).then(function(r) {
+    return r.ok ? r.text() : '';
+  }).catch(function() { return ''; }).then(function(htmlPreview) {
+    return fetch('/api/temas/' + encodeURIComponent(id) + '/html', { cache: 'no-store' }).then(function(r) {
+      return r.ok ? r.text() : '';
+    }).catch(function() { return ''; }).then(function(bruto) {
+      presetPreviewHtmlBruto = bruto || '';
+      if (htmlPreview && htmlPreview.indexOf('<') >= 0) frame.srcdoc = preencherAmostra(htmlPreview);
+      else frame.srcdoc = gerarHtmlDemoPreset(p);
+    });
+  });
 
   // Renderiza os tokens e detalhes na gaveta inferior
   var swatches = Object.keys(s).map(function(k) {
@@ -3996,6 +3227,28 @@ function abrirPreviewPreset(id) {
   document.getElementById('mpp-conteudo').innerHTML = htmlTokens;
   setPresetPreviewMode('desktop');
   document.getElementById('m-preset-preview-bg').classList.add('aberto');
+}
+
+function salvarCopiaDoPreview() {
+  if (!presetPreviewAtualObj) return;
+  var nome = window.prompt('Nome do tema na biblioteca:', presetPreviewAtualObj.nome + ' salvo');
+  if (!nome) return;
+  var id = nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  var copia = JSON.parse(JSON.stringify(presetPreviewAtualObj));
+  copia.id = id;
+  copia.nome = nome;
+  copia.origem = 'Salvo a partir de ' + presetPreviewAtualObj.id;
+  copia.ativo = true;
+  delete copia.aliases;
+  delete copia.arquetipo;
+  var html = presetPreviewHtmlBruto && presetPreviewHtmlBruto.indexOf('<') >= 0 ? presetPreviewHtmlBruto : null;
+  persistirTema(copia, html).then(function(ok) {
+    if (!ok) return;
+    fecharPreviewPreset();
+    view = 'presets';
+    render();
+    alert('Tema "' + nome + '" entrou na biblioteca e já aparece na listagem.');
+  });
 }
 
 function fecharPreviewPreset() {
@@ -4227,7 +3480,7 @@ function vSites() {
 
 function vPresets() {
   var html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">' +
-    '<div><p style="color:var(--muted);font-size:13px;margin:0;font-weight:600">Catálogo de regras visuais, composição, tipografia e diretrizes anti-slop para geração de sites:</p></div>' +
+    '<div><p style="color:var(--muted);font-size:13px;margin:0;font-weight:600">Biblioteca única de temas. O que você salva aqui fica no projeto e o gerador passa a listar o mesmo catálogo.</p></div>' +
     '<div style="display:flex;gap:8px">' +
     '<button class="btn-cta" onclick="abrirModalPreset()">+ Novo Preset</button>' +
     '</div></div>';
@@ -4262,7 +3515,7 @@ function vPresets() {
       '<div class="preset-meta-row"><span class="preset-meta-label">Composição:</span><span class="preset-meta-val">' + (p.composicao || '—') + ' &bull; ' + (p.densidade || 'média') + '</span></div>' +
       '<div class="preset-meta-row"><span class="preset-meta-label">Navegação:</span><span class="preset-meta-val">' + (p.navegacao || '—') + '</span></div>' +
       '<div class="preset-meta-row"><span class="preset-meta-label">Tipografia:</span><span class="preset-meta-val">' + (p.tipografia ? p.tipografia.display : '—') + '</span></div>' +
-      '<div class="preset-meta-row"><span class="preset-meta-label">Nichos:</span><span class="preset-meta-val">' + (nichosHtml || 'Geral') + '</span></div>' +
+      '<div class="preset-meta-row"><span class="preset-meta-label">Nicho:</span><span class="preset-meta-val">' + (p.nicho || nichosHtml || 'Geral') + (p.html_personalizado ? ' · HTML salvo' : '') + '</span></div>' +
       '</div>' +
       swatches +
       '</div>' +

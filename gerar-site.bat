@@ -33,13 +33,11 @@ if "%LEAD_SLUG%"=="" (
 )
 
 echo.
-echo Presets disponiveis:
-echo  1. auto (Detecta automaticamente pelo nicho do lead)
-echo  2. quiet-luxury (Estetica, Dermatologia, Cirurgia, Luxo)
-echo  3. swiss-precision (Odontologia, Implantes, Alta Tecnologia)
+echo Temas da biblioteca (use o id, ou auto):
+"%PYTHON_EXE%" "scripts\gerar-site-lead.py" --list-temas
 echo.
 set "PRESET=auto"
-set /p "INPUT_PRESET=Escolha o Preset [padrao: auto]: "
+set /p "INPUT_PRESET=Escolha o tema pelo id [padrao: auto]: "
 if not "%INPUT_PRESET%"=="" set "PRESET=%INPUT_PRESET%"
 
 echo.

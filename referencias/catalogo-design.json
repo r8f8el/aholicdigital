@@ -10,6 +10,7 @@
   ],
   "arquetipos": {
     "quiet_luxury": {
+      "tema_id": "editorial-atelier",
       "nome": "🏛️ Quiet Luxury / Editorial Sofisticado",
       "nichos": ["Estética Facial Avançada", "Dermatologia", "Cirurgia Plástica", "Consultorias Exclusivas"],
       "tipografia": {
@@ -26,6 +27,7 @@
       "referencia_local": "sites/clinica-anielly-vilela/clinica-anielly-vilela.html"
     },
     "swiss_tech": {
+      "tema_id": "instrumento-digital",
       "nome": "⚡ Swiss Precision / High-Tech Cirúrgico",
       "nichos": ["Odontologia Digital", "Implantes Guiados", "Ortodontia Invisível", "Tecnologia Médica"],
       "tipografia": {
@@ -42,6 +44,7 @@
       "referencia_local": "sites/quality-odontologia-face/quality-odontologia-face.html"
     },
     "monografia_editorial": {
+      "tema_id": "lumina-luxury-refined",
       "nome": "📐 Monografia Editorial / Minimalismo Arquitetônico",
       "nichos": ["Arquitetura de Alto Padrão", "Design de Interiores", "Engenharia Conceito"],
       "tipografia": {
@@ -58,6 +61,7 @@
       "referencia_local": "sites/karla-barros-arquitetura/versoes/v2-quiet-luxury-italiana.html"
     },
     "warm_organic": {
+      "tema_id": "modern-organic-editorial",
       "nome": "🌿 Warm Organic / Humanizado & Acolhedor",
       "nichos": ["Psicologia", "Nutrição", "Medicina Integrativa", "Pediatria", "Spas & Bem-Estar"],
       "tipografia": {
@@ -74,6 +78,7 @@
       "referencia_local": "sites/atipicamente-psi/versoes/v1-cream-superdesign.html"
     },
     "dark_authority": {
+      "tema_id": "dark-authority",
       "nome": "⚖️ Dark Authority & Contemporâneo",
       "nichos": ["Advocacia Tributária / Criminal / Cível", "Perícias Judiciais", "Finanças"],
       "tipografia": {

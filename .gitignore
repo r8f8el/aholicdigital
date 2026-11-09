@@ -10,6 +10,9 @@
 # Database local (se não quiser versionar o sqlite)
 prospector.db-journal
 
+# Sessão local do Instagram. Não versionar.
+config/instagram_session.json
+
 # Node
 node_modules/
 .vercel

@@ -1,0 +1,8 @@
+{
+  "name": "aholicdigital",
+  "private": true,
+  "description": "Os scripts Node deste repositório usam só módulos nativos. O painel e o gerador não precisam de npm.",
+  "engines": {
+    "node": ">=18"
+  }
+}

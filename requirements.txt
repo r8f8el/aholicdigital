@@ -1,0 +1,6 @@
+# O painel (dashboard-server.py) e o gerador (scripts/gerar-site-lead.py)
+# usam só a biblioteca padrão do Python 3.11+.
+#
+# A prospecção (minerar-leads.py, conectar-instagram.py e os extratores de foto)
+# precisa do Playwright. Instale apenas se for usar esses fluxos:
+playwright>=1.40

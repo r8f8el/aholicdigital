@@ -1,0 +1,93 @@
+{
+  "nome": "Modern Organic Editorial",
+  "nicho": "Nutrição e bem-estar",
+  "descricao": "Editorial orgânico em creme e sálvia, com DM Serif Display e Inter. HTML de referência em referencias/templates/modern-organic-editorial.html.",
+  "tags": [
+    "organico",
+    "nutricao",
+    "creme",
+    "sage",
+    "template"
+  ],
+  "nichos_recomendados": [
+    "Nutrição",
+    "Nutrição Esportiva",
+    "Medicina Integrativa",
+    "Bem-estar"
+  ],
+  "nichos_evitar": [
+    "Advocacia Criminal",
+    "Oficinas"
+  ],
+  "composicao": "organic-editorial",
+  "navegacao": "soft-top-bar",
+  "densidade": "baixa",
+  "tipografia": {
+    "display": "DM Serif Display",
+    "body": "Inter",
+    "labels": "Inter",
+    "escala": "moderada"
+  },
+  "paleta": {
+    "estilo": "creme-sage-carvao",
+    "sugestoes": {
+      "fundo": "#F7F5EB",
+      "superficie": "#F0EDE1",
+      "texto": "#202A2D",
+      "texto_secundario": "#5C675B",
+      "acento": "#9EA682",
+      "linha": "rgba(32, 42, 45, 0.12)"
+    }
+  },
+  "id": "modern-organic-editorial",
+  "origem": "referencias/templates/modern-organic-editorial.html",
+  "fontes": [
+    "templates",
+    "catalogo-design"
+  ],
+  "aliases": [
+    "warm-organic",
+    "warm_organic"
+  ],
+  "motor": "template",
+  "html_personalizado": false,
+  "arquetipo": "warm_organic",
+  "tokens": {
+    "fonts": {
+      "display": "DM Serif Display",
+      "body": "Inter"
+    },
+    "defaults": {
+      "--ah-primary": "#9EA682",
+      "--ah-accent": "#9EA682",
+      "--ah-bg": "#F7F5EB",
+      "--ah-surface": "#F0EDE1",
+      "--ah-text": "#202A2D",
+      "--ah-text-muted": "#5C675B"
+    },
+    "layout": "organic-editorial",
+    "dark": false,
+    "nichos": [
+      "nutrição",
+      "nutrição esportiva",
+      "medicina integrativa",
+      "bem-estar"
+    ]
+  },
+  "html_referencia": "referencias/templates/modern-organic-editorial.html",
+  "referencia_local": "sites/atipicamente-psi/versoes/v1-cream-superdesign.html",
+  "paleta_arquetipo": {
+    "estilo": "arquetipo",
+    "sugestoes": {
+      "fundo": "#FAF8F5",
+      "superficie": "#FFFFFF",
+      "texto": "#2D2823",
+      "texto_secundario": "#7C746A",
+      "acento": "#8F9E8B"
+    }
+  },
+  "html": "temas/modern-organic-editorial/casca.html",
+  "html_geracao": "temas/modern-organic-editorial/casca.html",
+  "preview": "temas/modern-organic-editorial/preview.html",
+  "ordem": 17
+}
