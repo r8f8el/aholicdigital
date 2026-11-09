@@ -45,13 +45,15 @@ EDITOR_SNIPPET = """
 #pe-bar strong{color:#38bdf8;font-weight:600}
 #pe-bar button{background:#22c55e;color:#fff;border:0;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s}
 #pe-bar button:hover{background:#16a34a}
+#pe-bar .pe-acoes{display:flex;gap:8px}
+#pe-biblioteca{background:#38bdf8 !important;color:#0f172a !important}
 body{margin-top:44px !important}
 .pe-hover{outline:2px dashed #22c55e !important;outline-offset:2px;cursor:pointer}
 [contenteditable="true"]:focus{outline:2px solid #38bdf8 !important;outline-offset:2px}
 </style>
 <div id="pe-bar">
   <div><strong>✨ Modo Edição Aholic</strong> · Clique em textos para alterar · clique em imagens para trocar</div>
-  <button id="pe-export" type="button">Salvar e Exportar Site</button>
+  <div class="pe-acoes"><button id="pe-biblioteca" type="button">Salvar tema na biblioteca</button><button id="pe-export" type="button">Salvar e Exportar Site</button></div>
 </div>
 <input type="file" id="pe-file" accept="image/*" style="display:none">
 <script id="pe-script">
@@ -89,6 +91,24 @@ body{margin-top:44px !important}
     var html='<!DOCTYPE html>\\n'+doc.outerHTML;
     var blob=new Blob([html],{type:'text/html'});
     var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';a.click();
+  });
+  var bibBtn=document.getElementById('pe-biblioteca');
+  if(bibBtn) bibBtn.addEventListener('click', function(){
+    var sugerido=(document.title||'Tema salvo').split('|')[0].replace(/\\s+/g,' ').trim()||'Tema salvo';
+    var nome=prompt('Nome deste tema na biblioteca:', sugerido);
+    if(!nome) return;
+    var doc=document.documentElement.cloneNode(true);
+    ['#pe-bar','#pe-style','#pe-script','#pe-file'].forEach(function(s){var n=doc.querySelector(s);if(n)n.remove()});
+    doc.querySelectorAll('[contenteditable]').forEach(function(n){n.removeAttribute('contenteditable')});
+    doc.querySelectorAll('.pe-hover').forEach(function(n){n.classList.remove('pe-hover')});
+    var html='<!DOCTYPE html>\\n'+doc.outerHTML;
+    var partes=location.pathname.split('/');
+    var i=partes.indexOf('sites');
+    var slug=i>=0&&partes[i+1]?decodeURIComponent(partes[i+1]):'';
+    fetch('/api/temas/a-partir-do-site',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:slug,nome:nome,html:html})})
+      .then(function(r){if(!r.ok) throw 0; return r.json();})
+      .then(function(j){alert('Tema gravado na biblioteca: '+((j.tema&&j.tema.nome)||nome)+'.\\nAbra Presets Visuais no dashboard. O gerador passa a listar este tema.');})
+      .catch(function(){alert('Não consegui gravar na biblioteca. Abra a página pelo dashboard (iniciar-dashboard.bat) e tente de novo.');});
   });
 })();
 </script>
@@ -684,6 +704,114 @@ def renderizar_swiss_precision(lead, logo_path, fotos):
 </html>
 """
 
+def biblioteca():
+    pasta = os.path.dirname(os.path.abspath(__file__))
+    if pasta not in sys.path:
+        sys.path.insert(0, pasta)
+    from biblioteca_temas import Biblioteca
+    return Biblioteca(RAIZ)
+
+def preset_salvo(lead):
+    """Direção criativa gravada no lead, quando o dashboard conseguiu persistir o tema."""
+    bruto = lead.get('direcaoCriativa') if lead else None
+    if isinstance(bruto, str) and bruto.strip()[:1] in '{[':
+        try:
+            bruto = json.loads(bruto)
+        except Exception:
+            return None
+    if isinstance(bruto, dict):
+        return bruto.get('presetId') or bruto.get('preset_id') or bruto.get('temaId')
+    return None
+
+def resolver_preset_id(lead, preset_id):
+    bib = biblioteca()
+    if preset_id and preset_id != 'auto':
+        tema = bib.resolver(preset_id)
+        return tema['id'] if tema else preset_id
+    salvo = preset_salvo(lead)
+    if salvo:
+        tema = bib.resolver(salvo)
+        if tema:
+            return tema['id']
+    return bib.escolher((lead or {}).get('nicho'))
+
+def montar_contexto(lead, logo_path, fotos):
+    """Dados do lead para os marcadores {{NOME_EMPRESA}}, {{NICHO}} e os demais."""
+    import html as html_lib
+    nome = lead.get('nome') or 'Estúdio'
+    cidade = lead.get('cidade') or ''
+    nicho = lead.get('nicho') or ''
+    whatsapp = re.sub(r'\D', '', str(lead.get('whatsapp') or '')) or '5500000000000'
+    telefone = lead.get('telefone') or ''
+    endereco = lead.get('endCliente') or cidade or ''
+    nota = '' if lead.get('nota') in (None, '') else lead.get('nota')
+    avaliacoes = '' if lead.get('avaliacoes') in (None, '') else lead.get('avaliacoes')
+    bio = lead.get('obs') or lead.get('motivo') or '%s em %s.' % (nicho or nome, cidade or 'atendimento com hora marcada')
+    iniciais = gerar_iniciais(nome)
+    wa_msg = urllib.parse.quote('Olá! Vi o site da %s e quero conversar.' % nome)
+    wa_link = 'https://wa.me/%s?text=%s' % (whatsapp, wa_msg)
+    if logo_path:
+        logo_html = '<img src="%s" alt="%s" style="width:48px;height:48px;object-fit:cover;border-radius:50%%">' % (
+            html_lib.escape(str(logo_path), quote=True), html_lib.escape(nome, quote=True))
+    else:
+        logo_html = '<span class="monograma">%s</span>' % html_lib.escape(iniciais)
+    hero = fotos[0] if fotos else 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80'
+    especialista = fotos[1] if len(fotos) > 1 else hero
+    fotos_grid = fotos[:4] if fotos else [hero]
+    galeria = ''.join(
+        '<figure><img src="%s" alt="%s"></figure>' % (html_lib.escape(str(f), quote=True), html_lib.escape(nome, quote=True))
+        for f in fotos_grid
+    )
+    def tx(valor):
+        return html_lib.escape('' if valor is None else str(valor))
+    return {
+        'NOME_EMPRESA': tx(nome),
+        'NOME_LEAD': tx(nome),
+        'NICHO': tx(nicho),
+        'CIDADE': tx(cidade),
+        'WHATSAPP_NUMERO': tx(whatsapp),
+        'WHATSAPP_LINK': wa_link,
+        'TELEFONE_VISUAL': tx(telefone),
+        'LOGO_HTML': logo_html,
+        'FOTO_HERO': html_lib.escape(str(hero), quote=True),
+        'FOTO_ESPECIALISTA': html_lib.escape(str(especialista), quote=True),
+        'GALERIA_FOTOS_HTML': galeria,
+        'AVALIACOES_NOTA': tx(nota),
+        'AVALIACOES_QTD': tx(avaliacoes),
+        'ENDERECO': tx(endereco),
+        'BIO_INSTAGRAM': tx(bio),
+    }
+
+def html_para_lead(lead, preset_id, logo_path, fotos):
+    bib = biblioteca()
+    preset_id = resolver_preset_id(lead, preset_id)
+    tema = bib.resolver(preset_id)
+    motor = (tema or {}).get('motor') or 'template'
+    personalizado = bool(tema and tema.get('html_personalizado'))
+    if tema and not personalizado and motor == 'quiet-luxury':
+        return renderizar_quiet_luxury(lead, logo_path, fotos), tema
+    if tema and not personalizado and motor == 'swiss-precision':
+        return renderizar_swiss_precision(lead, logo_path, fotos), tema
+    if tema:
+        html = bib.renderizar(tema, montar_contexto(lead, logo_path, fotos))
+        if html and '<html' in html.lower():
+            return html, tema
+    return renderizar_quiet_luxury(lead, logo_path, fotos), tema
+
+def listar_temas():
+    bib = biblioteca()
+    temas = bib.listar()
+    print('\n' + '=' * 78)
+    print('BIBLIOTECA DE TEMAS (%d) — dashboard e gerador leem o mesmo catálogo' % len(temas))
+    print('=' * 78)
+    for tema in temas:
+        estado = 'HTML salvo' if tema.get('html_personalizado') else (tema.get('motor') or 'template')
+        aliases = ', '.join(tema.get('aliases') or [])
+        extra = ('  (também: %s)' % aliases) if aliases else ''
+        print('  %-32s %s — %s [%s]%s' % (tema['id'], tema.get('nome'), tema.get('nicho') or 'Geral', estado, extra))
+    print('=' * 78)
+    print('Use o id acima em --preset, ou auto para escolher pelo nicho / direção criativa.\n')
+
 def compilar_site(slug, preset_id="auto"):
     lead = buscar_lead(slug)
     if not lead:
@@ -698,20 +826,14 @@ def compilar_site(slug, preset_id="auto"):
     print(f"  • Logo identificado: {logo_path if logo_path else '(monograma autoral gerado)'}")
     print(f"  • Fotos reais disponíveis: {len(fotos)}")
 
-    # Seleção de preset
-    if preset_id == "auto" or not preset_id:
-        preset_id = escolher_preset_auto(lead.get('nicho'))
-    
-    print(f"  • Preset visual selecionado: {preset_id}")
-
-    # Renderiza HTML de acordo com o preset
-    if preset_id in ["quiet-luxury", "estetica-luxo", "editorial-atelier"]:
-        html_puro = renderizar_quiet_luxury(lead, logo_path, fotos)
-    elif preset_id in ["swiss-precision", "odonto-tech", "swiss-tech"]:
-        html_puro = renderizar_swiss_precision(lead, logo_path, fotos)
+    html_puro, tema = html_para_lead(lead, preset_id, logo_path, fotos)
+    if tema:
+        origem = 'HTML salvo na biblioteca' if tema.get('html_personalizado') else tema.get('motor')
+        print(f"  • Tema da biblioteca: {tema['nome']} ({tema['id']})")
+        print(f"  • Como gera: {origem}")
+        print(f"  • Arquivo do tema: {tema.get('html')}")
     else:
-        # Fallback padrão
-        html_puro = renderizar_quiet_luxury(lead, logo_path, fotos)
+        print(f"  • Preset não encontrado na biblioteca ({preset_id}); usando o motor editorial.")
 
     # 1. Gera o arquivo final limpo: index.html
     caminho_index = os.path.join(pasta_lead, "index.html")
@@ -736,9 +858,14 @@ def compilar_site(slug, preset_id="auto"):
 def main():
     parser = argparse.ArgumentParser(description="Gerador Automático de Sites Anti-Slop Aholic")
     parser.add_argument("--slug", type=str, help="Slug do lead a gerar (ex: clinica-anielly-vilela)")
-    parser.add_argument("--preset", type=str, default="auto", help="Preset visual (ex: quiet-luxury, swiss-precision, warm-organic, auto)")
+    parser.add_argument("--preset", type=str, default="auto", help="Id do tema na biblioteca, um alias (quiet-luxury, swiss-precision) ou auto")
     parser.add_argument("--list", action="store_true", help="Lista os leads cadastrados no banco")
+    parser.add_argument("--list-temas", action="store_true", help="Lista a biblioteca única de temas")
     args = parser.parse_args()
+
+    if args.list_temas:
+        listar_temas()
+        return
 
     if args.list:
         leads = listar_leads()
@@ -747,7 +874,8 @@ def main():
         print("="*65)
         for idx, l in enumerate(leads, 1):
             print(f"{idx:2d}. [{l[4].upper():12s}] {l[1]} ({l[0]}) — Nicho: {l[2] or 'Geral'}")
-        print("="*65 + "\n")
+        print("="*65)
+        print("Biblioteca de temas: python scripts/gerar-site-lead.py --list-temas\n")
         return
 
     if not args.slug:

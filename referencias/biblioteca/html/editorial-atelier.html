@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{NOME_EMPRESA}} | {{NICHO}}</title>
+  <meta name="description" content="{{NOME_EMPRESA}} — {{NICHO}} em {{CIDADE}}.">
+  <!--
+    Tema Aholic: editorial-atelier
+    Marcadores preenchidos pelo gerador: {{NOME_EMPRESA}}, {{NOME_LEAD}}, {{NICHO}}, {{CIDADE}}, {{WHATSAPP_NUMERO}}, {{WHATSAPP_LINK}}, {{TELEFONE_VISUAL}}, {{LOGO_HTML}}, {{FOTO_HERO}}, {{FOTO_ESPECIALISTA}}, {{GALERIA_FOTOS_HTML}}, {{AVALIACOES_NOTA}}, {{AVALIACOES_QTD}}, {{ENDERECO}}, {{BIO_INSTAGRAM}}
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #FBFBFA;
+      --superficie: #FFFFFF;
+      --texto: #18181B;
+      --mudo: #71717A;
+      --acento: #C5A880;
+      --linha: rgba(226, 232, 240, 0.8);
+      --tinta-botao: #1A1A1A;
+      --display: "Newsreader", Georgia, serif;
+      --body: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+      --folga: 88px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .barra {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 18px 7vw; border-bottom: 1px solid var(--linha);
+      position: sticky; top: 0; background: var(--fundo);
+    }
+    .marca { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 650; }
+    .monograma {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      border: 1px solid var(--linha); border-radius: 50%; font-family: var(--display);
+    }
+    .marca small { display: block; color: var(--mudo); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; font-size: 10px; }
+    .cta {
+      background: var(--acento); color: var(--tinta-botao); text-decoration: none;
+      padding: 12px 18px; border-radius: 999px; font-weight: 650; font-size: 14px;
+    }
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: var(--folga) 7vw; }
+    .selo { letter-spacing: .16em; text-transform: uppercase; font-size: 11px; color: var(--mudo); margin: 0 0 14px; }
+    h1 { font-family: var(--display); font-weight: 650; font-size: clamp(40px, 6vw, 76px); line-height: .95; letter-spacing: -.03em; margin: 0 0 16px; }
+    .hero p { max-width: 38rem; color: var(--mudo); margin: 0 0 22px; }
+    .foto { min-height: 420px; background: var(--superficie) center/cover no-repeat; border-radius: 18px; }
+    .grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 7vw  var(--folga); }
+    .card { background: var(--superficie); border: 1px solid var(--linha); border-radius: 16px; padding: 22px; }
+    .card span { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--mudo); margin-bottom: 8px; }
+    .card h2 { font-family: var(--display); font-size: 28px; margin: 0; font-weight: 650; }
+    .galeria { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 7vw var(--folga); }
+    .galeria figure { margin: 0; }
+    .galeria img { width: 100%; height: 240px; object-fit: cover; border-radius: 12px; }
+    .bio { margin: 0 7vw var(--folga); padding: 28px; border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); font-family: var(--display); font-size: clamp(22px, 3vw, 34px); line-height: 1.25; }
+    footer { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding: 28px 7vw 48px; color: var(--mudo); font-size: 14px; }
+    @media (max-width: 860px) {
+      .hero, .grade, .galeria { grid-template-columns: 1fr; }
+      .barra { padding: 14px 20px; }
+      .hero, .grade, .galeria, .bio, footer { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body data-tema="editorial-atelier" data-escuro="false">
+  <header class="barra">
+    <a class="marca" href="#topo">{{LOGO_HTML}}<span>{{NOME_EMPRESA}}<small>asymmetrical-editorial</small></span></a>
+    <a class="cta" href="{{WHATSAPP_LINK}}">Chamar no WhatsApp</a>
+  </header>
+  <main id="topo">
+    <section class="hero">
+      <div>
+        <p class="selo">{{CIDADE}} · Editorial de Atelier</p>
+        <h1>{{NOME_EMPRESA}}</h1>
+        <p>{{BIO_INSTAGRAM}}</p>
+        <a class="cta" href="{{WHATSAPP_LINK}}">Agendar com {{NOME_EMPRESA}}</a>
+      </div>
+      <div class="foto" style="background-image:url('{{FOTO_HERO}}')" role="img" aria-label="{{NOME_EMPRESA}}"></div>
+    </section>
+    <section class="grade">
+      <article class="card"><span>01</span><h2>{{NICHO}}</h2></article>
+      <article class="card"><span>02</span><h2>{{AVALIACOES_NOTA}} · {{AVALIACOES_QTD}} avaliações</h2></article>
+      <article class="card"><span>03</span><h2>{{TELEFONE_VISUAL}}</h2></article>
+    </section>
+    <section class="galeria">{{GALERIA_FOTOS_HTML}}</section>
+    <p class="bio">{{NICHO}} em {{CIDADE}}.</p>
+  </main>
+  <footer>
+    <div>{{ENDERECO}}</div>
+    <div>{{WHATSAPP_NUMERO}}</div>
+  </footer>
+</body>
+</html>

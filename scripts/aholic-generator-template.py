@@ -125,6 +125,15 @@ def slugify(text: str) -> str:
     return text
 
 def load_presets():
+    try:
+        sys.path.insert(0, str(SCRIPTS_DIR))
+        from biblioteca_temas import Biblioteca
+        bib = Biblioteca(RAIZ)
+        temas = bib.listar()
+        if temas:
+            return {tema['id']: bib.como_preset_dinamico(tema) for tema in temas}
+    except Exception:
+        pass
     if PRESETS_JSON.exists():
         with open(PRESETS_JSON, encoding='utf-8') as f:
             return json.load(f)

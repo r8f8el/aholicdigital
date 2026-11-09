@@ -1760,6 +1760,10 @@ tr:hover td {
     <label>Proibições / Anti-Slop (separadas por vírgula)</label>
     <input id="mp-proibicoes" placeholder="bento-grid, gradiente-neon, hero-saas-falso">
 
+    <label>HTML do tema</label>
+    <p style="font-size:11px;color:var(--muted);margin:0 0 6px">O que você colar aqui entra na biblioteca e o gerador passa a usar esse HTML. Deixe em branco para manter o arquivo atual. Marcadores: {{NOME_EMPRESA}}, {{NICHO}}, {{CIDADE}}, {{WHATSAPP_LINK}}, {{TELEFONE_VISUAL}}, {{LOGO_HTML}}, {{FOTO_HERO}}, {{GALERIA_FOTOS_HTML}}, {{ENDERECO}}, {{BIO_INSTAGRAM}}.</p>
+    <textarea id="mp-html" rows="6" placeholder="Cole um documento HTML completo para substituir o tema. Em branco, a biblioteca conserva o HTML que já está salvo."></textarea>
+
     <div class="mbot">
       <button class="cancelar" onclick="fecharModalPreset()">Cancelar</button>
       <button class="salvar" onclick="salvarPresetModal()">Salvar Preset</button>
@@ -1787,6 +1791,7 @@ tr:hover td {
           <button id="btn-prev-mob" onclick="setPresetPreviewMode('mobile')" style="border:0;background:transparent;color:var(--muted);padding:5px 12px;border-radius:var(--radius-pill);font-size:11.5px;font-weight:700;cursor:pointer">📱 Mobile</button>
         </div>
         <button onclick="copiarPromptPresetAtual()" class="btn-cta" style="background:#1E293B;padding:6px 14px;font-size:11.5px;box-shadow:none">📋 Copiar Prompt</button>
+        <button onclick="salvarCopiaDoPreview()" class="btn-cta" style="padding:6px 14px;font-size:11.5px">Salvar cópia na biblioteca</button>
         <button class="cancelar" style="padding:6px 12px;font-size:12px" onclick="fecharPreviewPreset()">✕</button>
       </div>
     </div>
@@ -2962,16 +2967,19 @@ var PRESETS = (function() {
 })();
 
 function carregarPresetsRemoto() {
-  fetch('/api/presets', { cache: 'no-store' }).then(function(r) {
+  return fetch('/api/presets', { cache: 'no-store' }).then(function(r) {
     if (!r.ok) throw 0;
     return r.json();
   }).then(function(lista) {
+    if (lista && lista.temas) lista = lista.temas;
     if (Array.isArray(lista) && lista.length) {
       PRESETS = lista;
       localStorage.setItem('prospector_presets', JSON.stringify(PRESETS));
       if (view === 'presets') render();
+      return true;
     }
-  }).catch(function() {});
+    return false;
+  }).catch(function() { return false; });
 }
 carregarPresetsRemoto();
 
@@ -3089,7 +3097,12 @@ function salvarOv(slug, ch) {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(ch)
-    }).then(recarrega);
+    }).then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return recarrega();
+    }).catch(function() {
+      alert('Não foi possível salvar no banco. Abra o dashboard com iniciar-dashboard.bat.');
+    });
     return;
   }
   OV[slug] = Object.assign(OV[slug] || {}, ch);
@@ -3449,9 +3462,28 @@ function salvarDirecaoEscolhida() {
     status: 'direcao_definida'
   };
 
-  salvarOv(direcaoSlugAtual, { direcaoCriativa: cardDirecao });
+  var slugDirecao = direcaoSlugAtual;
+  var nomeLead = l ? l.nome : 'o lead';
+  var nomePreset = p.nome;
   fecharModalDirecao();
-  alert('✨ Direção Criativa definida com sucesso para ' + (l ? l.nome : 'o lead') + '!\nPreset: ' + p.nome);
+  if (MODE === 'supabase') {
+    salvarOv(slugDirecao, { direcaoCriativa: cardDirecao });
+    alert('Direção criativa definida para ' + nomeLead + '.\nPreset: ' + nomePreset);
+    return;
+  }
+  fetch('/api/leads/' + encodeURIComponent(slugDirecao), {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ direcaoCriativa: cardDirecao })
+  }).then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }).then(function() {
+    if (MODE === 'db') recarrega();
+    alert('Direção criativa gravada para ' + nomeLead + '.\nPreset: ' + nomePreset + '\nCom o preset em auto, o gerador usa este tema.');
+  }).catch(function() {
+    alert('Não foi possível gravar a direção no banco. Abra o dashboard com iniciar-dashboard.bat.');
+  });
 }
 
 function aprovarParaContato(slug) {
@@ -3464,9 +3496,74 @@ function aprovarParaContato(slug) {
 
 // === GESTÃO DE PRESETS (CRUD & PREVIEW) ===
 var presetEdicaoId = null;
+var presetHtmlOriginal = '';
+var presetPreviewHtmlBruto = '';
+
+function aplicarTemaNaLista(tema) {
+  if (!tema || !tema.id) return;
+  var i = PRESETS.findIndex(function(x) { return x.id === tema.id; });
+  if (i >= 0) PRESETS[i] = tema;
+  else PRESETS.push(tema);
+  localStorage.setItem('prospector_presets', JSON.stringify(PRESETS));
+}
+
+function persistirTema(obj, htmlDocumento) {
+  var payload = JSON.parse(JSON.stringify(obj || {}));
+  delete payload.html;
+  delete payload.preview;
+  delete payload.html_geracao;
+  delete payload.html_referencia;
+  delete payload.aliases;
+  if (htmlDocumento) payload.html = htmlDocumento;
+  return fetch('/api/temas', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r) {
+    if (!r.ok) {
+      return r.json().catch(function() { return {}; }).then(function(j) {
+        throw new Error(j.erro || ('HTTP ' + r.status));
+      });
+    }
+    return r.json();
+  }).then(function(res) {
+    if (res && res.tema) aplicarTemaNaLista(res.tema);
+    return carregarPresetsRemoto().then(function() { return true; });
+  }).catch(function(err) {
+    alert('Não foi possível gravar o tema na biblioteca do projeto. Abra o dashboard com iniciar-dashboard.bat.\n' + (err && err.message ? err.message : ''));
+    return false;
+  });
+}
+
+function preencherAmostra(html) {
+  var foto = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000"><rect width="100%" height="100%" fill="#d9d3c7"/><text x="50%" y="50%" fill="#5c574e" font-size="28" text-anchor="middle" font-family="Georgia">Foto do cliente</text></svg>');
+  var mapa = {
+    NOME_EMPRESA: 'Estúdio Exemplo',
+    NOME_LEAD: 'Estúdio Exemplo',
+    NICHO: 'Ofício de exemplo',
+    CIDADE: 'Cidade Exemplo',
+    WHATSAPP_NUMERO: '5500000000000',
+    WHATSAPP_LINK: '#',
+    TELEFONE_VISUAL: '(00) 00000-0000',
+    LOGO_HTML: '<span class="monograma">EX</span>',
+    FOTO_HERO: foto,
+    FOTO_ESPECIALISTA: foto,
+    GALERIA_FOTOS_HTML: '<figure><img src="' + foto + '" alt="Estúdio Exemplo"></figure>',
+    AVALIACOES_NOTA: '5.0',
+    AVALIACOES_QTD: '32',
+    ENDERECO: 'Rua Exemplo, 100 — Cidade Exemplo',
+    BIO_INSTAGRAM: 'Texto de exemplo para ver o tema com o conteúdo de um cliente fictício.'
+  };
+  return String(html || '').replace(/\{\{([A-Z0-9_]+)\}\}/g, function(_, chave) {
+    return mapa[chave] != null ? mapa[chave] : '';
+  });
+}
 
 function abrirModalPreset(id) {
   presetEdicaoId = id || null;
+  presetHtmlOriginal = '';
+  var campoHtml = document.getElementById('mp-html');
+  if (campoHtml) campoHtml.value = '';
   var p = id ? PRESETS.find(function(x) { return x.id === id; }) : null;
   document.getElementById('mp-titulo').textContent = p ? 'Editar Preset — ' + p.nome : 'Novo Preset de Direção Visual';
   document.getElementById('mp-id').value = p ? p.id : '';
@@ -3488,6 +3585,17 @@ function abrirModalPreset(id) {
   document.getElementById('mp-proibicoes').value = p && p.proibicoes ? p.proibicoes.join(', ') : '';
 
   document.getElementById('m-preset-bg').classList.add('aberto');
+  if (p && p.id) {
+    fetch('/api/temas/' + encodeURIComponent(p.id) + '/html', { cache: 'no-store' }).then(function(r) {
+      return r.ok ? r.text() : '';
+    }).then(function(texto) {
+      if (presetEdicaoId !== p.id) return;
+      var campo = document.getElementById('mp-html');
+      if (!campo || (campo.value && campo.value !== presetHtmlOriginal)) return;
+      presetHtmlOriginal = texto || '';
+      campo.value = presetHtmlOriginal;
+    }).catch(function() {});
+  }
 }
 
 function fecharModalPreset() {
@@ -3516,47 +3624,49 @@ function salvarPresetModal() {
   var proibs = document.getElementById('mp-proibicoes').value.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
 
   var idx = PRESETS.findIndex(function(x) { return x.id === id; });
-  var obj = {
+  var base = idx >= 0 ? PRESETS[idx] : {};
+  var palAnterior = (base.paleta && base.paleta.sugestoes) || {};
+  var obj = Object.assign({}, base, {
     id: id,
     nome: nome,
     descricao: desc,
-    origem: 'Criado no Aholic OS',
     tags: tags,
     nichos_recomendados: nichos,
     nichos_evitar: nichosEvitar,
+    nicho: nichos[0] || base.nicho || 'Geral',
     composicao: comp,
     navegacao: nav,
     densidade: dens,
-    tipografia: { display: fDisplay, body: fBody, labels: 'JetBrains Mono' },
-    imagem: { tratamento: 'custom', proporcoes: ['16:9', '1:1'] },
-    movimento: { estilo: ['smooth-scroll', 'hover-lift'], intensidade_interacao: 2, respeita_prefers_reduced_motion: true },
-    paleta: { estilo: 'custom', sugestoes: { fundo: cFundo, superficie: '#FFFFFF', texto: '#111315', acento: cAcento } },
+    tipografia: Object.assign({}, base.tipografia || {}, { display: fDisplay, body: fBody, labels: (base.tipografia && base.tipografia.labels) || 'JetBrains Mono' }),
+    paleta: {
+      estilo: (base.paleta && base.paleta.estilo) || 'custom',
+      sugestoes: Object.assign({}, palAnterior, { fundo: cFundo, acento: cAcento, superficie: palAnterior.superficie || '#FFFFFF', texto: palAnterior.texto || '#111315' })
+    },
     componentes_permitidos: comps,
     proibicoes: proibs,
     prioridade_conversao: conv,
-    ativo: true
-  };
+    ativo: base.ativo !== false
+  });
+  if (!base.origem) obj.origem = 'Criado no Aholic OS';
 
-  if (idx >= 0) {
-    PRESETS[idx] = Object.assign({}, PRESETS[idx], obj);
-  } else {
-    PRESETS.push(obj);
-  }
-
-  salvarPresetsLocal();
-  fecharModalPreset();
-  render();
+  var htmlAtual = (document.getElementById('mp-html') || {}).value || '';
+  var htmlDoc = null;
+  if (htmlAtual.trim() && htmlAtual !== presetHtmlOriginal) htmlDoc = htmlAtual;
+  if (idx >= 0) obj = Object.assign({}, PRESETS[idx], obj);
+  persistirTema(obj, htmlDoc).then(function(ok) {
+    if (!ok) return;
+    fecharModalPreset();
+    render();
+  });
 }
 
 function salvarPresetsLocal() {
   localStorage.setItem('prospector_presets', JSON.stringify(PRESETS));
-  if (MODE === 'db') {
-    fetch('/api/presets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(PRESETS)
-    }).catch(function(e) { console.error('Erro ao salvar presets via API:', e); });
-  }
+  fetch('/api/presets', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(PRESETS)
+  }).then(function() { return carregarPresetsRemoto(); }).catch(function(e) { console.error('Erro ao salvar presets via API:', e); });
 }
 
 function duplicarPreset(id) {
@@ -3566,17 +3676,17 @@ function duplicarPreset(id) {
   var clone = JSON.parse(JSON.stringify(p));
   clone.id = novoId;
   clone.nome = p.nome + ' (Cópia)';
-  PRESETS.push(clone);
-  salvarPresetsLocal();
-  render();
+  clone.origem = 'Cópia de ' + p.id;
+  delete clone.aliases;
+  delete clone.arquetipo;
+  persistirTema(clone, null).then(function(ok) { if (ok) render(); });
 }
 
 function toggleAtivoPreset(id) {
   var p = PRESETS.find(function(x) { return x.id === id; });
   if (!p) return;
   p.ativo = !p.ativo;
-  salvarPresetsLocal();
-  render();
+  persistirTema(p, null).then(function(ok) { if (ok) render(); });
 }
 
 var presetPreviewAtualObj = null;
@@ -3978,9 +4088,21 @@ function abrirPreviewPreset(id) {
   var fDisplay = (p.tipografia && p.tipografia.display) || 'Plus Jakarta Sans';
   var fBody = (p.tipografia && p.tipografia.body) || 'Inter';
 
-  // Renderiza o Iframe com a Mini-Landing Page ao Vivo
+  // A prévia vem do HTML da biblioteca. O demo local só entra se o arquivo não abrir.
   var frame = document.getElementById('mpp-frame');
-  frame.srcdoc = gerarHtmlDemoPreset(p);
+  presetPreviewHtmlBruto = '';
+  frame.srcdoc = '<p style="font-family:sans-serif;padding:24px">Carregando o HTML do tema…</p>';
+  fetch('/api/temas/' + encodeURIComponent(id) + '/preview', { cache: 'no-store' }).then(function(r) {
+    return r.ok ? r.text() : '';
+  }).catch(function() { return ''; }).then(function(htmlPreview) {
+    return fetch('/api/temas/' + encodeURIComponent(id) + '/html', { cache: 'no-store' }).then(function(r) {
+      return r.ok ? r.text() : '';
+    }).catch(function() { return ''; }).then(function(bruto) {
+      presetPreviewHtmlBruto = bruto || '';
+      if (htmlPreview && htmlPreview.indexOf('<') >= 0) frame.srcdoc = preencherAmostra(htmlPreview);
+      else frame.srcdoc = gerarHtmlDemoPreset(p);
+    });
+  });
 
   // Renderiza os tokens e detalhes na gaveta inferior
   var swatches = Object.keys(s).map(function(k) {
@@ -3996,6 +4118,28 @@ function abrirPreviewPreset(id) {
   document.getElementById('mpp-conteudo').innerHTML = htmlTokens;
   setPresetPreviewMode('desktop');
   document.getElementById('m-preset-preview-bg').classList.add('aberto');
+}
+
+function salvarCopiaDoPreview() {
+  if (!presetPreviewAtualObj) return;
+  var nome = window.prompt('Nome do tema na biblioteca:', presetPreviewAtualObj.nome + ' salvo');
+  if (!nome) return;
+  var id = nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  var copia = JSON.parse(JSON.stringify(presetPreviewAtualObj));
+  copia.id = id;
+  copia.nome = nome;
+  copia.origem = 'Salvo a partir de ' + presetPreviewAtualObj.id;
+  copia.ativo = true;
+  delete copia.aliases;
+  delete copia.arquetipo;
+  var html = presetPreviewHtmlBruto && presetPreviewHtmlBruto.indexOf('<') >= 0 ? presetPreviewHtmlBruto : null;
+  persistirTema(copia, html).then(function(ok) {
+    if (!ok) return;
+    fecharPreviewPreset();
+    view = 'presets';
+    render();
+    alert('Tema "' + nome + '" entrou na biblioteca e já aparece na listagem.');
+  });
 }
 
 function fecharPreviewPreset() {
@@ -4227,7 +4371,7 @@ function vSites() {
 
 function vPresets() {
   var html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">' +
-    '<div><p style="color:var(--muted);font-size:13px;margin:0;font-weight:600">Catálogo de regras visuais, composição, tipografia e diretrizes anti-slop para geração de sites:</p></div>' +
+    '<div><p style="color:var(--muted);font-size:13px;margin:0;font-weight:600">Biblioteca única de temas. O que você salva aqui fica no projeto e o gerador passa a listar o mesmo catálogo.</p></div>' +
     '<div style="display:flex;gap:8px">' +
     '<button class="btn-cta" onclick="abrirModalPreset()">+ Novo Preset</button>' +
     '</div></div>';
@@ -4262,7 +4406,7 @@ function vPresets() {
       '<div class="preset-meta-row"><span class="preset-meta-label">Composição:</span><span class="preset-meta-val">' + (p.composicao || '—') + ' &bull; ' + (p.densidade || 'média') + '</span></div>' +
       '<div class="preset-meta-row"><span class="preset-meta-label">Navegação:</span><span class="preset-meta-val">' + (p.navegacao || '—') + '</span></div>' +
       '<div class="preset-meta-row"><span class="preset-meta-label">Tipografia:</span><span class="preset-meta-val">' + (p.tipografia ? p.tipografia.display : '—') + '</span></div>' +
-      '<div class="preset-meta-row"><span class="preset-meta-label">Nichos:</span><span class="preset-meta-val">' + (nichosHtml || 'Geral') + '</span></div>' +
+      '<div class="preset-meta-row"><span class="preset-meta-label">Nicho:</span><span class="preset-meta-val">' + (p.nicho || nichosHtml || 'Geral') + (p.html_personalizado ? ' · HTML salvo' : '') + '</span></div>' +
       '</div>' +
       swatches +
       '</div>' +

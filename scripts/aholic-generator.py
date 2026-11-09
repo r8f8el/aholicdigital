@@ -99,6 +99,26 @@ PRESETS = {
 }
 
 
+def _presets_da_biblioteca(base: dict) -> dict:
+    """A lista de presets do gerador v2 passa a ser a biblioteca única."""
+    try:
+        sys.path.insert(0, str(SCRIPTS_DIR))
+        from biblioteca_temas import Biblioteca
+        bib = Biblioteca(RAIZ)
+        temas = bib.listar()
+    except Exception:
+        return base
+    if not temas:
+        return base
+    unidos = {tema['id']: bib.como_preset_dinamico(tema) for tema in temas}
+    for chave, valor in base.items():
+        unidos.setdefault(chave, valor)
+    return unidos
+
+
+PRESETS = _presets_da_biblioteca(PRESETS)
+
+
 def slugify(text: str) -> str:
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode()
     return re.sub(r'[\s_]+', '-', re.sub(r'[^\w\s-]', '', text.lower())).strip('-')
